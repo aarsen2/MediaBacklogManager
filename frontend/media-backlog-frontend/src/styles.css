@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primary1: white;
+    --color-primary2: lightgray;
+    --color-primary3: darkgray;
+    --color-secondary1: lightblue;
+    --color-secondary2: rgb(123, 212, 242);
+    --color-secondary3: rgb(74, 183, 219);
+    --color-tertiary1: darkblue;
+    --color-tertiary2: black;
+    --color-tertiary3: indigo;
+
+
+    --color-background1: white;
+    --color-background2: gray;
+    --color-background3: black;
+
+    --color-text1: black;
+    --color-text2: white;
+    --color-text3: gray;
+
+    --button-radius: 8px;
+}
+
+body, html {
+    margin: 0px;
+    background-color: var();
+    height: 100%
+}

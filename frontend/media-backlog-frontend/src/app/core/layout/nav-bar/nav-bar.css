@@ -1,40 +1,136 @@
+:root {
+    --color-primary1: white;
+    --color-primary2: lightgray;
+    --color-primary3: darkgray;
+    --color-secondary1: lightblue;
+    --color-secondary2: rgb(123, 212, 242);
+    --color-secondary3: rgb(74, 183, 219);
+    --color-tertiary1: blue;
+    --color-tertiary2: blue;
+    --color-tertiary3: blue;
+
+
+    --color-background1: white;
+    --color-background2: gray;
+    --color-background3: black;
+
+    --color-text1: black;
+    --color-text2: white;
+    --color-text3: gray;
+
+
+    --button-radius: 1px;
+}
+
+
+
+
+/* General Nav Styling*/
 .nav {
+  height: auto;
+  padding: .5rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  padding: 1rem 1.5rem;
-  background: #111;
-  color: white;
-
-  border-bottom: 1px solid #222;
+  justify-content: space-between;
+  background-color: var(--color-background1);
+  border: 1px solid black;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
+/* Logo Styling */
 
-.links {
-  display: flex;
-  gap: 1rem;
-}
-
-.links a {
-  color: #bbb;
+.logo a{
+  padding: 1rem;
+  color: var(--color-text1);
   text-decoration: none;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  transition: 0.2s;
+  font-size: x-large;
+  transition: .2s;
 }
 
-.links a:hover {
-  background: #222;
-  color: white;
+.logo a:hover{
+  padding: 1rem;
+  color: var(--color-text1);
+  text-decoration: none;
+  font-size: x-large;
+  background-color: var(--color-background2);
+  color: var(--color-text2);
 }
 
-.active {
-  background: #333;
-  color: white;
+
+
+/* Navigation Items Styling*/
+
+.navButtons {
+  display: flex;
+  align-items: center;
+}
+
+.navButton {
+  margin: .5rem;
+  cursor: pointer;
+  transition: .2s;
+  background-color: var(--color-secondary1);
+  border-radius: var(--button-radius);
+  border-color: var(--color-tertiary1);
+  height: 2.5rem;
+}
+
+.navButton:hover {
+  background-color: var(--color-secondary2);
+  border-color: var(--color-tertiary2);
+  transform: translateY(-1px);
+}
+
+.searchBar {
+  display: inline-flex;
+  align-items: center;
+  padding-left: .5rem;
+}
+
+.searchBar:focus-within {
+    background-color: var(--color-secondary2);
+}
+
+
+.searchBar input {
+  background-color: transparent;
+  border-color: transparent;
+  border: none;
+  height: 2.3rem;
+  font-size: medium;
+}
+
+.searchBar input:focus {
+  border: none;
+  outline: none;
+}
+
+.searchBar span {
+  height: 2.4rem;
+  border-radius: var(--button-radius);
+  display: flex;
+  align-items: center;
+  aspect-ratio: 1;
+  justify-content: center;
+  user-select: none;
+}
+
+.searchBar span:hover {
+  background-color: var(--color-secondary3);
+  transition: .2s;
+}
+
+.squareButton {
+  aspect-ratio: 1;
+}
+
+.textButton {
+  display: inline-flex;
+  align-items: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.profileButton {
+  padding: 0px;
+  border-radius: 50%;
 }

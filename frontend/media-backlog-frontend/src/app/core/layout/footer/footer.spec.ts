@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HorizontalCarousel } from './horizontal-carousel';
+import { Footer } from './footer';
 
-describe('HorizontalCarousel', () => {
-  let component: HorizontalCarousel;
-  let fixture: ComponentFixture<HorizontalCarousel>;
+describe('Footer', () => {
+  let component: Footer;
+  let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HorizontalCarousel]
+      imports: [Footer]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HorizontalCarousel);
+    fixture = TestBed.createComponent(Footer);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

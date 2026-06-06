@@ -1,23 +1,34 @@
 <nav class="nav">
   <div class="logo">
-    MediaBacklog
+    <a routerLink="/home" routerLinkActive="" [routerLinkActiveOptions]="{ exact: true }">
+      MediaBacklog
+    </a>
   </div>
 
-  <div class="links">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      Home
-    </a>
+  <div class="navButtons">
 
-    <a routerLink="/movies" routerLinkActive="active">
-      Movies
-    </a>
 
-    <a routerLink="/books" routerLinkActive="active">
-      Books
-    </a>
+    <div class="navButton searchBar">
+      <input>
+      <span class="material-symbols-outlined">search</span>
+    </div>
 
-    <a routerLink="/games" routerLinkActive="active">
-      Games
-    </a>
+    <button routerLink="/home" class="navButton squareButton">
+      <span class="material-symbols-outlined">home</span>
+    </button>
+
+    <button routerLink="/movies/create" class="navButton textButton">
+      <span class="material-symbols-outlined">add</span>New
+    </button>
+
+    <button routerLink="/movies/create" class="navButton squareButton">
+      <span class="material-symbols-outlined">query_stats</span>
+    </button>
+
+    <button routerLink="/movies/create" class="navButton squareButton profileButton">
+      <span class="material-symbols-outlined">person</span>
+    </button>
+
+
   </div>
 </nav>
