@@ -17,6 +17,9 @@ export class MoviesApi {
   }
 
   createMovie(dto: CreateMovieDto) : Observable<string> {
+    console.log("Creating Movie...");
+    console.log(dto);
     return this.http.post(this.baseUrl + '/Create', dto, {responseType: 'text'})
+    
   } 
 }

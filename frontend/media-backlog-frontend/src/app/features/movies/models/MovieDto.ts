@@ -1,12 +1,12 @@
 export interface MovieDto {
   title: string;
   description: string;
-  assets: any[]; // replace with Asset later if you define it
-  releaseDate: string; // ISO string from API
-  genres: any[];       // replace with Genre type later
+  releaseDate: string; // 
   generalRating: number;
   runTime: number;
   language: string;
   director: string;
   contentRating: string;
+  assets: any[]; // replace with propper asset storage later
+  genres: any[];       // List of genre types. I'll figure this out later.
 }

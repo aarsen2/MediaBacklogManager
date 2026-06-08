@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MoviesApi } from '../../services/movies-api';
 import { CreateMovieDto } from '../../models/CreateMovieDto';
+import { validate } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-movie-creation',
@@ -11,75 +12,63 @@ import { CreateMovieDto } from '../../models/CreateMovieDto';
 })
 export class MovieCreation {
 
-  isSubmitting = false;
-  successMessage = '';
-  errorMessage = '';
-  form!: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private api: MoviesApi
-  ) {
-    this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+  //injection
+  private api = inject(MoviesApi);
+  private formBuilder = inject(FormBuilder);
 
-      releaseDate: ['', Validators.required],
-
-      generalRating: [0, [Validators.min(0), Validators.max(10)]],
-      runTime: [0, [Validators.required, Validators.min(1)]],
-
-      language: ['English', Validators.required],
-      director: ['', Validators.required],
-      contentRating: ['PG13', Validators.required],
-
-      // arrays from your DTO
-      assets: this.fb.control<any[]>([]),
-      genres: this.fb.control<any[]>([])
-    });
-
-  }
+  successMessage: string = ""
+  errorMessage: string = ""
+  isSubmitting: boolean = false;
+  form = this.formBuilder.group({
+    title: ['', [Validators.required, Validators.maxLength(200)]],
+    description: ['', [Validators.maxLength(1000)]],
+    releaseDate: [new Date().toISOString().split('T')[0]],
+    generalRating: [0, [Validators.min(0), Validators.max(5)]],
+    runTime: [0],
+    language: ['English'],
+    director: ['', [Validators.maxLength(100)]],
+    contentRating: ['PG']
+  });
 
   submit() {
+
+
+
+    //Checks the form's validitiy and shows any errors that exist in the form
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    this.isSubmitting = true;
-    this.successMessage = '';
-    this.errorMessage = '';
+    const formValue = this.form.getRawValue();
 
-    const dto: CreateMovieDto = {
-      title: this.form.value.title ?? '',
-      description: this.form.value.description ?? '',
-      releaseDate: this.form.value.releaseDate ?? '',
-      generalRating: this.form.value.generalRating ?? 0,
-      runTime: this.form.value.runTime ?? 0,
-      language: this.form.value.language ?? 'English',
-      director: this.form.value.director ?? '',
-      contentRating: this.form.value.contentRating ?? 'PG13',
-      assets: this.form.value.assets ?? [],
-      genres: this.form.value.genres ?? []
-    };
 
-    this.api.createMovie(dto).subscribe({
-      next: () => {
-        this.successMessage = 'Movie created successfully!';
-        this.isSubmitting = false;
+    const newMovie: CreateMovieDto = {
+      title: formValue.title!,
+      description: formValue.description ?? '',
+      releaseDate: formValue.releaseDate ?? '', // 
+      generalRating: formValue.generalRating ?? 0,
+      runTime: formValue.runTime ?? 0,
+      language: formValue.language ?? 'English',
+      director: formValue.director ?? '',
+      contentRating: formValue.contentRating ?? 'PG',
+      genres: [],       // List of genre types. I'll figure this out later.
+      assets: [] // replace with propper asset storage later
+    }
 
-        this.form.reset({
-          language: 'English',
-          contentRating: 'PG13',
-          generalRating: 0,
-          runTime: 0,
-          assets: [],
-          genres: []
-        });
+    this.api.createMovie(newMovie).subscribe({
+      next: (res) => {
+        console.log('Movie created:');
+        console.log(res)
+        this.form.reset();
       },
-      error: () => {
-        this.errorMessage = 'Failed to create movie';
-        this.isSubmitting = false;
+      error: (err) => {
+        console.error('Failed to create movie:');
+        console.error(err.error)
       }
     });
+
+
+    console.log(newMovie);
   }
 }
