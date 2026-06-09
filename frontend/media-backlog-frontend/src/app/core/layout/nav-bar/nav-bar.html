@@ -25,9 +25,16 @@
       <span class="material-symbols-outlined">query_stats</span>
     </button>
 
-    <button routerLink="/login" class="navButton squareButton profileButton">
+    <button (click)="profileButton()"  class="navButton squareButton profileButton">
       <span class="material-symbols-outlined">person</span>
     </button>
+
+    
+    <div [hidden]="!profileMenuVisable"  class="profileMenu">
+      <button (click)="closeProfile()">x</button>
+      <app-profile-menu></app-profile-menu>
+    </div>
+    
 
 
   </div>

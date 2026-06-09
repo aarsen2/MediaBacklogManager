@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,11 @@ export class Login {
   logoutMessage: string = "You have logged out"
   isLoggingIn: boolean = false;
   isLoggingOut: boolean = false;
+
   private authService = inject(AuthService)
   private formBuilder = inject(FormBuilder)
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
 
 
   loginForm = this.formBuilder.group({
@@ -43,6 +47,8 @@ export class Login {
       next: (res) => {
         console.log('Logged In');
         console.log(res)
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
       },
       error: (err) => {
         console.error('Failed To Log In');

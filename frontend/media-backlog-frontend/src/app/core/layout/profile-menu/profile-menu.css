@@ -1,0 +1,10 @@
+* {border: 1px solid black}
+
+.profileButtons {
+    display: flex;
+    flex-direction: column;
+}
+.profileButton {
+    display: block;
+    cursor: pointer;
+}

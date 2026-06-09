@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthApi } from './auth-api';
 import { map, Observable, tap } from 'rxjs';
 import { AuthResponse } from './models/AuthResponse';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class AuthService {
   private expirationKey = "token_expiration";
   private refreshTokenKey = "refresh_token";
   private authAPI = inject(AuthApi);
+  private router = inject(Router)
   constructor() { }
 
   isLoggedIn(): boolean {
@@ -51,5 +53,6 @@ export class AuthService {
 
   logout(): void {
     this.clearToken()
+    this.router.navigate(['/logout']);
   }
 }

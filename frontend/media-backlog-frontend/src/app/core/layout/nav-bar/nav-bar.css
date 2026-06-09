@@ -1,25 +1,25 @@
 :root {
-    --color-primary1: white;
-    --color-primary2: lightgray;
-    --color-primary3: darkgray;
-    --color-secondary1: lightblue;
-    --color-secondary2: rgb(123, 212, 242);
-    --color-secondary3: rgb(74, 183, 219);
-    --color-tertiary1: blue;
-    --color-tertiary2: blue;
-    --color-tertiary3: blue;
+  --color-primary1: white;
+  --color-primary2: lightgray;
+  --color-primary3: darkgray;
+  --color-secondary1: lightblue;
+  --color-secondary2: rgb(123, 212, 242);
+  --color-secondary3: rgb(74, 183, 219);
+  --color-tertiary1: blue;
+  --color-tertiary2: blue;
+  --color-tertiary3: blue;
 
 
-    --color-background1: white;
-    --color-background2: gray;
-    --color-background3: black;
+  --color-background1: white;
+  --color-background2: gray;
+  --color-background3: black;
 
-    --color-text1: black;
-    --color-text2: white;
-    --color-text3: gray;
+  --color-text1: black;
+  --color-text2: white;
+  --color-text3: gray;
 
 
-    --button-radius: 1px;
+  --button-radius: 1px;
 }
 
 
@@ -34,11 +34,12 @@
   justify-content: space-between;
   background-color: var(--color-background1);
   border: 1px solid black;
+  position: relative;
 }
 
 /* Logo Styling */
 
-.logo a{
+.logo a {
   padding: 1rem;
   color: var(--color-text1);
   text-decoration: none;
@@ -46,7 +47,7 @@
   transition: .2s;
 }
 
-.logo a:hover{
+.logo a:hover {
   padding: 1rem;
   color: var(--color-text1);
   text-decoration: none;
@@ -87,7 +88,7 @@
 }
 
 .searchBar:focus-within {
-    background-color: var(--color-secondary2);
+  background-color: var(--color-secondary2);
 }
 
 
@@ -135,3 +136,10 @@
   border-radius: 50%;
 }
 
+.profileMenu {
+  border: 1px solid black;
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
