@@ -15,10 +15,11 @@ export class MovieCreation {
   //injection
   private api = inject(MoviesApi);
   private formBuilder = inject(FormBuilder);
-
-  successMessage: string = ""
-  errorMessage: string = ""
+  successMessage: string = "Movie Created Successfully"
+  errorMessage: string = "An Error Occured"
   isSubmitting: boolean = false;
+
+  
   form = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
     description: ['', [Validators.maxLength(1000)]],
@@ -31,14 +32,12 @@ export class MovieCreation {
   });
 
   submit() {
-
-
-
     //Checks the form's validitiy and shows any errors that exist in the form
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    this.isSubmitting = true;
 
     const formValue = this.form.getRawValue();
 
@@ -69,6 +68,7 @@ export class MovieCreation {
     });
 
 
+      this.isSubmitting = false;
     console.log(newMovie);
   }
 }

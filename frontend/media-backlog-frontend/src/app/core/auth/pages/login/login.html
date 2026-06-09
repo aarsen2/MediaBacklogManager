@@ -1,1 +1,38 @@
-<p>login works!</p>
+<body>
+    <div class="accountControlls">
+
+        <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <h2>Username</h2>
+            <input type="text" formControlName="username" />
+            @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+            <small class="error">Username is required</small>
+            }
+            <h2>Password</h2>
+            <input type="text" formControlName="password" />
+            @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <small class="error">Password is required</small>
+            }
+            <button type="submit" [disabled]="isLoggingIn">
+                {{ isLoggingIn ? 'Logging in...' : 'Log In' }}
+            </button>
+        </form>
+
+        <div class="logout">
+            <button type="submit" (click)="logout()" [disabled]="isLoggingOut">
+                {{ isLoggingOut ? 'Logging out...' : 'Log Out' }}
+            </button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p class="message">{{message}}</p>
+    <br>
+</body>
+
+
+
+

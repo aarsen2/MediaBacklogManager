@@ -1,0 +1,33 @@
+.login {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: center;
+}
+
+button {
+    margin: 1rem
+}
+
+.logout {
+    grid-column: 3;
+    display: block;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accountControlls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.message {
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
