@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "credentials",
+        "Type": "MediaBacklogManagerBackend.DTOs.CredentialDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AuthController",
+    "Method": "GetSecret",
+    "RelativePath": "api/auth/Test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "ReadAllMovies",
     "RelativePath": "api/Movie",

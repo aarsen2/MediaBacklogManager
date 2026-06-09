@@ -11,8 +11,6 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
         "releaseDate": "2010-07-16T00:00:00",
         "genres": [],
         "generalRating": 8.8,
-        "dateCreated": "2026-06-04T00:00:00",
-
         "runTime": 148,
         "language": "English",
         "director": "Christopher Nolan",

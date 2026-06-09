@@ -3,11 +3,13 @@ using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Services.Media;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediaBacklogManagerBackend.Controllers
 {
+    [Authorize]
     [Route("api/Movie")]
     [ApiController]
     public class MovieController : ControllerBase

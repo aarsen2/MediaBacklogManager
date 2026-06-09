@@ -23,7 +23,7 @@ namespace MediaBacklogManagerBackend.Data
     dotnet ef database update
      
     */
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         //Media Types Tables
         public virtual DbSet<Movie> Movies { get; set; }
