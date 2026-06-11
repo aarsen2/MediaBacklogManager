@@ -3,6 +3,7 @@ import { AuthApi } from './auth-api';
 import { map, Observable, tap } from 'rxjs';
 import { AuthResponse } from './models/AuthResponse';
 import { Router } from '@angular/router';
+import { UserService } from '../user/services/user-service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class AuthService {
   private refreshTokenKey = "refresh_token";
   private authAPI = inject(AuthApi);
   private router = inject(Router)
+  private userService = inject(UserService)
   constructor() { }
 
   isLoggedIn(): boolean {
@@ -39,6 +41,7 @@ export class AuthService {
     localStorage.setItem(this.expirationKey, token.expiresIn?.toString() ?? "");
     localStorage.setItem(this.refreshTokenKey, token.refreshToken ?? "");
   }
+
   private clearToken(): void {
     localStorage.removeItem(this.tokenkey);
     localStorage.removeItem(this.expirationKey);
@@ -47,12 +50,16 @@ export class AuthService {
 
   login(username: string, password: string): Observable<AuthResponse> {
     return this.authAPI.login(username, password).pipe(
-      tap(response => this.setToken(response))
+      tap(response => {
+        this.setToken(response)
+        this.userService.loadUser();
+      })
     );
   }
 
   logout(): void {
     this.clearToken()
     this.router.navigate(['/logout']);
+    this.userService.clearUser();
   }
 }

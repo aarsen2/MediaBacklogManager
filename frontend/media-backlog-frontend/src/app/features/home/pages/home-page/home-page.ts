@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { MoviesApi } from '../../../movies/services/movies-api';
-import { ReadMovieDto } from '../../../movies/models/ReadMovieDto';
-import { MovieCarousel } from "../../../movies/componenets/movie-carousel/movie-carousel";
 import { RouterLink } from "@angular/router";
+import { MoviesApi } from '../../../media/movies/services/movies-api';
+import { ReadMovieDto } from '../../../media/models/read/ReadMovieDto';
+import { MovieCarousel } from '../../../media/movies/componenets/movie-carousel/movie-carousel';
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +17,7 @@ export class HomePage {
 
   movies$?: Observable<ReadMovieDto[]>;
 
-  constructor(private api: MoviesApi, private cdr: ChangeDetectorRef) {
+  constructor(private api: MoviesApi) {
     this.GetMovies();
   }
 

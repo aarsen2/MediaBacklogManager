@@ -1,0 +1,13 @@
+<div class="itemContainer">
+    <div class="itemDetails">
+        <h1 class="title">{{media()?.title}}</h1>
+        <h3 class="releaseDate">{{releaseDate()?.toLocaleDateString()}}</h3>
+        <div class="spacer"></div>
+        <h2>{{media()?.description}}</h2>
+        <div class="spacer"></div>
+    </div>
+    <div class="itemBackground">
+        <img src="{{media()?.assets}}" alt="Item background image">
+    </div>
+
+</div>

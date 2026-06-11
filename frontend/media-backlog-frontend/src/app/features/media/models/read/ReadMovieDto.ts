@@ -1,4 +1,4 @@
-import { MovieDto } from "./MovieDto";
+import { MovieDto } from "../base/MovieDto";
 
 export interface ReadMovieDto extends MovieDto {
     id: number;

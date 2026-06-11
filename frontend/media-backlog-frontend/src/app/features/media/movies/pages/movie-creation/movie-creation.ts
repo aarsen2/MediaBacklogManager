@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MoviesApi } from '../../services/movies-api';
-import { CreateMovieDto } from '../../models/CreateMovieDto';
-import { validate } from '@angular/forms/signals';
+import { CreateMovieDto } from '../../../models/create/CreateMovieDto';
 
 @Component({
   selector: 'app-movie-creation',
@@ -15,11 +14,11 @@ export class MovieCreation {
   //injection
   private api = inject(MoviesApi);
   private formBuilder = inject(FormBuilder);
-  successMessage: string = "Movie Created Successfully"
-  errorMessage: string = "An Error Occured"
+  successMessage: string = ""
+  errorMessage: string = ""
   isSubmitting: boolean = false;
 
-  
+
   form = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
     description: ['', [Validators.maxLength(1000)]],
@@ -59,16 +58,18 @@ export class MovieCreation {
       next: (res) => {
         console.log('Movie created:');
         console.log(res)
+        this.successMessage = "Movie Created Successfully"
         this.form.reset();
       },
       error: (err) => {
         console.error('Failed to create movie:');
+        this.errorMessage = "An Error Occured";
         console.error(err.error)
       }
     });
 
 
-      this.isSubmitting = false;
+    this.isSubmitting = false;
     console.log(newMovie);
   }
 }

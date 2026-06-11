@@ -25,10 +25,10 @@ export const routes: Routes = [
                 .then(m => m.HOME_ROUTES)
     },
     {
-        path: 'movies',
+        path: 'media',
         canActivate: [authGuard],
         loadChildren: () =>
-            import('./features/movies/movies.routes').then(m => m.MOVIES_ROUTES)
+            import('./features/media/shared/routes/media.routes').then(m => m.MEDIA_ROUTES)
     },
     {
         path: '**',

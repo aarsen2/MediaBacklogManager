@@ -10,12 +10,12 @@ import { AuthService } from '../../auth/auth-service';
   styleUrl: './profile-menu.css',
 })
 export class ProfileMenu {
-  private userService = inject(UserService)
+  userService = inject(UserService)
   private authService = inject(AuthService);
-  displayName: string = this.userService.getUser()?.displayName ?? "User"; 
-  
 
   logout() {
     this.authService.logout();
   }
+
+
 }

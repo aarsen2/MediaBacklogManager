@@ -10,7 +10,7 @@ export class UserApi {
 
 
   private http = inject(HttpClient)
-  private baseUrl = "https://localhost:7170/api/User";
+  private baseUrl = "https://localhost:7170/api/user";
 
 
 

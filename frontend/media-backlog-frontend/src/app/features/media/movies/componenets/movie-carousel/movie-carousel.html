@@ -1,7 +1,7 @@
 @if (movies; as movies) {
   <div id="MovieCarousel">
     @for (movie of movies; track movie.id) {
-        <div class="MovieCard">
+        <div class="MovieCard" (click)="viewMovie(movie)">
             <h1>{{ movie.title }}</h1>
             <p>{{ movie.description }}</p>
         </div>

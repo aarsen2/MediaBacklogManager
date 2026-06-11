@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ReadMovieDto } from '../models/ReadMovieDto';
-import { CreateMovieDto } from '../models/CreateMovieDto';
+import { ReadMovieDto } from '../../models/read/ReadMovieDto';
+import { CreateMovieDto } from '../../models/create/CreateMovieDto';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,10 @@ export class MoviesApi {
 
   getMovies(): Observable<ReadMovieDto[]> {
     return this.http.get<ReadMovieDto[]>(this.baseUrl, {responseType: 'json'});
+  }
+
+  getMovie(id: string): Observable<ReadMovieDto> {
+    return this.http.get<ReadMovieDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
   }
 
   createMovie(dto: CreateMovieDto) : Observable<string> {
