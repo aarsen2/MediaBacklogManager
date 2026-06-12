@@ -7,8 +7,8 @@ import { CreateMovieDto } from '../../models/create/CreateMovieDto';
 @Injectable({
   providedIn: 'root',
 })
-export class MoviesApi {
-  private baseUrl = 'https://localhost:7170/api/Movie';
+export class MediaApi {
+    private baseUrl = 'https://localhost:7170/api/Movie';
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,6 @@
 import { CreateMediaBase } from "./CreateMediaBase";
 
-export interface CreateMovieDto extends CreateMediaBase {
+export interface CreateShowDto extends CreateMediaBase {
     runTime: number;
     language: string;
     director: string;

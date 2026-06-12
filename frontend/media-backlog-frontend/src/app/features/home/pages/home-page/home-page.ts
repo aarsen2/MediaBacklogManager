@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
 import { RouterLink } from "@angular/router";
-import { MoviesApi } from '../../../media/movies/services/movies-api';
-import { ReadMovieDto } from '../../../media/models/read/ReadMovieDto';
 import { MovieCarousel } from '../../../media/movies/componenets/movie-carousel/movie-carousel';
+import { MediaService } from '../../../media/shared/services/media-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-page',
@@ -14,15 +12,11 @@ import { MovieCarousel } from '../../../media/movies/componenets/movie-carousel/
   styleUrl: './home-page.css',
 })
 export class HomePage {
+  private readonly mediaService = inject(MediaService)
 
-  movies$?: Observable<ReadMovieDto[]>;
-
-  constructor(private api: MoviesApi) {
-    this.GetMovies();
-  }
+  movies = toSignal(
+    this.mediaService.readAllMedia() , {initialValue: null}
+  )
 
 
-  GetMovies() {
-    this.movies$ = this.api.getMovies();
-  }
 }

@@ -1,9 +1,9 @@
 import { ReadMediaBase } from "./ReadMediaBase";
 
-export interface ReadMovieDto extends ReadMediaBase {
+export interface ReadShowDto extends ReadMediaBase {
     runTime: number;
     language: string;
     director: string;
     contentRating: string;
-    type: 'Movie';
+    type: 'Show';
 }

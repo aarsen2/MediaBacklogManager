@@ -1,6 +1,6 @@
-import { MovieDto } from "../base/MovieDto";
+import { UpdateMediaBase } from "./UpdateMediaBase";
 
-export interface UpdateMovieDto extends MovieDto {
+export interface UpdateMovieDto extends UpdateMediaBase {
   id: number;
 
 }

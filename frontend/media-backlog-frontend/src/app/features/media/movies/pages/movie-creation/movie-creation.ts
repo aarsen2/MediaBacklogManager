@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MoviesApi } from '../../services/movies-api';
 import { CreateMovieDto } from '../../../models/create/CreateMovieDto';
+import { MediaService } from '../../../shared/services/media-service';
 
 @Component({
   selector: 'app-movie-creation',
@@ -12,7 +12,7 @@ import { CreateMovieDto } from '../../../models/create/CreateMovieDto';
 export class MovieCreation {
 
   //injection
-  private api = inject(MoviesApi);
+  private mediaService = inject(MediaService);
   private formBuilder = inject(FormBuilder);
   successMessage: string = ""
   errorMessage: string = ""
@@ -54,7 +54,7 @@ export class MovieCreation {
       assets: [] // replace with propper asset storage later
     }
 
-    this.api.createMovie(newMovie).subscribe({
+    this.mediaService.createMedia<CreateMovieDto>(newMovie).subscribe({
       next: (res) => {
         console.log('Movie created:');
         console.log(res)
