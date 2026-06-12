@@ -69,7 +69,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovie(int id)
         {
-            var movie = await Service.GetMovieById(id);
+            var movie = await Service.ReadMovieById(id);
 
             if (movie == null)
                 return NotFound();

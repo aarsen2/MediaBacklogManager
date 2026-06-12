@@ -255,6 +255,35 @@
           }
         }
       }
+    },
+    "/api/user/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUserDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUserDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUserDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -477,6 +506,35 @@
       "MovieContentRating": {
         "type": "integer"
       },
+      "ReadUserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "roles": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "UpdateMovieDto": {
         "type": "object",
         "properties": {
@@ -569,6 +627,9 @@
     },
     {
       "name": "Test"
+    },
+    {
+      "name": "User"
     }
   ]
 }

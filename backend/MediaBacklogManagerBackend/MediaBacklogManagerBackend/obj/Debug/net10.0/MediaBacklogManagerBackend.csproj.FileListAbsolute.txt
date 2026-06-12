@@ -7,6 +7,8 @@ C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManage
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\MediaBacklogManagerBackend.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\MediaBacklogManagerBackend.pdb
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Humanizer.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.Build.Framework.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.CodeAnalysis.dll
@@ -22,6 +24,12 @@ C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManage
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.VisualStudio.SolutionPersistence.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Mono.TextTemplating.dll
@@ -35,6 +43,7 @@ C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManage
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\System.Composition.Hosting.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\System.Composition.Runtime.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\System.Composition.TypedParts.dll
+C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -147,13 +156,4 @@ C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManage
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\obj\Debug\net10.0\MediaBacklogManagerBackend.pdb
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\obj\Debug\net10.0\MediaBacklogManagerBackend.genruntimeconfig.cache
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\obj\Debug\net10.0\ref\MediaBacklogManagerBackend.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Aaron\Projects\Capstone\Task 3\d424-capstone\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

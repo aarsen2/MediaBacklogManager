@@ -2,6 +2,7 @@
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
+using MediaBacklogManagerBackend.Emuns;
 using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -159,9 +160,26 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         }
 
-        internal async Task<Movie?> GetMovieById(int id)
+        internal async Task<ReadMovieDto?> ReadMovieById(int id)
         {
-            return await dbContext.Movies.FindAsync(id);
+            var movie = await GetMovieById(id);
+
+            ReadMovieDto movieDto = new ReadMovieDto
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                Description = movie.Description,
+                Assets = movie.Assets,
+                ReleaseDate = movie.ReleaseDate,
+                Genres = movie.Genres,
+                GeneralRating = movie.GeneralRating,
+                RunTime = movie.RunTime,
+                Language = movie.Language,
+                Director = movie.Director,
+                ContentRating = movie.ContentRating
+            };
+
+            return movieDto;
         }
 
         internal async Task<bool> DeleteMovie(int id)
@@ -175,6 +193,11 @@ namespace MediaBacklogManagerBackend.Services.Media
             await dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        private async Task<Movie> GetMovieById(int id)
+        {
+            return await dbContext.Movies.FindAsync(id);
         }
     }
 }

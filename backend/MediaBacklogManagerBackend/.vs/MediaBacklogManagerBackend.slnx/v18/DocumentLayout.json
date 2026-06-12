@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readmoviedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readmoviedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\models\\media\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\models\\media\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +35,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ReadMovieDto.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T18:43:22.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Models\\Media\\Movie.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Models\\Media\\Movie.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Models\\Media\\Movie.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Models\\Media\\Movie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T17:56:25.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MovieController.cs",
               "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
               "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
               "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
               "RelativeToolTip": "MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAcwEcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-08T23:11:13.811Z",
+              "WhenOpened": "2026-06-12T17:55:15.067Z",
               "EditorCaption": ""
             }
           ]

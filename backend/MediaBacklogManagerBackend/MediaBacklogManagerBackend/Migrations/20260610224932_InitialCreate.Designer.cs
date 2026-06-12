@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaBacklogManagerBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260608215211_InitialCreate")]
+    [Migration("20260610224932_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -164,6 +164,9 @@ namespace MediaBacklogManagerBackend.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

@@ -8,7 +8,10 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
         public string? Language { get; set; }
         public string? Director { get; set; }
         public MovieContentRating? ContentRating { get; set; }
-        public ReadMovieDto() { }
+        public ReadMovieDto()
+        {
+            Type = MediaType.Show;
+        }
 
         public override string ToString()
         {

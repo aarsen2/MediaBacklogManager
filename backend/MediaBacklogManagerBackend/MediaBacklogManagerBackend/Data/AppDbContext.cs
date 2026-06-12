@@ -1,5 +1,6 @@
 ﻿using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -23,7 +24,7 @@ namespace MediaBacklogManagerBackend.Data
     dotnet ef database update
      
     */
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         //Media Types Tables
         public virtual DbSet<Movie> Movies { get; set; }

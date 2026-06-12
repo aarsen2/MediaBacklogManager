@@ -1,4 +1,5 @@
-﻿using MediaBacklogManagerBackend.Models;
+﻿using MediaBacklogManagerBackend.Emuns;
+using MediaBacklogManagerBackend.Models;
 
 namespace MediaBacklogManagerBackend.DTOs.Reading
 {
@@ -11,7 +12,9 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
         public DateTime? ReleaseDate { get; set; }
         public List<Genre> Genres { get; set; } = new();
         public double? GeneralRating { get; set; }
+        public MediaType Type { get; set; }
         public ReadMediaDto() { }
+
 
 
 

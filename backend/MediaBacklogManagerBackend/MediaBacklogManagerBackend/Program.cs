@@ -24,16 +24,22 @@ namespace MediaBacklogManagerBackend
 
             builder.Services.AddScoped<MovieService>();
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<UserService>();
 
-            builder.Services.AddIdentityCore<User>()
+            builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
+                .AddRoles<IdentityRole>()
                 .AddSignInManager();
 
 
 
             //set up JWT Authentication
 
-            builder.Services.AddAuthentication("Bearer")
+            builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "Bearer";
+                    options.DefaultChallengeScheme = "Bearer";
+                })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -93,7 +99,7 @@ namespace MediaBacklogManagerBackend
                 db.Database.Migrate();
             }
 
-
+            //Seeds User and Role info if not previously created.
             app.Lifetime.ApplicationStarted.Register(() =>
             {
                 Task.Run(async () =>
@@ -101,13 +107,31 @@ namespace MediaBacklogManagerBackend
                     using var scope = app.Services.CreateScope();
 
                     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    var user = await userManager.FindByNameAsync("admin");
+                    var adminUsername = builder.Configuration["User:Admin_Username"];
+                    var adminPassword = builder.Configuration["User:Admin_Password"];
+
+                    //creates needed Roles
+                    if (!await roleManager.RoleExistsAsync("Admin"))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole("Admin"));
+                    }
+
+
+                    //Creates Admin Account
+                    var user = await userManager.FindByNameAsync(adminUsername);
 
                     if (user == null)
                     {
-                        var newUser = new User { UserName = "admin" };
-                        await userManager.CreateAsync(newUser, "Admin123!");
+                        user = new User { UserName = adminUsername };
+                        await userManager.CreateAsync(user, adminPassword);
+                    }
+
+                    //Adds Admin account to Admin Role
+                    if (!await userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        await userManager.AddToRoleAsync(user, "Admin");
                     }
                 });
             });
@@ -129,21 +153,3 @@ namespace MediaBacklogManagerBackend
     }
 }
 
-
-public static class DataSeeder
-{
-    public static async Task SeedAdminAsync(IServiceProvider services)
-    {
-        using var scope = services.CreateScope();
-
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-        var user = await userManager.FindByNameAsync("admin");
-
-        if (user == null)
-        {
-            var newUser = new User { UserName = "admin" };
-            await userManager.CreateAsync(newUser, "Admin123!");
-        }
-    }
-}

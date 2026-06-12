@@ -7,7 +7,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-page',
-  imports: [AsyncPipe, MovieCarousel, RouterLink],
+  imports: [MovieCarousel, RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
