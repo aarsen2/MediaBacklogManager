@@ -16,15 +16,7 @@ export class MediaView {
   private route = inject(ActivatedRoute);
   private mediaService = inject(MediaService);
 
-  private mediaFetchers: Record<MediaType, (id: string) => Observable<any>> = {
-    movie: id => this.mediaService.readMedia(id),
-    show: id => this.mediaService.readMedia(id),
-    game: id => this.mediaService.readMedia(id),
-    book: id => this.mediaService.readMedia(id),
-    album: id => this.mediaService.readMedia(id),
-    song: id => this.mediaService.readMedia(id),
-  };
-
+    
 
 
   media = toSignal(
@@ -32,7 +24,7 @@ export class MediaView {
       switchMap(params => {
         const type: MediaType = params.get('type')! as MediaType;
         const id = params.get('id')!;
-        return this.mediaFetchers[type](id);
+        return this.mediaService.getMedia(type, id);
       })
     ),
 

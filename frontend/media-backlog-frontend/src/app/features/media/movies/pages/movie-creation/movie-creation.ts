@@ -54,7 +54,7 @@ export class MovieCreation {
       assets: [] // replace with propper asset storage later
     }
 
-    this.mediaService.createMedia<CreateMovieDto>(newMovie).subscribe({
+    this.mediaService.createMedia('movie', newMovie).subscribe({
       next: (res) => {
         console.log('Movie created:');
         console.log(res)

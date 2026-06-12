@@ -15,7 +15,7 @@ export class HomePage {
   private readonly mediaService = inject(MediaService)
 
   movies = toSignal(
-    this.mediaService.readAllMedia() , {initialValue: null}
+    this.mediaService.getAllMedia('movie') , {initialValue: null}
   )
 
 

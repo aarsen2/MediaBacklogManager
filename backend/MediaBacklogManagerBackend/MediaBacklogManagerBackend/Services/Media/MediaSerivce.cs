@@ -1,23 +1,18 @@
 ﻿using MediaBacklogManagerBackend.Data;
-using MediaBacklogManagerBackend.DTOs.Creation;
-using MediaBacklogManagerBackend.DTOs.Reading;
-using MediaBacklogManagerBackend.DTOs.Updating;
-using MediaBacklogManagerBackend.Emuns;
-using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using System.Net.WebSockets;
+
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class MovieService
+    public class MediaService<T> where T : Models.Media.Media
     {
-        private readonly AppDbContext dbContext;
-
-        public MovieService(AppDbContext context)
+        protected readonly AppDbContext dbContext;
+        protected DbSet<T> dbSet;
+        public MediaService(AppDbContext context)
         {
             dbContext = context;
+            dbSet = dbContext.Set<T>();
         }
 
         //this is used to test API Calls and functionality.
@@ -30,174 +25,51 @@ namespace MediaBacklogManagerBackend.Services.Media
         }
 
 
-        //Movie Creation, Mapping, and Reading
-        internal async Task<Movie> CreateMovie(CreateMovieDto movieDto)
+        protected async Task<T> CreateAsync(T media)
         {
-            Console.WriteLine($"Creating Movie: {movieDto.Title}");
-            var movie = MapMovieCreation(movieDto);
-            var exists = false;
-            Console.WriteLine(exists);
-            if (movieDto.ReleaseDate.HasValue)
+            await dbSet.AddAsync(media);
+            await dbContext.SaveChangesAsync();
+            return media;
+        }
+
+        protected async Task<bool> CheckExistsAsync(string title, DateTime? releaseDate)
+        {
+            if (releaseDate.HasValue)
             {
-                var date = movieDto.ReleaseDate.Value.Date;
+                var date = releaseDate.Value.Date;
                 var nextDay = date.AddDays(1);
 
-                exists = await dbContext.Movies.AnyAsync(m =>
-                    m.Title.ToLower().Trim() == movieDto.Title.ToLower().Trim() &&
+                return await dbContext.Movies.AnyAsync(m =>
+                    m.Title.ToLower().Trim() == title.ToLower().Trim() &&
                     m.ReleaseDate >= date &&
                     m.ReleaseDate < nextDay);
             }
-            Console.WriteLine(exists);
-
-            if (!exists)
-            {
-                await dbContext.Movies.AddAsync(movie);
-                await dbContext.SaveChangesAsync();
-                return movie;
-            }
-            else return null;
+            return false;
         }
-
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        protected async Task<bool> CheckExistsAsync(int id)
         {
-            return new Movie
-            {
-                // Required
-                Title = movieDto.Title,
-
-                // Optional (nullable → fallback)
-                Description = movieDto.Description ?? string.Empty,
-                Language = movieDto.Language ?? "Unknown",
-                Director = movieDto.Director ?? "Unknown",
-
-                // Value types with defaults
-                RunTime = movieDto.RunTime ?? 0,
-                GeneralRating = movieDto.GeneralRating ?? 0.0,
-
-                // Nullable stays nullable
-                ContentRating = movieDto.ContentRating,
-                ReleaseDate = movieDto.ReleaseDate,
-
-                // Collections (avoid nulls)
-                Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
-
-                // System-managed fields
-                DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
-            };
-        }
-
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
-        {
-
-            // Required
-            movie.Title = movieDto.Title;
-
-            // Optional (nullable → fallback)
-            movie.Description = movieDto.Description ?? string.Empty;
-            movie.Language = movieDto.Language ?? "Unknown";
-            movie.Director = movieDto.Director ?? "Unknown";
-
-            // Value types with defaults
-            movie.RunTime = movieDto.RunTime ?? 0;
-            movie.GeneralRating = movieDto.GeneralRating ?? 0.0;
-
-            // Nullable stays nullable
-            movie.ContentRating = movieDto.ContentRating;
-            movie.ReleaseDate = movieDto.ReleaseDate;
-
-            // Collections (avoid nulls)
-            movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
-
-
-        }
-
-        internal async Task<List<ReadMovieDto>> ReadAllMovies()
-        {
-            return await dbContext.Movies
-                .Select(m => new ReadMovieDto
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    RunTime = m.RunTime,
-                    GeneralRating = m.GeneralRating,
-                    ContentRating = m.ContentRating,
-                    ReleaseDate = m.ReleaseDate,
-                    Director = m.Director,
-                    Language = m.Language,
-                    Description = m.Description,
-
-                    Assets = m.Assets.ToList(),
-
-                    Genres = m.Genres.ToList()
-                })
-                .ToListAsync();
-        }
-
-        internal async Task<bool> UpdateMovie(UpdateMovieDto movieDto)
-        {
-            var id = movieDto.Id;
-            var movie = await dbContext.Movies.FindAsync(id);
-
-            if (movie == null)
+            if (await dbSet.FindAsync(id) == null)
             {
                 return false;
             }
-
-            try
-            {
-                MapMovieUpdate(movie, movieDto);
-
-                await dbContext.SaveChangesAsync();
-
-                return true;
-            }
-            catch
-            {
-                throw new Exception("Something went wrong with updaing the movie");
-            }
-
+            return true;
         }
 
-        internal async Task<ReadMovieDto?> ReadMovieById(int id)
+        protected async Task<bool> DeleteMediaAsync(int id)
         {
-            var movie = await GetMovieById(id);
+            var mediaItem = await GetItemById(id);
 
-            ReadMovieDto movieDto = new ReadMovieDto
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Assets = movie.Assets,
-                ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
-                GeneralRating = movie.GeneralRating,
-                RunTime = movie.RunTime,
-                Language = movie.Language,
-                Director = movie.Director,
-                ContentRating = movie.ContentRating
-            };
-
-            return movieDto;
-        }
-
-        internal async Task<bool> DeleteMovie(int id)
-        {
-            var movie = await GetMovieById(id);
-
-            if (movie == null)
+            if (mediaItem == null)
                 return false;
 
-            dbContext.Movies.Remove(movie);
+            dbSet.Remove(mediaItem);
             await dbContext.SaveChangesAsync();
 
             return true;
         }
-
-        private async Task<Movie> GetMovieById(int id)
+        protected async Task<T?> GetItemById(int id)
         {
-            return await dbContext.Movies.FindAsync(id);
+            return await dbSet.FindAsync(id);
         }
     }
 }
