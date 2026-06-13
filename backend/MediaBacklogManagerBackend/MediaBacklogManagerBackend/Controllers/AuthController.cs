@@ -35,11 +35,7 @@ namespace MediaBacklogManagerBackend.Controllers
 
         }
 
-        [HttpGet("Test")]
-        public IActionResult GetSecret()
-        {
-            return Ok("You Are Authenticated. Here is my Secret");
-        }
+ 
 
     }
 }

@@ -16,16 +16,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AuthController",
-    "Method": "GetSecret",
-    "RelativePath": "api/auth/Test",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "ReadAllMovies",
     "RelativePath": "api/Movie",
@@ -100,25 +90,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.TestController",
-    "Method": "Create",
-    "RelativePath": "api/Test/CreateMovie",
-    "HttpMethod": "POST",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "ReadAllShows",
+    "RelativePath": "api/Show",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "movieDto",
-        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateMovieDto",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.TestController",
-    "Method": "GetUserByID",
-    "RelativePath": "api/Test/GetUserById/{id}",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "GetShow",
+    "RelativePath": "api/Show/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -132,13 +116,51 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.TestController",
-    "Method": "GetAll",
-    "RelativePath": "api/Test/Test",
-    "HttpMethod": "GET",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "DeleteShow",
+    "RelativePath": "api/Show/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "Create",
+    "RelativePath": "api/Show/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "showDto",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateShowDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "Update",
+    "RelativePath": "api/Show/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "showDto",
+        "Type": "MediaBacklogManagerBackend.DTOs.Updating.UpdateShowDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

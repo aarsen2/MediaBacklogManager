@@ -1,6 +1,6 @@
 ﻿namespace MediaBacklogManagerBackend.Emuns
 {
-    public enum ShowRating
+    public enum ShowContentRating
     {
         TV_Y, 
         TV_Y7, 

@@ -1,8 +1,12 @@
-﻿namespace MediaBacklogManagerBackend.Models.Media
+﻿using MediaBacklogManagerBackend.Emuns;
+
+namespace MediaBacklogManagerBackend.Models.Media
 {
     public class Show : Media
     {
         public int? SeasonCount { get; set; }
         public int? EpisodeCount { get; set; }
+        public ShowContentRating? ContentRating { get; set; }
+
     }
 }

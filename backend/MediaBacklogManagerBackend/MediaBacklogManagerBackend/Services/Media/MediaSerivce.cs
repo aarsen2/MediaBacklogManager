@@ -34,25 +34,22 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         protected async Task<bool> CheckExistsAsync(string title, DateTime? releaseDate)
         {
-            if (releaseDate.HasValue)
-            {
-                var date = releaseDate.Value.Date;
-                var nextDay = date.AddDays(1);
+            if (!releaseDate.HasValue)
+                return false;
 
-                return await dbContext.Movies.AnyAsync(m =>
-                    m.Title.ToLower().Trim() == title.ToLower().Trim() &&
-                    m.ReleaseDate >= date &&
-                    m.ReleaseDate < nextDay);
-            }
-            return false;
+            var date = releaseDate.Value.Date;
+            var nextDay = date.AddDays(1);
+            var normalizedTitle = title.Trim().ToLowerInvariant();
+
+            return await dbSet.AnyAsync(m =>
+                m.Title.ToLower() == normalizedTitle &&
+                m.ReleaseDate.HasValue &&
+                m.ReleaseDate.Value >= date &&
+                m.ReleaseDate.Value < nextDay);
         }
         protected async Task<bool> CheckExistsAsync(int id)
         {
-            if (await dbSet.FindAsync(id) == null)
-            {
-                return false;
-            }
-            return true;
+            return await dbSet.FindAsync(id) != null;
         }
 
         protected async Task<bool> DeleteMediaAsync(int id)
@@ -69,7 +66,14 @@ namespace MediaBacklogManagerBackend.Services.Media
         }
         protected async Task<T?> GetItemById(int id)
         {
-            return await dbSet.FindAsync(id);
+            Console.WriteLine($"\n\n\n{id}\n\n\n");
+
+
+            var val = await dbSet.FindAsync(id);
+            Console.WriteLine($"\n\n\n{val}\n\n\n");
+
+            return val;
+
         }
     }
 }

@@ -23,6 +23,7 @@ namespace MediaBacklogManagerBackend
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<MovieService>();
+            builder.Services.AddScoped<ShowService>();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<UserService>();
 

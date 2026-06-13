@@ -10,9 +10,9 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class MovieService : MediaService<Movie>
+    public class SongService : MediaService<Movie>
     {
-        public MovieService(AppDbContext context) : base(context)
+        public SongService(AppDbContext context) : base(context)
         {
         }
 
@@ -85,15 +85,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         internal async Task<ReadMovieDto?> ReadMovieById(int id)
         {
-            bool val = await CheckExistsAsync(id);
-            Console.WriteLine($"\n\n\nMovie Eists: {val}\n\n\n");
-            if (val)
-            {
-                var movie = await GetItemById(id);
+            if (await CheckExistsAsync(id)) { }
 
-                return GetReadMovieDto(movie!);
-            }
-            return null;
+            var movie = await GetItemById(id);
+
+            return GetReadMovieDto(movie!);
         }
 
         internal async Task<bool> DeleteMovie(int id)
