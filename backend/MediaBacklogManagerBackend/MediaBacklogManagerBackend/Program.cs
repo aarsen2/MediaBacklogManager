@@ -24,6 +24,10 @@ namespace MediaBacklogManagerBackend
 
             builder.Services.AddScoped<MovieService>();
             builder.Services.AddScoped<ShowService>();
+            builder.Services.AddScoped<SongService>();
+            builder.Services.AddScoped<AlbumService>();
+            builder.Services.AddScoped<GameService>();
+            builder.Services.AddScoped<BookService>();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<UserService>();
 

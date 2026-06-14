@@ -78,7 +78,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the movie");
             }
 
         }

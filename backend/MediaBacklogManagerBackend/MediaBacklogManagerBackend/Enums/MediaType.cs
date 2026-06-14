@@ -9,7 +9,7 @@ namespace MediaBacklogManagerBackend.Emuns
         Show,
         Game,
         Book,
-        Music,
+        Song,
         Album
     }
 }

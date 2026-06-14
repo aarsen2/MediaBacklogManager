@@ -16,7 +16,7 @@ namespace MediaBacklogManagerBackend.Services.Media
         {
         }
 
-        //Movie Creation, Mapping, and Reading
+        //Show Creation, Mapping, and Reading
         internal async Task<Show?> CreateShow(CreateShowDto showDto)
         {
             Console.WriteLine($"Creating Show: {showDto.Title}");
@@ -58,16 +58,16 @@ namespace MediaBacklogManagerBackend.Services.Media
         internal async Task<bool> UpdateShow(UpdateShowDto showDto)
         {
             var id = showDto.Id;
-            var movie = await GetItemById(id);
+            var show = await GetItemById(id);
 
-            if (movie == null)
+            if (show == null)
             {
                 return false;
             }
 
             try
             {
-                MapShowUpdate(movie, showDto);
+                MapShowUpdate(show, showDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -75,7 +75,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the show");
             }
 
         }

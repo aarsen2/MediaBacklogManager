@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediaBacklogManagerBackend.Controllers
 {
     [Authorize]
-    [Route("api/Show")]
+    [Route("api/show")]
     [ApiController]
     public class ShowController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace MediaBacklogManagerBackend.Controllers
         }
 
         //Creates a new Show
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateShowDto showDto)
         {
             var show = await Service.CreateShow(showDto);
@@ -35,7 +35,7 @@ namespace MediaBacklogManagerBackend.Controllers
 
 
         //Updates a Movie By its ID
-        [HttpPut("Update")]
+        [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateShowDto showDto)
         {
             Console.WriteLine("Updating Show");

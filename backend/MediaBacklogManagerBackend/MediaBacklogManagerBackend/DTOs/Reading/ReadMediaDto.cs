@@ -15,31 +15,5 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
         public MediaType Type { get; set; }
         public ReadMediaDto() { }
 
-
-
-
-
-
-        public override string ToString()
-        {
-            var assetsText = (Assets == null || Assets.Count == 0)
-                ? "None"
-                : string.Join(", ", Assets);
-
-            var genresText = (Genres == null || Genres.Count == 0)
-                ? "None"
-                : string.Join(", ", Genres);
-
-            return $@"
-=== MEDIA OBJECT ===
-Title: {Title}
-Description: {Description ?? "N/A"}
-Release Date: {ReleaseDate?.ToString() ?? "N/A"}
-General Rating: {GeneralRating?.ToString() ?? "N/A"}
-
-Assets: {assetsText}
-Genres: {genresText}
-";
-        }
     }
 }

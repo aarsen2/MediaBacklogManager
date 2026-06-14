@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class BookService : MediaService<Movie>
+    public class BookService : MediaService<Book>
     {
         public BookService(AppDbContext context) : base(context)
         {
@@ -18,38 +18,36 @@ namespace MediaBacklogManagerBackend.Services.Media
 
 
 
-        //Movie Creation, Mapping, and Reading
-        internal async Task<Movie?> CreateMovie(CreateMovieDto movieDto)
+        //Book Creation, Mapping, and Reading
+        internal async Task<Book?> CreateBook(CreateBookDto bookDto)
         {
-            Console.WriteLine($"Creating Movie: {movieDto.Title}");
+            Console.WriteLine($"Creating book: {bookDto.Title}");
 
-            bool exists = await CheckExistsAsync(movieDto.Title, movieDto.ReleaseDate);
+            bool exists = await CheckExistsAsync(bookDto.Title, bookDto.ReleaseDate);
 
-            Console.WriteLine($"Movie Exists: {exists}");
+            Console.WriteLine($"Book Exists: {exists}");
             if (exists)
                 return null;
 
-            var movie = MapMovieCreation(movieDto);
+            var book = MapBookCreation(bookDto);
 
-            return await CreateAsync(movie);
+            return await CreateAsync(book);
 
         }
 
 
-        internal async Task<List<ReadMovieDto>> ReadAllMovies()
+        internal async Task<List<ReadBookDto>> ReadAllBooks()
         {
-            return await dbContext.Movies
-                .Select(m => new ReadMovieDto
+            return await dbContext.Books
+                .Select(m => new ReadBookDto
                 {
                     Id = m.Id,
                     Title = m.Title,
-                    RunTime = m.RunTime,
-                    GeneralRating = m.GeneralRating,
-                    ContentRating = m.ContentRating,
                     ReleaseDate = m.ReleaseDate,
-                    Director = m.Director,
-                    Language = m.Language,
                     Description = m.Description,
+                    Author = m.Author,
+                    PageCount = m.PageCount,
+                    Language = m.Language,
 
                     Assets = m.Assets.ToList(),
 
@@ -58,19 +56,19 @@ namespace MediaBacklogManagerBackend.Services.Media
                 .ToListAsync();
         }
 
-        internal async Task<bool> UpdateMovie(UpdateMovieDto movieDto)
+        internal async Task<bool> UpdateBook(UpdateBookDto bookDto)
         {
-            var id = movieDto.Id;
-            var movie = await GetItemById(id);
+            var id = bookDto.Id;
+            var book = await GetItemById(id);
 
-            if (movie == null)
+            if (book == null)
             {
                 return false;
             }
 
             try
             {
-                MapMovieUpdate(movie, movieDto);
+                MapBookUpdate(book, bookDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -78,21 +76,21 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the book");
             }
 
         }
 
-        internal async Task<ReadMovieDto?> ReadMovieById(int id)
+        internal async Task<ReadBookDto?> ReadBookById(int id)
         {
             if (await CheckExistsAsync(id)) { }
 
-            var movie = await GetItemById(id);
+            var book = await GetItemById(id);
 
-            return GetReadMovieDto(movie!);
+            return GetReadBookDto(book!);
         }
 
-        internal async Task<bool> DeleteMovie(int id)
+        internal async Task<bool> DeleteBook(int id)
         {
             return await DeleteMediaAsync(id);
         }
@@ -102,74 +100,70 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        private Book MapBookCreation(CreateBookDto bookDto)
         {
-            return new Movie
+            return new Book
             {
                 // Required
-                Title = movieDto.Title,
+                Title = bookDto.Title,
 
                 // Optional (nullable → fallback)
-                Description = movieDto.Description ?? string.Empty,
-                Language = movieDto.Language ?? "Unknown",
-                Director = movieDto.Director ?? "Unknown",
+                Description = bookDto.Description ?? string.Empty,
+                Author = bookDto.Author ?? string.Empty,
+                Language = bookDto.Language ?? "Unknown",
 
                 // Value types with defaults
-                RunTime = movieDto.RunTime ?? 0,
-                GeneralRating = movieDto.GeneralRating ?? 0.0,
+                GeneralRating = bookDto.GeneralRating ?? 0.0,
+                PageCount = bookDto.PageCount ?? 0,
 
                 // Nullable stays nullable
-                ContentRating = movieDto.ContentRating,
-                ReleaseDate = movieDto.ReleaseDate,
+                ReleaseDate = bookDto.ReleaseDate,
 
                 // Collections (avoid nulls)
-                Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
+                Assets = bookDto.Assets ?? new List<MediaAsset>(),
+                Genres = bookDto.Genres ?? new List<Genre>(),
 
                 // System-managed fields
-                DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
+                DateCreated = bookDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
+        private void MapBookUpdate(Book book, UpdateBookDto bookDto)
         {
 
             // Required
-            movie.Title = movieDto.Title;
+            book.Title = bookDto.Title;
 
             // Optional (nullable → fallback)
-            movie.Description = movieDto.Description ?? string.Empty;
-            movie.Language = movieDto.Language ?? "Unknown";
-            movie.Director = movieDto.Director ?? "Unknown";
-
+            book.Description = bookDto.Description ?? string.Empty;
+            book.Language = bookDto.Language ?? "Unknown";
+            book.Author = bookDto.Author ?? string.Empty;
             // Value types with defaults
-            movie.RunTime = movieDto.RunTime ?? 0;
-            movie.GeneralRating = movieDto.GeneralRating ?? 0.0;
+            book.PageCount = bookDto.PageCount ?? 0;
+            book.GeneralRating = bookDto.GeneralRating ?? 0.0;
 
             // Nullable stays nullable
-            movie.ContentRating = movieDto.ContentRating;
-            movie.ReleaseDate = movieDto.ReleaseDate;
+            book.ReleaseDate = bookDto.ReleaseDate;
 
             // Collections (avoid nulls)
-            movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
+            book.Assets = bookDto.Assets ?? new List<MediaAsset>();
+            book.Genres = bookDto.Genres ?? new List<Genre>();
         }
 
-        private ReadMovieDto GetReadMovieDto(Movie movie)
+        private ReadBookDto GetReadBookDto(Book book)
         {
-            return new ReadMovieDto
+            return new ReadBookDto
             {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Assets = movie.Assets,
-                ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
-                GeneralRating = movie.GeneralRating,
-                RunTime = movie.RunTime,
-                Language = movie.Language,
-                Director = movie.Director,
-                ContentRating = movie.ContentRating
+                Id = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                Assets = book.Assets,
+                ReleaseDate = book.ReleaseDate,
+                Genres = book.Genres,
+                GeneralRating = book.GeneralRating,
+                Language = book.Language,
+                PageCount = book.PageCount,
+                Author = book.Author,
             }
             ;
         }

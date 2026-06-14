@@ -8,7 +8,7 @@ import { CreateMovieDto } from '../../models/create/CreateMovieDto';
   providedIn: 'root',
 })
 export class MediaApi {
-    private baseUrl = 'https://localhost:7170/api/Movie';
+    private baseUrl = 'https://localhost:7170/api/movie';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class MediaApi {
   createMovie(dto: CreateMovieDto) : Observable<string> {
     console.log("Creating Movie...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/Create', dto, {responseType: 'text'})
+    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
     
   } 
 }

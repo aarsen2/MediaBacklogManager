@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class SongService : MediaService<Movie>
+    public class SongService : MediaService<Song>
     {
         public SongService(AppDbContext context) : base(context)
         {
@@ -18,37 +18,35 @@ namespace MediaBacklogManagerBackend.Services.Media
 
 
 
-        //Movie Creation, Mapping, and Reading
-        internal async Task<Movie?> CreateMovie(CreateMovieDto movieDto)
+        //Song Creation, Mapping, and Reading
+        internal async Task<Song?> CreateSong(CreateSongDto songDto)
         {
-            Console.WriteLine($"Creating Movie: {movieDto.Title}");
+            Console.WriteLine($"Creating Song: {songDto.Title}");
 
-            bool exists = await CheckExistsAsync(movieDto.Title, movieDto.ReleaseDate);
+            bool exists = await CheckExistsAsync(songDto.Title, songDto.ReleaseDate);
 
-            Console.WriteLine($"Movie Exists: {exists}");
+            Console.WriteLine($"Song Exists: {exists}");
             if (exists)
                 return null;
 
-            var movie = MapMovieCreation(movieDto);
+            var song = MapSongCreation(songDto);
 
-            return await CreateAsync(movie);
+            return await CreateAsync(song);
 
         }
 
 
-        internal async Task<List<ReadMovieDto>> ReadAllMovies()
+        internal async Task<List<ReadSongDto>> ReadAllSongs()
         {
-            return await dbContext.Movies
-                .Select(m => new ReadMovieDto
+            return await dbContext.Songs
+                .Select(m => new ReadSongDto
                 {
                     Id = m.Id,
                     Title = m.Title,
                     RunTime = m.RunTime,
                     GeneralRating = m.GeneralRating,
-                    ContentRating = m.ContentRating,
+                    Artist = m.Artist,
                     ReleaseDate = m.ReleaseDate,
-                    Director = m.Director,
-                    Language = m.Language,
                     Description = m.Description,
 
                     Assets = m.Assets.ToList(),
@@ -58,19 +56,19 @@ namespace MediaBacklogManagerBackend.Services.Media
                 .ToListAsync();
         }
 
-        internal async Task<bool> UpdateMovie(UpdateMovieDto movieDto)
+        internal async Task<bool> UpdateSong(UpdateSongDto songDto)
         {
-            var id = movieDto.Id;
-            var movie = await GetItemById(id);
+            var id = songDto.Id;
+            var song = await GetItemById(id);
 
-            if (movie == null)
+            if (song == null)
             {
                 return false;
             }
 
             try
             {
-                MapMovieUpdate(movie, movieDto);
+                MapSongUpdate(song, songDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -78,21 +76,21 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the song");
             }
 
         }
 
-        internal async Task<ReadMovieDto?> ReadMovieById(int id)
+        internal async Task<ReadSongDto?> ReadSongById(int id)
         {
             if (await CheckExistsAsync(id)) { }
 
-            var movie = await GetItemById(id);
+            var song = await GetItemById(id);
 
-            return GetReadMovieDto(movie!);
+            return GetReadSongDto(song!);
         }
 
-        internal async Task<bool> DeleteMovie(int id)
+        internal async Task<bool> DeleteSong(int id)
         {
             return await DeleteMediaAsync(id);
         }
@@ -102,74 +100,68 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        private Song MapSongCreation(CreateSongDto songDto)
         {
-            return new Movie
+            return new Song
             {
                 // Required
-                Title = movieDto.Title,
+                Title = songDto.Title,
 
                 // Optional (nullable → fallback)
-                Description = movieDto.Description ?? string.Empty,
-                Language = movieDto.Language ?? "Unknown",
-                Director = movieDto.Director ?? "Unknown",
+                Description = songDto.Description ?? string.Empty,
+                Artist = songDto.Artist ?? string.Empty,
 
                 // Value types with defaults
-                RunTime = movieDto.RunTime ?? 0,
-                GeneralRating = movieDto.GeneralRating ?? 0.0,
+                RunTime = songDto.RunTime ?? 0,
+                GeneralRating = songDto.GeneralRating ?? 0.0,
 
                 // Nullable stays nullable
-                ContentRating = movieDto.ContentRating,
-                ReleaseDate = movieDto.ReleaseDate,
+                ReleaseDate = songDto.ReleaseDate,
 
                 // Collections (avoid nulls)
-                Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
+                Assets = songDto.Assets ?? new List<MediaAsset>(),
+                Genres = songDto.Genres ?? new List<Genre>(),
 
                 // System-managed fields
-                DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
+                DateCreated = songDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
+        private void MapSongUpdate(Song song, UpdateSongDto songDto)
         {
 
             // Required
-            movie.Title = movieDto.Title;
+            song.Title = songDto.Title;
 
             // Optional (nullable → fallback)
-            movie.Description = movieDto.Description ?? string.Empty;
-            movie.Language = movieDto.Language ?? "Unknown";
-            movie.Director = movieDto.Director ?? "Unknown";
+            song.Description = songDto.Description ?? string.Empty;
+            song.Artist = songDto.Artist ?? string.Empty;
 
             // Value types with defaults
-            movie.RunTime = movieDto.RunTime ?? 0;
-            movie.GeneralRating = movieDto.GeneralRating ?? 0.0;
+            song.RunTime = songDto.RunTime ?? 0;
+            song.GeneralRating = songDto.GeneralRating ?? 0.0;
 
             // Nullable stays nullable
-            movie.ContentRating = movieDto.ContentRating;
-            movie.ReleaseDate = movieDto.ReleaseDate;
+            song.ReleaseDate = songDto.ReleaseDate;
 
             // Collections (avoid nulls)
-            movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
+            song.Assets = songDto.Assets ?? new List<MediaAsset>();
+            song.Genres = songDto.Genres ?? new List<Genre>();
         }
 
-        private ReadMovieDto GetReadMovieDto(Movie movie)
+        private ReadSongDto GetReadSongDto(Song song)
         {
-            return new ReadMovieDto
+            return new ReadSongDto
             {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Assets = movie.Assets,
-                ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
-                GeneralRating = movie.GeneralRating,
-                RunTime = movie.RunTime,
-                Language = movie.Language,
-                Director = movie.Director,
-                ContentRating = movie.ContentRating
+                Id = song.Id,
+                Title = song.Title,
+                Description = song.Description,
+                Assets = song.Assets,
+                ReleaseDate = song.ReleaseDate,
+                Genres = song.Genres,
+                GeneralRating = song.GeneralRating,
+                RunTime = song.RunTime,
+                Artist = song.Artist
             }
             ;
         }

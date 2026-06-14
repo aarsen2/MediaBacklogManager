@@ -11,7 +11,7 @@ import { AuthResponse } from './models/AuthResponse';
 export class AuthApi {
 
   private http = inject(HttpClient)
-  private baseUrl =  "https://localhost:7170/api/Auth";
+  private baseUrl =  "https://localhost:7170/api/auth";
 
 
   login(username: string, password: string): Observable<AuthResponse> {

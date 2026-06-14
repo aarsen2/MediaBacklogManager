@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class AlbumService : MediaService<Movie>
+    public class AlbumService : MediaService<Album>
     {
         public AlbumService(AppDbContext context) : base(context)
         {
@@ -18,37 +18,36 @@ namespace MediaBacklogManagerBackend.Services.Media
 
 
 
-        //Movie Creation, Mapping, and Reading
-        internal async Task<Movie?> CreateMovie(CreateMovieDto movieDto)
+        //Album Creation, Mapping, and Reading
+        internal async Task<Album?> CreateAlbum(CreateAlbumDto albumDto)
         {
-            Console.WriteLine($"Creating Movie: {movieDto.Title}");
+            Console.WriteLine($"Creating Album: {albumDto.Title}");
 
-            bool exists = await CheckExistsAsync(movieDto.Title, movieDto.ReleaseDate);
+            bool exists = await CheckExistsAsync(albumDto.Title, albumDto.ReleaseDate);
 
-            Console.WriteLine($"Movie Exists: {exists}");
+            Console.WriteLine($"Album Exists: {exists}");
             if (exists)
                 return null;
 
-            var movie = MapMovieCreation(movieDto);
+            var album = MapAlbumCreation(albumDto);
 
-            return await CreateAsync(movie);
+            return await CreateAsync(album);
 
         }
 
 
-        internal async Task<List<ReadMovieDto>> ReadAllMovies()
+        internal async Task<List<ReadAlbumDto>> ReadAllAlbums()
         {
-            return await dbContext.Movies
-                .Select(m => new ReadMovieDto
+            return await dbContext.Albums
+                .Select(m => new ReadAlbumDto
                 {
                     Id = m.Id,
                     Title = m.Title,
                     RunTime = m.RunTime,
                     GeneralRating = m.GeneralRating,
-                    ContentRating = m.ContentRating,
                     ReleaseDate = m.ReleaseDate,
-                    Director = m.Director,
-                    Language = m.Language,
+                    Artist = m.Artist,
+                    TrackCount = m.TrackCount,
                     Description = m.Description,
 
                     Assets = m.Assets.ToList(),
@@ -58,19 +57,19 @@ namespace MediaBacklogManagerBackend.Services.Media
                 .ToListAsync();
         }
 
-        internal async Task<bool> UpdateMovie(UpdateMovieDto movieDto)
+        internal async Task<bool> UpdateAlbum(UpdateAlbumDto albumDto)
         {
-            var id = movieDto.Id;
-            var movie = await GetItemById(id);
+            var id = albumDto.Id;
+            var album = await GetItemById(id);
 
-            if (movie == null)
+            if (album == null)
             {
                 return false;
             }
 
             try
             {
-                MapMovieUpdate(movie, movieDto);
+                MapAlbumUpdate(album, albumDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -78,21 +77,21 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the album");
             }
 
         }
 
-        internal async Task<ReadMovieDto?> ReadMovieById(int id)
+        internal async Task<ReadAlbumDto?> ReadAlbumById(int id)
         {
             if (await CheckExistsAsync(id)) { }
 
-            var movie = await GetItemById(id);
+            var album = await GetItemById(id);
 
-            return GetReadMovieDto(movie!);
+            return GetReadAlbumDto(album!);
         }
 
-        internal async Task<bool> DeleteMovie(int id)
+        internal async Task<bool> DeleteAlbum(int id)
         {
             return await DeleteMediaAsync(id);
         }
@@ -102,76 +101,74 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        private Album MapAlbumCreation(CreateAlbumDto albumDto)
         {
-            return new Movie
+            return new Album
             {
                 // Required
-                Title = movieDto.Title,
+                Title = albumDto.Title,
 
                 // Optional (nullable → fallback)
-                Description = movieDto.Description ?? string.Empty,
-                Language = movieDto.Language ?? "Unknown",
-                Director = movieDto.Director ?? "Unknown",
+                Description = albumDto.Description ?? string.Empty,
+                Artist = albumDto.Artist ?? string.Empty,
+
+
 
                 // Value types with defaults
-                RunTime = movieDto.RunTime ?? 0,
-                GeneralRating = movieDto.GeneralRating ?? 0.0,
+                RunTime = albumDto.RunTime ?? 0,
+                GeneralRating = albumDto.GeneralRating ?? 0.0,
+                TrackCount = albumDto.TrackCount,
 
                 // Nullable stays nullable
-                ContentRating = movieDto.ContentRating,
-                ReleaseDate = movieDto.ReleaseDate,
+                ReleaseDate = albumDto.ReleaseDate,
 
                 // Collections (avoid nulls)
-                Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
+                Assets = albumDto.Assets ?? new List<MediaAsset>(),
+                Genres = albumDto.Genres ?? new List<Genre>(),
 
                 // System-managed fields
-                DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
+                DateCreated = albumDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
+        private void MapAlbumUpdate(Album album, UpdateAlbumDto albumDto)
         {
 
             // Required
-            movie.Title = movieDto.Title;
+            album.Title = albumDto.Title;
 
             // Optional (nullable → fallback)
-            movie.Description = movieDto.Description ?? string.Empty;
-            movie.Language = movieDto.Language ?? "Unknown";
-            movie.Director = movieDto.Director ?? "Unknown";
+            album.Description = albumDto.Description ?? string.Empty;
+            album.Artist = albumDto.Artist ?? string.Empty;
 
             // Value types with defaults
-            movie.RunTime = movieDto.RunTime ?? 0;
-            movie.GeneralRating = movieDto.GeneralRating ?? 0.0;
+            album.RunTime = albumDto.RunTime ?? 0;
+            album.GeneralRating = albumDto.GeneralRating ?? 0.0;
+            album.TrackCount = albumDto.TrackCount;
 
             // Nullable stays nullable
-            movie.ContentRating = movieDto.ContentRating;
-            movie.ReleaseDate = movieDto.ReleaseDate;
+            album.ReleaseDate = albumDto.ReleaseDate;
 
             // Collections (avoid nulls)
-            movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
+            album.Assets = albumDto.Assets ?? new List<MediaAsset>();
+            album.Genres = albumDto.Genres ?? new List<Genre>();
         }
 
-        private ReadMovieDto GetReadMovieDto(Movie movie)
+        private ReadAlbumDto GetReadAlbumDto(Album album)
         {
-            return new ReadMovieDto
+            return new ReadAlbumDto
             {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Assets = movie.Assets,
-                ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
-                GeneralRating = movie.GeneralRating,
-                RunTime = movie.RunTime,
-                Language = movie.Language,
-                Director = movie.Director,
-                ContentRating = movie.ContentRating
-            }
-            ;
+                Id = album.Id,
+                Title = album.Title,
+                Description = album.Description,
+                Assets = album.Assets,
+                ReleaseDate = album.ReleaseDate,
+                Genres = album.Genres,
+                GeneralRating = album.GeneralRating,
+                RunTime = album.RunTime,
+                TrackCount = album.TrackCount,
+                Artist = album.Artist
+            };
         }
     }
 }

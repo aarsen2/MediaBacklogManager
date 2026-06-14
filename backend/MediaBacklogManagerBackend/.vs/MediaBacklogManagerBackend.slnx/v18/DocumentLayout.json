@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\controllers\\showcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\controllers\\showcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -13,7 +17,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 215,
+          "DockedHeight": 139,
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -27,20 +31,33 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ShowController.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\ShowController.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Controllers\\ShowController.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\ShowController.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\Controllers\\ShowController.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAACsAAAAlAAAAAAAAAA==",
+              "Title": "MovieController.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Controllers\\MovieController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-13T00:48:55.74Z",
+              "WhenOpened": "2026-06-14T21:17:20.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SongController.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\SongController.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Controllers\\SongController.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\SongController.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Controllers\\SongController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T21:04:47.607Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedHeight": 74,
+          "DockedHeight": 150,
           "SelectedChildIndex": -1,
           "Children": [
             {

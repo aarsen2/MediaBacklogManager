@@ -15,15 +15,5 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
             Type = MediaType.Show;
         }
 
-        public override string ToString()
-        {
-            return base.ToString() + $@"
-=== SHOW SPECIFIC DATA ===
-SeasonCount: {SeasonCount?.ToString() ?? "N/A"} Seasons
-EpisodeCount: {EpisodeCount?.ToString() ?? "N/A"} Episodes
-Content Rating: {ContentRating?.ToString() ?? "N/A"}
-===========================
-";
-        }
     }
 }

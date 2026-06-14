@@ -26,16 +26,6 @@ namespace MediaBacklogManagerBackend.DTOs.Updating
         public MovieContentRating? ContentRating { get; set; }
         public UpdateMovieDto() { }
 
-        public override string ToString()
-        {
-            return base.ToString() + $@"
-=== MOVIE SPECIFIC DATA ===
-Runtime: {RunTime?.ToString() ?? "N/A"} minutes
-Language: {Language ?? "N/A"}
-Director: {Director ?? "N/A"}
-Content Rating: {ContentRating?.ToString() ?? "N/A"}
-===========================
-";
-        }
+       
     }
 }

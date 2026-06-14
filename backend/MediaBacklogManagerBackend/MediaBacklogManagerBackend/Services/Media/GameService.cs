@@ -10,7 +10,7 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
-    public class GameService : MediaService<Movie>
+    public class GameService : MediaService<Game>
     {
         public GameService(AppDbContext context) : base(context)
         {
@@ -18,38 +18,38 @@ namespace MediaBacklogManagerBackend.Services.Media
 
 
 
-        //Movie Creation, Mapping, and Reading
-        internal async Task<Movie?> CreateMovie(CreateMovieDto movieDto)
+        //Game Creation, Mapping, and Reading
+        internal async Task<Game?> CreateGame(CreateGameDto gameDto)
         {
-            Console.WriteLine($"Creating Movie: {movieDto.Title}");
+            Console.WriteLine($"Creating Game: {gameDto.Title}");
 
-            bool exists = await CheckExistsAsync(movieDto.Title, movieDto.ReleaseDate);
+            bool exists = await CheckExistsAsync(gameDto.Title, gameDto.ReleaseDate);
 
-            Console.WriteLine($"Movie Exists: {exists}");
+            Console.WriteLine($"Game Exists: {exists}");
             if (exists)
                 return null;
 
-            var movie = MapMovieCreation(movieDto);
+            var game = MapGameCreation(gameDto);
 
-            return await CreateAsync(movie);
+            return await CreateAsync(game);
 
         }
 
 
-        internal async Task<List<ReadMovieDto>> ReadAllMovies()
+        internal async Task<List<ReadGameDto>> ReadAllGames()
         {
-            return await dbContext.Movies
-                .Select(m => new ReadMovieDto
+            return await dbContext.Games
+                .Select(m => new ReadGameDto
                 {
                     Id = m.Id,
                     Title = m.Title,
-                    RunTime = m.RunTime,
                     GeneralRating = m.GeneralRating,
                     ContentRating = m.ContentRating,
                     ReleaseDate = m.ReleaseDate,
-                    Director = m.Director,
-                    Language = m.Language,
                     Description = m.Description,
+                    Studio = m.Studio,
+
+                    Platforms = m.Platforms.ToList(),
 
                     Assets = m.Assets.ToList(),
 
@@ -58,19 +58,19 @@ namespace MediaBacklogManagerBackend.Services.Media
                 .ToListAsync();
         }
 
-        internal async Task<bool> UpdateMovie(UpdateMovieDto movieDto)
+        internal async Task<bool> UpdateGame(UpdateGameDto gameDto)
         {
-            var id = movieDto.Id;
-            var movie = await GetItemById(id);
+            var id = gameDto.Id;
+            var game = await GetItemById(id);
 
-            if (movie == null)
+            if (game == null)
             {
                 return false;
             }
 
             try
             {
-                MapMovieUpdate(movie, movieDto);
+                MapGameUpdate(game, gameDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -78,21 +78,21 @@ namespace MediaBacklogManagerBackend.Services.Media
             }
             catch
             {
-                throw new Exception("Something went wrong with updaing the movie");
+                throw new Exception("Something went wrong with updating the game");
             }
 
         }
 
-        internal async Task<ReadMovieDto?> ReadMovieById(int id)
+        internal async Task<ReadGameDto?> ReadGameById(int id)
         {
             if (await CheckExistsAsync(id)) { }
 
-            var movie = await GetItemById(id);
+            var game = await GetItemById(id);
 
-            return GetReadMovieDto(movie!);
+            return GetReadGameDto(game!);
         }
 
-        internal async Task<bool> DeleteMovie(int id)
+        internal async Task<bool> DeleteGame(int id)
         {
             return await DeleteMediaAsync(id);
         }
@@ -102,74 +102,70 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        private Game MapGameCreation(CreateGameDto gameDto)
         {
-            return new Movie
+            return new Game
             {
                 // Required
-                Title = movieDto.Title,
+                Title = gameDto.Title,
 
                 // Optional (nullable → fallback)
-                Description = movieDto.Description ?? string.Empty,
-                Language = movieDto.Language ?? "Unknown",
-                Director = movieDto.Director ?? "Unknown",
-
+                Description = gameDto.Description ?? string.Empty,
+                Studio = gameDto.Studio ?? string.Empty,
                 // Value types with defaults
-                RunTime = movieDto.RunTime ?? 0,
-                GeneralRating = movieDto.GeneralRating ?? 0.0,
+                GeneralRating = gameDto.GeneralRating ?? 0.0,
 
                 // Nullable stays nullable
-                ContentRating = movieDto.ContentRating,
-                ReleaseDate = movieDto.ReleaseDate,
+                ContentRating = gameDto.ContentRating,
+                ReleaseDate = gameDto.ReleaseDate,
 
                 // Collections (avoid nulls)
-                Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
+                Assets = gameDto.Assets ?? new List<MediaAsset>(),
+                Genres = gameDto.Genres ?? new List<Genre>(),
+                Platforms = gameDto.Platforms ?? new List<GamePlatform>(),
 
                 // System-managed fields
-                DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
+                DateCreated = gameDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
+        private void MapGameUpdate(Game game, UpdateGameDto gameDto)
         {
 
             // Required
-            movie.Title = movieDto.Title;
+            game.Title = gameDto.Title;
 
             // Optional (nullable → fallback)
-            movie.Description = movieDto.Description ?? string.Empty;
-            movie.Language = movieDto.Language ?? "Unknown";
-            movie.Director = movieDto.Director ?? "Unknown";
+            game.Description = gameDto.Description ?? string.Empty;
+            game.Studio = gameDto.Studio ?? string.Empty;
 
             // Value types with defaults
-            movie.RunTime = movieDto.RunTime ?? 0;
-            movie.GeneralRating = movieDto.GeneralRating ?? 0.0;
+            game.GeneralRating = gameDto.GeneralRating ?? 0.0;
 
             // Nullable stays nullable
-            movie.ContentRating = movieDto.ContentRating;
-            movie.ReleaseDate = movieDto.ReleaseDate;
+            game.ContentRating = gameDto.ContentRating;
+            game.ReleaseDate = gameDto.ReleaseDate;
 
             // Collections (avoid nulls)
-            movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
+            game.Assets = gameDto.Assets ?? new List<MediaAsset>();
+            game.Genres = gameDto.Genres ?? new List<Genre>();
+            game.Platforms = gameDto.Platforms ?? new List<GamePlatform>();
         }
 
-        private ReadMovieDto GetReadMovieDto(Movie movie)
+        private ReadGameDto GetReadGameDto(Game Game)
         {
-            return new ReadMovieDto
+            return new ReadGameDto
             {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Assets = movie.Assets,
-                ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
-                GeneralRating = movie.GeneralRating,
-                RunTime = movie.RunTime,
-                Language = movie.Language,
-                Director = movie.Director,
-                ContentRating = movie.ContentRating
+                Id = Game.Id,
+                Title = Game.Title,
+                Description = Game.Description,
+                Assets = Game.Assets,
+                ReleaseDate = Game.ReleaseDate,
+                Genres = Game.Genres,
+                GeneralRating = Game.GeneralRating,
+                Platforms = Game.Platforms,
+                Studio = Game.Studio,
+                ContentRating = Game.ContentRating
             }
             ;
         }

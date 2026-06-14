@@ -26,15 +26,6 @@ public class UpdateShowDto : UpdateMediaDto
 
         public UpdateShowDto() { }
 
-        public override string ToString()
-        {
-            return base.ToString() + $@"
-=== SHOW SPECIFIC DATA ===
-SeasonCount: {SeasonCount?.ToString() ?? "N/A"} Seasons
-EpisodeCount: {EpisodeCount?.ToString() ?? "N/A"} Episodes
-Content Rating: {ContentRating?.ToString() ?? "N/A"}
-===========================
-";
-        }
+        
     }
 }

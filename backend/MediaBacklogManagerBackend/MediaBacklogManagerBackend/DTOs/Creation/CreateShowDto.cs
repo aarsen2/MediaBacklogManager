@@ -26,16 +26,7 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
         public ShowContentRating? ContentRating { get; set; }
         public CreateShowDto() { }
 
-        public override string ToString()
-        {
-            return base.ToString() + $@"
-=== SHOW SPECIFIC DATA ===
-SeasonCount: {SeasonCount?.ToString() ?? "N/A"} Seasons
-EpisodeCount: {EpisodeCount?.ToString() ?? "N/A"} Episodes
-Content Rating: {ContentRating?.ToString() ?? "N/A"}
-===========================
-";
-        }
+      
     }
 }
 
