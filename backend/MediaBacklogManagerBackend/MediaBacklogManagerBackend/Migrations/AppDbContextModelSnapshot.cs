@@ -17,6 +17,21 @@ namespace MediaBacklogManagerBackend.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
 
+            modelBuilder.Entity("GameGamePlatform", b =>
+                {
+                    b.Property<int>("GamesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlatformsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("GamesId", "PlatformsId");
+
+                    b.HasIndex("PlatformsId");
+
+                    b.ToTable("GameGamePlatform");
+                });
+
             modelBuilder.Entity("GenreMedia", b =>
                 {
                     b.Property<int>("GenresId")
@@ -38,18 +53,13 @@ namespace MediaBacklogManagerBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("GameId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
-                    b.ToTable("GamePlatform");
+                    b.ToTable("Platforms");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Genre", b =>
@@ -64,7 +74,7 @@ namespace MediaBacklogManagerBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Media", b =>
@@ -471,6 +481,21 @@ namespace MediaBacklogManagerBackend.Migrations
                     b.HasDiscriminator().HasValue("Song");
                 });
 
+            modelBuilder.Entity("GameGamePlatform", b =>
+                {
+                    b.HasOne("MediaBacklogManagerBackend.Models.Media.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaBacklogManagerBackend.Models.GamePlatform", null)
+                        .WithMany()
+                        .HasForeignKey("PlatformsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GenreMedia", b =>
                 {
                     b.HasOne("MediaBacklogManagerBackend.Models.Genre", null)
@@ -484,13 +509,6 @@ namespace MediaBacklogManagerBackend.Migrations
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MediaBacklogManagerBackend.Models.GamePlatform", b =>
-                {
-                    b.HasOne("MediaBacklogManagerBackend.Models.Media.Game", null)
-                        .WithMany("Platforms")
-                        .HasForeignKey("GameId");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.MediaAsset", b =>
@@ -568,11 +586,6 @@ namespace MediaBacklogManagerBackend.Migrations
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Album", b =>
                 {
                     b.Navigation("Songs");
-                });
-
-            modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Game", b =>
-                {
-                    b.Navigation("Platforms");
                 });
 #pragma warning restore 612, 618
         }

@@ -27,7 +27,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var show = MapShowCreation(showDto);
+            var show = await MapShowCreation(showDto);
 
             return await CreateAsync(show);
 
@@ -50,7 +50,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -67,7 +71,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapShowUpdate(show, showDto);
+                await MapShowUpdate(show, showDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -103,7 +107,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Show MapShowCreation(CreateShowDto showDto)
+        private async Task<Show> MapShowCreation(CreateShowDto showDto)
         {
             return new Show
             {
@@ -124,14 +128,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = showDto.Assets ?? new List<MediaAsset>(),
-                Genres = showDto.Genres ?? new List<Genre>(),
+                Genres = await GetGenresAsync(showDto.Genres) ?? new List<Genre>(),
 
                 // System-managed fields
                 DateCreated = showDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapShowUpdate(Show show, UpdateShowDto showDto)
+        private async Task MapShowUpdate(Show show, UpdateShowDto showDto)
         {
 
             // Required
@@ -151,7 +155,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             show.Assets = showDto.Assets ?? new List<MediaAsset>();
-            show.Genres = showDto.Genres ?? new List<Genre>();
+            show.Genres = await GetGenresAsync(showDto.Genres) ?? new List<Genre>();
         }
 
         private ReadShowDto GetReadShowDto(Show show)
@@ -163,7 +167,11 @@ namespace MediaBacklogManagerBackend.Services.Media
                 Description = show.Description,
                 Assets = show.Assets,
                 ReleaseDate = show.ReleaseDate,
-                Genres = show.Genres,
+                Genres = show.Genres.Select(g => new ReadGenreDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
                 GeneralRating = show.GeneralRating,
                 SeasonCount = show.SeasonCount,
                 EpisodeCount = show.EpisodeCount,

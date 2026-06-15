@@ -29,7 +29,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var movie = MapMovieCreation(movieDto);
+            var movie = await MapMovieCreation(movieDto);
 
             return await CreateAsync(movie);
 
@@ -53,7 +53,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -70,7 +74,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapMovieUpdate(movie, movieDto);
+                await MapMovieUpdate(movie, movieDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -106,7 +110,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Movie MapMovieCreation(CreateMovieDto movieDto)
+        private async Task<Movie> MapMovieCreation(CreateMovieDto movieDto)
         {
             return new Movie
             {
@@ -128,14 +132,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = movieDto.Assets ?? new List<MediaAsset>(),
-                Genres = movieDto.Genres ?? new List<Genre>(),
+                Genres = await GetGenresAsync(movieDto.Genres) ?? new List<Genre>(),
 
                 // System-managed fields
                 DateCreated = movieDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
+        private async Task MapMovieUpdate(Movie movie, UpdateMovieDto movieDto)
         {
 
             // Required
@@ -156,7 +160,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             movie.Assets = movieDto.Assets ?? new List<MediaAsset>();
-            movie.Genres = movieDto.Genres ?? new List<Genre>();
+            movie.Genres = await GetGenresAsync(movieDto.Genres) ?? new List<Genre>();
         }
 
         private ReadMovieDto GetReadMovieDto(Movie movie)
@@ -168,7 +172,11 @@ namespace MediaBacklogManagerBackend.Services.Media
                 Description = movie.Description,
                 Assets = movie.Assets,
                 ReleaseDate = movie.ReleaseDate,
-                Genres = movie.Genres,
+                Genres = movie.Genres.Select(g => new ReadGenreDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
                 GeneralRating = movie.GeneralRating,
                 RunTime = movie.RunTime,
                 Language = movie.Language,

@@ -29,7 +29,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var song = MapSongCreation(songDto);
+            var song = await MapSongCreation(songDto);
 
             return await CreateAsync(song);
 
@@ -51,7 +51,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -68,7 +72,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapSongUpdate(song, songDto);
+                await MapSongUpdate(song, songDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -83,11 +87,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         internal async Task<ReadSongDto?> ReadSongById(int id)
         {
-            if (await CheckExistsAsync(id)) { }
+            if (await CheckExistsAsync(id))
+            {
 
-            var song = await GetItemById(id);
+                var song = await GetItemById(id);
 
-            return GetReadSongDto(song!);
+                return GetReadSongDto(song!);
+            }
+            return null;
         }
 
         internal async Task<bool> DeleteSong(int id)
@@ -100,7 +107,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Song MapSongCreation(CreateSongDto songDto)
+        private async Task<Song> MapSongCreation(CreateSongDto songDto)
         {
             return new Song
             {
@@ -120,14 +127,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = songDto.Assets ?? new List<MediaAsset>(),
-                Genres = songDto.Genres ?? new List<Genre>(),
+                Genres = await GetGenresAsync(songDto.Genres) ?? new List<Genre>(),
 
                 // System-managed fields
                 DateCreated = songDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapSongUpdate(Song song, UpdateSongDto songDto)
+        private async Task MapSongUpdate(Song song, UpdateSongDto songDto)
         {
 
             // Required
@@ -146,7 +153,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             song.Assets = songDto.Assets ?? new List<MediaAsset>();
-            song.Genres = songDto.Genres ?? new List<Genre>();
+            song.Genres = await GetGenresAsync(songDto.Genres) ?? new List<Genre>();
         }
 
         private ReadSongDto GetReadSongDto(Song song)
@@ -158,7 +165,11 @@ namespace MediaBacklogManagerBackend.Services.Media
                 Description = song.Description,
                 Assets = song.Assets,
                 ReleaseDate = song.ReleaseDate,
-                Genres = song.Genres,
+                Genres = song.Genres.Select(g => new ReadGenreDto
+                {
+                    Name = g.Name,
+                    Id = g.Id,
+                }).ToList(),
                 GeneralRating = song.GeneralRating,
                 RunTime = song.RunTime,
                 Artist = song.Artist

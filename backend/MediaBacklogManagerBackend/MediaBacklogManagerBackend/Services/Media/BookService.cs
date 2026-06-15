@@ -29,7 +29,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var book = MapBookCreation(bookDto);
+            var book = await MapBookCreation(bookDto);
 
             return await CreateAsync(book);
 
@@ -51,7 +51,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -68,7 +72,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapBookUpdate(book, bookDto);
+                await MapBookUpdate(book, bookDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -83,11 +87,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         internal async Task<ReadBookDto?> ReadBookById(int id)
         {
-            if (await CheckExistsAsync(id)) { }
+            if (await CheckExistsAsync(id))
+            {
 
-            var book = await GetItemById(id);
+                var book = await GetItemById(id);
 
-            return GetReadBookDto(book!);
+                return GetReadBookDto(book!);
+            }
+            return null;
         }
 
         internal async Task<bool> DeleteBook(int id)
@@ -100,7 +107,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Book MapBookCreation(CreateBookDto bookDto)
+        private async Task<Book> MapBookCreation(CreateBookDto bookDto)
         {
             return new Book
             {
@@ -121,14 +128,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = bookDto.Assets ?? new List<MediaAsset>(),
-                Genres = bookDto.Genres ?? new List<Genre>(),
+                Genres = await GetGenresAsync(bookDto.Genres) ?? new List<Genre>(),
 
                 // System-managed fields
                 DateCreated = bookDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapBookUpdate(Book book, UpdateBookDto bookDto)
+        private async Task MapBookUpdate(Book book, UpdateBookDto bookDto)
         {
 
             // Required
@@ -147,7 +154,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             book.Assets = bookDto.Assets ?? new List<MediaAsset>();
-            book.Genres = bookDto.Genres ?? new List<Genre>();
+            book.Genres = await GetGenresAsync(bookDto.Genres) ?? new List<Genre>();
         }
 
         private ReadBookDto GetReadBookDto(Book book)
@@ -159,7 +166,11 @@ namespace MediaBacklogManagerBackend.Services.Media
                 Description = book.Description,
                 Assets = book.Assets,
                 ReleaseDate = book.ReleaseDate,
-                Genres = book.Genres,
+                Genres = book.Genres.Select(g => new ReadGenreDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
                 GeneralRating = book.GeneralRating,
                 Language = book.Language,
                 PageCount = book.PageCount,

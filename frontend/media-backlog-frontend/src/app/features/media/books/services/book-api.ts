@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ReadBookDto } from '../../models/read/ReadBookDto';
+import { Observable } from 'rxjs';
+import { CreateBookDto } from '../../models/create/CreateBookDto';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BookApi {
+     private baseUrl = 'https://localhost:7170/api/book';
+
+  constructor(private http: HttpClient) {}
+
+  getBooks(): Observable<ReadBookDto[]> {
+    return this.http.get<ReadBookDto[]>(this.baseUrl, {responseType: 'json'});
+  }
+
+  getBook(id: string): Observable<ReadBookDto> {
+    return this.http.get<ReadBookDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
+  }
+
+  createBook(dto: CreateBookDto) : Observable<string> {
+    console.log("Creating Book...");
+    console.log(dto);
+    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
+  } 
+}

@@ -5,5 +5,5 @@ export interface ReadMovieDto extends ReadMediaBase {
     language: string;
     director: string;
     contentRating: string;
-    type: 'Movie';
+    type: 'movie';
 }

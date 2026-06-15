@@ -9,7 +9,7 @@ namespace MediaBacklogManagerBackend.DTOs.Updating
         public string? Description { get; set; }
         public List<MediaAsset> Assets { get; set; } = new();
         public DateTime? ReleaseDate { get; set; }
-        public List<Genre> Genres { get; set; } = new();
+        public List<string> Genres { get; set; } = new();
         public double? GeneralRating { get; set; }
         public UpdateMediaDto() { }
 

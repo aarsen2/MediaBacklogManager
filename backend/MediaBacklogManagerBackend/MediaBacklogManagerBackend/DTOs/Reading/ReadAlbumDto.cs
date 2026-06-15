@@ -11,7 +11,7 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
 
         public ReadAlbumDto()
         {
-            Type = MediaType.Album;
+            Type = MediaType.album;
         }
     }
 }

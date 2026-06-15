@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using static MediaBacklogManagerBackend.Models.GamePlatform;
 
 namespace MediaBacklogManagerBackend.Data
 {
@@ -24,6 +25,19 @@ namespace MediaBacklogManagerBackend.Data
     dotnet ef database update
      
     */
+
+
+    /* 
+    Adding a new migration
+    
+     
+    dotnet ef migrations add {NameOfMigration}
+
+    Apply the migration    
+    dotnet ef database update
+
+     
+     */
     public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         //Media Types Tables
@@ -33,7 +47,8 @@ namespace MediaBacklogManagerBackend.Data
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Song> Songs { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
-
+        public virtual DbSet<GamePlatform> Platforms { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
         //Other Needed Tables
         public virtual DbSet<Recommender> Recommenders { get; set; }
 

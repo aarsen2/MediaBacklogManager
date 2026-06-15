@@ -1,4 +1,6 @@
 ﻿using MediaBacklogManagerBackend.Data;
+using MediaBacklogManagerBackend.DTOs.Reading;
+using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,11 +71,50 @@ namespace MediaBacklogManagerBackend.Services.Media
             Console.WriteLine($"\n\n\n{id}\n\n\n");
 
 
-            var val = await dbSet.FindAsync(id);
+            var val = await dbSet
+                .Include(m => m.Genres).Include(m => m.Assets)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             Console.WriteLine($"\n\n\n{val}\n\n\n");
 
             return val;
 
+        }
+        protected async Task<List<Genre>> GetGenresAsync(List<string> genreStrings)
+        {
+            // Normalize for comparison only
+            var cleanedInputs = genreStrings
+                .Where(p => !string.IsNullOrWhiteSpace(p))
+                .Select(p => p.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            List<Genre> genres = new List<Genre>();
+            foreach (var genreString in cleanedInputs)
+            {
+                var normalizedGenre = genreString.ToLower();
+                var platform = await dbContext.Genres.FirstOrDefaultAsync(g => g.Name.ToLower() == normalizedGenre);
+
+                if (platform == null)
+                {
+                    platform = new Genre() { Name = genreString };
+
+                    await dbContext.Genres.AddAsync(platform);
+                }
+                genres.Add(platform);
+
+            }
+
+            return genres;
+        }
+
+        protected List<ReadGenreDto> ReadGenres(Models.Media.Media media)
+        {
+            return media.Genres.Select(g => new ReadGenreDto
+            {
+                Id = g.Id,
+                Name = g.Name
+            }).ToList();
         }
     }
 }

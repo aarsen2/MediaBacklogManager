@@ -6,12 +6,12 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
 {
     public class ReadGameDto : ReadMediaDto
     {
-        public List<GamePlatform> Platforms { get; set; } = new();
+        public List<ReadPlatformDto> Platforms { get; set; } = new();
         public string? Studio { get; set; }
         public GameContentRating ContentRating { get; set; }
         public ReadGameDto()
         {
-            Type = MediaType.Game;
+            Type = MediaType.game;
         }
     }
 }

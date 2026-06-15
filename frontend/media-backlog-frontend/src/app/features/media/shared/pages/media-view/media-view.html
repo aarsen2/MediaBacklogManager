@@ -13,12 +13,23 @@
         @if(media(); as m) {
 
         @switch (m.type) {
-        @case ('Movie') {
-
+        @case ('movie') {
         <app-movie-details [movie]="m"></app-movie-details>
         }
-        @case ('Show') {
+        @case ('show') {
         <app-show-details [show]="m"></app-show-details>
+        }
+        @case ('album') {
+        <app-album-details [album]="m"></app-album-details>
+        }
+        @case ('book') {
+        <app-book-details [book]="m"></app-book-details>
+        }
+        @case ('game') {
+        <app-game-details [game]="m"></app-game-details>
+        }
+        @case ('song') {
+        <app-song-details [song]="m"></app-song-details>
         }
         }
         }

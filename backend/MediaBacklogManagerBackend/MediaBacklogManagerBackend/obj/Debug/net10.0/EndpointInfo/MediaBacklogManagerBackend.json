@@ -45,6 +45,47 @@
         }
       }
     },
+    "/api/album/create-many": {
+      "post": {
+        "tags": [
+          "Album"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateAlbumDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateAlbumDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateAlbumDto"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/album/update": {
       "put": {
         "tags": [
@@ -205,6 +246,47 @@
         }
       }
     },
+    "/api/book/create-many": {
+      "post": {
+        "tags": [
+          "Book"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateBookDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateBookDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateBookDto"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/book/update": {
       "put": {
         "tags": [
@@ -333,6 +415,47 @@
         }
       }
     },
+    "/api/game/create-many": {
+      "post": {
+        "tags": [
+          "Game"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateGameDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateGameDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateGameDto"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/game/update": {
       "put": {
         "tags": [
@@ -429,7 +552,7 @@
         }
       }
     },
-    "/api/MOVIE/create": {
+    "/api/movie/create": {
       "post": {
         "tags": [
           "Movie"
@@ -461,7 +584,48 @@
         }
       }
     },
-    "/api/MOVIE/update": {
+    "/api/movie/create-many": {
+      "post": {
+        "tags": [
+          "Movie"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateMovieDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateMovieDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateMovieDto"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/movie/update": {
       "put": {
         "tags": [
           "Movie"
@@ -493,7 +657,7 @@
         }
       }
     },
-    "/api/MOVIE": {
+    "/api/movie": {
       "get": {
         "tags": [
           "Movie"
@@ -505,7 +669,7 @@
         }
       }
     },
-    "/api/MOVIE/{id}": {
+    "/api/movie/{id}": {
       "get": {
         "tags": [
           "Movie"
@@ -577,6 +741,47 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateShowDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/show/create-many": {
+      "post": {
+        "tags": [
+          "Show"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateShowDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateShowDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateShowDto"
+                }
               }
             }
           },
@@ -705,6 +910,47 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateSongDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/song/create-many": {
+      "post": {
+        "tags": [
+          "Song"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateSongDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateSongDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateSongDto"
+                }
               }
             }
           },
@@ -899,7 +1145,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -969,7 +1215,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -996,7 +1242,7 @@
           "platforms": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GamePlatform"
+              "type": "string"
             }
           },
           "studio": {
@@ -1033,7 +1279,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1113,7 +1359,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1190,7 +1436,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1254,7 +1500,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1288,97 +1534,6 @@
       },
       "GameContentRating": {
         "type": "integer"
-      },
-      "GamePlatform": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "Genre": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "name": {
-            "type": "string"
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Media"
-            }
-          }
-        }
-      },
-      "Media": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "assets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaAsset"
-            }
-          },
-          "releaseDate": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "genres": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Genre"
-            }
-          },
-          "generalRating": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
-            "format": "double"
-          },
-          "dateCreated": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
       },
       "MediaAsset": {
         "type": "object",
@@ -1520,7 +1675,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1591,7 +1746,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1611,7 +1766,7 @@
           "platforms": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GamePlatform"
+              "type": "string"
             }
           },
           "studio": {
@@ -1656,7 +1811,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1737,7 +1892,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1815,7 +1970,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {
@@ -1880,7 +2035,7 @@
           "genres": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Genre"
+              "type": "string"
             }
           },
           "generalRating": {

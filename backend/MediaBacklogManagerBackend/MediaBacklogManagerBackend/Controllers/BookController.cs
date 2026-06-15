@@ -2,6 +2,7 @@
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
+using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,8 @@ namespace MediaBacklogManagerBackend.Controllers
             Service = service;
         }
 
+
+
         //Creates a new Book
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateBookDto bookDto)
@@ -30,10 +33,52 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Creating Book");
             if (book != null)
             {
-                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
+                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, await Service.ReadBookById(book.Id));
             }
             else return Conflict("Book Already Exists.");
         }
+
+        //Creates a list of Books
+        [HttpPost("create-many")]
+        public async Task<IActionResult> CreateMany([FromBody] CreateBookDto[] bookDtos)
+        {
+            var createdBooks = new List<ReadBookDto>();
+            var conflicts = new List<string>();
+
+            foreach (var bookDto in bookDtos)
+            {
+                var book = await Service.CreateBook(bookDto);
+
+                if (book != null)
+                {
+                    var readDto = await Service.ReadBookById(book.Id);
+                    createdBooks.Add(readDto!);
+                }
+                else
+                {
+                    conflicts.Add(bookDto.Title);
+                }
+            }
+
+            Console.WriteLine($"Created {createdBooks.Count} books");
+
+            if (createdBooks.Count == 0)
+            {
+                return Conflict(new { message = "No books were created", conflicts });
+            }
+
+            if (conflicts.Count > 0)
+            {
+                return StatusCode(207, new { created = createdBooks, conflicts });
+            }
+
+
+            return Ok(await Service.ReadAllBooks());
+        }
+
+
+
+
 
 
         //Updates a Book By its ID

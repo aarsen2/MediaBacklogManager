@@ -1,9 +1,8 @@
 import { ReadMediaBase } from "./ReadMediaBase";
 
 export interface ReadShowDto extends ReadMediaBase {
-    runTime: number;
-    language: string;
-    director: string;
+    seasonCount: number;
+    EpisodeCount: number;
     contentRating: string;
-    type: 'Show';
+    type: 'show';
 }

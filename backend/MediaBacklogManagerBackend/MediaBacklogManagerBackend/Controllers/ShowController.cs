@@ -1,5 +1,7 @@
 ﻿using MediaBacklogManagerBackend.DTOs.Creation;
+using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
+using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,22 +21,64 @@ namespace MediaBacklogManagerBackend.Controllers
             Service = service;
         }
 
+
         //Creates a new Show
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateShowDto showDto)
         {
             var show = await Service.CreateShow(showDto);
 
-            Console.WriteLine("Creating Movie");
+            Console.WriteLine("Creating Show");
             if (show != null)
             {
-                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, show);
+                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, await Service.ReadShowById(show.Id));
             }
-            else return Conflict("Movie Already Exists.");
+            else return Conflict("Show Already Exists.");
+        }
+
+        //Creates a list of Shows
+        [HttpPost("create-many")]
+        public async Task<IActionResult> CreateMany([FromBody] CreateShowDto[] showDtos)
+        {
+            var createdShows = new List<ReadShowDto>();
+            var conflicts = new List<string>();
+
+            foreach (var showDto in showDtos)
+            {
+                var show = await Service.CreateShow(showDto);
+
+                if (show != null)
+                {
+                    var readDto = await Service.ReadShowById(show.Id);
+                    createdShows.Add(readDto!);
+                }
+                else
+                {
+                    conflicts.Add(showDto.Title);
+                }
+            }
+
+            Console.WriteLine($"Created {createdShows.Count} shows");
+
+            if (createdShows.Count == 0)
+            {
+                return Conflict(new { message = "No shows were created", conflicts });
+            }
+
+            if (conflicts.Count > 0)
+            {
+                return StatusCode(207, new { created = createdShows, conflicts });
+            }
+
+
+            return Ok(await Service.ReadAllShows());
         }
 
 
-        //Updates a Movie By its ID
+
+
+
+        //Updates a Show By its ID
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateShowDto showDto)
         {
@@ -54,7 +98,7 @@ namespace MediaBacklogManagerBackend.Controllers
         }
 
 
-        //Gets all movies
+        //Gets all Shows
         [HttpGet]
         public async Task<IActionResult> ReadAllShows()
         {
@@ -63,7 +107,7 @@ namespace MediaBacklogManagerBackend.Controllers
 
 
 
-        ////Gets a single movie by ID
+        ////Gets a single Show by ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetShow(int id)
         {

@@ -10,7 +10,7 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
         public MovieContentRating? ContentRating { get; set; }
         public ReadMovieDto()
         {
-            Type = MediaType.Movie;
+            Type = MediaType.movie;
         }
 
        

@@ -29,7 +29,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var album = MapAlbumCreation(albumDto);
+            var album = await MapAlbumCreation(albumDto);
 
             return await CreateAsync(album);
 
@@ -52,7 +52,11 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -69,7 +73,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapAlbumUpdate(album, albumDto);
+                await MapAlbumUpdate(album, albumDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -84,11 +88,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         internal async Task<ReadAlbumDto?> ReadAlbumById(int id)
         {
-            if (await CheckExistsAsync(id)) { }
+            if (await CheckExistsAsync(id))
+            {
 
-            var album = await GetItemById(id);
+                var album = await GetItemById(id);
 
-            return GetReadAlbumDto(album!);
+                return GetReadAlbumDto(album!);
+            }
+            return null;
         }
 
         internal async Task<bool> DeleteAlbum(int id)
@@ -101,7 +108,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Album MapAlbumCreation(CreateAlbumDto albumDto)
+        private async Task<Album> MapAlbumCreation(CreateAlbumDto albumDto)
         {
             return new Album
             {
@@ -124,14 +131,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = albumDto.Assets ?? new List<MediaAsset>(),
-                Genres = albumDto.Genres ?? new List<Genre>(),
+                Genres = await GetGenresAsync(albumDto.Genres) ?? new List<Genre>(),
 
                 // System-managed fields
                 DateCreated = albumDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapAlbumUpdate(Album album, UpdateAlbumDto albumDto)
+        private async Task MapAlbumUpdate(Album album, UpdateAlbumDto albumDto)
         {
 
             // Required
@@ -151,7 +158,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             album.Assets = albumDto.Assets ?? new List<MediaAsset>();
-            album.Genres = albumDto.Genres ?? new List<Genre>();
+            album.Genres = await GetGenresAsync(albumDto.Genres) ?? new List<Genre>();
         }
 
         private ReadAlbumDto GetReadAlbumDto(Album album)
@@ -163,7 +170,11 @@ namespace MediaBacklogManagerBackend.Services.Media
                 Description = album.Description,
                 Assets = album.Assets,
                 ReleaseDate = album.ReleaseDate,
-                Genres = album.Genres,
+                Genres = album.Genres.Select(g => new ReadGenreDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
                 GeneralRating = album.GeneralRating,
                 RunTime = album.RunTime,
                 TrackCount = album.TrackCount,

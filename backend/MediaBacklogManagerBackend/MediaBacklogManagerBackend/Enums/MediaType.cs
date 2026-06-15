@@ -5,11 +5,11 @@ namespace MediaBacklogManagerBackend.Emuns
 {
     public enum MediaType
     {
-        Movie,
-        Show,
-        Game,
-        Book,
-        Song,
-        Album
+        movie,
+        show,
+        game,
+        book,
+        song,
+        album
     }
 }

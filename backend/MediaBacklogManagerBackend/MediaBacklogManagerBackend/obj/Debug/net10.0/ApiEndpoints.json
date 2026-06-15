@@ -59,6 +59,22 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "Method": "CreateMany",
+    "RelativePath": "api/album/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateAlbumDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
     "Method": "Update",
     "RelativePath": "api/album/update",
     "HttpMethod": "PUT",
@@ -149,6 +165,22 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "Method": "CreateMany",
+    "RelativePath": "api/book/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateBookDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
     "Method": "Update",
     "RelativePath": "api/book/update",
     "HttpMethod": "PUT",
@@ -223,6 +255,22 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "Method": "CreateMany",
+    "RelativePath": "api/game/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateGameDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
     "Method": "Update",
     "RelativePath": "api/game/update",
     "HttpMethod": "PUT",
@@ -240,7 +288,7 @@
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "ReadAllMovies",
-    "RelativePath": "api/MOVIE",
+    "RelativePath": "api/movie",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -250,7 +298,7 @@
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "GetMovie",
-    "RelativePath": "api/MOVIE/{id}",
+    "RelativePath": "api/movie/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -266,7 +314,7 @@
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "DeleteMovie",
-    "RelativePath": "api/MOVIE/{id}",
+    "RelativePath": "api/movie/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -282,7 +330,7 @@
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "Create",
-    "RelativePath": "api/MOVIE/create",
+    "RelativePath": "api/movie/create",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -297,8 +345,24 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "Method": "CreateMany",
+    "RelativePath": "api/movie/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "movieDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateMovieDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
     "Method": "Update",
-    "RelativePath": "api/MOVIE/update",
+    "RelativePath": "api/movie/update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -364,6 +428,22 @@
       {
         "Name": "showDto",
         "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateShowDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "Method": "CreateMany",
+    "RelativePath": "api/show/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "showDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateShowDto[]",
         "IsRequired": true
       }
     ],
@@ -438,6 +518,22 @@
       {
         "Name": "songDto",
         "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateSongDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "Method": "CreateMany",
+    "RelativePath": "api/song/create-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "songDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateSongDto[]",
         "IsRequired": true
       }
     ],

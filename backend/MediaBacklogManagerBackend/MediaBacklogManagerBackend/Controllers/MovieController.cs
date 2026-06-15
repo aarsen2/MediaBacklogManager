@@ -2,6 +2,7 @@
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
+using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,10 +31,51 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Creating Movie");
             if (movie != null)
             {
-                return CreatedAtAction(nameof(GetMovie), new { id = movie.Id}, movie);
+                return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, await Service.ReadMovieById(movie.Id));
             }
             else return Conflict("Movie Already Exists.");
         }
+
+        //Creates a list of movies
+        [HttpPost("create-many")]
+        public async Task<IActionResult> CreateMany([FromBody] CreateMovieDto[] movieDtos)
+        {
+            var createdMovies = new List<ReadMovieDto>();
+            var conflicts = new List<string>();
+
+            foreach (var movieDto in movieDtos)
+            {
+                var movie = await Service.CreateMovie(movieDto);
+
+                if (movie != null)
+                {
+                    var readDto = await Service.ReadMovieById(movie.Id);
+                    createdMovies.Add(readDto!);
+                }
+                else
+                {
+                    conflicts.Add(movieDto.Title);
+                }
+            }
+
+            Console.WriteLine($"Created {createdMovies.Count} movies");
+
+            if (createdMovies.Count == 0)
+            {
+                return Conflict(new { message = "No movies were created", conflicts });
+            }
+
+            if (conflicts.Count > 0)
+            {
+                return StatusCode(207, new { created = createdMovies, conflicts });
+            }
+
+
+            return Ok(await Service.ReadAllMovies());
+        }
+
+
+
 
 
         //Updates a Movie By its ID

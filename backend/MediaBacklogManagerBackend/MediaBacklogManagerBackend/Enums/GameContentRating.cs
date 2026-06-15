@@ -4,7 +4,7 @@
     {
         EC, 
         E, 
-        E10Plus, 
+        E10, 
         T, 
         M, 
         AO, 

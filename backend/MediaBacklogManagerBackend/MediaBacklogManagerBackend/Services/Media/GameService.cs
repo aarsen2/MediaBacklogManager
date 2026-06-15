@@ -1,12 +1,9 @@
 ﻿using MediaBacklogManagerBackend.Data;
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
-using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services.Media
 {
@@ -29,7 +26,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             if (exists)
                 return null;
 
-            var game = MapGameCreation(gameDto);
+            var game = await MapGameCreation(gameDto);
 
             return await CreateAsync(game);
 
@@ -49,11 +46,19 @@ namespace MediaBacklogManagerBackend.Services.Media
                     Description = m.Description,
                     Studio = m.Studio,
 
-                    Platforms = m.Platforms.ToList(),
+                    Platforms = m.Platforms.Select(g => new ReadPlatformDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
 
                     Assets = m.Assets.ToList(),
 
-                    Genres = m.Genres.ToList()
+                    Genres = m.Genres.Select(g => new ReadGenreDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -70,7 +75,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             try
             {
-                MapGameUpdate(game, gameDto);
+                await MapGameUpdate(game, gameDto);
 
                 await dbContext.SaveChangesAsync();
 
@@ -85,11 +90,14 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         internal async Task<ReadGameDto?> ReadGameById(int id)
         {
-            if (await CheckExistsAsync(id)) { }
+            if (await CheckExistsAsync(id))
+            {
 
-            var game = await GetItemById(id);
+                var game = await GetItemById(id);
 
-            return GetReadGameDto(game!);
+                return GetReadGameDto(game!);
+            }
+            return null;
         }
 
         internal async Task<bool> DeleteGame(int id)
@@ -102,7 +110,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         //DTO Mapping
 
-        private Game MapGameCreation(CreateGameDto gameDto)
+        private async Task<Game> MapGameCreation(CreateGameDto gameDto)
         {
             return new Game
             {
@@ -121,17 +129,16 @@ namespace MediaBacklogManagerBackend.Services.Media
 
                 // Collections (avoid nulls)
                 Assets = gameDto.Assets ?? new List<MediaAsset>(),
-                Genres = gameDto.Genres ?? new List<Genre>(),
-                Platforms = gameDto.Platforms ?? new List<GamePlatform>(),
+                Genres = await GetGenresAsync(gameDto.Genres) ?? new List<Genre>(),
+                Platforms = await GetPlatformsAsync(gameDto.Platforms) ?? new List<GamePlatform>(),
 
                 // System-managed fields
                 DateCreated = gameDto.DateCreated ?? DateTime.UtcNow
             };
         }
 
-        private void MapGameUpdate(Game game, UpdateGameDto gameDto)
+        private async Task MapGameUpdate(Game game, UpdateGameDto gameDto)
         {
-
             // Required
             game.Title = gameDto.Title;
 
@@ -148,26 +155,64 @@ namespace MediaBacklogManagerBackend.Services.Media
 
             // Collections (avoid nulls)
             game.Assets = gameDto.Assets ?? new List<MediaAsset>();
-            game.Genres = gameDto.Genres ?? new List<Genre>();
-            game.Platforms = gameDto.Platforms ?? new List<GamePlatform>();
+            game.Genres = await GetGenresAsync(gameDto.Genres) ?? new List<Genre>();
+            game.Platforms.Clear();
+            game.Platforms = await GetPlatformsAsync(gameDto.Platforms) ?? new List<GamePlatform>();
         }
 
-        private ReadGameDto GetReadGameDto(Game Game)
+        private ReadGameDto GetReadGameDto(Game game)
         {
             return new ReadGameDto
             {
-                Id = Game.Id,
-                Title = Game.Title,
-                Description = Game.Description,
-                Assets = Game.Assets,
-                ReleaseDate = Game.ReleaseDate,
-                Genres = Game.Genres,
-                GeneralRating = Game.GeneralRating,
-                Platforms = Game.Platforms,
-                Studio = Game.Studio,
-                ContentRating = Game.ContentRating
+                Id = game.Id,
+                Title = game.Title,
+                Description = game.Description,
+                Assets = game.Assets,
+                ReleaseDate = game.ReleaseDate,
+                Genres = game.Genres.Select(g => new ReadGenreDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
+                GeneralRating = game.GeneralRating,
+                Platforms = game.Platforms.Select(g => new ReadPlatformDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                }).ToList(),
+                Studio = game.Studio,
+                ContentRating = game.ContentRating
             }
             ;
+
+        }
+
+        private async Task<List<GamePlatform>> GetPlatformsAsync(List<string> platformStrings)
+        {
+            // Normalize for comparison only
+            var cleanedInputs = platformStrings
+                .Where(p => !string.IsNullOrWhiteSpace(p))
+                .Select(p => p.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            List<GamePlatform> platforms = new List<GamePlatform>();
+            foreach (var platformString in cleanedInputs)
+            {
+                var normalizedPlatform = platformString.ToLower();
+                var platform = await dbContext.Platforms.FirstOrDefaultAsync(p => p.Name.ToLower() == normalizedPlatform);
+
+                if (platform == null)
+                {
+                    platform = new GamePlatform() { Name = platformString };
+
+                    await dbContext.Platforms.AddAsync(platform);
+                }
+                platforms.Add(platform);
+
+            }
+
+            return platforms;
         }
     }
 }

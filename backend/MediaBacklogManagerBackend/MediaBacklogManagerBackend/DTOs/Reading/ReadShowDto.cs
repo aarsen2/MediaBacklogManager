@@ -12,7 +12,7 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
 
         public ReadShowDto()
         {
-            Type = MediaType.Show;
+            Type = MediaType.show;
         }
 
     }
