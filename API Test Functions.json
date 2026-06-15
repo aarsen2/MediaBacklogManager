@@ -1,0 +1,1132 @@
+{
+  "info": {
+    "_postman_id": "cefc173d-b1b6-4d8c-b2d2-b5832200338e",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55903812",
+    "_collection_link": "https://go.postman.co/collection/55903812-cefc173d-b1b6-4d8c-b2d2-b5832200338e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authorization",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/auth/login",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user/me",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"admin\": \"admin\",\r\n    \"password\": \"Admin123!\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/user/me",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "user",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Media Functions",
+      "item": [
+        {
+          "name": "Movies",
+          "item": [
+            {
+              "name": "Read All Movies",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/movie",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Movie",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Movie",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/7",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Movie",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"runTime\": 184,\r\n    \"language\": \"English\",\r\n    \"director\": \"\",\r\n    \"contentRating\": \"PG13\",\r\n    \"id\": 5,\r\n    \"title\": \"Avengerss\",\r\n    \"description\": \" Earth's Mightiest Heroes uniting to stop threats that no single hero can defeat. Formed by S.H.I.E.L.D. to repel an alien invasion in New York City, the ever-evolving team spans humans, gods, and androids who constantly adapt to save the universe from existential doom\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2026-06-11T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 4,\r\n    \"type\": \"Movie\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Movie",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Inception 2\",\r\n    \"description\": \"A thief who steals information by entering dreams.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2010-07-16T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.8,\r\n    \"runTime\": 148,\r\n    \"language\": \"English\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"contentRating\": \"PG13\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Many Movies",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\r\n  {\r\n    \"title\": \"Arrival\",\r\n    \"description\": \"A linguist works with the military to communicate with alien visitors.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2016-11-11T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.1,\r\n    \"runTime\": 116,\r\n    \"language\": \"English\",\r\n    \"director\": \"Denis Villeneuve\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"Whiplash\",\r\n    \"description\": \"A young drummer enrolls at a cut-throat music conservatory.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2014-10-10T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.5,\r\n    \"runTime\": 106,\r\n    \"language\": \"English\",\r\n    \"director\": \"Damien Chazelle\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"The Social Network\",\r\n    \"description\": \"The story of Facebook's founding and the lawsuits that followed.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2010-10-01T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 7.7,\r\n    \"runTime\": 120,\r\n    \"language\": \"English\",\r\n    \"director\": \"David Fincher\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"Blade Runner 2049\",\r\n    \"description\": \"A young blade runner discovers a secret that could plunge society into chaos.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2017-10-06T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.0,\r\n    \"runTime\": 164,\r\n    \"language\": \"English\",\r\n    \"director\": \"Denis Villeneuve\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"The Grand Budapest Hotel\",\r\n    \"description\": \"A hotel concierge and his protégé become involved in a murder mystery.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2014-03-28T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.1,\r\n    \"runTime\": 99,\r\n    \"language\": \"English\",\r\n    \"director\": \"Wes Anderson\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"Her\",\r\n    \"description\": \"A lonely writer develops a relationship with an AI operating system.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2013-12-18T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.0,\r\n    \"runTime\": 126,\r\n    \"language\": \"English\",\r\n    \"director\": \"Spike Jonze\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"Ford v Ferrari\",\r\n    \"description\": \"American car designers battle corporate interference to build a race car.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2019-11-15T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.1,\r\n    \"runTime\": 152,\r\n    \"language\": \"English\",\r\n    \"director\": \"James Mangold\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"The Revenant\",\r\n    \"description\": \"A frontiersman fights for survival after being left for dead.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2015-12-25T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.0,\r\n    \"runTime\": 156,\r\n    \"language\": \"English\",\r\n    \"director\": \"Alejandro G. Iñárritu\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"A Quiet Place\",\r\n    \"description\": \"A family must live in silence to avoid creatures that hunt by sound.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2018-04-06T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 7.5,\r\n    \"runTime\": 90,\r\n    \"language\": \"English\",\r\n    \"director\": \"John Krasinski\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"The Martian\",\r\n    \"description\": \"An astronaut becomes stranded on Mars and must survive alone.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2015-10-02T00:00:00\",\r\n    \"genres\": [],\r\n    \"generalRating\": 8.0,\r\n    \"runTime\": 144,\r\n    \"language\": \"English\",\r\n    \"director\": \"Ridley Scott\",\r\n    \"contentRating\": \"PG13\"\r\n  }\r\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/create-many",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "create-many"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Shows",
+          "item": [
+            {
+              "name": "Read All Shows",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/show",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "show"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Show",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/show/28",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "show",
+                    "28"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Show",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/show/20",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "show",
+                    "20"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Show",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "   {\r\n       \"title\": \"Breaking Bad The second\",\r\n       \"description\": \"A chemistry teacher turns to making meth.\",\r\n       \"generalRating\": 9.5,\r\n       \"seasonCount\": 5,\r\n       \"episodeCount\": 62,\r\n       \"contentRating\": \"TV_MA\",\r\n       \"releaseDate\": \"2008-01-20T00:00:00Z\",\r\n       \"assets\": [],\r\n       \"genres\": [],\r\n       \"id\": 33\r\n   }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/show/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "show",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Show",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "   {\r\n       \"title\": \"Breaking Bad 2\",\r\n       \"description\": \"A chemistry teacher turns to making meth.\",\r\n       \"generalRating\": 9.5,\r\n       \"seasonCount\": 5,\r\n       \"episodeCount\": 62,\r\n       \"contentRating\": \"TV_MA\",\r\n       \"releaseDate\": \"2008-01-20T00:00:00Z\",\r\n       \"assets\": [],\r\n       \"genres\": []\r\n   }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/show/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "show",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Albums",
+          "item": [
+            {
+              "name": "Read All Albums",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/album",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "album"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Album",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/album/35",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "album",
+                    "35"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Album",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/album/34",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "album",
+                    "34"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Album",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Random Access Memories\",\r\n  \"description\": \"A studio album by Daft Punk featuring a blend of electronic and disco influences.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"2013-05-17T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.8,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"artist\": \"Daft Punks\",\r\n  \"trackCount\": 13,\r\n  \"runTime\": 74.0,\r\n  \"id\": 34\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/album/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "album",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Album",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Random Access Memories\",\r\n  \"description\": \"A studio album by Daft Punk featuring a blend of electronic and disco influences.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"2013-05-17T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.8,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"artist\": \"Daft Punk\",\r\n  \"trackCount\": 13,\r\n  \"runTime\": 74.0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/album/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "album",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Books",
+          "item": [
+            {
+              "name": "Read All Books",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/book",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "book"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Book",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/book/36",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "book",
+                    "36"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Book",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/book/36",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "book",
+                    "36"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Book",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"The Hobbit\",\r\n  \"description\": \"A fantasy novel about Bilbo Baggins's adventure to win a share of treasure guarded by a dragon.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"1937-09-21T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.7,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"author\": \"J.R.R. Tolkien\",\r\n  \"pageCount\": 310,\r\n  \"language\": \"English\",\r\n  \"id\": 36\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/book/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "book",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Book",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"The Hobbit\",\r\n  \"description\": \"A fantasy novel about Bilbo Baggins' adventure to win a share of treasure guarded by a dragon.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"1937-09-21T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.7,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"author\": \"J.R.R. Tolkien\",\r\n  \"pageCount\": 310,\r\n  \"language\": \"English\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/book/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "book",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Games",
+          "item": [
+            {
+              "name": "Read All Games",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/game",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "game"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Game",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/game/38",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "game",
+                    "38"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Game",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/game/38",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "game",
+                    "38"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Game",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"The Witcher 3: Wild Hunt\",\r\n  \"description\": \"An open-world RPG where you play as Geralt of Rivia hunting monsters and navigating political intrigue.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"2015-05-19T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 5.0,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"platforms\": [\"pc\"],\r\n  \"studio\": \"CD Projekt Red\",\r\n  \"contentRating\": \"M\",\r\n  \"Id\": 39\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/game/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "game",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Game",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"The Witcher 3: Wild Hunt\",\r\n  \"description\": \"An open-world RPG where you play as Geralt of Rivia hunting monsters and navigating political intrigue.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"2015-05-19T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.9,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"platforms\": [\"pc\"],\r\n  \"studio\": \"CD Projekt Red\",\r\n  \"contentRating\": \"M\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/game/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "game",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Songs",
+          "item": [
+            {
+              "name": "Read All Songs",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/song",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "song"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Read Single Song",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/5",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Song",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:7170/api/song/40",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "song",
+                    "40"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Song",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Blinding Lights\",\r\n  \"description\": \"A hit synthwave-inspired song by The Weeknd.\",\r\n  \"assets\": [\r\n    {\r\n      \"url\": \"https://example.com/blinding-lights-cover.jpg\",\r\n      \"type\": \"Image\"\r\n    },\r\n    {\r\n      \"url\": \"https://example.com/blinding-lights-preview.mp3\",\r\n      \"type\": \"Audio\"\r\n    }\r\n  ],\r\n  \"releaseDate\": \"2019-11-29T00:00:00\",\r\n  \"genres\": [\r\n    \"Pop\",\r\n    \"Synthwave\"\r\n  ],\r\n  \"generalRating\": 4.6,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"artist\": \"The Weeknd\",\r\n  \"runTime\": 3.2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/song/update",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "song",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Song",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Blinding Lights\",\r\n  \"description\": \"A hit synthwave-inspired song by The Weeknd.\",\r\n  \"assets\": [],\r\n  \"releaseDate\": \"2019-11-29T00:00:00\",\r\n  \"genres\": [],\r\n  \"generalRating\": 4.6,\r\n  \"dateCreated\": \"2026-06-14T12:00:00\",\r\n  \"artist\": \"The Weeknd\",\r\n  \"runTime\": 3.2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:7170/api/movie/create",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "7170",
+                  "path": [
+                    "api",
+                    "movie",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Seed Data",
+      "item": [
+        {
+          "name": "Create Many Books",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"1984\",\r\n    \"description\": \"A dystopian novel about a totalitarian regime that practices extreme surveillance.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1949-06-08T00:00:00\",\r\n    \"genres\": [\"Dystopian Fiction\", \"Political Fiction\", \"Science Fiction\", \"Philosophical Fiction\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"George Orwell\",\r\n    \"pageCount\": 328,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"To Kill a Mockingbird\",\r\n    \"description\": \"A story of racial injustice and moral growth in the American South.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1960-07-11T00:00:00\",\r\n    \"genres\": [\"Southern Gothic\", \"Coming-of-Age\", \"Legal Drama\", \"Social Commentary\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Harper Lee\",\r\n    \"pageCount\": 281,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"The Great Gatsby\",\r\n    \"description\": \"A critique of the American Dream set in the Roaring Twenties.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1925-04-10T00:00:00\",\r\n    \"genres\": [\"Tragedy\", \"Literary Fiction\", \"Historical Fiction\", \"Social Commentary\"],\r\n    \"generalRating\": 4.4,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"F. Scott Fitzgerald\",\r\n    \"pageCount\": 180,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"The Catcher in the Rye\",\r\n    \"description\": \"A story about teenage rebellion and identity.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1951-07-16T00:00:00\",\r\n    \"genres\": [\"Coming-of-Age\", \"Literary Fiction\", \"Psychological Fiction\", \"Drama\"],\r\n    \"generalRating\": 4.2,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"J.D. Salinger\",\r\n    \"pageCount\": 214,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"Brave New World\",\r\n    \"description\": \"A futuristic society driven by technology and conditioned happiness.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1932-08-31T00:00:00\",\r\n    \"genres\": [\"Dystopian Fiction\", \"Science Fiction\", \"Philosophical Fiction\", \"Political Fiction\"],\r\n    \"generalRating\": 4.6,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Aldous Huxley\",\r\n    \"pageCount\": 268,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"The Alchemist\",\r\n    \"description\": \"A young shepherd travels in search of treasure and discovers his destiny.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1988-01-01T00:00:00\",\r\n    \"genres\": [\"Philosophical Fiction\", \"Fantasy\", \"Adventure\", \"Inspirational Fiction\"],\r\n    \"generalRating\": 4.3,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Paulo Coelho\",\r\n    \"pageCount\": 208,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"Dune\",\r\n    \"description\": \"A young nobleman becomes the leader of a desert planet and its people.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1965-08-01T00:00:00\",\r\n    \"genres\": [\"Science Fiction\", \"Space Opera\", \"Political Fiction\", \"Epic Fantasy\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Frank Herbert\",\r\n    \"pageCount\": 412,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"The Road\",\r\n    \"description\": \"A father and son journey through a post-apocalyptic world.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2006-09-26T00:00:00\",\r\n    \"genres\": [\"Post-Apocalyptic\", \"Literary Fiction\", \"Survival Fiction\", \"Drama\"],\r\n    \"generalRating\": 4.1,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Cormac McCarthy\",\r\n    \"pageCount\": 287,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"Gone Girl\",\r\n    \"description\": \"A thriller about a marriage gone terribly wrong.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2012-06-05T00:00:00\",\r\n    \"genres\": [\"Psychological Thriller\", \"Crime Fiction\", \"Mystery\", \"Domestic Thriller\"],\r\n    \"generalRating\": 4.3,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Gillian Flynn\",\r\n    \"pageCount\": 422,\r\n    \"language\": \"English\"\r\n  },\r\n  {\r\n    \"title\": \"The Name of the Wind\",\r\n    \"description\": \"A gifted young man grows to become the most notorious wizard of his world.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2007-03-27T00:00:00\",\r\n    \"genres\": [\"Epic Fantasy\", \"High Fantasy\", \"Coming-of-Age\", \"Adventure\"],\r\n    \"generalRating\": 4.7,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"author\": \"Patrick Rothfuss\",\r\n    \"pageCount\": 662,\r\n    \"language\": \"English\"\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/book/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "book",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Many Songs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"Levitating\",\r\n    \"description\": \"A disco-pop track by Dua Lipa with a retro futuristic vibe.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2020-03-27T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Disco\", \"Dance\", \"Synthpop\"],\r\n    \"generalRating\": 4.5,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Dua Lipa\",\r\n    \"runTime\": 3.4\r\n  },\r\n  {\r\n    \"title\": \"As It Was\",\r\n    \"description\": \"A reflective pop song by Harry Styles about change and identity.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2022-04-01T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Indie Pop\", \"Synthpop\", \"Alternative\"],\r\n    \"generalRating\": 4.4,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Harry Styles\",\r\n    \"runTime\": 2.8\r\n  },\r\n  {\r\n    \"title\": \"Shape of You\",\r\n    \"description\": \"A global pop hit by Ed Sheeran with dancehall influences.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2017-01-06T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Dancehall\", \"Tropical House\", \"R&B\"],\r\n    \"generalRating\": 4.3,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Ed Sheeran\",\r\n    \"runTime\": 4.0\r\n  },\r\n  {\r\n    \"title\": \"bad guy\",\r\n    \"description\": \"A minimalist electropop song by Billie Eilish with dark humor.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2019-03-29T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Electropop\", \"Alternative Pop\", \"Dark Pop\"],\r\n    \"generalRating\": 4.5,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Billie Eilish\",\r\n    \"runTime\": 3.1\r\n  },\r\n  {\r\n    \"title\": \"Stay\",\r\n    \"description\": \"A catchy pop collaboration between The Kid LAROI and Justin Bieber.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2021-07-09T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Hip Hop\", \"Pop Rap\", \"R&B\"],\r\n    \"generalRating\": 4.2,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"The Kid LAROI & Justin Bieber\",\r\n    \"runTime\": 2.4\r\n  },\r\n  {\r\n    \"title\": \"Rolling in the Deep\",\r\n    \"description\": \"A powerful soul-pop anthem by Adele about heartbreak and resilience.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2010-11-29T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Soul\", \"R&B\", \"Blues\"],\r\n    \"generalRating\": 4.7,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Adele\",\r\n    \"runTime\": 3.8\r\n  },\r\n  {\r\n    \"title\": \"Uptown Funk\",\r\n    \"description\": \"A funky, upbeat track by Mark Ronson featuring Bruno Mars.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2014-11-10T00:00:00\",\r\n    \"genres\": [\"Funk\", \"Pop\", \"Disco\", \"R&B\"],\r\n    \"generalRating\": 4.6,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Mark Ronson ft. Bruno Mars\",\r\n    \"runTime\": 4.3\r\n  },\r\n  {\r\n    \"title\": \"Someone You Loved\",\r\n    \"description\": \"A heartfelt ballad by Lewis Capaldi about love and loss.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2018-11-08T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Ballad\", \"Soul\", \"Adult Contemporary\"],\r\n    \"generalRating\": 4.5,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Lewis Capaldi\",\r\n    \"runTime\": 3.0\r\n  },\r\n  {\r\n    \"title\": \"HUMBLE.\",\r\n    \"description\": \"A hard-hitting hip-hop track by Kendrick Lamar with sharp lyricism.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2017-03-30T00:00:00\",\r\n    \"genres\": [\"Hip Hop\", \"Rap\", \"Trap\", \"Conscious Hip Hop\"],\r\n    \"generalRating\": 4.6,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Kendrick Lamar\",\r\n    \"runTime\": 2.9\r\n  },\r\n  {\r\n    \"title\": \"Counting Stars\",\r\n    \"description\": \"A pop-rock anthem by OneRepublic about chasing dreams.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2013-06-14T00:00:00\",\r\n    \"genres\": [\"Pop Rock\", \"Alternative Rock\", \"Indie Pop\", \"Folk Pop\"],\r\n    \"generalRating\": 4.4,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"OneRepublic\",\r\n    \"runTime\": 4.2\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/song/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "song",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Many Games",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"Elden Ring\",\r\n    \"description\": \"An open-world action RPG set in a dark fantasy world created with George R. R. Martin.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2022-02-25T00:00:00\",\r\n    \"genres\": [\"Action RPG\", \"Open World\", \"Soulslike\", \"Dark Fantasy\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"PlayStation 4\", \"PlayStation 5\", \"Xbox One\", \"Xbox Series X/S\"],\r\n    \"studio\": \"FromSoftware\",\r\n    \"contentRating\": \"M\"\r\n  },\r\n  {\r\n    \"title\": \"Red Dead Redemption 2\",\r\n    \"description\": \"An outlaw navigates life in a fading Wild West while evading law enforcement.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2018-10-26T00:00:00\",\r\n    \"genres\": [\"Open World\", \"Action-Adventure\", \"Western\", \"Story Rich\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"PlayStation 4\", \"Xbox One\"],\r\n    \"studio\": \"Rockstar Games\",\r\n    \"contentRating\": \"M\"\r\n  },\r\n  {\r\n    \"title\": \"God of War\",\r\n    \"description\": \"Kratos embarks on a journey with his son through the world of Norse mythology.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2018-04-20T00:00:00\",\r\n    \"genres\": [\"Action-Adventure\", \"Hack and Slash\", \"Mythology\", \"Story Rich\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PlayStation 4\", \"PlayStation 5\", \"PC\"],\r\n    \"studio\": \"Santa Monica Studio\",\r\n    \"contentRating\": \"M\"\r\n  },\r\n  {\r\n    \"title\": \"Hades\",\r\n    \"description\": \"A rogue-like dungeon crawler where you attempt to escape the underworld.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2020-09-17T00:00:00\",\r\n    \"genres\": [\"Roguelike\", \"Action Roguelike\", \"Hack and Slash\", \"Mythology\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"Nintendo Switch\", \"PlayStation 4\", \"PlayStation 5\", \"Xbox One\", \"Xbox Series X/S\"],\r\n    \"studio\": \"Supergiant Games\",\r\n    \"contentRating\": \"T\"\r\n  },\r\n  {\r\n    \"title\": \"Minecraft\",\r\n    \"description\": \"A sandbox game where players can build, explore, and survive in a blocky world.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2011-11-18T00:00:00\",\r\n    \"genres\": [\"Sandbox\", \"Survival\", \"Building\", \"Open World\"],\r\n    \"generalRating\": 4.7,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"Mobile\", \"Nintendo Switch\", \"PlayStation 4\", \"PlayStation 5\", \"Xbox One\", \"Xbox Series X/S\"],\r\n    \"studio\": \"Mojang\",\r\n    \"contentRating\": \"E10\"\r\n  },\r\n  {\r\n    \"title\": \"The Legend of Zelda: Breath of the Wild\",\r\n    \"description\": \"Link explores a vast open world to defeat Calamity Ganon and save Hyrule.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2017-03-03T00:00:00\",\r\n    \"genres\": [\"Action-Adventure\", \"Open World\", \"Exploration\", \"Fantasy\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"Nintendo Switch\", \"Wii U\"],\r\n    \"studio\": \"Nintendo\",\r\n    \"contentRating\": \"E10\"\r\n  },\r\n  {\r\n    \"title\": \"Cyberpunk 2077\",\r\n    \"description\": \"A futuristic RPG set in Night City where players navigate crime and technology.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2020-12-10T00:00:00\",\r\n    \"genres\": [\"Action RPG\", \"Open World\", \"Cyberpunk\", \"Sci-Fi\"],\r\n    \"generalRating\": 4.2,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"PlayStation 4\", \"PlayStation 5\", \"Xbox One\", \"Xbox Series X/S\"],\r\n    \"studio\": \"CD Projekt Red\",\r\n    \"contentRating\": \"M\"\r\n  },\r\n  {\r\n    \"title\": \"Stardew Valley\",\r\n    \"description\": \"A farming simulation game where you build a life in a small town.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2016-02-26T00:00:00\",\r\n    \"genres\": [\"Farming Simulator\", \"Life Sim\", \"Indie\", \"RPG Elements\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"Mobile\", \"Nintendo Switch\", \"PlayStation 4\", \"Xbox One\"],\r\n    \"studio\": \"ConcernedApe\",\r\n    \"contentRating\": \"E10\"\r\n  },\r\n  {\r\n    \"title\": \"Overwatch\",\r\n    \"description\": \"A team-based multiplayer shooter with diverse heroes and abilities.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2016-05-24T00:00:00\",\r\n    \"genres\": [\"Hero Shooter\", \"FPS\", \"Multiplayer\", \"Team-Based\"],\r\n    \"generalRating\": 4.5,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"PlayStation 4\", \"Xbox One\", \"Nintendo Switch\"],\r\n    \"studio\": \"Blizzard Entertainment\",\r\n    \"contentRating\": \"T\"\r\n  },\r\n  {\r\n    \"title\": \"Baldur's Gate 3\",\r\n    \"description\": \"A story-rich RPG based on Dungeons & Dragons where player choices shape the world.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2023-08-03T00:00:00\",\r\n    \"genres\": [\"CRPG\", \"Turn-Based RPG\", \"Fantasy\", \"Story Rich\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"platforms\": [\"PC\", \"PlayStation 5\", \"Xbox Series X/S\"],\r\n    \"studio\": \"Larian Studios\",\r\n    \"contentRating\": \"M\"\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/game/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "game",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Many Albums",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"Abbey Road\",\r\n    \"description\": \"The Beatles' iconic album featuring a mix of rock and experimental music.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1969-09-26T00:00:00\",\r\n    \"genres\": [\"Rock\", \"Pop Rock\", \"Psychedelic Rock\", \"Experimental Rock\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"The Beatles\",\r\n    \"trackCount\": 17,\r\n    \"runTime\": 47.0\r\n  },\r\n  {\r\n    \"title\": \"Thriller\",\r\n    \"description\": \"Michael Jackson's best-selling album with groundbreaking pop hits.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1982-11-30T00:00:00\",\r\n    \"genres\": [\"Pop\", \"R&B\", \"Post-Disco\", \"Funk\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Michael Jackson\",\r\n    \"trackCount\": 9,\r\n    \"runTime\": 42.0\r\n  },\r\n  {\r\n    \"title\": \"Back in Black\",\r\n    \"description\": \"AC/DC's tribute album with powerful hard rock tracks.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1980-07-25T00:00:00\",\r\n    \"genres\": [\"Hard Rock\", \"Rock\", \"Blues Rock\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"AC/DC\",\r\n    \"trackCount\": 10,\r\n    \"runTime\": 42.0\r\n  },\r\n  {\r\n    \"title\": \"1989\",\r\n    \"description\": \"Taylor Swift's pop transformation album featuring chart-topping hits.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2014-10-27T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Synthpop\", \"Dance-Pop\", \"Pop Rock\"],\r\n    \"generalRating\": 4.6,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Taylor Swift\",\r\n    \"trackCount\": 13,\r\n    \"runTime\": 48.0\r\n  },\r\n  {\r\n    \"title\": \"To Pimp a Butterfly\",\r\n    \"description\": \"A deeply political and experimental hip-hop album by Kendrick Lamar.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2015-03-15T00:00:00\",\r\n    \"genres\": [\"Hip Hop\", \"Jazz Rap\", \"Conscious Hip Hop\", \"Funk\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Kendrick Lamar\",\r\n    \"trackCount\": 16,\r\n    \"runTime\": 79.0\r\n  },\r\n  {\r\n    \"title\": \"Rumours\",\r\n    \"description\": \"Fleetwood Mac's emotionally charged album about relationships and breakups.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1977-02-04T00:00:00\",\r\n    \"genres\": [\"Rock\", \"Soft Rock\", \"Pop Rock\", \"Folk Rock\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Fleetwood Mac\",\r\n    \"trackCount\": 11,\r\n    \"runTime\": 39.0\r\n  },\r\n  {\r\n    \"title\": \"The Dark Side of the Moon\",\r\n    \"description\": \"Pink Floyd's progressive rock masterpiece exploring themes of life and time.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1973-03-01T00:00:00\",\r\n    \"genres\": [\"Progressive Rock\", \"Psychedelic Rock\", \"Art Rock\"],\r\n    \"generalRating\": 4.9,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Pink Floyd\",\r\n    \"trackCount\": 10,\r\n    \"runTime\": 43.0\r\n  },\r\n  {\r\n    \"title\": \"DAMN.\",\r\n    \"description\": \"Kendrick Lamar's Pulitzer Prize-winning album blending rap and introspection.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2017-04-14T00:00:00\",\r\n    \"genres\": [\"Hip Hop\", \"Conscious Hip Hop\", \"Trap\", \"Alternative Hip Hop\"],\r\n    \"generalRating\": 4.7,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Kendrick Lamar\",\r\n    \"trackCount\": 14,\r\n    \"runTime\": 55.0\r\n  },\r\n  {\r\n    \"title\": \"Future Nostalgia\",\r\n    \"description\": \"Dua Lipa's dance-pop album inspired by retro disco sounds.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2020-03-27T00:00:00\",\r\n    \"genres\": [\"Pop\", \"Dance-Pop\", \"Disco\", \"Nu-Disco\"],\r\n    \"generalRating\": 4.6,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Dua Lipa\",\r\n    \"trackCount\": 11,\r\n    \"runTime\": 37.0\r\n  },\r\n  {\r\n    \"title\": \"Nevermind\",\r\n    \"description\": \"Nirvana's breakthrough grunge album that defined a generation.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1991-09-24T00:00:00\",\r\n    \"genres\": [\"Grunge\", \"Alternative Rock\", \"Post-Hardcore\", \"Rock\"],\r\n    \"generalRating\": 4.8,\r\n    \"dateCreated\": \"2026-06-14T12:00:00\",\r\n    \"artist\": \"Nirvana\",\r\n    \"trackCount\": 12,\r\n    \"runTime\": 49.0\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/album/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "album",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Many Shows",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"Better Call Saul\",\r\n    \"description\": \"The story of a small-time lawyer hustling his way up before becoming Saul Goodman.\",\r\n    \"generalRating\": 9.0,\r\n    \"seasonCount\": 6,\r\n    \"episodeCount\": 63,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2015-02-08T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Crime Drama\", \"Legal Drama\", \"Character Drama\", \"Tragedy\"]\r\n  },\r\n  {\r\n    \"title\": \"Dark\",\r\n    \"description\": \"A time travel mystery unfolds in a small German town.\",\r\n    \"generalRating\": 8.8,\r\n    \"seasonCount\": 3,\r\n    \"episodeCount\": 26,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2017-12-01T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Sci-Fi Mystery\", \"Time Travel\", \"Psychological Thriller\", \"Dark Drama\"]\r\n  },\r\n  {\r\n    \"title\": \"The Crown\",\r\n    \"description\": \"A dramatized history of the reign of Queen Elizabeth II.\",\r\n    \"generalRating\": 8.6,\r\n    \"seasonCount\": 6,\r\n    \"episodeCount\": 60,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2016-11-04T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Historical Drama\", \"Biographical Drama\", \"Political Drama\", \"Period Drama\"]\r\n  },\r\n  {\r\n    \"title\": \"House of the Dragon\",\r\n    \"description\": \"The Targaryen civil war unfolds generations before Game of Thrones.\",\r\n    \"generalRating\": 8.5,\r\n    \"seasonCount\": 2,\r\n    \"episodeCount\": 18,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2022-08-21T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Epic Fantasy\", \"Political Drama\", \"War Drama\", \"Adventure\"]\r\n  },\r\n  {\r\n    \"title\": \"The Boys\",\r\n    \"description\": \"A group seeks to take down corrupt superheroes abusing their powers.\",\r\n    \"generalRating\": 8.7,\r\n    \"seasonCount\": 4,\r\n    \"episodeCount\": 32,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2019-07-26T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Dark Comedy\", \"Superhero Satire\", \"Action Drama\", \"Crime Thriller\"]\r\n  },\r\n  {\r\n    \"title\": \"Westworld\",\r\n    \"description\": \"A futuristic theme park allows guests to live out wild fantasies with AI hosts.\",\r\n    \"generalRating\": 8.5,\r\n    \"seasonCount\": 4,\r\n    \"episodeCount\": 36,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2016-10-02T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Sci-Fi Thriller\", \"Philosophical Drama\", \"Artificial Intelligence\", \"Mystery\"]\r\n  },\r\n  {\r\n    \"title\": \"Black Mirror\",\r\n    \"description\": \"An anthology series exploring the dark side of technology and society.\",\r\n    \"generalRating\": 8.8,\r\n    \"seasonCount\": 6,\r\n    \"episodeCount\": 27,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2011-12-04T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Anthology\", \"Dystopian Sci-Fi\", \"Psychological Thriller\", \"Social Satire\"]\r\n  },\r\n  {\r\n    \"title\": \"The Witcher\",\r\n    \"description\": \"A monster hunter struggles to find his place in a world of magic and politics.\",\r\n    \"generalRating\": 8.2,\r\n    \"seasonCount\": 3,\r\n    \"episodeCount\": 24,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2019-12-20T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Dark Fantasy\", \"Monster Fantasy\", \"Adventure Drama\", \"Magic & Sorcery\"]\r\n  },\r\n  {\r\n    \"title\": \"Severance\",\r\n    \"description\": \"Employees undergo a procedure to separate their work and personal memories.\",\r\n    \"generalRating\": 8.7,\r\n    \"seasonCount\": 2,\r\n    \"episodeCount\": 19,\r\n    \"contentRating\": \"TV_14\",\r\n    \"releaseDate\": \"2022-02-18T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Psychological Sci-Fi\", \"Corporate Thriller\", \"Mystery Drama\", \"Dystopian Fiction\"]\r\n  },\r\n  {\r\n    \"title\": \"True Detective\",\r\n    \"description\": \"Different detectives investigate disturbing crimes across various timelines.\",\r\n    \"generalRating\": 8.9,\r\n    \"seasonCount\": 4,\r\n    \"episodeCount\": 30,\r\n    \"contentRating\": \"TV_MA\",\r\n    \"releaseDate\": \"2014-01-12T00:00:00Z\",\r\n    \"assets\": [],\r\n    \"genres\": [\"Crime Drama\", \"Neo-Noir\", \"Psychological Thriller\", \"Mystery\"]\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/show/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "show",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Many Movies",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"title\": \"Inception\",\r\n    \"description\": \"A thief enters dreams to steal secrets.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2010-07-16T00:00:00\",\r\n    \"genres\": [\"Action\", \"Science Fiction\", \"Thriller\", \"Mystery\"],\r\n    \"generalRating\": 8.8,\r\n    \"runTime\": 148,\r\n    \"language\": \"English\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"The Dark Knight\",\r\n    \"description\": \"Batman faces the Joker in Gotham City.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2008-07-18T00:00:00\",\r\n    \"genres\": [\"Action\", \"Crime\", \"Drama\", \"Thriller\"],\r\n    \"generalRating\": 9.0,\r\n    \"runTime\": 152,\r\n    \"language\": \"English\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"Interstellar\",\r\n    \"description\": \"Explorers travel through a wormhole to save humanity.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2014-11-07T00:00:00\",\r\n    \"genres\": [\"Adventure\", \"Drama\", \"Science Fiction\"],\r\n    \"generalRating\": 8.6,\r\n    \"runTime\": 169,\r\n    \"language\": \"English\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"Gladiator\",\r\n    \"description\": \"A betrayed Roman general seeks revenge.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2000-05-05T00:00:00\",\r\n    \"genres\": [\"Action\", \"Drama\", \"History\"],\r\n    \"generalRating\": 8.5,\r\n    \"runTime\": 155,\r\n    \"language\": \"English\",\r\n    \"director\": \"Ridley Scott\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"Titanic\",\r\n    \"description\": \"A love story aboard the doomed RMS Titanic.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1997-12-19T00:00:00\",\r\n    \"genres\": [\"Drama\", \"Romance\"],\r\n    \"generalRating\": 7.9,\r\n    \"runTime\": 195,\r\n    \"language\": \"English\",\r\n    \"director\": \"James Cameron\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"The Matrix\",\r\n    \"description\": \"A hacker discovers reality is a simulation.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1999-03-31T00:00:00\",\r\n    \"genres\": [\"Action\", \"Science Fiction\"],\r\n    \"generalRating\": 8.7,\r\n    \"runTime\": 136,\r\n    \"language\": \"English\",\r\n    \"director\": \"The Wachowskis\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"Fight Club\",\r\n    \"description\": \"An insomniac forms an underground fight club.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"1999-10-15T00:00:00\",\r\n    \"genres\": [\"Drama\"],\r\n    \"generalRating\": 8.8,\r\n    \"runTime\": 139,\r\n    \"language\": \"English\",\r\n    \"director\": \"David Fincher\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"Avatar\",\r\n    \"description\": \"A soldier becomes part of an alien world.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2009-12-18T00:00:00\",\r\n    \"genres\": [\"Action\", \"Adventure\", \"Science Fiction\"],\r\n    \"generalRating\": 7.8,\r\n    \"runTime\": 162,\r\n    \"language\": \"English\",\r\n    \"director\": \"James Cameron\",\r\n    \"contentRating\": \"PG13\"\r\n  },\r\n  {\r\n    \"title\": \"Joker\",\r\n    \"description\": \"The origin story of the Joker in Gotham City.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2019-10-04T00:00:00\",\r\n    \"genres\": [\"Crime\", \"Drama\", \"Thriller\"],\r\n    \"generalRating\": 8.4,\r\n    \"runTime\": 122,\r\n    \"language\": \"English\",\r\n    \"director\": \"Todd Phillips\",\r\n    \"contentRating\": \"R\"\r\n  },\r\n  {\r\n    \"title\": \"The Avengers\",\r\n    \"description\": \"Earth's heroes unite to stop Loki.\",\r\n    \"assets\": [],\r\n    \"releaseDate\": \"2012-05-04T00:00:00\",\r\n    \"genres\": [\"Action\", \"Adventure\", \"Science Fiction\"],\r\n    \"generalRating\": 8.0,\r\n    \"runTime\": 143,\r\n    \"language\": \"English\",\r\n    \"director\": \"Joss Whedon\",\r\n    \"contentRating\": \"PG13\"\r\n  }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/movie/create-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "movie",
+                "create-many"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImFjM2JkNGE0LWI1MTQtNDllNy1hMWYxLTY5YzZmYmEzMmE4YyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImV4cCI6MTc4MTU2Mjc4MywiaXNzIjoiTWVkaWFCYWNrbG9nQXBpIiwiYXVkIjoiTWVkaWFCYWNrbG9nQ2xpZW50In0.3nJO5VbnfOUvAtD0wrzDVxGlIYm_2EZ2BM-uRP0NDlI",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
