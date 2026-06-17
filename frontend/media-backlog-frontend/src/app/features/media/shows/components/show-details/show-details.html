@@ -1,1 +1,23 @@
-<p>show-details works!</p>
+@if (show;) {
+
+<div class="details-section">
+    <div class="details-row">
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Seasons</span>
+        <span class="details-value">{{ show.seasonCount }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Episodes</span>
+        <span class="details-value">{{ show.episodeCount }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Rating</span>
+        <span class="details-badge">{{ show.contentRating }}</span>
+    </div>
+
+</div>
+}

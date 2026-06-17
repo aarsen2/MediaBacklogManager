@@ -1,19 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../auth-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
 
-  message: string = "";
-  loginMessage: string = "You have logged in"
-  logoutMessage: string = "You have logged out"
+  message = signal<string | null>(null)
+
+  errorMessage: string = "Your Username or Password Was Incorrect"
   isLoggingIn: boolean = false;
   isLoggingOut: boolean = false;
 
@@ -51,19 +51,13 @@ export class Login {
         this.router.navigate([returnUrl]);
       },
       error: (err) => {
+        this.message.set(this.errorMessage);
         console.error('Failed To Log In');
         console.error(err.error)
       }
     });;
 
-    this.message = this.loginMessage
     this.isLoggingIn = false;
   }
 
-  logout() {
-    this.isLoggingOut = true;
-    this.authService.logout();
-    this.message = this.logoutMessage
-    this.isLoggingOut = false;
-  }
 }

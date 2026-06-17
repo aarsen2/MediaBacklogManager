@@ -1,1 +1,30 @@
-<p>game-details works!</p>
+@if (game;) {
+
+<div class="details-section">
+    <div class="details-row">
+    </div>
+
+
+    <div class="details-row">
+        <span class="details-label">Studio</span>
+        <span class="details-value">{{ game.studio }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Platforms</span>
+
+        <div class="details-platforms">
+            @for (platform of game.platforms; track platform.id) {
+            <span class="details-tag">
+                {{ platform.name }}
+            </span>
+            }
+        </div>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Rating</span>
+        <span class="details-badge">{{ game.contentRating }}</span>
+    </div>
+</div>
+}

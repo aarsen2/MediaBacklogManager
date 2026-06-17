@@ -1,38 +1,41 @@
-<body>
+<div class="loginContainer">
+    <div class="content">
+        <h1 class="content-title">Track everything you want to watch, play, and read</h1>
+        <p class="content-subtitle">Backlog Manager is your personal backlog manager for movies, games, and books-making
+            it easier to
+            decide what to experience next</p>
+
+        <ul class="feature-list">
+            <li class="feature-list-item">Keep all your media in one place</li>
+            <li class="feature-list-item">Track what you've finished and what's next</li>
+            <li class="feature-list-item">Rate and organize your favorites</li>
+        </ul>
+
+        <div class="content-cta">
+            <p class="cta-text">New here?</p>
+            <p class="cta-button"><a routerLink="/create-account">Create an account</a> to get started</p>
+        </div>
+    </div>
     <div class="accountControlls">
-
-        <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
-
-            <h2>Username</h2>
-            <input type="text" formControlName="username" />
+        <form class="forms-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <h1 class="forms-title">Sign Into Your Backlog</h1>
+            <h3 class="forms-label">Username</h3>
+            <input class="forms-input" type="text" name="username" autocomplete="username" required
+                formControlName="username" />
             @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
-            <small class="error">Username is required</small>
+            <small class="forms-error">Username is required</small>
             }
-            <h2>Password</h2>
-            <input type="text" formControlName="password" />
+            <h3 class="forms-label">Password</h3>
+            <input class="forms-input" type="password" autocomplete="current-password" formControlName="password" />
+            <small class="password-reset"><a routerLink="/reset-password">Reset Password</a></small>
             @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-            <small class="error">Password is required</small>
-            }
-            <button type="submit" [disabled]="isLoggingIn">
+            <small class="forms-error">Password is required</small>}
+            <p class="message forms-error">{{message()}}</p>
+            <button class="forms-button" type="submit" [disabled]="isLoggingIn">
                 {{ isLoggingIn ? 'Logging in...' : 'Log In' }}
             </button>
         </form>
-
-        <div class="logout">
-            <button type="submit" (click)="logout()" [disabled]="isLoggingOut">
-                {{ isLoggingOut ? 'Logging out...' : 'Log Out' }}
-            </button>
-        </div>
+        <div class="separator">OR</div>
+        <button class="forms-button">Create Account</button>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <p class="message">{{message}}</p>
-    <br>
-</body>
-
-
-
-
+</div>

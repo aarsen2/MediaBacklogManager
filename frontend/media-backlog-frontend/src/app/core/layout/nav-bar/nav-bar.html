@@ -8,12 +8,12 @@
   <div class="navButtons">
 
 
-    <div class="navButton searchBar">
-      <input>
-      <span class="material-symbols-outlined">search</span>
+    <div class="searchBar">
+      <input placeholder="search">
+      <span class="navButton squareButton material-symbols-outlined">search</span>
     </div>
 
-    <button routerLink="/home" class="navButton squareButton">
+    <button routerLink="/home" (click)="closeProfile()" class="navButton squareButton">
       <span class="material-symbols-outlined">home</span>
     </button>
 
@@ -25,17 +25,17 @@
       <span class="material-symbols-outlined">query_stats</span>
     </button>
 
-    <button (click)="profileButton()"  class="navButton squareButton profileButton">
-      <span class="material-symbols-outlined">person</span>
-    </button>
 
-    
-    <div [hidden]="!profileMenuVisable"  class="profileMenu">
-      <button (click)="closeProfile()">x</button>
-      <app-profile-menu></app-profile-menu>
+    <div class="profileWrapper">
+
+      <button (click)="profileButton()" class="navButton profileButton">
+        <span class="material-symbols-outlined">person</span>
+      </button>
+
+
+      <app-profile-menu  (closeMenu)="closeProfile()" class="profileMenu" [hidden]="!profileMenuVisable"></app-profile-menu>
+
     </div>
-    
-
 
   </div>
 </nav>

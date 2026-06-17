@@ -1,20 +1,25 @@
+.container {
+    padding: 1rem;
+    background-color: var(--color-background2);
+}
+
 .MediaCarousel {
     display: flex;
     gap: 1rem;
     overflow-x: scroll;
     padding: 1rem;
-
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-
 }
+
+
+
 
 .MediaCard {
     flex: 0 0 auto;
     width: 200px;
     padding: 1rem;
     border-radius: 12px;
-    background: #222;
+    background: var(--color-background3);
     color: white;
     scroll-snap-align: start;
     cursor: pointer;

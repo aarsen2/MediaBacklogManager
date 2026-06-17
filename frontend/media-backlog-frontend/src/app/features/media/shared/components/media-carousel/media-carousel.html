@@ -1,10 +1,12 @@
-@if (media;) {
-  <div class="MediaCarousel">
+<div class="container">
+  @if (media) {
+  <div class="MediaCarousel scrollable">
     @for (mediaItem of media; track mediaItem.id) {
-        <div class="MediaCard" (click)="viewMovie(mediaItem)">
-            <h1>{{ mediaItem.title }}</h1>
-            <p>{{ mediaItem.description }}</p>
-        </div>
+    <div class="MediaCard" (click)="viewMovie(mediaItem)">
+      <h1>{{ mediaItem.title }}</h1>
+      <p>{{ mediaItem.description }}</p>
+    </div>
     }
   </div>
-}
+  }
+</div>

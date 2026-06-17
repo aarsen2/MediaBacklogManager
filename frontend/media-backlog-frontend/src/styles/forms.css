@@ -1,0 +1,87 @@
+.forms-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    width: 100%;
+
+    padding: 1.5rem;
+
+    background-color: var(--color-background2);
+    border: 1px solid var(--color-secondary3);
+    border-radius: var(--button-radius);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+
+.forms-title {
+    color: var(--color-text1);
+    font-size: xx-large;
+}
+
+.forms-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.forms-label {
+    color: var(--color-text1);
+}
+
+.forms-input {
+    width: 90%;
+    align-self: center;
+    height: 2.5rem;
+    padding: 0 0.6rem;
+    border-radius: var(--button-radius);
+    border: 1px solid var(--color-secondary3);
+    background-color: var(--color-background3);
+    color: var(--color-text1);
+    font-size: 0.95rem;
+    transition: 0.15s;
+    box-sizing: content-box;
+}
+
+.forms-input:focus {
+    outline: none;
+    border-color: var(--color-primary2);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+
+.forms-error {
+  color: var(--color-error1);
+}
+
+
+.forms-button {
+  width: 90%;
+  height: 2.5rem;
+  align-self: center;
+  border: none;
+  border-radius: var(--button-radius);
+  background-color: var(--color-primary2);
+  color: var(--color-text1);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 1rem;
+}
+
+.forms-button:hover {
+  background-color: var(--color-primary1);
+}
+
+.forms-button:active {
+  background-color: var(--color-primary3);
+}
+
+.forms-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

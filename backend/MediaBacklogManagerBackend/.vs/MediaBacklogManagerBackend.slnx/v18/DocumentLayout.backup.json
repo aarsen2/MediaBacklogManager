@@ -3,48 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readshowdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readshowdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readgamedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readgamedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\services\\media\\gameservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\services\\media\\gameservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readmoviedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readmoviedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\services\\media\\mediaserivce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\services\\media\\mediaserivce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readbookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readbookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\reading\\readalbumdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\reading\\readalbumdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\enums\\mediatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\enums\\mediatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\creation\\createsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\creation\\createsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\creation\\createbookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\creation\\createbookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\creation\\creategamedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\creation\\creategamedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\dtos\\creation\\createalbumdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\dtos\\creation\\createalbumdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|c:\\users\\aaron\\projects\\capstone\\task 3\\d424-capstone\\backend\\mediabacklogmanagerbackend\\mediabacklogmanagerbackend\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80D11618-61DF-0043-9FB2-5EF23BF85007}|MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj|solutionrelative:mediabacklogmanagerbackend\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 139,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,145 +38,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReadMovieDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadMovieDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAA4wD4AAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:05:23.113Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ReadSongDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadSongDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadSongDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadSongDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadSongDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:05:20.301Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ReadBookDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadBookDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadBookDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadBookDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadBookDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:05:17.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ReadAlbumDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadAlbumDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadAlbumDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadAlbumDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadAlbumDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAWwA0AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:05:14.02Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MediaType.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Enums\\MediaType.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Enums\\MediaType.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Enums\\MediaType.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\Enums\\MediaType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:04:52.443Z",
+              "WhenOpened": "2026-06-16T17:41:46.015Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ReadGameDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadGameDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadGameDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadGameDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadGameDto.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAApwA0AAAAeAAAAAAAAAA==",
+              "Title": "GameService.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Services\\Media\\GameService.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Services\\Media\\GameService.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Services\\Media\\GameService.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Services\\Media\\GameService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T22:02:31.183Z",
+              "WhenOpened": "2026-06-16T17:35:01.643Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CreateGameDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateGameDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateGameDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateGameDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateGameDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MediaSerivce.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Services\\Media\\MediaSerivce.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Services\\Media\\MediaSerivce.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Services\\Media\\MediaSerivce.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Services\\Media\\MediaSerivce.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAqwEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T21:45:33.727Z",
+              "WhenOpened": "2026-06-16T17:36:17.294Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CreateBookDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateBookDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateBookDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateBookDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateBookDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\GameController.cs",
+              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\Controllers\\GameController.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\Controllers\\GameController.cs",
+              "RelativeToolTip": "MediaBacklogManagerBackend\\Controllers\\GameController.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAmwHQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T21:44:30.361Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CreateSongDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateSongDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateSongDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateSongDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateSongDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T21:43:57.773Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CreateAlbumDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateAlbumDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateAlbumDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Creation\\CreateAlbumDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Creation\\CreateAlbumDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T21:39:47.223Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReadShowDto.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadShowDto.cs",
-              "RelativeDocumentMoniker": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadShowDto.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\DTOs\\Reading\\ReadShowDto.cs",
-              "RelativeToolTip": "MediaBacklogManagerBackend\\DTOs\\Reading\\ReadShowDto.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAA+wA4AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T21:35:36.363Z",
+              "WhenOpened": "2026-06-16T17:34:41.184Z",
               "EditorCaption": ""
             }
           ]

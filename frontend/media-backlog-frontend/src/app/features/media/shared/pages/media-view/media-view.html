@@ -1,37 +1,76 @@
 <div class="itemContainer">
-    <div class="itemDetails">
-        <h1 class="title">{{media()?.title}}</h1>
-        <h3 class="releaseDate">{{releaseDate()?.toLocaleDateString()}}</h3>
-        <div class="spacer"></div>
-        <h2>{{media()?.description}}</h2>
-        <div class="spacer"></div>
-    </div>
-    <div class="itemBackground">
-        <img src="{{media()?.assets}}" alt="Item background image">
-    </div>
-    <div class="typeSpecificDetials">
-        @if(media(); as m) {
 
-        @switch (m.type) {
-        @case ('movie') {
-        <app-movie-details [movie]="m"></app-movie-details>
-        }
-        @case ('show') {
-        <app-show-details [show]="m"></app-show-details>
-        }
-        @case ('album') {
-        <app-album-details [album]="m"></app-album-details>
-        }
-        @case ('book') {
-        <app-book-details [book]="m"></app-book-details>
-        }
-        @case ('game') {
-        <app-game-details [game]="m"></app-game-details>
-        }
-        @case ('song') {
-        <app-song-details [song]="m"></app-song-details>
-        }
-        }
-        }
+    @if (media(); as m) {
+
+
+    <!-- 🔹 General Media Details -->
+    <div class="itemDetails">
+        <h1 class="title">{{ m.title }}</h1>
+
+        <h3 class="releaseDate">
+            {{ m.releaseDate | date }}
+        </h3>
+
+        <div class="rating">
+            Rating: {{ m.generalRating !== 0 ? m.generalRating : "N/A"}}
+        </div>
+
+        <div class="genres">
+            @for (genre of m.genres; track genre) {
+            <span class="details-tag">
+                {{ genre.name || genre }}
+            </span>
+            }
+        </div>
+
+        <div class="spacer"></div>
+
+        <p class="description">
+            {{ m.description }}
+        </p>
+
+        <div class="spacer"></div>
+
+        <!-- 🔹 Type-Specific Details -->
+        <div class="typeSpecificDetails">
+
+            @switch (m.type) {
+
+            @case ('movie') {
+            <app-movie-details [movie]="m"></app-movie-details>
+            }
+
+            @case ('show') {
+            <app-show-details [show]="m"></app-show-details>
+            }
+
+            @case ('album') {
+            <app-album-details [album]="m"></app-album-details>
+            }
+
+            @case ('book') {
+            <app-book-details [book]="m"></app-book-details>
+            }
+
+            @case ('game') {
+            <app-game-details [game]="m"></app-game-details>
+            }
+
+            @case ('song') {
+            <app-song-details [song]="m"></app-song-details>
+            }
+            }
+
+        </div>
     </div>
+
+    <!-- 🔹 Optional Asset Gallery -->
+
+    <!-- 🔹 Background / Hero Image -->
+    <div class="itemBackground">
+        <img [src]="m.assets?.[0]" alt="Media background image">
+    </div>
+
+
+    }
 </div>

@@ -1,64 +1,64 @@
 <div class="movie-form-container">
 
-  <h2>Create Movie</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <h2 class="forms-title">Create Movie</h2>
+  <form class="forms-form" [formGroup]="form" (ngSubmit)="submit()">
 
 
     <!-- Title -->
-    <div class="field">
-      <label>Title</label>
-      <input type="text" formControlName="title" />
+    <div class="forms-field">
+      <label class="forms-label">Title</label>
+      <input class="forms-input" type="text" formControlName="title" />
       @if (form.get('title')?.invalid && form.get('title')?.touched) {
-      <small class="error">Title is required</small>
+      <small class="forms-error">Title is required</small>
       }
     </div>
 
 
     <!-- Description -->
-    <div class="field">
-      <label>Description</label>
-      <input type="text" formControlName="description">
+    <div class="forms-field">
+      <label class="forms-label">Description</label>
+      <input class="forms-input" type="text" formControlName="description">
     </div>
 
 
 
     <!-- Release Date -->
-    <div class="field">
-      <label>Release Date</label>
-      <input type="date" formControlName="releaseDate" />
+    <div class="forms-field">
+      <label class="forms-label">Release Date</label>
+      <input class="forms-input" type="date" formControlName="releaseDate" />
       @if (form.get('title')?.invalid && form.get('releaseDate')?.touched) {
       <small class="error">Release date is required</small>
       }
     </div>
 
     <!-- Rating -->
-    <div class="field">
-      <label>Rating (0-5)</label>
-      <input type="number" step="0.1" formControlName="generalRating" />
+    <div class="forms-field">
+      <label class="forms-label">Rating (0-5)</label>
+      <input class="forms-input" type="number" step="0.1" formControlName="generalRating" />
     </div>
 
     <!-- Runtime -->
-    <div class="field">
-      <label>Runtime (minutes)</label>
-      <input type="number" formControlName="runTime" />
+    <div class="forms-field">
+      <label class="forms-label">Runtime (minutes)</label>
+      <input class="forms-input" type="number" formControlName="runTime" />
     </div>
 
     <!-- Language -->
-    <div class="field">
-      <label>Language</label>
-      <input type="text" formControlName="language" />
+    <div class="forms-field">
+      <label class="forms-label">Language</label>
+      <input class="forms-input" type="text" formControlName="language" />
     </div>
 
     <!-- Director -->
-    <div class="field">
-      <label>Director</label>
-      <input type="text" formControlName="director" />
+    <div class="forms-field">
+      <label class="forms-label">Director</label>
+      <input class="forms-input" type="text" formControlName="director" />
     </div>
 
     <!-- Content Rating -->
-    <div class="field">
-      <label>Content Rating</label>
-      <select formControlName="contentRating">
+    <div class="forms-field">
+      <label class="forms-label">Content Rating</label>
+      <select class="forms-input" formControlName="contentRating">
         <option value="G">G</option>
         <option value="PG">PG</option>
         <option value="PG13">PG13</option>
@@ -66,9 +66,10 @@
       </select>
     </div>
 
+    <div class="separator"></div>
 
     <!-- Submit -->
-    <button type="submit" [disabled]="isSubmitting">
+    <button class="forms-button" type="submit" [disabled]="isSubmitting">
       {{ isSubmitting ? 'Creating...' : 'Create Movie' }}
     </button>
 
@@ -76,11 +77,11 @@
 
   <!-- Messages -->
   @if (successMessage) {
-  <p class="success">{{ successMessage }}</p>
+  <p class="forms-success">{{ successMessage }}</p>
   }
 
   @if (errorMessage) {
-  <p class="error">{{ errorMessage }}</p>
+  <p class="forms-error">{{ errorMessage }}</p>
   }
 
 </div>

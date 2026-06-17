@@ -162,6 +162,7 @@ namespace MediaBacklogManagerBackend.Services.Media
 
         private ReadGameDto GetReadGameDto(Game game)
         {
+            
             return new ReadGameDto
             {
                 Id = game.Id,

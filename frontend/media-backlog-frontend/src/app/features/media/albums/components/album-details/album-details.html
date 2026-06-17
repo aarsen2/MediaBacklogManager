@@ -1,1 +1,27 @@
-<p>album-details works!</p>
+@if (album;) {
+
+<div class="details-section">
+    <div class="details-row">
+    </div>
+
+    
+    <div class="details-row">
+        <span class="details-label">Artist</span>
+        <span class="details-value">{{ album.artist }}</span>
+    </div>
+    
+    <div class="details-row">
+        <span class="details-label">Duration</span>
+        <span class="details-value">{{ formatRunTime(album.runTime) }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Tracks</span>
+        <span class="details-value">{{ album.trackCount }}</span>
+    </div>
+
+    
+    
+
+</div>
+}

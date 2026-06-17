@@ -1,8 +1,30 @@
-<h1>{{userService.user()?.username}}</h1>
 
-<div class = "profileButtons">
-    <a class="profileButton" routerLink="/home">Profile</a>
-    <a class="profileButton" routerLink="/home">Preferences</a>
-    <a class="profileButton" routerLink="/home">Export/Import Data</a>
-    <a class="profileButton" (click)="logout()">Logout</a>
+
+<div class="profileMenu">
+
+  <div class="profileHeader">
+    <h3 class="username">{{ userService.user()?.username }}</h3>
+  </div>
+
+  <div class="profileButtons">
+
+    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
+      Profile
+    </a>
+
+    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
+      Preferences
+    </a>
+
+    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
+      Export / Import Data
+    </a>
+
+    <div class="divider"></div>
+
+    <a class="profileButton logout" (click)="logout()">
+      Logout
+    </a>
+
+  </div>
 </div>

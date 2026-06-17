@@ -1,30 +1,3 @@
-:root {
-  --color-primary1: white;
-  --color-primary2: lightgray;
-  --color-primary3: darkgray;
-  --color-secondary1: lightblue;
-  --color-secondary2: rgb(123, 212, 242);
-  --color-secondary3: rgb(74, 183, 219);
-  --color-tertiary1: blue;
-  --color-tertiary2: blue;
-  --color-tertiary3: blue;
-
-
-  --color-background1: white;
-  --color-background2: gray;
-  --color-background3: black;
-
-  --color-text1: black;
-  --color-text2: white;
-  --color-text3: gray;
-
-
-  --button-radius: 1px;
-}
-
-
-
-
 /* General Nav Styling*/
 .nav {
   height: auto;
@@ -32,8 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--color-background1);
-  border: 1px solid black;
+  background-color: var(--color-background2);
+  border-bottom: 1px solid var(--color-secondary3);
   position: relative;
 }
 
@@ -44,18 +17,24 @@
   color: var(--color-text1);
   text-decoration: none;
   font-size: x-large;
-  transition: .2s;
 }
 
 .logo a:hover {
   padding: 1rem;
-  color: var(--color-text1);
   text-decoration: none;
   font-size: x-large;
   background-color: var(--color-background2);
   color: var(--color-text2);
 }
 
+.logo {
+  transition: .2s;
+}
+
+.logo:hover {
+  color: var(--color-text1);
+  transform: translateY(-2px);
+}
 
 
 /* Navigation Items Styling*/
@@ -69,58 +48,29 @@
   margin: .5rem;
   cursor: pointer;
   transition: .2s;
+  color: var(--color-text2);
   background-color: var(--color-secondary1);
   border-radius: var(--button-radius);
-  border-color: var(--color-tertiary1);
+  border-color: transparent;
   height: 2.5rem;
 }
 
 .navButton:hover {
-  background-color: var(--color-secondary2);
-  border-color: var(--color-tertiary2);
+  background-color: var(--color-primary2);
+  color: var(--color-text1);
   transform: translateY(-1px);
 }
 
-.searchBar {
-  display: inline-flex;
-  align-items: center;
-  padding-left: .5rem;
+.navButton:active {
+  background-color: var(--color-primary3);
+  color: var(--color-text1)
 }
 
-.searchBar:focus-within {
-  background-color: var(--color-secondary2);
-}
-
-
-.searchBar input {
-  background-color: transparent;
-  border-color: transparent;
-  border: none;
-  height: 2.3rem;
-  font-size: medium;
-}
-
-.searchBar input:focus {
-  border: none;
-  outline: none;
-}
-
-.searchBar span {
-  height: 2.4rem;
-  border-radius: var(--button-radius);
-  display: flex;
-  align-items: center;
-  aspect-ratio: 1;
-  justify-content: center;
-  user-select: none;
-}
-
-.searchBar span:hover {
-  background-color: var(--color-secondary3);
-  transition: .2s;
-}
 
 .squareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   aspect-ratio: 1;
 }
 
@@ -134,12 +84,77 @@
 .profileButton {
   padding: 0px;
   border-radius: 50%;
+  aspect-ratio: 1;
 }
 
-.profileMenu {
-  border: 1px solid black;
-  position: absolute;
-  top: 100%;
-  right: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+
+
+.searchBar {
+  display: inline-flex;
+  align-items: center;
+
+  height: 2.5rem;
+  margin: .5rem;
+  padding: 0 .5rem;
+
+  background-color: var(--color-background1);
+  border: 1px solid transparent;
+  border-radius: var(--button-radius);
+
+  transition: background-color .2s, border-color .2s;
 }
+
+.searchBar:hover {
+  background-color: var(--color-secondary2);
+}
+
+.searchBar:focus-within {
+  background-color: var(--color-secondary2);
+  border-color: var(--color-primary2);
+}
+
+.searchBar input {
+  flex: 1;
+  height: 100%;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  font-size: medium;
+  color: var(--color-text1);
+}
+
+.searchBar input::placeholder {
+  color: var(--color-text3);
+}
+
+.searchBar span {
+  height: 2rem;
+  width: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: calc(var(--button-radius) - 4px);
+
+  color: var(--color-text2);
+  cursor: pointer;
+  user-select: none;
+
+  transition: .2s;
+}
+
+.searchBar span:hover {
+  background-color: var(--color-secondary3);
+  color: var(--color-text1);
+}
+
+.searchBar span:active {
+  background-color: var(--color-primary3);
+}
+
+

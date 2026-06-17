@@ -14,10 +14,11 @@ import { AlbumDetails } from '../../../albums/components/album-details/album-det
 import { BookDetails } from '../../../books/components/book-details/book-details';
 import { GameDetails } from '../../../games/components/game-details/game-details';
 import { SongDetails } from '../../../songs/components/song-details/song-details';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-media-view',
-  imports: [MovieDetails, ShowDetails, AlbumDetails, BookDetails, GameDetails, SongDetails],
+  imports: [MovieDetails, ShowDetails, AlbumDetails, BookDetails, GameDetails, SongDetails, DatePipe],
   templateUrl: './media-view.html',
   styleUrl: './media-view.css',
 })

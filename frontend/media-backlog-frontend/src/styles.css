@@ -1,29 +1,107 @@
 /* You can add global styles to this file, and also import other style files */
+@import './styles/details.css';
+@import './styles/forms.css';
+
 :root {
-    --color-primary1: white;
-    --color-primary2: lightgray;
-    --color-primary3: darkgray;
-    --color-secondary1: lightblue;
-    --color-secondary2: rgb(123, 212, 242);
-    --color-secondary3: rgb(74, 183, 219);
-    --color-tertiary1: darkblue;
-    --color-tertiary2: black;
-    --color-tertiary3: indigo;
+    --color-background1: #0b1220;
+    --color-background2: #0f172a;
+    --color-background3: #1e293b;
 
+    --color-text1: #e2e8f0;
+    --color-text2: #cbd5e1;
+    --color-text3: #94a3b8;
 
-    --color-background1: white;
-    --color-background2: gray;
-    --color-background3: black;
+    --color-primary1: #38bdf8;
+    --color-primary2: #0ea5e9;
+    --color-primary3: #0369a1;
 
-    --color-text1: black;
-    --color-text2: white;
-    --color-text3: gray;
+    --color-secondary1: #0f172a;
+    --color-secondary2: #1e293b;
+    --color-secondary3: #334155;
+
+    --color-tertiary1: #94a3b8;
+    --color-tertiary2: #cbd5e1;
+    --color-tertiary3: #f1f5f9;
+
+    --color-error1: #f87171;
 
     --button-radius: 8px;
+
+    background-color: var(--color-background1);
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body, html {
+body,
+html {
     margin: 0px;
     background-color: var();
     height: 100%
+}
+
+
+/* Dividers */
+/* With Text */
+.separator {
+  display: flex;
+  color: var(--color-text3);
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-secondary3);
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}
+
+
+
+
+
+
+
+/* Componenet Scroll Bars */
+.scrollable::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: var(--color-background1);
+    border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        var(--color-primary2),
+        var(--color-primary3)
+    );
+    border-radius: 10px;
+    border: 2px solid var(--color-background2);
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        var(--color-primary1),
+        var(--color-primary2)
+    );
+}
+
+.scrollable::-webkit-scrollbar-corner {
+    background: transparent;
 }

@@ -1,1 +1,18 @@
-<p>song-details works!</p>
+@if (song;) {
+
+<div class="details-section">
+    <div class="details-row">
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Artist</span>
+        <span class="details-value">{{ song.artist }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Duration</span>
+        <span class="details-value">{{ formatRunTime(song.runTime) }}</span>
+    </div>
+
+</div>
+}

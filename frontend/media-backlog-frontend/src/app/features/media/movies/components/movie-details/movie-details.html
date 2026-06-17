@@ -1,1 +1,25 @@
-<p>Media Specific Details</p>
+@if (movie;) {
+
+<div class="details-section">
+    <div class="details-row">
+        <span class="details-label">Duration </span>
+        <span class="details-value">{{ formatRunTime(movie.runTime) }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Language</span>
+        <span class="details-value">{{ movie.language }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Director</span>
+        <span class="details-value">{{ movie.director }}</span>
+    </div>
+
+    <div class="details-row">
+        <span class="details-label">Rating</span>
+        <span class="details-badge">{{ movie.contentRating }}</span>
+    </div>
+
+</div>
+}

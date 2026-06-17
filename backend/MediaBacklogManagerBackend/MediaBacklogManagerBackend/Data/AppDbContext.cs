@@ -59,6 +59,8 @@ namespace MediaBacklogManagerBackend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Game>().Navigation(g => g.Platforms).AutoInclude();
             //Create Seed Data for the media tables
            // modelBuilder.Entity<Media>().HasData(;
 
