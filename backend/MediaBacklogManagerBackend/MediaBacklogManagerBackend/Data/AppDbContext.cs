@@ -41,12 +41,8 @@ namespace MediaBacklogManagerBackend.Data
     public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         //Media Types Tables
-        public virtual DbSet<Movie> Movies { get; set; }
-        public virtual DbSet<Show> Shows { get; set; }
-        public virtual DbSet<Game> Games { get; set; }
-        public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Song> Songs { get; set; }
-        public virtual DbSet<Album> Albums { get; set; }
+
+        public virtual DbSet<Media> Media { get; set; }
         public virtual DbSet<GamePlatform> Platforms { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         //Other Needed Tables
@@ -61,8 +57,16 @@ namespace MediaBacklogManagerBackend.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Game>().Navigation(g => g.Platforms).AutoInclude();
-            //Create Seed Data for the media tables
-           // modelBuilder.Entity<Media>().HasData(;
+
+            modelBuilder.Entity<Media>()
+                .HasDiscriminator<string>("MediaType")
+                .HasValue<Movie>("Movie")
+                .HasValue<Show>("Show")
+                .HasValue<Album>("Album")
+                .HasValue<Book>("Book")
+                .HasValue<Song>("Song")
+                .HasValue<Game>("Game");
+
 
         }
     }

@@ -1,8 +1,9 @@
-﻿using MediaBacklogManagerBackend.DTOs.Creation;
+﻿using MediaBacklogManagerBackend.DTOs;
+using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,16 @@ namespace MediaBacklogManagerBackend.Controllers
     [ApiController]
     public class ShowController : ControllerBase
     {
-        private ShowService Service { get; set; }
+        private MediaService<Show> MediaService { get; set; }
+        private UserService UserService { get; set; }
 
-        public ShowController(ShowService service)
+
+        public ShowController(
+            UserService userService,
+            MediaService<Show> mediaService)
         {
-            Service = service;
+            UserService = userService;
+            MediaService = mediaService;
         }
 
 
@@ -26,12 +32,14 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateShowDto showDto)
         {
-            var show = await Service.CreateShow(showDto);
+
+            var userId = await UserService.GetCurrentUserId(User);
+            var show = await MediaService.CreateMediaAsync(showDto, userId);
 
             Console.WriteLine("Creating Show");
             if (show != null)
             {
-                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, await Service.ReadShowById(show.Id));
+                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, await MediaService.ReadMediaByIdAsync(show.Id));
             }
             else return Conflict("Show Already Exists.");
         }
@@ -40,16 +48,18 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create-many")]
         public async Task<IActionResult> CreateMany([FromBody] CreateShowDto[] showDtos)
         {
-            var createdShows = new List<ReadShowDto>();
+            var createdShows = new List<ReadMediaDto>();
             var conflicts = new List<string>();
+            var userId = await UserService.GetCurrentUserId(User);
+
 
             foreach (var showDto in showDtos)
             {
-                var show = await Service.CreateShow(showDto);
+                var show = await MediaService.CreateMediaAsync(showDto, userId);
 
                 if (show != null)
                 {
-                    var readDto = await Service.ReadShowById(show.Id);
+                    var readDto = await MediaService.ReadMediaByIdAsync(show.Id);
                     createdShows.Add(readDto!);
                 }
                 else
@@ -71,7 +81,7 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
 
-            return Ok(await Service.ReadAllShows());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -85,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Updating Show");
             try
             {
-                await Service.UpdateShow(showDto);
+                await MediaService.UpdateMediaAsync(showDto);
 
                 return NoContent();
             }
@@ -102,16 +112,16 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAllShows()
         {
-            return Ok(await Service.ReadAllShows());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
 
-        ////Gets a single Show by ID
+        //Gets a single Show by ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetShow(int id)
         {
-            var show = await Service.ReadShowById(id);
+            var show = await MediaService.ReadMediaByIdAsync(id);
 
             if (show == null)
                 return NotFound();
@@ -122,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShow(int id)
         {
-            var result = await Service.DeleteShow(id);
+            var result = await MediaService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

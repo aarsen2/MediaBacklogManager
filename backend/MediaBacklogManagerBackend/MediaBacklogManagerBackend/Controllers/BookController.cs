@@ -3,7 +3,7 @@ using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,25 +15,31 @@ namespace MediaBacklogManagerBackend.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private BookService Service { get; set; }
+        private MediaService<Book> MediaService { get; set; }
+        private UserService UserService { get; set; }
 
-        public BookController(BookService service)
+
+        public BookController(
+            UserService userService,
+            MediaService<Book> mediaService)
         {
-            Service = service;
+            UserService = userService;
+            MediaService = mediaService;
         }
-
 
 
         //Creates a new Book
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateBookDto bookDto)
         {
-            var book = await Service.CreateBook(bookDto);
+
+            var userId = await UserService.GetCurrentUserId(User);
+            var book = await MediaService.CreateMediaAsync(bookDto, userId);
 
             Console.WriteLine("Creating Book");
             if (book != null)
             {
-                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, await Service.ReadBookById(book.Id));
+                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, await MediaService.ReadMediaByIdAsync(book.Id));
             }
             else return Conflict("Book Already Exists.");
         }
@@ -42,16 +48,18 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create-many")]
         public async Task<IActionResult> CreateMany([FromBody] CreateBookDto[] bookDtos)
         {
-            var createdBooks = new List<ReadBookDto>();
+            var createdBooks = new List<ReadMediaDto>();
             var conflicts = new List<string>();
+            var userId = await UserService.GetCurrentUserId(User);
+
 
             foreach (var bookDto in bookDtos)
             {
-                var book = await Service.CreateBook(bookDto);
+                var book = await MediaService.CreateMediaAsync(bookDto, userId);
 
                 if (book != null)
                 {
-                    var readDto = await Service.ReadBookById(book.Id);
+                    var readDto = await MediaService.ReadMediaByIdAsync(book.Id);
                     createdBooks.Add(readDto!);
                 }
                 else
@@ -73,9 +81,8 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
 
-            return Ok(await Service.ReadAllBooks());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
-
 
 
 
@@ -88,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Updating Book");
             try
             {
-                await Service.UpdateBook(bookDto);
+                await MediaService.UpdateMediaAsync(bookDto);
 
                 return NoContent();
             }
@@ -105,7 +112,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAllBooks()
         {
-            return Ok(await Service.ReadAllBooks());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -114,7 +121,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBook(int id)
         {
-            var book = await Service.ReadBookById(id);
+            var book = await MediaService.ReadMediaByIdAsync(id);
 
             if (book == null)
                 return NotFound();
@@ -125,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            var result = await Service.DeleteBook(id);
+            var result = await MediaService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

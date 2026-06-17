@@ -3,7 +3,7 @@ using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,41 +15,51 @@ namespace MediaBacklogManagerBackend.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private MovieService Service { get; set; }
+        private MediaService<Movie> MediaService { get; set; }
+        private UserService UserService { get; set; }
 
-        public MovieController(MovieService service)
+
+        public MovieController(
+            UserService userService,
+            MediaService<Movie> mediaService)
         {
-            Service = service;
+            UserService = userService;
+            MediaService = mediaService;
         }
 
-        //Creates a new movie
+
+        //Creates a new Movie
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateMovieDto movieDto)
         {
-            var movie = await Service.CreateMovie(movieDto);
+
+            var userId = await UserService.GetCurrentUserId(User);
+            var movie = await MediaService.CreateMediaAsync(movieDto, userId);
 
             Console.WriteLine("Creating Movie");
             if (movie != null)
             {
-                return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, await Service.ReadMovieById(movie.Id));
+                return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, await MediaService.ReadMediaByIdAsync(movie.Id));
             }
             else return Conflict("Movie Already Exists.");
         }
 
-        //Creates a list of movies
+        //Creates a list of Movies
         [HttpPost("create-many")]
         public async Task<IActionResult> CreateMany([FromBody] CreateMovieDto[] movieDtos)
         {
-            var createdMovies = new List<ReadMovieDto>();
+            var createdMovies = new List<ReadMediaDto>();
             var conflicts = new List<string>();
+            var userId = await UserService.GetCurrentUserId(User);
+
 
             foreach (var movieDto in movieDtos)
             {
-                var movie = await Service.CreateMovie(movieDto);
+                var movie = await MediaService.CreateMediaAsync(movieDto, userId);
 
                 if (movie != null)
                 {
-                    var readDto = await Service.ReadMovieById(movie.Id);
+                    var readDto = await MediaService.ReadMediaByIdAsync(movie.Id);
                     createdMovies.Add(readDto!);
                 }
                 else
@@ -71,7 +81,7 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
 
-            return Ok(await Service.ReadAllMovies());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -85,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Updating Movie");
             try
             {
-                await Service.UpdateMovie(movieDto);
+                await MediaService.UpdateMediaAsync(movieDto);
 
                 return NoContent();
             }
@@ -98,20 +108,20 @@ namespace MediaBacklogManagerBackend.Controllers
         }
 
 
-        //Gets all movies
+        //Gets all Movies
         [HttpGet]
         public async Task<IActionResult> ReadAllMovies()
         {
-            return Ok(await Service.ReadAllMovies());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
 
-        //Gets a single movie by ID
+        //Gets a single Movie by ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovie(int id)
         {
-            var movie = await Service.ReadMovieById(id);
+            var movie = await MediaService.ReadMediaByIdAsync(id);
 
             if (movie == null)
                 return NotFound();
@@ -122,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
-            var result = await Service.DeleteMovie(id);
+            var result = await MediaService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

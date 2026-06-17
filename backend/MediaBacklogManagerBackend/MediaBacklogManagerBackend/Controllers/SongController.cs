@@ -3,7 +3,7 @@ using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,16 @@ namespace MediaBacklogManagerBackend.Controllers
     [ApiController]
     public class SongController : ControllerBase
     {
-        private SongService Service { get; set; }
+        private MediaService<Song> MediaService { get; set; }
+        private UserService UserService { get; set; }
 
-        public SongController(SongService service)
+
+        public SongController(
+            UserService userService,
+            MediaService<Song> mediaService)
         {
-            Service = service;
+            UserService = userService;
+            MediaService = mediaService;
         }
 
 
@@ -27,12 +32,14 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateSongDto songDto)
         {
-            var song = await Service.CreateSong(songDto);
+
+            var userId = await UserService.GetCurrentUserId(User);
+            var song = await MediaService.CreateMediaAsync(songDto, userId);
 
             Console.WriteLine("Creating Song");
             if (song != null)
             {
-                return CreatedAtAction(nameof(GetSong), new { id = song.Id }, await Service.ReadSongById(song.Id));
+                return CreatedAtAction(nameof(GetSong), new { id = song.Id }, await MediaService.ReadMediaByIdAsync(song.Id));
             }
             else return Conflict("Song Already Exists.");
         }
@@ -41,16 +48,18 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create-many")]
         public async Task<IActionResult> CreateMany([FromBody] CreateSongDto[] songDtos)
         {
-            var createdSongs = new List<ReadSongDto>();
+            var createdSongs = new List<ReadMediaDto>();
             var conflicts = new List<string>();
+            var userId = await UserService.GetCurrentUserId(User);
+
 
             foreach (var songDto in songDtos)
             {
-                var song = await Service.CreateSong(songDto);
+                var song = await MediaService.CreateMediaAsync(songDto, userId);
 
                 if (song != null)
                 {
-                    var readDto = await Service.ReadSongById(song.Id);
+                    var readDto = await MediaService.ReadMediaByIdAsync(song.Id);
                     createdSongs.Add(readDto!);
                 }
                 else
@@ -72,7 +81,7 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
 
-            return Ok(await Service.ReadAllSongs());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -86,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Updating Song");
             try
             {
-                await Service.UpdateSong(songDto);
+                await MediaService.UpdateMediaAsync(songDto);
 
                 return NoContent();
             }
@@ -103,7 +112,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAllSongs()
         {
-            return Ok(await Service.ReadAllSongs());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -112,7 +121,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSong(int id)
         {
-            var song = await Service.ReadSongById(id);
+            var song = await MediaService.ReadMediaByIdAsync(id);
 
             if (song == null)
                 return NotFound();
@@ -123,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSong(int id)
         {
-            var result = await Service.DeleteSong(id);
+            var result = await MediaService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

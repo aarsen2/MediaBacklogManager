@@ -65,47 +65,6 @@ namespace MediaBacklogManagerBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Media",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    GeneralRating = table.Column<double>(type: "REAL", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 5, nullable: false),
-                    Artist = table.Column<string>(type: "TEXT", nullable: true),
-                    TrackCount = table.Column<int>(type: "INTEGER", nullable: true),
-                    RunTime = table.Column<double>(type: "REAL", nullable: true),
-                    Author = table.Column<string>(type: "TEXT", nullable: true),
-                    PageCount = table.Column<int>(type: "INTEGER", nullable: true),
-                    Language = table.Column<string>(type: "TEXT", nullable: true),
-                    Studio = table.Column<string>(type: "TEXT", nullable: true),
-                    ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
-                    Movie_RunTime = table.Column<int>(type: "INTEGER", nullable: true),
-                    Movie_Language = table.Column<string>(type: "TEXT", nullable: true),
-                    Director = table.Column<string>(type: "TEXT", nullable: true),
-                    Movie_ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
-                    SeasonCount = table.Column<int>(type: "INTEGER", nullable: true),
-                    EpisodeCount = table.Column<int>(type: "INTEGER", nullable: true),
-                    Show_ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
-                    Song_Artist = table.Column<string>(type: "TEXT", nullable: true),
-                    Song_RunTime = table.Column<double>(type: "REAL", nullable: true),
-                    AlbumId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Media", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Media_Media_AlbumId",
-                        column: x => x.AlbumId,
-                        principalTable: "Media",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Platforms",
                 columns: table => new
                 {
@@ -238,6 +197,78 @@ namespace MediaBacklogManagerBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Media",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    GeneralRating = table.Column<double>(type: "REAL", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedByUserId = table.Column<string>(type: "TEXT", nullable: false),
+                    MediaType = table.Column<string>(type: "TEXT", maxLength: 5, nullable: false),
+                    Artist = table.Column<string>(type: "TEXT", nullable: true),
+                    TrackCount = table.Column<int>(type: "INTEGER", nullable: true),
+                    RunTime = table.Column<double>(type: "REAL", nullable: true),
+                    Author = table.Column<string>(type: "TEXT", nullable: true),
+                    PageCount = table.Column<int>(type: "INTEGER", nullable: true),
+                    Language = table.Column<string>(type: "TEXT", nullable: true),
+                    Studio = table.Column<string>(type: "TEXT", nullable: true),
+                    ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
+                    Movie_RunTime = table.Column<int>(type: "INTEGER", nullable: true),
+                    Movie_Language = table.Column<string>(type: "TEXT", nullable: true),
+                    Director = table.Column<string>(type: "TEXT", nullable: true),
+                    Movie_ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
+                    SeasonCount = table.Column<int>(type: "INTEGER", nullable: true),
+                    EpisodeCount = table.Column<int>(type: "INTEGER", nullable: true),
+                    Show_ContentRating = table.Column<int>(type: "INTEGER", nullable: true),
+                    Song_Artist = table.Column<string>(type: "TEXT", nullable: true),
+                    Song_RunTime = table.Column<double>(type: "REAL", nullable: true),
+                    AlbumId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Media", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Media_AspNetUsers_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Media_Media_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "Media",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GameGamePlatform",
+                columns: table => new
+                {
+                    GamesId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PlatformsId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameGamePlatform", x => new { x.GamesId, x.PlatformsId });
+                    table.ForeignKey(
+                        name: "FK_GameGamePlatform_Media_GamesId",
+                        column: x => x.GamesId,
+                        principalTable: "Media",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GameGamePlatform_Platforms_PlatformsId",
+                        column: x => x.PlatformsId,
+                        principalTable: "Platforms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GenreMedia",
                 columns: table => new
                 {
@@ -281,30 +312,6 @@ namespace MediaBacklogManagerBackend.Migrations
                         name: "FK_MediaAsset_Media_MediaID",
                         column: x => x.MediaID,
                         principalTable: "Media",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GameGamePlatform",
-                columns: table => new
-                {
-                    GamesId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PlatformsId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GameGamePlatform", x => new { x.GamesId, x.PlatformsId });
-                    table.ForeignKey(
-                        name: "FK_GameGamePlatform_Media_GamesId",
-                        column: x => x.GamesId,
-                        principalTable: "Media",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GameGamePlatform_Platforms_PlatformsId",
-                        column: x => x.PlatformsId,
-                        principalTable: "Platforms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -362,6 +369,11 @@ namespace MediaBacklogManagerBackend.Migrations
                 column: "AlbumId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Media_CreatedByUserId",
+                table: "Media",
+                column: "CreatedByUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MediaAsset_MediaID",
                 table: "MediaAsset",
                 column: "MediaID");
@@ -401,9 +413,6 @@ namespace MediaBacklogManagerBackend.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Platforms");
 
             migrationBuilder.DropTable(
@@ -411,6 +420,9 @@ namespace MediaBacklogManagerBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Media");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

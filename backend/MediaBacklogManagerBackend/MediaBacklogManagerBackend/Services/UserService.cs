@@ -16,7 +16,6 @@ namespace MediaBacklogManagerBackend.Services
         {
             _dbContext = dbContext;
             _userManager = userManager;
-
         }
 
         public async Task<ReadUserDto?> GetCurrentUser(ClaimsPrincipal userPrincipal)
@@ -37,6 +36,25 @@ namespace MediaBacklogManagerBackend.Services
                 Email = user.Email,
                 Roles = roles.ToList()
             };
+        }
+
+
+        public async Task<string> GetCurrentUserId(ClaimsPrincipal userPrincipal)
+        {
+
+            var user = await _userManager.GetUserAsync(userPrincipal);
+
+            if (user == null)
+                return "-1";
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            return user.Id ?? "-1";
+        }
+
+        internal async Task<User> GetUserById(string userId)
+        {
+            return await _userManager.FindByIdAsync(userId);
         }
     }
 }

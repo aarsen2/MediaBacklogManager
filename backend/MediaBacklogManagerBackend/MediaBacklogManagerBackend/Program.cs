@@ -2,7 +2,7 @@
 using MediaBacklogManagerBackend.Data;
 using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Services;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.StartUp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,49 +22,9 @@ namespace MediaBacklogManagerBackend
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<MovieService>();
-            builder.Services.AddScoped<ShowService>();
-            builder.Services.AddScoped<SongService>();
-            builder.Services.AddScoped<AlbumService>();
-            builder.Services.AddScoped<GameService>();
-            builder.Services.AddScoped<BookService>();
-            builder.Services.AddScoped<AuthService>();
-            builder.Services.AddScoped<UserService>();
+            builder.Services.AddApplicationServices();
 
-            builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddRoles<IdentityRole>()
-                .AddSignInManager();
-
-
-
-            //set up JWT Authentication
-
-            builder.Services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = "Bearer";
-                    options.DefaultChallengeScheme = "Bearer";
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-
-                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                        ValidAudience = builder.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
-                            )
-                    };
-                });
-
-
-
-
+            builder.Services.AddIdentityServices(builder.Configuration);
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -121,6 +81,7 @@ namespace MediaBacklogManagerBackend
                     if (!await roleManager.RoleExistsAsync("Admin"))
                     {
                         await roleManager.CreateAsync(new IdentityRole("Admin"));
+                        await roleManager.CreateAsync(new IdentityRole("User"));
                     }
 
 

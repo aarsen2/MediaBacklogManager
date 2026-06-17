@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaBacklogManagerBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260615195339_InitialCreate")]
+    [Migration("20260617194811_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -86,19 +86,23 @@ namespace MediaBacklogManagerBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CreatedByUserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<double>("GeneralRating")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("MediaType")
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("TEXT");
-
-                    b.Property<double>("GeneralRating")
-                        .HasColumnType("REAL");
 
                     b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("TEXT");
@@ -109,9 +113,11 @@ namespace MediaBacklogManagerBackend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedByUserId");
+
                     b.ToTable("Media");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Media");
+                    b.HasDiscriminator<string>("MediaType").HasValue("Media");
 
                     b.UseTphMappingStrategy();
                 });
@@ -512,6 +518,17 @@ namespace MediaBacklogManagerBackend.Migrations
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Media", b =>
+                {
+                    b.HasOne("MediaBacklogManagerBackend.Models.User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.MediaAsset", b =>

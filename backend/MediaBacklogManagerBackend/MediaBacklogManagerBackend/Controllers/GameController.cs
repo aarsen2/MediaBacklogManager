@@ -3,7 +3,7 @@ using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
-using MediaBacklogManagerBackend.Services.Media;
+using MediaBacklogManagerBackend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,25 +15,31 @@ namespace MediaBacklogManagerBackend.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private GameService Service { get; set; }
+        private MediaService<Game> MediaService { get; set; }
+        private UserService UserService { get; set; }
 
-        public GameController(GameService service)
+
+        public GameController(
+            UserService userService,
+            MediaService<Game> mediaService)
         {
-            Service = service;
+            UserService = userService;
+            MediaService = mediaService;
         }
-
 
 
         //Creates a new Game
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateGameDto gameDto)
         {
-            var game = await Service.CreateGame(gameDto);
+
+            var userId = await UserService.GetCurrentUserId(User);
+            var game = await MediaService.CreateMediaAsync(gameDto, userId);
 
             Console.WriteLine("Creating Game");
             if (game != null)
             {
-                return CreatedAtAction(nameof(GetGame), new { id = game.Id }, await Service.ReadGameById(game.Id));
+                return CreatedAtAction(nameof(GetGame), new { id = game.Id }, await MediaService.ReadMediaByIdAsync(game.Id));
             }
             else return Conflict("Game Already Exists.");
         }
@@ -42,22 +48,24 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("create-many")]
         public async Task<IActionResult> CreateMany([FromBody] CreateGameDto[] gameDtos)
         {
-            var createdGames = new List<ReadGameDto>();
+            var createdGames = new List<ReadMediaDto>();
             var conflicts = new List<string>();
+            var userId = await UserService.GetCurrentUserId(User);
+
 
             foreach (var gameDto in gameDtos)
             {
-                var game = await Service.CreateGame(gameDto);
+                var game = await MediaService.CreateMediaAsync(gameDto, userId);
 
                 if (game != null)
                 {
-                    var readDto = await Service.ReadGameById(game.Id);
+                    var readDto = await MediaService.ReadMediaByIdAsync(game.Id);
                     createdGames.Add(readDto!);
                 }
                 else
                 {
                     conflicts.Add(gameDto.Title);
-                }   
+                }
             }
 
             Console.WriteLine($"Created {createdGames.Count} games");
@@ -73,9 +81,8 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
 
-            return Ok(await Service.ReadAllGames());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
-
 
 
 
@@ -88,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine("Updating Game");
             try
             {
-                await Service.UpdateGame(gameDto);
+                await MediaService.UpdateMediaAsync(gameDto);
 
                 return NoContent();
             }
@@ -105,7 +112,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAllGames()
         {
-            return Ok(await Service.ReadAllGames());
+            return Ok(await MediaService.ReadAllMediaAsync());
         }
 
 
@@ -114,7 +121,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGame(int id)
         {
-            var game = await Service.ReadGameById(id);
+            var game = await MediaService.ReadMediaByIdAsync(id);
 
             if (game == null)
                 return NotFound();
@@ -125,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGame(int id)
         {
-            var result = await Service.DeleteGame(id);
+            var result = await MediaService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

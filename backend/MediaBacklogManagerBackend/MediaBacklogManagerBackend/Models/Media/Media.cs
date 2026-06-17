@@ -10,6 +10,8 @@
         public List<Genre> Genres { get; set; } = new();
         public double GeneralRating { get; set; }
         public DateTime DateCreated { get; set; }
+        public string CreatedByUserId { get; set; }
+        public User CreatedByUser { get; set; }
 
         public Media() { }
 
