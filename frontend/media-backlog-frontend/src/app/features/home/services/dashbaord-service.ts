@@ -11,7 +11,6 @@ export class DashbaordService {
 
   public getDashboard(): Observable<DashboardDto> {
     const response = this.dashboardApi.getDashboard();
-    console.log(response);
     return response;
   }
 

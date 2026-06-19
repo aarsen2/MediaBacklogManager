@@ -14,7 +14,6 @@ export class AuthService {
   private refreshTokenKey = "refresh_token";
   private authAPI = inject(AuthApi);
   private router = inject(Router)
-  private userService = inject(UserService)
   constructor() { }
 
   isLoggedIn(): boolean {
@@ -52,7 +51,6 @@ export class AuthService {
     return this.authAPI.login(username, password).pipe(
       tap(response => {
         this.setToken(response)
-        this.userService.loadUser();
       })
     );
   }
@@ -60,6 +58,5 @@ export class AuthService {
   logout(): void {
     this.clearToken()
     this.router.navigate(['/logout']);
-    this.userService.clearUser();
   }
 }
