@@ -234,6 +234,47 @@ namespace MediaBacklogManagerBackend.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.UserMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateCompleted")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MediaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Prioritized")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("UserRating")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaId");
+
+                    b.HasIndex("UserId", "MediaId")
+                        .IsUnique();
+
+                    b.ToTable("UserMedia");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -537,6 +578,25 @@ namespace MediaBacklogManagerBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.UserMedia", b =>
+                {
+                    b.HasOne("MediaBacklogManagerBackend.Models.Media.Media", "Media")
+                        .WithMany()
+                        .HasForeignKey("MediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaBacklogManagerBackend.Models.User", "User")
+                        .WithMany("UserMedia")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Media");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -598,6 +658,11 @@ namespace MediaBacklogManagerBackend.Migrations
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Media", b =>
                 {
                     b.Navigation("Assets");
+                });
+
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.User", b =>
+                {
+                    b.Navigation("UserMedia");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Album", b =>

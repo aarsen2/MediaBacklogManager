@@ -7,5 +7,6 @@ namespace MediaBacklogManagerBackend.Models
     public class User : IdentityUser
     {
         public string? DisplayName { get; set; }
+        public List<UserMedia> UserMedia { get; set; } = new List<UserMedia>();
     }
 }

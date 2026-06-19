@@ -43,6 +43,7 @@ namespace MediaBacklogManagerBackend.Data
         //Media Types Tables
 
         public virtual DbSet<Media> Media { get; set; }
+        public virtual DbSet<UserMedia> UserMedia { get; set; }
         public virtual DbSet<GamePlatform> Platforms { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         //Other Needed Tables
@@ -67,7 +68,22 @@ namespace MediaBacklogManagerBackend.Data
                 .HasValue<Song>("Song")
                 .HasValue<Game>("Game");
 
+            modelBuilder.Entity<UserMedia>()
+                .HasIndex(um => new { um.UserId, um.MediaId })
+                .IsUnique();
 
+
+            modelBuilder.Entity<UserMedia>()
+            .HasOne(um => um.User)
+            .WithMany(u => u.UserMedia)
+            .HasForeignKey(um => um.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserMedia>()
+                .HasOne(um => um.Media)
+                .WithMany()
+                .HasForeignKey(um => um.MediaId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

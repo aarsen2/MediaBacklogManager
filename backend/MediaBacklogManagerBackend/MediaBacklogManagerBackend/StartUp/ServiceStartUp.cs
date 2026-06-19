@@ -10,6 +10,9 @@ namespace MediaBacklogManagerBackend.StartUp
             services.AddScoped<AuthService>();
             services.AddScoped<UserService>();
             services.AddScoped<MediaMapper>();
+            services.AddScoped<UserMediaMapper>();
+            services.AddScoped<UserMediaService>();
+            services.AddScoped<DashboardService>();
             services.AddScoped(typeof(MediaService<>));
 
             return services;

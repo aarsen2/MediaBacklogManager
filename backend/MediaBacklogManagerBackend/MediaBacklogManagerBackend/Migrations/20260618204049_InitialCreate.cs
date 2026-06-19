@@ -316,6 +316,38 @@ namespace MediaBacklogManagerBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserMedia",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    MediaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    Prioritized = table.Column<bool>(type: "INTEGER", nullable: false),
+                    UserRating = table.Column<double>(type: "REAL", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateCompleted = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMedia", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserMedia_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserMedia_Media_MediaId",
+                        column: x => x.MediaId,
+                        principalTable: "Media",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -377,6 +409,17 @@ namespace MediaBacklogManagerBackend.Migrations
                 name: "IX_MediaAsset_MediaID",
                 table: "MediaAsset",
                 column: "MediaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMedia_MediaId",
+                table: "UserMedia",
+                column: "MediaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMedia_UserId_MediaId",
+                table: "UserMedia",
+                columns: new[] { "UserId", "MediaId" },
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -408,6 +451,9 @@ namespace MediaBacklogManagerBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recommenders");
+
+            migrationBuilder.DropTable(
+                name: "UserMedia");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "ReadAllAlbums",
     "RelativePath": "api/album",
     "HttpMethod": "GET",
@@ -10,7 +10,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "GetAlbum",
     "RelativePath": "api/album/{id}",
     "HttpMethod": "GET",
@@ -26,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "DeleteAlbum",
     "RelativePath": "api/album/{id}",
     "HttpMethod": "DELETE",
@@ -42,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "Create",
     "RelativePath": "api/album/create",
     "HttpMethod": "POST",
@@ -58,7 +58,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "CreateMany",
     "RelativePath": "api/album/create-many",
     "HttpMethod": "POST",
@@ -74,7 +74,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.AlbumController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.AlbumController",
     "Method": "Update",
     "RelativePath": "api/album/update",
     "HttpMethod": "PUT",
@@ -106,7 +106,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "ReadAllBooks",
     "RelativePath": "api/book",
     "HttpMethod": "GET",
@@ -116,7 +116,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "GetBook",
     "RelativePath": "api/book/{id}",
     "HttpMethod": "GET",
@@ -132,7 +132,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "DeleteBook",
     "RelativePath": "api/book/{id}",
     "HttpMethod": "DELETE",
@@ -148,7 +148,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "Create",
     "RelativePath": "api/book/create",
     "HttpMethod": "POST",
@@ -164,7 +164,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "CreateMany",
     "RelativePath": "api/book/create-many",
     "HttpMethod": "POST",
@@ -180,7 +180,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.BookController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "Update",
     "RelativePath": "api/book/update",
     "HttpMethod": "PUT",
@@ -196,7 +196,17 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.DashboardController",
+    "Method": "GetDashBoard",
+    "RelativePath": "api/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "ReadAllGames",
     "RelativePath": "api/game",
     "HttpMethod": "GET",
@@ -206,7 +216,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "GetGame",
     "RelativePath": "api/game/{id}",
     "HttpMethod": "GET",
@@ -222,7 +232,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "DeleteGame",
     "RelativePath": "api/game/{id}",
     "HttpMethod": "DELETE",
@@ -238,7 +248,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "Create",
     "RelativePath": "api/game/create",
     "HttpMethod": "POST",
@@ -254,7 +264,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "CreateMany",
     "RelativePath": "api/game/create-many",
     "HttpMethod": "POST",
@@ -270,7 +280,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.GameController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.GameController",
     "Method": "Update",
     "RelativePath": "api/game/update",
     "HttpMethod": "PUT",
@@ -286,7 +296,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "ReadAllMovies",
     "RelativePath": "api/movie",
     "HttpMethod": "GET",
@@ -296,7 +306,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "GetMovie",
     "RelativePath": "api/movie/{id}",
     "HttpMethod": "GET",
@@ -312,7 +322,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "DeleteMovie",
     "RelativePath": "api/movie/{id}",
     "HttpMethod": "DELETE",
@@ -328,7 +338,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "Create",
     "RelativePath": "api/movie/create",
     "HttpMethod": "POST",
@@ -344,7 +354,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "CreateMany",
     "RelativePath": "api/movie/create-many",
     "HttpMethod": "POST",
@@ -360,7 +370,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.MovieController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.MovieController",
     "Method": "Update",
     "RelativePath": "api/movie/update",
     "HttpMethod": "PUT",
@@ -376,7 +386,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "ReadAllShows",
     "RelativePath": "api/show",
     "HttpMethod": "GET",
@@ -386,7 +396,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "GetShow",
     "RelativePath": "api/show/{id}",
     "HttpMethod": "GET",
@@ -402,7 +412,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "DeleteShow",
     "RelativePath": "api/show/{id}",
     "HttpMethod": "DELETE",
@@ -418,7 +428,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "Create",
     "RelativePath": "api/show/create",
     "HttpMethod": "POST",
@@ -434,7 +444,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "CreateMany",
     "RelativePath": "api/show/create-many",
     "HttpMethod": "POST",
@@ -450,7 +460,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.ShowController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "Update",
     "RelativePath": "api/show/update",
     "HttpMethod": "PUT",
@@ -466,7 +476,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "ReadAllSongs",
     "RelativePath": "api/song",
     "HttpMethod": "GET",
@@ -476,7 +486,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "GetSong",
     "RelativePath": "api/song/{id}",
     "HttpMethod": "GET",
@@ -492,7 +502,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "DeleteSong",
     "RelativePath": "api/song/{id}",
     "HttpMethod": "DELETE",
@@ -508,7 +518,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "Create",
     "RelativePath": "api/song/create",
     "HttpMethod": "POST",
@@ -524,7 +534,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "CreateMany",
     "RelativePath": "api/song/create-many",
     "HttpMethod": "POST",
@@ -540,7 +550,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.SongController",
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.SongController",
     "Method": "Update",
     "RelativePath": "api/song/update",
     "HttpMethod": "PUT",
@@ -550,6 +560,96 @@
       {
         "Name": "songDto",
         "Type": "MediaBacklogManagerBackend.DTOs.Creation.UpdateSongDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "ReadAllMedia",
+    "RelativePath": "api/user-media",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "GetUserMedia",
+    "RelativePath": "api/user-media/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "DeleteMedia",
+    "RelativePath": "api/user-media/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "AddMedia",
+    "RelativePath": "api/user-media/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMediaDto",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateUserMediaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "BulkAddMedia",
+    "RelativePath": "api/user-media/add-many",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMediaDtos",
+        "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateUserMediaDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
+    "Method": "Update",
+    "RelativePath": "api/user-media/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userMediaDto",
+        "Type": "MediaBacklogManagerBackend.DTOs.Updating.UpdateUserMediaDto",
         "IsRequired": true
       }
     ],

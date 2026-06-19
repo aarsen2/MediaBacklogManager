@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MediaBacklogManagerBackend.Controllers
+namespace MediaBacklogManagerBackend.Controllers.MediaControllers
 {
     [Authorize]
     [Route("api/show")]
