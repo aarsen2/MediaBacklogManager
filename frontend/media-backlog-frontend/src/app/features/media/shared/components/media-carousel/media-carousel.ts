@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { ReadMediaDto } from '../../../models/read/ReadMediaDto';
 import { Router } from '@angular/router';
+import { DashboardItemDto } from '../../../../home/pages/home-page/models/DashboardItemDto';
 
 @Component({
   selector: 'app-media-carousel',
@@ -9,14 +10,14 @@ import { Router } from '@angular/router';
   styleUrl: './media-carousel.css',
 })
 export class MediaCarousel {
-  @Input()  media: ReadMediaDto[] | null = [];
+  @Input()  items: DashboardItemDto[] | null = [];
   private router = inject(Router);
 
 
-  viewMovie(movie: ReadMediaDto) {
+  viewItem(item: DashboardItemDto) {
     console.log("clicked");
-    console.log(movie);
-    this.router.navigate(['/media/view', movie.type, movie.id])
+    console.log(item);
+    this.router.navigate(['/media/view', item.mediaType, item.id])
   }
 
 }

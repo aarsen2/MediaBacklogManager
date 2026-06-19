@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { MovieService } from '../../../media/movies/services/media-service';
@@ -9,6 +9,9 @@ import { AlbumSerivce } from '../../../media/albums/services/album-serivce';
 import { BookService } from '../../../media/books/services/book-service';
 import { GamesService } from '../../../media/games/services/games-service';
 import { SongService } from '../../../media/songs/services/song-service';
+import { DashbaordService } from '../../services/dashbaord-service';
+import { DashboardDto } from './models/DashboardDto';
+import { DashboardSectionDto } from './models/DashboardSectionDto';
 
 @Component({
   selector: 'app-home-page',
@@ -17,33 +20,23 @@ import { SongService } from '../../../media/songs/services/song-service';
   styleUrl: './home-page.css',
 })
 export class HomePage {
-  private readonly movieService = inject(MovieService)
-  private readonly showService = inject(ShowService)
-  private readonly albumService = inject(AlbumSerivce)
-  private readonly bookService = inject(BookService)
-  private readonly gameService = inject(GamesService)
-  private readonly songService = inject(SongService)
+  private readonly dashboardService = inject(DashbaordService)
 
-  movies = toSignal(
-    this.movieService.getAllMovies() , {initialValue: null}
-  )
-  shows = toSignal(
-    this.showService.getAllShows() , {initialValue: null}
-  )
-  albums = toSignal(
-    this.albumService.getAllAlbums() , {initialValue: null}
-  )
-  books = toSignal(
-    this.bookService.getAllBooks() , {initialValue: null}
-  )
-  games = toSignal(
-    this.gameService.getAllGames() , {initialValue: null}
-  )
-  songs = toSignal(
-    this.songService.getAllSongs() , {initialValue: null}
-  )
+
+  dashboard = toSignal(
+  this.dashboardService.getDashboard(),
+  {
+    initialValue: {
+      sections: []
+    } as DashboardDto
+  }
+);
 
 
 
-
+  constructor() {
+    effect(() => {
+      console.log('Dashboard:', this.dashboard());
+    });
+  }
 }

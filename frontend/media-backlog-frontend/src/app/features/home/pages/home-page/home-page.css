@@ -16,6 +16,7 @@ h1 {
     margin-bottom: 1rem;
     color: var(--color-text1);
 }
+
 h2 {
     font-size: 1.5rem;
     margin-top: 2rem;
@@ -28,4 +29,8 @@ h2 {
 app-media-carousel {
     display: block;
     margin-bottom: 3rem;
+}
+
+* {
+    color: white;   
 }

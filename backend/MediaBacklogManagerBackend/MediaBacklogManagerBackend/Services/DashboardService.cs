@@ -20,19 +20,21 @@ namespace MediaBacklogManagerBackend.Services
         {
             var Dashboard = new DashboardDto();
 
-            Dashboard.Sections.Add(GetPriorityItems());
+            Dashboard.Sections.Add(GetPriorityItems(userId));
+            Dashboard.Sections.Add(GetMovies(userId));
+            Dashboard.Sections.Add(GetShows(userId));
 
             return Dashboard;
 
         }
 
-        private DashboardSectionDto GetPriorityItems()
+        private DashboardSectionDto GetPriorityItems(string userId)
         {
             var Section = new DashboardSectionDto();
 
             var priorityItems = dbContext.UserMedia
                 .Include(m => m.Media)
-                .Where(m => m.Prioritized == true)
+                .Where(m => m.UserId == userId && m.Prioritized == true)
                 .Select(MapItemDto)
                 .ToList();
 
@@ -42,6 +44,32 @@ namespace MediaBacklogManagerBackend.Services
 
             return Section;
         }
+        private DashboardSectionDto GetMovies(string userId)
+        {
+            var Section = new DashboardSectionDto();
+            var movies = dbContext.UserMedia
+                .Include(m => m.Media)
+                .Where(m => m.UserId == userId && m.Media is Movie)
+                .Select(MapItemDto)
+                .ToList();
+            Section.Title = "Movies";
+            Section.Items.AddRange(movies);
+            return Section;
+        }
+        private DashboardSectionDto GetShows(string userId)
+        {
+            var Section = new DashboardSectionDto();
+            var shows = dbContext.UserMedia
+                .Include(m => m.Media)
+                .Where(m => m.UserId == userId && m.Media is Show)
+                .Select(MapItemDto)
+                .ToList();
+            Section.Title = "Shows";
+            Section.Items.AddRange(shows);
+            return Section;
+        }
+
+
 
         private DashboardItemDto MapItemDto(UserMedia m)
         {
@@ -49,14 +77,14 @@ namespace MediaBacklogManagerBackend.Services
             {
                 Id = m.Id,
                 Description = m.Media.Description,
+                Title = m.Media.Title,
                 MediaType =
-                   m is Movie ? MediaType.movie :
-                   m is Show ? MediaType.show :
-                   m is Game ? MediaType.game :
-                   m is Book ? MediaType.book :
-                   m is Song ? MediaType.song :
-                   MediaType.album,
-                Title = m.Media.Title
+                    m.Media is Movie ? MediaType.movie :
+                    m.Media is Show ? MediaType.show :
+                    m.Media is Game ? MediaType.game :
+                    m.Media is Book ? MediaType.book :
+                    m.Media is Song ? MediaType.song :
+                    MediaType.album
             };
         }
 

@@ -1,18 +1,19 @@
 <h1>Home</h1>
 
-<h2>Movies</h2>
-<app-media-carousel [media]="movies()"></app-media-carousel>
-<h2>Shows</h2>
-<app-media-carousel [media]="shows()"></app-media-carousel>
-<h2>Albums</h2>
-<app-media-carousel [media]="albums()"></app-media-carousel>
-<h2>Books</h2>
-<app-media-carousel [media]="books()"></app-media-carousel>
-<h2>Games</h2>
-<app-media-carousel [media]="games()"></app-media-carousel>
-<h2>Songs</h2>
-<app-media-carousel [media]="songs()"></app-media-carousel>
+<!--Ensures that the dashboaard data is usable  -->
+@if (dashboard(); as data) {
 
 
+<!-- Creates a media carousel for each section -->
+@for (section of data.sections; track section.title) {
 
 
+<!-- Only show sections with items -->
+@if (section.items.length > 0) {
+<h2>{{section.title}}</h2>
+<app-media-carousel [items]="section.items"></app-media-carousel>
+}
+}
+} @else {
+<p>Loading...</p>
+}
