@@ -1,0 +1,105 @@
+.registration-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    place-items: center;
+}
+
+.content {
+    max-width: 600px;
+    color: var(--color-text2);
+    margin: 4rem auto;
+    margin-left: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+
+.content-title {
+    color: var(--color-text1);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.content-subtitle {
+    color: var(--color-text2);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+.feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    width: 60%;
+    font-size: 1.3rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: var(--color-text2);
+    border-radius: var(--button-radius);
+    margin: .5rem;
+}
+
+.feature-list li::before {
+    content: "•";
+    margin-right: .5rem;
+    color: var(--color-primary1);
+}
+
+.accountControlls {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+    max-width: 350px;
+}
+
+
+.message {
+    text-align: start;
+}
+
+
+.password-reset {
+    color: var(--color-text2);
+    align-self: end;
+    margin-top: 0px;
+    transform: translateY(-10px)
+}
+
+.password-reset a {
+    text-decoration: none;
+    color: var(--color-text2)
+}
+
+.password-reset a:hover {
+    cursor: pointer;
+    color: var(--color-text3)
+}
+
+
+
+.sign-in {
+    color: var(--color-text3);
+    align-self: center;
+}
+
+.sign-in a {
+    color: var(--color-primary1);
+    font-weight: 500;
+    transition: 0.15s;
+}

@@ -16,6 +16,7 @@ export class ProfileMenu {
   
   logout() {
     this.authService.logout();
+    this.userService.clearUser();
     this.closeMenu.emit();
   }
   

@@ -1,5 +1,6 @@
 export interface AuthResponse {
     token: string,
     expiresIn?: number,
-    refreshToken?: string
+    refreshToken?: string,
+    errors: string[];
 }

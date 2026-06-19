@@ -8,7 +8,18 @@
         public List<MediaAsset> Assets { get; set; } = new();
         public DateTime? ReleaseDate { get; set; }
         public List<Genre> Genres { get; set; } = new();
-        public double GeneralRating { get; set; }
+        private double _generalRating;
+        public double GeneralRating
+        {
+            get
+            {
+                return _generalRating;
+            }
+            set
+            {
+                _generalRating = Math.Clamp(value, 0, 5);
+            }
+        }
         public DateTime DateCreated { get; set; }
         public string CreatedByUserId { get; set; }
         public User CreatedByUser { get; set; }

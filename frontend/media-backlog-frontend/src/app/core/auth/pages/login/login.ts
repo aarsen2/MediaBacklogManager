@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../auth-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { UserService } from '../../../user/services/user-service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class Login {
   isLoggingOut: boolean = false;
 
   private authService = inject(AuthService)
+  private userService = inject(UserService)
   private formBuilder = inject(FormBuilder)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
@@ -47,6 +49,7 @@ export class Login {
       next: (res) => {
         console.log('Logged In');
         console.log(res)
+        this.userService.loadUser();
         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.router.navigate([returnUrl]);
       },

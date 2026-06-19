@@ -4,6 +4,7 @@ import { map, Observable, tap } from 'rxjs';
 import { AuthResponse } from './models/AuthResponse';
 import { Router } from '@angular/router';
 import { UserService } from '../user/services/user-service';
+import { RegisterDto } from './models/RegisterDto';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,15 @@ export class AuthService {
         this.setToken(response)
       })
     );
+  }
+
+
+  register(registerDto: RegisterDto) {
+    return this.authAPI.register(registerDto).pipe(
+      tap(response => {
+        this.setToken(response)
+      })
+    )
   }
 
   logout(): void {

@@ -16,18 +16,7 @@ namespace MediaBacklogManagerBackend.Models
             get { return _userRating; }
             set
             {
-                if (value < 0)
-                {
-                    _userRating = 0;
-                }
-                else if (value > 5)
-                {
-                    _userRating = 5;
-                }
-                else
-                {
-                    _userRating = value;
-                }
+                _userRating = Math.Clamp(value, 0, 5);
             }
         }
 

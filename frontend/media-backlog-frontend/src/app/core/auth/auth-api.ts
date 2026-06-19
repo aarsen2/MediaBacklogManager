@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CredentialDto } from './models/CredentialDto';
 import { AuthResponse } from './models/AuthResponse';
+import { RegisterDto } from './models/RegisterDto';
 
 
 @Injectable({
@@ -25,4 +26,9 @@ export class AuthApi {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, dto)
 
   }
+
+  register(registerDto: RegisterDto): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/register`, registerDto)
+  }
+
 }

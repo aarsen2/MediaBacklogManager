@@ -11,11 +11,13 @@ namespace MediaBacklogManagerBackend.Services
     {
         private readonly AppDbContext _dbContext;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(AppDbContext dbContext, UserManager<User> userManager)
+        public UserService(AppDbContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<ReadUserDto?> GetCurrentUser(ClaimsPrincipal userPrincipal)
@@ -56,6 +58,7 @@ namespace MediaBacklogManagerBackend.Services
         {
             return await _userManager.FindByIdAsync(userId);
         }
+
     }
 }
 

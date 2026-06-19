@@ -30,12 +30,22 @@ namespace MediaBacklogManagerBackend.Controllers
             Console.WriteLine(result);
             if (result == null)
                 return Unauthorized();
-
             return Ok(result);
-
         }
 
- 
+
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] CreateUserDto newUserDto)
+        {
+            Debug.WriteLine("Registering new User...");
+            var result = await _authService.CreateNewAccount(newUserDto);
+            if (result.Errors.Count > 0) 
+            { 
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
 
     }
 }

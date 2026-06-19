@@ -15,7 +15,7 @@ import { DashboardSectionDto } from './models/DashboardSectionDto';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, MediaCarousel],
+  imports: [MediaCarousel],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

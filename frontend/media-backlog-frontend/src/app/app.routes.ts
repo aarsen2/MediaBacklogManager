@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './core/auth/pages/login/login';
 import { authGuard } from './core/auth/auth-guard';
 import { Logout } from './core/auth/pages/logout/logout';
+import { CreateAccount } from './core/auth/pages/create-account/create-account';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,10 @@ export const routes: Routes = [
     {
         path: 'logout',
         component: Logout
+    },
+    {
+        path: 'register',
+        component: CreateAccount
     },
     {
         path: 'home',
