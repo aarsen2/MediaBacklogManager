@@ -6,12 +6,16 @@
 
     <div class="details-row">
         <span class="details-label">Seasons</span>
-        <span class="details-value">{{ show.seasonCount }}</span>
+        <span class="details-value">
+            {{ show.seasonCount > 1 ? show.seasonCount+ " Seasons" :show.seasonCount + " Season"}} 
+        </span>
     </div>
-
+    
     <div class="details-row">
         <span class="details-label">Episodes</span>
-        <span class="details-value">{{ show.episodeCount }}</span>
+        <span class="details-value">
+            {{ show.episodeCount > 1 ? show.episodeCount+ " Episodes" :show.episodeCount + " Episode"}} 
+        </span>
     </div>
 
     <div class="details-row">

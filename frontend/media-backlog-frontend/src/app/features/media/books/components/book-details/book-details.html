@@ -12,7 +12,9 @@
     
     <div class="details-row">
         <span class="details-label">Pages</span>
-        <span class="details-value">{{ book.pageCount }}</span>
+        <span class="details-value">
+            {{ book.pageCount > 1 ? book.pageCount+ " Pages" :book.pageCount + " Page"}} 
+        </span>
     </div>
     
 
