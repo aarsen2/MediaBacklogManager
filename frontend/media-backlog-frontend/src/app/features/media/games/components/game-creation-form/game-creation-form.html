@@ -1,0 +1,46 @@
+<div class="separator">Game Specific Detials</div>
+
+<form class="forms-subform" [formGroup]="gameForm">
+
+    <!-- Studio -->
+    <div class="forms-field">
+        <label class="forms-label">Studio</label>
+        <input class="forms-input" type="text" formControlName="studio" />
+    </div>
+
+
+    <!-- Content Rating -->
+    <div class="forms-field">
+        <label class="forms-label">Content Rating</label>
+
+        <select class="forms-input" formControlName="contentRating">
+            <option selected value="RP">RP (Rating Pending)</option>
+            <option value="EC">EC (Early Childhood)</option>
+            <option value="E">E (Everyone)</option>
+            <option value="E10">E10+ (Everyone 10+)</option>
+            <option value="T">T (Teen)</option>
+            <option value="M">M (Mature)</option>
+            <option value="AO">AO (Adults Only)</option>
+        </select>
+    </div>
+
+    <!-- Platforms -->
+    <div class="forms-field">
+        <label class="forms-label">Platforms</label>
+        <div class="chips">
+            @for (platform of gameForm.value.platforms; track platform) {
+            <div class="details-tag chip">
+                {{ platform }}<span class="material-symbols-outlined icon"
+                    (click)="removePlatform(platform)">close</span>
+            </div>
+            }
+        </div>
+
+        <input class="forms-input" formControlName="platformInput" type="text"
+            (keydown.enter)="addPlatform()" (keydown)="handleKeydown($event)"
+            placeholder="Type a platform and press Enter" />
+    </div>
+
+
+
+</form>

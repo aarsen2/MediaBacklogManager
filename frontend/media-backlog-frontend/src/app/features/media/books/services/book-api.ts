@@ -20,9 +20,9 @@ export class BookApi {
     return this.http.get<ReadBookDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
   }
 
-  createBook(dto: CreateBookDto) : Observable<string> {
+  createBook(dto: CreateBookDto) : Observable<ReadBookDto> {
     console.log("Creating Book...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
+    return this.http.post<ReadBookDto>(this.baseUrl + '/create', dto)
   } 
 }

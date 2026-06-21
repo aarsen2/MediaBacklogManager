@@ -1,0 +1,46 @@
+.movie-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
+
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .5rem;
+  margin-top: 0rem;;
+}
+
+.chip .icon {
+  display: none;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+}
+
+.chip:hover .icon {
+  display:inline;
+  font-size: large;
+  margin-left: .5rem;
+}
+
+.chip:hover .icon:hover {
+  display:inline;
+  color: var(--color-error1)
+}
+

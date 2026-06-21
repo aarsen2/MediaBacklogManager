@@ -20,9 +20,9 @@ export class AlbumApi {
     return this.http.get<ReadAlbumDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
   }
 
-  createAlbum(dto: CreateAlbumDto) : Observable<string> {
+  createAlbum(dto: CreateAlbumDto) : Observable<ReadAlbumDto> {
     console.log("Creating Album...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
+    return this.http.post<ReadAlbumDto>(this.baseUrl + '/create', dto)
   } 
 }

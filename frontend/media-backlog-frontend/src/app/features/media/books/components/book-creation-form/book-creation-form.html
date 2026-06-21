@@ -1,0 +1,27 @@
+<div class="separator">Book Specific Detials</div>
+
+<form class="forms-subform" [formGroup]="bookForm">
+
+    <!-- Author -->
+    <div class="forms-field">
+        <label class="forms-label">Author</label>
+        <input class="forms-input" type="text" formControlName="author" />
+    </div>
+
+
+
+    <div class="forms-double-field">
+
+        <!-- Page Count -->
+        <div class="forms-field">
+            <label class="forms-label">Page Count</label>
+            <input class="forms-input" type="number" formControlName="pageCount" />
+        </div>
+
+        <!-- Language -->
+        <div class="forms-field">
+            <label class="forms-label">Language</label>
+            <input class="forms-input" type="text" formControlName="Language" />
+        </div>
+    </div>
+</form>

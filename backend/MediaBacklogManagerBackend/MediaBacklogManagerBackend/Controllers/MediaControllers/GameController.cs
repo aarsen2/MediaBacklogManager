@@ -15,16 +15,16 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private MediaService<Game> MediaService { get; set; }
+        private GameService GameService { get; set; }
         private UserService UserService { get; set; }
 
 
         public GameController(
             UserService userService,
-            MediaService<Game> mediaService)
+            GameService mediaService)
         {
             UserService = userService;
-            MediaService = mediaService;
+            GameService = mediaService;
         }
 
 
@@ -34,12 +34,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         {
 
             var userId = await UserService.GetCurrentUserId(User);
-            var game = await MediaService.CreateMediaAsync(gameDto, userId);
+            var game = await GameService.CreateMediaAsync(gameDto, userId);
 
             Console.WriteLine("Creating Game");
             if (game != null)
             {
-                return CreatedAtAction(nameof(GetGame), new { id = game.Id }, await MediaService.ReadMediaByIdAsync(game.Id));
+                return CreatedAtAction(nameof(GetGame), new { id = game.Id }, await GameService.ReadMediaByIdAsync(game.Id));
             }
             else return Conflict("Game Already Exists.");
         }
@@ -55,11 +55,11 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
 
             foreach (var gameDto in gameDtos)
             {
-                var game = await MediaService.CreateMediaAsync(gameDto, userId);
+                var game = await GameService.CreateMediaAsync(gameDto, userId);
 
                 if (game != null)
                 {
-                    var readDto = await MediaService.ReadMediaByIdAsync(game.Id);
+                    var readDto = await GameService.ReadMediaByIdAsync(game.Id);
                     createdGames.Add(readDto!);
                 }
                 else
@@ -81,7 +81,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             }
 
 
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await GameService.ReadAllMediaAsync());
         }
 
 
@@ -95,7 +95,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             Console.WriteLine("Updating Game");
             try
             {
-                await MediaService.UpdateMediaAsync(gameDto);
+                await GameService.UpdateMediaAsync(gameDto);
 
                 return NoContent();
             }
@@ -112,7 +112,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet]
         public async Task<IActionResult> ReadAllGames()
         {
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await GameService.ReadAllMediaAsync());
         }
 
 
@@ -121,7 +121,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGame(int id)
         {
-            var game = await MediaService.ReadMediaByIdAsync(id);
+            var game = await GameService.ReadMediaByIdAsync(id);
 
             if (game == null)
                 return NotFound();
@@ -132,7 +132,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGame(int id)
         {
-            var result = await MediaService.DeleteMediaAsync(id);
+            var result = await GameService.DeleteMediaAsync(id);
 
             if (!result)
                 return NotFound();

@@ -1,7 +1,7 @@
 .forms-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 
   width: 100%;
 
@@ -14,6 +14,17 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
+.forms-subform {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+
+  padding: 0rem;
+
+
+}
 
 .forms-title {
   color: var(--color-text1);
@@ -21,20 +32,49 @@
   align-self: center;
 }
 
+
 .forms-field {
   display: flex;
   flex-direction: column;
+  margin-top: .5rem;
+  width: 90%;
+  align-self: center;
+}
+
+/* Puts 2 form controls next to each other */
+.forms-double-field{
+  align-self: center;
+  width: 90%;
+  gap: 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Puts 3 form controls next to each other */
+.forms-triple-field{
+  align-self: center;
+  width: 94%;
+  gap: 5%;
+  display: grid;
+  width: 90%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Allows the form fields within double and triple fields to take up all the space in the the column */
+.forms-double-field .forms-field, .forms-triple-field .forms-field{
+  width: 100%;
 }
 
 .forms-label {
   color: var(--color-text1);
+  margin-bottom: .5rem;
 }
 
 .forms-input {
-  width: 90%;
+  width: 100%;
   align-self: center;
   height: 2.5rem;
-  padding: 0 0.6rem;
+  margin: 0.3rem 0;
   border-radius: var(--button-radius);
   border: 1px solid var(--color-secondary3);
   background-color: var(--color-background3);
@@ -42,6 +82,7 @@
   font-size: 0.95rem;
   transition: 0.15s;
   box-sizing: content-box;
+  color-scheme: dark;
 }
 
 .forms-input:focus {
@@ -49,6 +90,12 @@
   border-color: var(--color-primary2);
   box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
 }
+
+
+.forms-date-picker{
+  color-scheme: dark;
+}
+
 
 
 .forms-error {

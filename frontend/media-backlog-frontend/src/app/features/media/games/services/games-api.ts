@@ -20,9 +20,9 @@ export class GamesApi {
     return this.http.get<ReadGameDto>(`${this.baseUrl}/${id}`, { responseType: 'json' })
   }
 
-  createGame(dto: CreateGameDto): Observable<string> {
+  createGame(dto: CreateGameDto): Observable<ReadGameDto> {
     console.log("Creating Game...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/create', dto, { responseType: 'text' })
+    return this.http.post<ReadGameDto>(this.baseUrl + '/create', dto)
   }
 }

@@ -4,7 +4,7 @@ export const MEDIA_ROUTES: Routes = [
   {
     path: 'create',
     loadComponent: () =>
-      import('../../movies/pages/movie-creation/movie-creation').then(m => m.MovieCreation)
+      import('../pages/media-creation/media-creation').then(m => m.MediaCreation)
   },
   {
     path: 'view/:type/:id',

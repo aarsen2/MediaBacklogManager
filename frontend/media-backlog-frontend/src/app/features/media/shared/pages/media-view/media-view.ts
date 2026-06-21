@@ -4,7 +4,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { MovieDetails } from '../../../movies/components/movie-details/movie-details';
 import { ShowDetails } from '../../../shows/components/show-details/show-details';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { MovieService } from '../../../movies/services/media-service';
+import { MovieService } from '../../../movies/services/movie-service';
 import { ShowService } from '../../../shows/services/show-service';
 import { AlbumSerivce } from '../../../albums/services/album-serivce';
 import { BookService } from '../../../books/services/book-service';

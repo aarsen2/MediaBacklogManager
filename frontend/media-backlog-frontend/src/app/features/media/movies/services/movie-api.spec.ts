@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MediaApi } from './media-api';
+import { MediaApi } from './movie-api';
 
 describe('MediaApi', () => {
   let service: MediaApi;

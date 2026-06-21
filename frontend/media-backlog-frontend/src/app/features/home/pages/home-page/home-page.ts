@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
-import { MovieService } from '../../../media/movies/services/media-service';
+import { MovieService } from '../../../media/movies/services/movie-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MediaCarousel } from "../../../media/shared/components/media-carousel/media-carousel";
 import { ShowService } from '../../../media/shows/services/show-service';

@@ -1,0 +1,41 @@
+<div class="separator">Movie Specific Detials</div>
+
+<form class="forms-subform" [formGroup]="movieForm">
+    <!-- Director -->
+    <div class="forms-field">
+        <label class="forms-label">Director</label>
+        <input class="forms-input" type="text" formControlName="director" />
+    </div>
+
+
+
+
+    <div class="forms-triple-field">
+
+
+        <!-- Runtime -->
+        <div class="forms-field">
+            <label class="forms-label">Runtime (minutes)</label>
+            <input class="forms-input" type="number" formControlName="runTime" />
+        </div>
+
+
+        <!-- Content Rating -->
+        <div class="forms-field">
+            <label class="forms-label">Content Rating</label>
+            <select class="forms-input" formControlName="contentRating">
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG13">PG-13</option>
+                <option value="R">R</option>
+            </select>
+        </div>
+        <!-- Language -->
+        <div class="forms-field">
+            <label class="forms-label">Language</label>
+            <input class="forms-input" type="text" formControlName="language" />
+        </div>
+
+    </div>
+
+</form>

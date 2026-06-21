@@ -3,6 +3,7 @@ import { AlbumApi } from './album-api';
 import { CreateAlbumDto } from '../../models/create/CreateAlbumDto';
 import { Observable } from 'rxjs';
 import { ReadAlbumDto } from '../../models/read/ReadAlbumDto';
+import { AlbumForm } from '../../models/forms/AlbumForm';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +11,34 @@ import { ReadAlbumDto } from '../../models/read/ReadAlbumDto';
 export class AlbumSerivce {
   private readonly AlbumApi = inject(AlbumApi);
 
-  createMedia(AlbumDto: CreateAlbumDto): Observable<string> {
-    return this.AlbumApi.createAlbum(AlbumDto);
+  createAlbum(albumForm: AlbumForm): Observable<ReadAlbumDto> {
+    let albumDto = this.mapCreateDto(albumForm)
+    return this.AlbumApi.createAlbum(albumDto);
   }
 
-  getAlbum(id: string): Observable<ReadAlbumDto> {  
+  getAlbum(id: string): Observable<ReadAlbumDto> {
     return this.AlbumApi.getAlbum(id);
   }
 
   getAllAlbums(): Observable<ReadAlbumDto[]> {
     return this.AlbumApi.getAlbums();
+  }
+
+
+  mapCreateDto(albumForm: AlbumForm): CreateAlbumDto {
+    return {
+      // MediaBase / CreateMediaBase fields
+      title: albumForm.title,
+      description: albumForm.description,
+      releaseDate: albumForm.releaseDate,
+      genres: albumForm.genres ?? [],
+      generalRating: albumForm.userRating,
+      assets: [],
+
+      // Album-specific fields
+      runTime: albumForm.runTime,
+      trackCount: albumForm.TrackCount,
+      artist: albumForm.artist
+    };
   }
 }

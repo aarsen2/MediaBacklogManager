@@ -1,0 +1,34 @@
+<div class="separator">Show Specific Detials</div>
+
+<form class="forms-subform" [formGroup]="showForm">
+
+    <div class="forms-triple-field">
+
+        <!-- Season Count -->
+        <div class="forms-field">
+            <label class="forms-label">Season Count</label>
+            <input class="forms-input" type="number" formControlName="seasonCount" />
+        </div>
+        <!-- Episode Count -->
+        <div class="forms-field">
+            <label class="forms-label">Episode Count</label>
+            <input class="forms-input" type="number" formControlName="episodeCount" />
+        </div>
+
+
+        <!-- Content Rating -->
+        <div class="forms-field">
+            <label class="forms-label">Content Rating</label>
+            <select class="forms-input" formControlName="contentRating">
+                <option value="TV_Y">TV-Y</option>
+                <option value="TV_Y7">TV-Y7</option>
+                <option value="TV_Y7_FV">TV-Y7-FV</option>
+                <option value="TV_G">TV-G</option>
+                <option value="TV_PG">TV-PG</option>
+                <option value="TV_14">TV-14</option>
+                <option value="TV_MA">TV-MA</option>
+            </select>
+        </div>
+    </div>
+
+</form>

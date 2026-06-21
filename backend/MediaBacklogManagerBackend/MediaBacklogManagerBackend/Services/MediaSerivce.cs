@@ -30,7 +30,7 @@ namespace MediaBacklogManagerBackend.Services
             Console.WriteLine("");
         }
 
-        internal async Task<List<ReadMediaDto>> ReadAllMediaAsync()
+        internal virtual async Task<List<ReadMediaDto>> ReadAllMediaAsync()
         {
             var Media = await dbContext.Set<T>()
                 .Include(m => m.Genres)

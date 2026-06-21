@@ -20,9 +20,9 @@ export class SongApi {
     return this.http.get<ReadSongDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
   }
 
-  createSong(dto: CreateSongDto) : Observable<string> {
+  createSong(dto: CreateSongDto) : Observable<ReadSongDto> {
     console.log("Creating Song...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
+    return this.http.post<ReadSongDto>(this.baseUrl + '/create', dto)
   } 
 }

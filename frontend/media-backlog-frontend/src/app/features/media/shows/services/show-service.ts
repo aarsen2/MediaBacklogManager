@@ -3,23 +3,43 @@ import { Observable } from 'rxjs';
 import { CreateShowDto } from '../../models/create/CreateShowDto';
 import { ReadShowDto } from '../../models/read/ReadShowDto';
 import { ShowApi } from './show-api';
+import { ShowForm } from '../../models/forms/ShowForm';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShowService {
 
-  private readonly movieApi = inject(ShowApi);
+  private readonly songApi = inject(ShowApi);
 
-  createShow(movieDto: CreateShowDto): Observable<string> {
-    return this.movieApi.createShow(movieDto);
+  createShow(showForm: ShowForm): Observable<ReadShowDto> {
+    let showDto = this.mapCreateDto(showForm)
+    return this.songApi.createShow(showDto);
   }
 
   getShow(id: string): Observable<ReadShowDto> {
-    return this.movieApi.getShow(id);
+    return this.songApi.getShow(id);
   }
 
   getAllShows(): Observable<ReadShowDto[]> {
-    return this.movieApi.getShows();
+    return this.songApi.getShows();
   }
+
+  mapCreateDto(showForm: ShowForm): CreateShowDto {
+       return {
+          // MediaBase / CreateMediaBase fields
+          title: showForm.title,
+          description: showForm.description,
+          releaseDate: showForm.releaseDate,
+          genres: showForm.genres ?? [],
+          generalRating: showForm.userRating,
+          assets: [],
+  
+          // Show-specific fields
+          EpisodeCount: showForm.episodeCount,
+          seasonCount: showForm.seasonCount,
+          contentRating: showForm.contentRating
+          
+      };
+    }
 }

@@ -10,6 +10,7 @@ namespace MediaBacklogManagerBackend.Models
         public int MediaId { get; set; }
         public UserMediaStatus Status { get; set; }
         public bool Prioritized { get; set; }
+
         private double _userRating;
         public double UserRating
         {

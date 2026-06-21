@@ -20,9 +20,9 @@ export class MovieApi {
     return this.http.get<ReadMovieDto>(`${this.baseUrl}/${id}`, {responseType: 'json'})
   }
 
-  createMovie(dto: CreateMovieDto) : Observable<string> {
+  createMovie(dto: CreateMovieDto) : Observable<ReadMovieDto> {
     console.log("Creating Movie...");
     console.log(dto);
-    return this.http.post(this.baseUrl + '/create', dto, {responseType: 'text'})
+    return this.http.post<ReadMovieDto>(this.baseUrl + '/create', dto)
   } 
 }

@@ -1,0 +1,25 @@
+<div class="separator">Album Specific Detials</div>
+
+<form class="forms-subform" [formGroup]="albumForm">
+
+    <!-- Artist -->
+    <div class="forms-field">
+        <label class="forms-label">Artist</label>
+        <input class="forms-input" type="text" formControlName="artist" />
+    </div>
+
+    <div class="forms-double-field">
+
+        <!-- Track Count -->
+        <div class="forms-field">
+            <label class="forms-label">Track Count</label>
+            <input class="forms-input" type="number" formControlName="trackCount" />
+        </div>
+
+        <!-- Runtime -->
+        <div class="forms-field">
+            <label class="forms-label">Runtime (minutes)</label>
+            <input class="forms-input" type="number" formControlName="runTime" />
+        </div>
+    </div>
+</form>

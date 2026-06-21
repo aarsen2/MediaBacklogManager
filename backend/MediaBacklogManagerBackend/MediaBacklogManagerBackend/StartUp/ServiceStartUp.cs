@@ -1,4 +1,5 @@
-﻿using MediaBacklogManagerBackend.Services;
+﻿using MediaBacklogManagerBackend.Models.Media;
+using MediaBacklogManagerBackend.Services;
 
 namespace MediaBacklogManagerBackend.StartUp
 {
@@ -13,7 +14,9 @@ namespace MediaBacklogManagerBackend.StartUp
             services.AddScoped<UserMediaMapper>();
             services.AddScoped<UserMediaService>();
             services.AddScoped<DashboardService>();
+
             services.AddScoped(typeof(MediaService<>));
+            services.AddScoped<GameService>();
 
             return services;
         }
