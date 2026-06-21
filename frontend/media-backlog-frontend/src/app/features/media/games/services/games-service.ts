@@ -13,6 +13,7 @@ export class GamesService {
 
   createGame(gameForm: GameForm): Observable<ReadGameDto> {
     let gameDto = this.mapCreateDto(gameForm);
+    console.log(gameDto)
     return this.gameApi.createGame(gameDto);
   }
 
@@ -36,7 +37,7 @@ export class GamesService {
 
       // Game-specific fields
       studio: gameForm.studio,
-      platforms: gameForm.platform,
+      platforms: gameForm.platforms,
       contentRating: gameForm.contentRating
     };
   }

@@ -4,6 +4,7 @@ using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services;
+using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,16 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private MediaService<Book> MediaService { get; set; }
+        private BookService BookService { get; set; }
         private UserService UserService { get; set; }
 
 
         public BookController(
             UserService userService,
-            MediaService<Book> mediaService)
+            BookService mediaService)
         {
             UserService = userService;
-            MediaService = mediaService;
+            BookService = mediaService;
         }
 
 
@@ -34,12 +35,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         {
 
             var userId = await UserService.GetCurrentUserId(User);
-            var book = await MediaService.CreateMediaAsync(bookDto, userId);
+            var book = await BookService.CreateBook(bookDto, userId);
 
             Console.WriteLine("Creating Book");
             if (book != null)
             {
-                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, await MediaService.ReadMediaByIdAsync(book.Id));
+                return CreatedAtAction(nameof(GetBook), new { id = book.Id }, await BookService.ReadBookById(book.Id));
             }
             else return Conflict("Book Already Exists.");
         }
@@ -55,11 +56,11 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
 
             foreach (var bookDto in bookDtos)
             {
-                var book = await MediaService.CreateMediaAsync(bookDto, userId);
+                var book = await BookService.CreateBook(bookDto, userId);
 
                 if (book != null)
                 {
-                    var readDto = await MediaService.ReadMediaByIdAsync(book.Id);
+                    var readDto = await BookService.ReadBookById(book.Id);
                     createdBooks.Add(readDto!);
                 }
                 else
@@ -81,7 +82,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             }
 
 
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await BookService.ReadAllBooks());
         }
 
 
@@ -95,7 +96,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             Console.WriteLine("Updating Book");
             try
             {
-                await MediaService.UpdateMediaAsync(bookDto);
+                await BookService.UpdateBook(bookDto);
 
                 return NoContent();
             }
@@ -112,7 +113,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet]
         public async Task<IActionResult> ReadAllBooks()
         {
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await BookService.ReadAllBooks());
         }
 
 
@@ -121,7 +122,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBook(int id)
         {
-            var book = await MediaService.ReadMediaByIdAsync(id);
+            var book = await BookService.ReadBookById(id);
 
             if (book == null)
                 return NotFound();
@@ -132,7 +133,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            var result = await MediaService.DeleteMediaAsync(id);
+            var result = await BookService.DeleteBook(id);
 
             if (!result)
                 return NotFound();

@@ -129,6 +129,8 @@ export class MediaCreation {
       ...subForm
     }
 
+    console.log("Submitting Full Form: " + fullForm)
+
     this.backlogService.CreateAndAddItem(fullForm).subscribe({
       next: (res) => {
         console.log(res)

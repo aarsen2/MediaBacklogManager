@@ -4,6 +4,7 @@ using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services;
+using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,16 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
     [ApiController]
     public class ShowController : ControllerBase
     {
-        private MediaService<Show> MediaService { get; set; }
+        private ShowService ShowService { get; set; }
         private UserService UserService { get; set; }
 
 
         public ShowController(
             UserService userService,
-            MediaService<Show> mediaService)
+            ShowService mediaService)
         {
             UserService = userService;
-            MediaService = mediaService;
+            ShowService = mediaService;
         }
 
 
@@ -34,12 +35,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         {
 
             var userId = await UserService.GetCurrentUserId(User);
-            var show = await MediaService.CreateMediaAsync(showDto, userId);
+            var show = await ShowService.CreateShow(showDto, userId);
 
             Console.WriteLine("Creating Show");
             if (show != null)
             {
-                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, await MediaService.ReadMediaByIdAsync(show.Id));
+                return CreatedAtAction(nameof(GetShow), new { id = show.Id }, await ShowService.ReadShowById(show.Id));
             }
             else return Conflict("Show Already Exists.");
         }
@@ -55,11 +56,11 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
 
             foreach (var showDto in showDtos)
             {
-                var show = await MediaService.CreateMediaAsync(showDto, userId);
+                var show = await ShowService.CreateShow(showDto, userId);
 
                 if (show != null)
                 {
-                    var readDto = await MediaService.ReadMediaByIdAsync(show.Id);
+                    var readDto = await ShowService.ReadShowById(show.Id);
                     createdShows.Add(readDto!);
                 }
                 else
@@ -81,7 +82,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             }
 
 
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await ShowService.ReadAllShows());
         }
 
 
@@ -95,7 +96,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             Console.WriteLine("Updating Show");
             try
             {
-                await MediaService.UpdateMediaAsync(showDto);
+                await ShowService.UpdateShow(showDto);
 
                 return NoContent();
             }
@@ -112,7 +113,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet]
         public async Task<IActionResult> ReadAllShows()
         {
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await ShowService.ReadAllShows());
         }
 
 
@@ -121,7 +122,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetShow(int id)
         {
-            var show = await MediaService.ReadMediaByIdAsync(id);
+            var show = await ShowService.ReadShowById(id);
 
             if (show == null)
                 return NotFound();
@@ -132,7 +133,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShow(int id)
         {
-            var result = await MediaService.DeleteMediaAsync(id);
+            var result = await ShowService.DeleteShow(id);
 
             if (!result)
                 return NotFound();

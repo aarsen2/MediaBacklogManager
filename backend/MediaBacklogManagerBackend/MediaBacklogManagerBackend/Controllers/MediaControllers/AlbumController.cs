@@ -4,6 +4,7 @@ using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services;
+using MediaBacklogManagerBackend.Services.Media;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,16 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
     [ApiController]
     public class AlbumController : ControllerBase
     {
-        private MediaService<Album> MediaService { get; set; }
+        private AlbumService AlbumService { get; set; }
         private UserService UserService { get; set; }
 
 
         public AlbumController(
             UserService userService,
-            MediaService<Album> mediaService)
+            AlbumService mediaService)
         {
             UserService = userService;
-            MediaService = mediaService;
+            AlbumService = mediaService;
         }
 
 
@@ -34,12 +35,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         {
 
             var userId = await UserService.GetCurrentUserId(User);
-            var album = await MediaService.CreateMediaAsync(albumDto, userId);
+            var album = await AlbumService.CreateAlbum(albumDto, userId);
 
             Console.WriteLine("Creating album");
             if (album != null)
             {
-                return CreatedAtAction(nameof(GetAlbum), new { id = album.Id }, await MediaService.ReadMediaByIdAsync(album.Id));
+                return CreatedAtAction(nameof(GetAlbum), new { id = album.Id }, await AlbumService.ReadAlbumById(album.Id));
             }
             else return Conflict("Album Already Exists.");
         }
@@ -55,11 +56,11 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
 
             foreach (var albumDto in albumDtos)
             {
-                var album = await MediaService.CreateMediaAsync(albumDto, userId);
+                var album = await AlbumService.CreateAlbum(albumDto, userId);
 
                 if (album != null)
                 {
-                    var readDto = await MediaService.ReadMediaByIdAsync(album.Id);
+                    var readDto = await AlbumService.ReadAlbumById(album.Id);
                     createdAlbums.Add(readDto!);
                 }
                 else
@@ -81,7 +82,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             }
 
 
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await AlbumService.ReadAllAlbums());
         }
 
 
@@ -95,7 +96,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
             Console.WriteLine("Updating album");
             try
             {
-                await MediaService.UpdateMediaAsync(albumDto);
+                await AlbumService.UpdateAlbum(albumDto);
 
                 return NoContent();
             }
@@ -112,7 +113,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet]
         public async Task<IActionResult> ReadAllAlbums()
         {
-            return Ok(await MediaService.ReadAllMediaAsync());
+            return Ok(await AlbumService.ReadAllAlbums());
         }
 
 
@@ -121,7 +122,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAlbum(int id)
         {
-            var album = await MediaService.ReadMediaByIdAsync(id);
+            var album = await AlbumService.ReadAlbumById(id);
 
             if (album == null)
                 return NotFound();
@@ -132,7 +133,7 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAlbum(int id)
         {
-            var result = await MediaService.DeleteMediaAsync(id);
+            var result = await AlbumService.DeleteAlbum(id);
 
             if (!result)
                 return NotFound();
