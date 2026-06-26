@@ -9,18 +9,45 @@ using Microsoft.JSInterop;
 
 namespace MediaBacklogManagerBackend.Services
 {
-    public class MediaMapper
+    public class BacklogMapper
     {
         private readonly AppDbContext dbContext;
-        public MediaMapper(AppDbContext context)
+        public BacklogMapper(AppDbContext context)
         {
             dbContext = context;
         }
 
-
-
-        public ReadMediaDto MapMediaRead(Models.Media.Media media)
+        public static ReadUserMediaDto MapUserMediaRead(UserMedia userMedia, Models.Media.Media media)
         {
+            if (userMedia == null)
+            {
+                throw new ArgumentNullException(nameof(userMedia));
+            }
+
+
+            return new ReadUserMediaDto
+            {
+                Id = userMedia.Id,
+                UserId = userMedia.UserId,
+                MediaId = userMedia.MediaId,
+                Status = userMedia.Status,
+                Prioritized = userMedia.Prioritized,
+                UserRating = userMedia.UserRating,
+                Notes = userMedia.Notes,
+                DateAdded = userMedia.DateAdded,
+                DateCompleted = userMedia.DateCompleted,
+
+                Media = MapMediaRead(media)
+            };
+        }
+
+        public static ReadMediaDto MapMediaRead(Models.Media.Media media)
+        {
+            if (media == null)
+            {
+                throw new InvalidDataException("Media is null");
+            }
+
             switch (media)
             {
                 case Movie m:
@@ -127,7 +154,7 @@ namespace MediaBacklogManagerBackend.Services
 
         //Read DTO Mapping
 
-        private ReadMediaDto ReadMovieMap(Movie m)
+        public static ReadMovieDto ReadMovieMap(Movie m)
         {
             return new ReadMovieDto
             {
@@ -149,7 +176,7 @@ namespace MediaBacklogManagerBackend.Services
             }
             ;
         }
-        private ReadMediaDto ReadShowMap(Show s)
+        public static ReadShowDto ReadShowMap(Show s)
         {
             return new ReadShowDto
             {
@@ -172,7 +199,7 @@ namespace MediaBacklogManagerBackend.Services
                 }).ToList()
             };
         }
-        private ReadMediaDto ReadAlbumMap(Album a)
+        public static ReadMediaDto ReadAlbumMap(Album a)
         {
             return new ReadAlbumDto
             {
@@ -194,7 +221,7 @@ namespace MediaBacklogManagerBackend.Services
                 }).ToList()
             };
         }
-        private ReadMediaDto ReadBookMap(Book b)
+        public static ReadBookDto ReadBookMap(Book b)
         {
             return new ReadBookDto
             {
@@ -215,7 +242,7 @@ namespace MediaBacklogManagerBackend.Services
                 }).ToList(),
             };
         }
-        private ReadMediaDto ReadGameMap(Game g)
+        public static ReadGameDto ReadGameMap(Game g)
         {
             return new ReadGameDto
             {
@@ -242,7 +269,7 @@ namespace MediaBacklogManagerBackend.Services
                 }).ToList(),
             };
         }
-        private ReadMediaDto ReadSongMap(Song song)
+        public static ReadSongDto ReadSongMap(Song song)
         {
             return new ReadSongDto
             {
@@ -663,6 +690,7 @@ namespace MediaBacklogManagerBackend.Services
 
         }
 
+   
     }
 
 

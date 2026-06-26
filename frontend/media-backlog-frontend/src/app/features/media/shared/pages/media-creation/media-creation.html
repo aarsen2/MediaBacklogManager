@@ -1,6 +1,6 @@
 <div class="movie-form-container">
 
-    <h2 class="forms-title">Create Movie</h2>
+    <h2 class="forms-title">Add Media</h2>
     <form class="forms-form" [formGroup]="form" (ngSubmit)="submit()">
 
         <!-- Global Items -->
@@ -130,7 +130,7 @@
         <div class="separator"></div>
 
         <!-- Submit -->
-        <button class="forms-button" type="submit" [disabled]="isSubmitting">
+        <button class="UI-button" type="submit" [disabled]="isSubmitting">
             {{ isSubmitting ? 'Creating...' : ('Create ' + ((form.value.mediaType || 'Item')) | titlecase) }} 
         </button>
 

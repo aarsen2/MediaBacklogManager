@@ -1,4 +1,6 @@
-﻿namespace MediaBacklogManagerBackend.Models.Media
+﻿using MediaBacklogManagerBackend.Emuns;
+
+namespace MediaBacklogManagerBackend.Models.Media
 {
     public class Book : Media
     {
@@ -7,6 +9,8 @@
         public string? Language { get; set; }
 
 
-        public Book() { }
+        public Book()
+        {
+        }
     }
 }

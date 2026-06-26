@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReadAlbumDto } from '../../../models/read/ReadAlbumDto';
 
 @Component({
   selector: 'app-album-creation-form',
@@ -10,7 +11,7 @@ import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule } from '@
 export class AlbumCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-
+  @Input() album!: ReadAlbumDto | null;
 
   albumForm = this.formBuilder.group({
     artist: [''],
@@ -23,10 +24,18 @@ export class AlbumCreationForm {
   ngOnInit() {
     const parentForm: any = this.controlContainer.control as FormGroup;
     parentForm.addControl('album', this.albumForm)
+  if (this.album != null) {
+      this.prefillFrom();
+    }
   }
 
   ngOnDestroy() {
     const parent = this.controlContainer.control as FormGroup;
     parent.removeControl('album');
+  }
+  prefillFrom() {
+    this.albumForm.patchValue({ artist: this.album?.artist })
+    this.albumForm.patchValue({ runTime: this.album?.runTime })
+    this.albumForm.patchValue({ trackCount: this.album?.trackCount })
   }
 }

@@ -6,6 +6,8 @@ namespace MediaBacklogManagerBackend.Models.Media
     {
         public string? Artist { get; set; }
         public double? RunTime { get; set; }
-        public Song() { }
+        public Song()
+        {
+        }
     }
 }

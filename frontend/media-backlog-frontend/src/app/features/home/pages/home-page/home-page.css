@@ -32,5 +32,51 @@ app-media-carousel {
 }
 
 * {
-    color: white;   
+    color: white;
+}
+
+.no-media {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-media button {
+    width: 40%;
+}
+
+.no-media-container {
+    height: 30rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+@media (max-width: 900px) {
+
+    .title {
+        font-size: x-large;
+        margin-left: .5rem;
+        margin-top: 0px;
+    }
+
+    .section-title {
+        font-size: large;
+        margin-top: 1rem;
+    }
+
+    :host {
+        padding: .8rem;
+    }
+
+
+    app-media-carousel {
+        display: block;
+        margin-bottom: .5rem;
+    }
+
 }

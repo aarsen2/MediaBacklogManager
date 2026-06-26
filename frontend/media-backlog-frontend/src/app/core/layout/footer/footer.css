@@ -57,3 +57,30 @@
   color: var(--color-text1);
 }
 
+
+
+@media (max-width: 900px) {
+
+
+}
+
+
+@media (max-width: 550px) {
+  
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-section {
+    align-self: center;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+}

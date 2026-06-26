@@ -1,11 +1,14 @@
-export interface MediaForm {
-    title: string   
-    mediaType: MediaType
-    releaseDate: string
-    description: string
-    genres: string[]
-    status: string
-    prioritized: string
-    userRating: number
-    notes: string
-}
+import { AlbumForm } from "./AlbumForm";
+import { BookForm } from "./BookForm";
+import { GameForm } from "./GameForm";
+import { MovieForm } from "./MovieForm";
+import { ShowForm } from "./ShowForm";
+import { SongForm } from "./SongForm";
+
+export type MediaForm =
+  | MovieForm
+  | ShowForm
+  | AlbumForm
+  | BookForm
+  | GameForm
+  | SongForm;

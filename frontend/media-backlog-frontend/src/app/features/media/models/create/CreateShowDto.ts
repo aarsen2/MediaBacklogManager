@@ -2,6 +2,6 @@ import { CreateMediaBase } from "./CreateMediaBase";
 
 export interface CreateShowDto extends CreateMediaBase {
     seasonCount: number;
-    EpisodeCount: number;
+    episodeCount: number;
     contentRating: string;
 }

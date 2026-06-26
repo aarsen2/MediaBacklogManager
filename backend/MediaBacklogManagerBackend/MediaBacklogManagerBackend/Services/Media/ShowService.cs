@@ -21,13 +21,12 @@ namespace MediaBacklogManagerBackend.Services.Media
         {
             Console.WriteLine($"Creating Show: {showDto.Title}");
 
-            bool exists = await CheckExistsAsync(showDto.Title, showDto.ReleaseDate);
+            var show = await CheckExistsAsync(showDto.Title, showDto.ReleaseDate);
 
-            Console.WriteLine($"Show Exists: {exists}");
-            if (exists)
-                return null;
+            if (show != null)
+                return show;
 
-            var show = await MapShowCreation(showDto);
+             show = await MapShowCreation(showDto);
 
             return await CreateAsync(show, userId);
 
@@ -90,7 +89,7 @@ namespace MediaBacklogManagerBackend.Services.Media
             {
 
                 Console.WriteLine($"\n\n\n{id}\n\n\n");
-                Show show = await GetItemByIdAsync(id);
+                var show = await GetItemByIdAsync(id);
 
                 return GetReadShowDto(show!);
             }

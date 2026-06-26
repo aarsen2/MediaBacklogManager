@@ -10,7 +10,7 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
 
         public ReadBookDto()
         {
-            Type = Emuns.MediaType.book;
+            MediaType = Emuns.MediaType.book;
         }
     }
 }

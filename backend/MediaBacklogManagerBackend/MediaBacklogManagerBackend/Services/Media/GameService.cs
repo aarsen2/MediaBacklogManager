@@ -20,13 +20,12 @@ namespace MediaBacklogManagerBackend.Services.Media
         {
             Console.WriteLine($"Creating Game: {gameDto.Title}");
 
-            bool exists = await CheckExistsAsync(gameDto.Title, gameDto.ReleaseDate);
+            var game = await CheckExistsAsync(gameDto.Title, gameDto.ReleaseDate);
 
-            Console.WriteLine($"Game Exists: {exists}");
-            if (exists)
-                return null;
+            if (game != null)
+                return game;
 
-            var game = await MapGameCreation(gameDto);
+            game = await MapGameCreation(gameDto);
 
             return await CreateAsync(game, userId);
 

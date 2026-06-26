@@ -6,7 +6,7 @@ import { AlbumCreationForm } from '../../../albums/components/album-creation-for
 import { BookCreationForm } from '../../../books/components/book-creation-form/book-creation-form';
 import { GameCreationForm } from '../../../games/components/game-creation-form/game-creation-form';
 import { SongCreationForm } from '../../../songs/components/song-creation-form/song-creation-form';
-import { MediaForm } from '../../../models/forms/MediaForm';
+import { BaseForm } from '../../../models/forms/BaseForm';
 import { MediaBacklogService } from '../../../../backlog/services/media-backlog-service';
 import { TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -85,7 +85,7 @@ export class MediaCreation {
   }
 
 
-  private mapBase(formValue: any): MediaForm {
+  private mapBase(formValue: any): BaseForm {
     return {
       title: formValue.title,
       mediaType: formValue.mediaType,

@@ -1,0 +1,30 @@
+.UI-button {
+    width: 90%;
+    height: 2.5rem;
+    align-self: center;
+    border: none;
+    border-radius: var(--button-radius);
+    background-color: var(--color-primary2);
+    color: var(--color-text1);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 1rem;
+}
+
+.UI-button:hover {
+    background-color: var(--color-primary1);
+    transform: translateY(-1px);
+}
+
+.UI-button:active {
+    background-color: var(--color-primary3);
+    color: var(--color-text1);
+    transform: translateY(1px);
+}    
+
+.UI-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

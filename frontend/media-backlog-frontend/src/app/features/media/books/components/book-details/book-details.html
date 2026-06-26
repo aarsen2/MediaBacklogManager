@@ -4,19 +4,26 @@
     <div class="details-row">
     </div>
 
-    
+
     <div class="details-row">
         <span class="details-label">Author</span>
         <span class="details-value">{{ book.author }}</span>
     </div>
-    
+
+
     <div class="details-row">
         <span class="details-label">Pages</span>
         <span class="details-value">
-            {{ book.pageCount > 1 ? book.pageCount+ " Pages" :book.pageCount + " Page"}} 
+            {{ book.pageCount > 1 ? book.pageCount+ " Pages" :book.pageCount + " Page"}}
         </span>
     </div>
-    
+
+    <div class="details-row">
+        <span class="details-label">Language</span>
+        <span class="details-value">
+            {{ book.language}}
+        </span>
+    </div>
 
 </div>
 }

@@ -1,6 +1,7 @@
 ﻿using MediaBacklogManagerBackend.Data;
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
+using MediaBacklogManagerBackend.DTOs.Updating;
 using MediaBacklogManagerBackend.Emuns;
 using MediaBacklogManagerBackend.Enums;
 using MediaBacklogManagerBackend.Models;
@@ -59,6 +60,20 @@ namespace MediaBacklogManagerBackend.Services
                 Prioritized = userMedia.Prioritized,
                 Status = userMedia.Status,
             };
+        }
+
+        public void MapMediaUpdate(UserMedia userMedia, UpdateUserMediaDto userMediaDto)
+        {
+            userMedia.Status = userMediaDto.Status;
+            userMedia.UserRating = userMediaDto.UserRating;
+
+            if (userMedia.Status != UserMediaStatus.Completed &&
+                userMediaDto.Status == UserMediaStatus.Completed)
+            {
+                userMedia.DateCompleted = DateTime.Now;
+            }
+            userMedia.Notes = userMediaDto.Notes;
+            userMedia.Prioritized = userMediaDto.Prioritized;
         }
     }
 }

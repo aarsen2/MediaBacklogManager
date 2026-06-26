@@ -91,10 +91,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateUserMediaDto userMediaDto)
         {
+            var userId = await UserService.GetCurrentUserId(User);
+
             Console.WriteLine("Updating Book");
             try
             {
-                await UserMediaService.UpdateMediaAsync(userMediaDto);
+                await UserMediaService.UpdateMediaAsync(userMediaDto, userId);
 
                 return NoContent();
             }
@@ -129,16 +131,19 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMedia(int id)
+        [HttpDelete("{mediaId}")]
+        public async Task<IActionResult> DeleteMedia(int mediaId)
         {
             var userId = await UserService.GetCurrentUserId(User);
-            var result = await UserMediaService.DeleteMediaAsync(id, userId);
+            var result = await UserMediaService.DeleteMediaAsync(mediaId, userId);
 
             if (!result)
                 return NotFound();
 
             return NoContent();
         }
+
+
+    
     }
 }

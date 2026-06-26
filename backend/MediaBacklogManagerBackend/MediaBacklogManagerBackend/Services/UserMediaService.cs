@@ -34,9 +34,9 @@ namespace MediaBacklogManagerBackend.Services
             return userMedia;
         }
 
-        internal async Task<bool> DeleteMediaAsync(int id, string userId)
+        internal async Task<bool> DeleteMediaAsync(int mediaID, string userId)
         {
-            var media = await GetUserMediaByIdAsync(id, userId);
+            var media = await GetUserMediaByMediaIdAsync(mediaID, userId);
             if (media == null)
             {
                 return false;
@@ -44,12 +44,27 @@ namespace MediaBacklogManagerBackend.Services
             try
             {
                 dbContext.UserMedia.Remove(media);
+                await dbContext.SaveChangesAsync();
                 return true;
             }
             catch
             {
                 throw new ArgumentException("Invalid Media ID");
             }
+        }
+
+        private async Task<UserMedia?> GetUserMediaByMediaIdAsync(int mediaId, string userId)
+        {
+            var userMedia = dbContext.UserMedia
+                .Where(m => m.UserId == userId && m.MediaId == mediaId)
+                .FirstOrDefault();
+
+            if (userMedia == null)
+            {
+                return null;
+            }
+
+            return userMedia;
         }
 
         internal async Task<UserMedia?> GetUserMediaByIdAsync(int id, string userId)
@@ -94,9 +109,26 @@ namespace MediaBacklogManagerBackend.Services
             return UserMediaMapper.MapMediaRead(media);
         }
 
-        internal async Task UpdateMediaAsync(UpdateUserMediaDto userMediaDto)
+        internal async Task<bool> UpdateMediaAsync(UpdateUserMediaDto userMediaDto, string userId)
         {
-            throw new NotImplementedException();
+            var mediaId = userMediaDto.MediaId;
+            var userMedia = await GetUserMediaByMediaIdAsync(mediaId, userId);
+
+            if (userMedia == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                UserMediaMapper.MapMediaUpdate(userMedia, userMediaDto);
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                throw new Exception("Something went wrong with updating User Media");
+            }
         }
 
 

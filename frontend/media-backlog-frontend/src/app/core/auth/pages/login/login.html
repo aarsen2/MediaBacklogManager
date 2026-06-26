@@ -31,11 +31,11 @@
             @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
             <small class="forms-error">Password is required</small>}
             <p class="message forms-error">{{message()}}</p>
-            <button class="forms-button" type="submit" [disabled]="isLoggingIn">
+            <button class="UI-button" type="submit" [disabled]="isLoggingIn">
                 {{ isLoggingIn ? 'Logging in...' : 'Log In' }}
             </button>
         </form>
         <div class="separator">OR</div>
-        <button class="forms-button" routerLink="/register">Create Account</button>
+        <button class="UI-button" routerLink="/register">Create Account</button>
     </div>
 </div>

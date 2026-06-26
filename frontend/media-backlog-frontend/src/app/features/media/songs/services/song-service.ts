@@ -26,6 +26,7 @@ export class SongService {
 
   mapCreateDto(songForm: SongForm): CreateSongDto {
     return {
+      type: 'song',
       // MediaBase / CreateMediaBase fields
       title: songForm.title,
       description: songForm.description,

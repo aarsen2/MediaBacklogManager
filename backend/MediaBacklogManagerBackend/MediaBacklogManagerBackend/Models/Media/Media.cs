@@ -1,4 +1,6 @@
-﻿namespace MediaBacklogManagerBackend.Models.Media
+﻿using MediaBacklogManagerBackend.Emuns;
+
+namespace MediaBacklogManagerBackend.Models.Media
 {
     public abstract class Media
     {
@@ -9,6 +11,7 @@
         public DateTime? ReleaseDate { get; set; }
         public List<Genre> Genres { get; set; } = new();
         private double _generalRating;
+        public string MediaType { get; set; }
         public double GeneralRating
         {
             get

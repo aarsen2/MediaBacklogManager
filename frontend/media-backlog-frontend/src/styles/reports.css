@@ -1,0 +1,103 @@
+.report {
+    /* height: 50vh; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
+    background: var(--color-background2);
+    transition: .2s;
+    color: var(--color-text1);
+    padding: 1rem;
+}
+
+.report-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.report-date {
+    font-size: .8rem;
+    font-style: italic;
+    text-align: end;
+    margin: 0px;
+
+}
+
+.report-headers {
+    display: grid;
+    padding: 1rem;
+
+}
+
+.report-header {
+    font-weight: 500;
+    font-size: large;
+    text-align: start;
+}
+
+.report-table {
+    display: flex;
+    flex-direction: column;
+    height: 23rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+
+
+.report-row {
+    color: var(--color-text2);
+    display: grid;
+    width: auto;
+    padding: 1rem;
+}
+
+.report-row:nth-child(odd) {
+    background-color: var(--color-background1);
+}
+
+.report-row:nth-child(even) {
+    background-color: var(--color-background3);
+}
+
+.cell {
+    overflow: hidden;
+    width: 100%;
+
+}
+
+.cell-clickable {
+    color: var(--color-primary1);
+    text-decoration: underline;
+}
+
+.cell-clickable:hover {
+    color: var(--color-primary2);
+    cursor: pointer;
+    ;
+}
+
+@media (max-width: 550px) {
+
+.report{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.report-title {
+    font-size: large;
+}
+
+.report-date {
+    font-size: xx-small;
+}
+
+.report-header {
+    font-size: small;
+}
+
+.cell {
+    font-size: small;
+}
+
+}

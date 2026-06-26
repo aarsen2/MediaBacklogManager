@@ -9,6 +9,10 @@ export const MEDIA_ROUTES: Routes = [
   {
     path: 'view/:type/:id',
     loadComponent: () =>
-      import('../pages/media-view/media-view').then(m => m.MediaView)
+      import('../pages/media-view-simple/media-view-simple').then(m => m.MediaViewSimple)
+  }, {
+    path: 'edit/:type/:id',
+    loadComponent: () =>
+      import('../pages/media-edit/media-edit').then(m => m.MediaEdit)
   }
 ];

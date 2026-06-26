@@ -8,7 +8,7 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
         public double? RunTime { get; set; }
         public ReadSongDto()
         {
-            Type = Emuns.MediaType.song;
+            MediaType = Emuns.MediaType.song;
         }
     }
 }

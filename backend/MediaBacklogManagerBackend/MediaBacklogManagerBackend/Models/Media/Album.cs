@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+﻿using MediaBacklogManagerBackend.Emuns;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace MediaBacklogManagerBackend.Models.Media
 {
@@ -9,6 +10,8 @@ namespace MediaBacklogManagerBackend.Models.Media
         public double? RunTime { get; set; }
         public List<Song> Songs { get; set; } = new();
 
-        public Album() { }
+        public Album()
+        {
+        }
     }
 }

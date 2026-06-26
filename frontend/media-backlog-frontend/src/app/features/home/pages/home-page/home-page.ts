@@ -10,12 +10,12 @@ import { BookService } from '../../../media/books/services/book-service';
 import { GamesService } from '../../../media/games/services/games-service';
 import { SongService } from '../../../media/songs/services/song-service';
 import { DashbaordService } from '../../services/dashbaord-service';
-import { DashboardDto } from './models/DashboardDto';
-import { DashboardSectionDto } from './models/DashboardSectionDto';
+import { DashboardDto } from '../../models/DashboardDto';
+import { DashboardSectionDto } from '../../models/DashboardSectionDto';
 
 @Component({
   selector: 'app-home-page',
-  imports: [MediaCarousel],
+  imports: [MediaCarousel, RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
@@ -24,13 +24,13 @@ export class HomePage {
 
 
   dashboard = toSignal(
-  this.dashboardService.getDashboard(),
-  {
-    initialValue: {
-      sections: []
-    } as DashboardDto
-  }
-);
+    this.dashboardService.getDashboard(),
+    {
+      initialValue: {
+        sections: []
+      } as DashboardDto
+    }
+  );
 
 
 
@@ -38,5 +38,12 @@ export class HomePage {
     effect(() => {
       console.log('Dashboard:', this.dashboard());
     });
+  }
+
+  hasAnyItems(): boolean {
+    const data = this.dashboard();
+    if (!data) return false;
+
+    return data.sections.some(section => section.items.length > 0);
   }
 }

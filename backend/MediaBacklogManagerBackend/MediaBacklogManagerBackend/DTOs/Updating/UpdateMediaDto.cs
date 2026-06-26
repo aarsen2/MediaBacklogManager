@@ -1,7 +1,17 @@
-﻿using MediaBacklogManagerBackend.Models;
+﻿using MediaBacklogManagerBackend.DTOs.Creation;
+using MediaBacklogManagerBackend.DTOs.Reading;
+using MediaBacklogManagerBackend.Models;
+using System.Text.Json.Serialization;
 
 namespace MediaBacklogManagerBackend.DTOs.Updating
 {
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+    [JsonDerivedType(typeof(UpdateMovieDto), "movie")]
+    [JsonDerivedType(typeof(UpdateShowDto), "show")]
+    [JsonDerivedType(typeof(UpdateAlbumDto), "album")]
+    [JsonDerivedType(typeof(UpdateBookDto), "book")]
+    [JsonDerivedType(typeof(UpdateGameDto), "game")]
+    [JsonDerivedType(typeof(UpdateSongDto), "song")]
     public class UpdateMediaDto
     {
         public int Id { get; set; }

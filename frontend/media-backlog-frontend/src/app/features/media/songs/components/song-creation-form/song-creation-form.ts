@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReadSongDto } from '../../../models/read/ReadSongDto';
 
 @Component({
   selector: 'app-song-creation-form',
@@ -10,7 +11,7 @@ import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validato
 export class SongCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-
+  @Input() song!: ReadSongDto | null;
 
   songForm = this.formBuilder.group({
     artist: ['', [Validators.maxLength(100)]],
@@ -27,7 +28,15 @@ export class SongCreationForm {
   ngOnDestroy() {
     const parent = this.controlContainer.control as FormGroup;
     parent.removeControl('song');
+
+    if (this.song != null) {
+      this.prefillFrom();
+    }
   }
 
+  prefillFrom() {
+    this.songForm.patchValue({ artist: this.song?.artist })
+    this.songForm.patchValue({ runTime: this.song?.runTime })
+  }
 
 }

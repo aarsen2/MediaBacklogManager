@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { AuthApi } from './auth-api';
 import { map, Observable, tap } from 'rxjs';
 import { AuthResponse } from './models/AuthResponse';
@@ -15,12 +15,16 @@ export class AuthService {
   private refreshTokenKey = "refresh_token";
   private authAPI = inject(AuthApi);
   private router = inject(Router)
-  constructor() { }
+  constructor() {
+    this.isLoggedInSignal.set(this.isLoggedIn())
+   }
 
   isLoggedIn(): boolean {
     const token = this.getToken();
     return !!token;
   }
+
+  isLoggedInSignal = signal<boolean>(false)
 
 
   getToken(): string | null {
@@ -52,21 +56,24 @@ export class AuthService {
     return this.authAPI.login(username, password).pipe(
       tap(response => {
         this.setToken(response)
+        this.isLoggedInSignal.set(true);
       })
     );
   }
-
-
+  
+  
   register(registerDto: RegisterDto) {
     return this.authAPI.register(registerDto).pipe(
       tap(response => {
         this.setToken(response)
+        this.isLoggedInSignal.set(true);
       })
     )
   }
-
+  
   logout(): void {
     this.clearToken()
     this.router.navigate(['/logout']);
+    this.isLoggedInSignal.set(false);
   }
 }

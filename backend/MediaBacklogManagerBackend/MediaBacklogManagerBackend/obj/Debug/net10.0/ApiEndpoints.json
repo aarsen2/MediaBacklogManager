@@ -90,6 +90,62 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AnalyticsController",
+    "Method": "GetCompleted",
+    "RelativePath": "api/analytics/completed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AnalyticsController",
+    "Method": "GetCompleted",
+    "RelativePath": "api/analytics/completed/{days}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "days",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AnalyticsController",
+    "Method": "GetCompletionTime",
+    "RelativePath": "api/analytics/completion-time",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AnalyticsController",
+    "Method": "GetMediaTypeReport",
+    "RelativePath": "api/analytics/media-type",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.AnalyticsController",
+    "Method": "GetHighPriority",
+    "RelativePath": "api/analytics/priority",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/auth/login",
@@ -116,6 +172,69 @@
       {
         "Name": "newUserDto",
         "Type": "MediaBacklogManagerBackend.DTOs.Creation.CreateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "GetDashboard",
+    "RelativePath": "api/backlog/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "GetBacklogItem",
+    "RelativePath": "api/backlog/item/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "TogglePriority",
+    "RelativePath": "api/backlog/item/{mediaId}/priority/toggle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mediaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "UpdateItem",
+    "RelativePath": "api/backlog/item/{mediaId}/update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mediaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newUserMedia",
+        "Type": "MediaBacklogManagerBackend.DTOs.Updating.UpdateBacklogItemDto",
         "IsRequired": true
       }
     ],
@@ -209,16 +328,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MediaBacklogManagerBackend.Controllers.DashboardController",
-    "Method": "GetDashBoard",
-    "RelativePath": "api/dashboard",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -400,6 +509,47 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.SearchController",
+    "Method": "Search",
+    "RelativePath": "api/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "q",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "genre",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "platform",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "rec",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MediaBacklogManagerBackend.Models.SearchResultItem, MediaBacklogManagerBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
@@ -610,13 +760,13 @@
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.UserMediaController",
     "Method": "DeleteMedia",
-    "RelativePath": "api/user-media/{id}",
+    "RelativePath": "api/user-media/{mediaId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "mediaId",
         "Type": "System.Int32",
         "IsRequired": true
       }

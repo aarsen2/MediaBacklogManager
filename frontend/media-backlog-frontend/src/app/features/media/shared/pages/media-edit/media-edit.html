@@ -1,0 +1,131 @@
+<div class="movie-form-container">
+
+    <h2 class="forms-title">Update {{(form.value.mediaType || 'Item') | titlecase}}</h2>
+    <form class="forms-form" [formGroup]="form" (ngSubmit)="submit()">
+
+        <!-- Global Items -->
+        <!-- Title -->
+        <div class="forms-field">
+            <label class="forms-label">Title</label>
+            <input class="forms-input" type="text" formControlName="title" />
+            @if (form.get('title')?.invalid && form.get('title')?.touched) {
+            <small class="forms-error">Title is required</small>
+            }
+        </div>
+
+
+
+        <!-- Release Date -->
+        <div class="forms-field forms-date-picker">
+            <label class="forms-label">Release Date</label>
+            <input class="forms-input" type="date" formControlName="releaseDate" />
+            @if (form.get('title')?.invalid && form.get('releaseDate')?.touched) {
+            <small class="forms-error">Release date is required</small>
+            }
+        </div>
+
+
+
+        <!-- Description -->
+        <div class="forms-field">
+            <label class="forms-label">Description</label>
+            <input class="forms-input" type="text" formControlName="description">
+        </div>
+
+
+        <!-- Genres -->
+        <div class="forms-field">
+            <label class="forms-label">Genres</label>
+            <div class="chips">
+                @for (genre of form.value.genres; track genre) {
+                <div class="details-tag chip">
+                    {{ genre }}<span class="material-symbols-outlined icon" (click)="removeGenre(genre)">close</span>
+                </div>
+                }
+            </div>
+
+            <input class="forms-input" name="genreInput" formControlName="genreInput" type="text"
+                (keydown.enter)="addGenre()" (keydown)="handleKeydown($event)"
+                placeholder="Type a genre and press Enter" />
+        </div>
+
+
+        <!-- User Specific Items -->
+        <div class="separator"></div>
+
+        <div class="forms-triple-field">
+            <!-- Status -->
+            <div class="forms-field">
+                <label class="forms-label">Status</label>
+                <select class="forms-input" formControlName="status">
+                    <option selected value="Backlog">Backlog</option>
+                    <option value="InProgress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+
+            <!-- Prioritized -->
+            <div class="forms-field">
+                <label class="forms-label">Prioritize</label>
+                <select class="forms-input" formControlName="prioritized">
+                    <option selected value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <!-- Rating -->
+            <div class="forms-field">
+                <label class="forms-label">Rating (0-5)</label>
+                <input class="forms-input" type="number" min="0" max="5" step="0.1" formControlName="userRating" />
+            </div>
+        </div>
+
+
+
+
+        <!-- Notes -->
+        <div class="forms-field">
+            <label class="forms-label">Notes</label>
+            <input class="forms-input" type="text" formControlName="notes">
+        </div>
+
+        @switch (form.value.mediaType) {
+        @case ('movie') {
+        <app-movie-creation-form [movie]="movie"></app-movie-creation-form>
+        }
+        @case ('show') {
+        <app-show-creation-form [show]="show"></app-show-creation-form>
+        }
+        @case ('album') {
+        <app-album-creation-form [album]="album"></app-album-creation-form>
+        }
+        @case ('book') {
+        <app-book-creation-form [book]="book"></app-book-creation-form>
+        }
+        @case ('game') {
+        <app-game-creation-form [game]="game"></app-game-creation-form>
+        }
+        @case ('song') {
+        <app-song-creation-form [song]="song"></app-song-creation-form>
+        }
+        }
+
+        <div class="separator"></div>
+
+        <!-- Submit -->
+        <button class="UI-button" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Creating...' : ('Update ' + ((form.value.mediaType || 'Item')) | titlecase) }}
+        </button>
+
+    </form>
+
+    <!-- Messages -->
+    @if (successMessage()) {
+    <p class="forms-success">{{ successMessage() }}</p>
+    }
+
+    @if (errorMessage()) {
+    <p class="forms-error">{{ errorMessage() }}</p>
+    }
+
+</div>

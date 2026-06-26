@@ -7,6 +7,8 @@ namespace MediaBacklogManagerBackend.Models.Media
         public int? SeasonCount { get; set; }
         public int? EpisodeCount { get; set; }
         public ShowContentRating? ContentRating { get; set; }
-
+        public Show()
+        {
+        }
     }
 }

@@ -1,5 +1,6 @@
-import { Component, inject, Injector } from '@angular/core';
+import { Component, inject, Injector, Input, input } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReadShowDto } from '../../../models/read/ReadShowDto';
 
 @Component({
   selector: 'app-show-creation-form',
@@ -10,6 +11,7 @@ import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validato
 export class ShowCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
+  @Input() show!: ReadShowDto | null;
 
 
   showForm = this.formBuilder.group({
@@ -23,10 +25,21 @@ export class ShowCreationForm {
   ngOnInit() {
     const parentForm: any = this.controlContainer.control as FormGroup;
     parentForm.addControl('show', this.showForm)
+  if (this.show != null) {
+      this.prefillFrom();
+    }
   }
 
   ngOnDestroy() {
     const parent = this.controlContainer.control as FormGroup;
     parent.removeControl('show');
+  }
+
+
+
+  prefillFrom() {
+    this.showForm.patchValue({seasonCount: this.show?.seasonCount})
+    this.showForm.patchValue({episodeCount: this.show?.episodeCount})
+    this.showForm.patchValue({contentRating: this.show?.contentRating})
   }
 }

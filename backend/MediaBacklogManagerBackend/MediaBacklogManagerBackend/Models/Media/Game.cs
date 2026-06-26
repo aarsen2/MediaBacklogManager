@@ -8,6 +8,9 @@ namespace MediaBacklogManagerBackend.Models.Media
         public string? Studio { get; set; }
         public GameContentRating ContentRating { get; set; }
 
+        public Game()
+        {
+        }
 
     }
 }

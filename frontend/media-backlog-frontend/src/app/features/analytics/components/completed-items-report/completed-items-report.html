@@ -1,0 +1,28 @@
+@if(report) {
+<div class="report scrollable">
+    <h1 class="report-title">{{report.title}}</h1>
+    <p class="report-date">Generated on {{report.generatedAt | date:"MMM dd, yyyy 'at' hh:mm a"}}</p>
+    <div class="separator"></div>
+    <table class="report-table  scrollable">
+
+        <tr class="report-headers">
+            <th class="report-header">Title</th>
+            <th class="report-header">Media Type</th>
+            <th class="report-header">Date Added</th>
+            <th class="report-header">Date Completed</th>
+        </tr>
+
+        <div class="report-content">
+
+            @for(reportItem of report.mediaItems; track reportItem) {
+            <tr class="report-row">
+                <td class="cell cell-clickable" (click)="openItem(reportItem)">{{reportItem.title}}</td>
+                <td class="cell">{{reportItem.mediaType}}</td>
+                <td class="cell">{{reportItem.dateAdded | date}}</td>
+                <td class="cell">{{reportItem.dateCompleted | date}}</td>
+            </tr>
+            }
+        </div>
+    </table>
+</div>
+}

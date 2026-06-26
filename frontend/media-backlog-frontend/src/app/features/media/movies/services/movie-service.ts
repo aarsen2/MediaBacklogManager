@@ -30,6 +30,7 @@ export class MovieService {
   mapCreateDto(movieForm: MovieForm): CreateMovieDto {
      return {
         // MediaBase / CreateMediaBase fields
+        type: 'movie',
         title: movieForm.title,
         description: movieForm.description,
         releaseDate: movieForm.releaseDate,

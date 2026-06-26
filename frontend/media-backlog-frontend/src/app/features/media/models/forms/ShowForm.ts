@@ -1,6 +1,7 @@
-import { MediaForm } from "./MediaForm";
+import { BaseForm } from "./BaseForm";
 
-export interface ShowForm extends MediaForm {
+export interface ShowForm extends BaseForm {
+    mediaType: 'show';
     seasonCount: number;
     episodeCount: number;
     contentRating: string;

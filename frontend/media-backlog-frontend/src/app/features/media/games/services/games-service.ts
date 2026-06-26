@@ -28,6 +28,7 @@ export class GamesService {
   mapCreateDto(gameForm: GameForm): CreateGameDto {
     return {
       // MediaBase / CreateMediaBase fields
+      type: 'game',
       title: gameForm.title,
       description: gameForm.description,
       releaseDate: gameForm.releaseDate,

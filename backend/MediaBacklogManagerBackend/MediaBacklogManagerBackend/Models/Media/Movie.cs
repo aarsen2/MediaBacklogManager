@@ -8,6 +8,8 @@ namespace MediaBacklogManagerBackend.Models.Media
         public string? Language { get; set; }
         public string? Director { get; set; }
         public MovieContentRating? ContentRating { get; set; }
-        public Movie() { }
+        public Movie()
+        {
+        }
     }
 }

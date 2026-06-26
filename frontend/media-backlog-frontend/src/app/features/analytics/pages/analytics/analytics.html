@@ -1,0 +1,17 @@
+<div class="reports-container">
+
+    @if(completedItemsReport()) {
+        <app-completed-items-report [report]="completedItemsReport()"></app-completed-items-report>
+    }
+    
+    @if(priorityItemsReport()) {
+        <app-priority-items-report [report]="priorityItemsReport()"></app-priority-items-report>
+        
+    }
+    @if(mediaTypeReport()) {
+        <app-media-type-report [report]="mediaTypeReport()"></app-media-type-report>
+    }
+    @if(timeToCompleteReport()) {
+    <app-time-to-complete-report [report]="timeToCompleteReport()"></app-time-to-complete-report>
+    }
+</div>

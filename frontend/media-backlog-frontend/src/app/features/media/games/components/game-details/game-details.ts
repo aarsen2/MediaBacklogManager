@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ReadGameDto } from '../../../models/read/ReadGameDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-details',
@@ -9,5 +10,14 @@ import { ReadGameDto } from '../../../models/read/ReadGameDto';
 })
 export class GameDetails {
   @Input() game!: ReadGameDto | null;
+  private router = inject(Router)
 
+
+  searchPlatform(platformName: string) {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        platform: platformName || null,
+      }
+    })
+  }
 }

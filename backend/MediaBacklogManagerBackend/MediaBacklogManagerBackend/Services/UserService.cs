@@ -49,7 +49,7 @@ namespace MediaBacklogManagerBackend.Services
             if (user == null)
                 return "-1";
 
-            var roles = await _userManager.GetRolesAsync(user);
+            //var roles = await _userManager.GetRolesAsync(user);
 
             return user.Id ?? "-1";
         }

@@ -1,0 +1,110 @@
+<div class="itemContainer">
+
+    @if (backlogItem(); as b) {
+    @if (b.media; as m) {
+
+
+
+    <!-- 🔹 General Media Details -->
+    <div class="itemDetails">
+        <div class="media-controls">
+            <div class="media-control" title="Delete Item">
+                <span class="icon material-symbols-outlined" (click)="deleteItem()">
+                    delete
+                </span>
+            </div>
+            <div class="media-control" title="Edit Item">
+                <span class="icon material-symbols-outlined" (click)="editItem()">
+                    edit
+                </span>
+            </div>
+            <div class="media-control" title="Toggle Prioritization">
+                <span class="icon material-symbols-outlined" [class.prioritized]="prioritized()"
+                    (click)="toggleFavorite()">
+                    star
+                </span>
+            </div>
+        </div>
+        <h1 class="title">{{ m.title }}</h1>
+        <h1 class="status">{{ formatStatus(b.status) }}</h1>
+
+        <div class="details-row">
+            <span class="details-label">Release Date</span>
+            <span class="details-value">{{ m.releaseDate | date}}</span>
+        </div>
+
+        <div class="details-row">
+            <span class="details-label">Global Rating: </span>
+            <span class="details-value">
+                {{ m.generalRating !== 0 ? (m.generalRating + " / 5"): "N/A"}}
+            </span>
+        </div>
+
+        <div class="details-row">
+            <span class="details-label">Your Rating: </span>
+            <span class="details-value">
+                {{ b.userRating !== 0 ? (b.userRating + " / 5"): "N/A"}}
+            </span>
+        </div>
+
+
+        @if (m.genres.length > 0) {
+
+        <div class="details-row">
+            <span class="details-label">Genres</span>
+            <div class="details-tag-list">
+                @for (genre of m.genres; track genre) {
+                <span class="details-tag" (click)="searchGenre(genre.name)">
+                    {{ genre.name || genre }}
+                </span>
+                }
+            </div>
+        </div>
+        }
+
+
+
+
+        <p class="description">
+            {{ m.description }}
+        </p>
+
+        <div class="spacer"></div>
+
+        <div class="separator"></div>
+        <!-- 🔹 Type-Specific Details -->
+        <div class="typeSpecificDetails">
+
+            @switch (m.type) {
+
+            @case ('movie') {
+            <app-movie-details [movie]="m"></app-movie-details>
+            }
+
+            @case ('show') {
+            <app-show-details [show]="m"></app-show-details>
+            }
+
+            @case ('album') {
+            <app-album-details [album]="m"></app-album-details>
+            }
+
+            @case ('book') {
+            <app-book-details [book]="m"></app-book-details>
+            }
+
+            @case ('game') {
+            <app-game-details [game]="m"></app-game-details>
+            }
+
+            @case ('song') {
+            <app-song-details [song]="m"></app-song-details>
+            }
+            }
+
+        </div>
+    </div>
+
+    }
+    }
+</div>

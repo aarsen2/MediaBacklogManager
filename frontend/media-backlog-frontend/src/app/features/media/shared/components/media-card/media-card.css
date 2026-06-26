@@ -1,0 +1,129 @@
+.MediaCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+    width: 13rem;
+    aspect-ratio: .7;
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--color-background3);
+    scroll-snap-align: start;
+    cursor: pointer;
+    position: relative;
+    transition: .2s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.MediaCard:hover {
+    transform: translateY(-2px);
+}
+
+.MediaCard:active {
+    transform: translateY(2px);
+    scale: .99;
+    background-color: #111;
+
+}
+
+.icon {
+    color: var(--color-text2);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.title {
+    color: var(--color-text1);
+    text-align: center;
+    font-size: 1.7rem;
+    display: -webkit-box;
+    line-clamp: 3;
+    line-height: 2rem;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: calc(1.7rem * 3 * 1.2);
+
+}
+
+.description {
+    color: var(--color-text2);
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+@media (max-width: 900px) {
+    .MediaCard {
+        width: 8rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .icon {
+        font-size: large;
+    }
+
+    .title {
+        font-size: large;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .description {
+        font-size: medium;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.rem;
+
+    }
+}
+
+
+
+
+
+@media (max-width: 550px) {
+
+    .MediaCard {
+        width: 5rem;
+        display: grid;
+        border-radius: 6px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        padding: .5rem;
+        ;
+    }
+
+    .icon {
+        font-size: x-small;
+        top: 5px;
+        left: 5px;
+    }
+
+    .title {
+        font-size: x-small;
+        justify-content: center;
+        text-align: center;
+        margin: 0px;
+        padding-top: .5rem;
+        line-clamp: 7;
+        line-height: .87rem;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .description {
+        display:none;
+    }
+}

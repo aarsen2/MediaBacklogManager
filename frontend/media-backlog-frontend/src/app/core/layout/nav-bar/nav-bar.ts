@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileMenu } from '../profile-menu/profile-menu';
 import { DOCUMENT } from '@angular/common';
+import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,6 +12,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class NavBar {
   profileMenuVisable: boolean = false;
+  private readonly router = inject(Router)
+  public readonly authService = inject(AuthService)
 
 
 
@@ -19,6 +22,12 @@ export class NavBar {
   }
   closeProfile() {
     this.profileMenuVisable = false;
+  }
+
+  search(searchInput: string) {
+    this.router.navigate(['/search/'], {
+      queryParams: {q: searchInput.trim()}
+    })
   }
 
 

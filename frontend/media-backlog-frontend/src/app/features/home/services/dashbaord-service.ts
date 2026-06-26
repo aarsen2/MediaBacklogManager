@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { DashboardDto } from '../pages/home-page/models/DashboardDto';
+import { DashboardDto } from '../models/DashboardDto';
 import { DashbaordApi } from './dashbaord-api';
 import { Observable } from 'rxjs';
 

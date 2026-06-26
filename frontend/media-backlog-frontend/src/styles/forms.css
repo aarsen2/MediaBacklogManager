@@ -42,7 +42,7 @@
 }
 
 /* Puts 2 form controls next to each other */
-.forms-double-field{
+.forms-double-field {
   align-self: center;
   width: 90%;
   gap: 5%;
@@ -51,7 +51,7 @@
 }
 
 /* Puts 3 form controls next to each other */
-.forms-triple-field{
+.forms-triple-field {
   align-self: center;
   width: 94%;
   gap: 5%;
@@ -61,7 +61,8 @@
 }
 
 /* Allows the form fields within double and triple fields to take up all the space in the the column */
-.forms-double-field .forms-field, .forms-triple-field .forms-field{
+.forms-double-field .forms-field,
+.forms-triple-field .forms-field {
   width: 100%;
 }
 
@@ -75,7 +76,7 @@
   align-self: center;
   height: 2.5rem;
   margin: 0.3rem 0;
-  padding: 0 .5rem ;
+  padding: 0 .5rem;
   border-radius: var(--button-radius);
   border: 1px solid var(--color-secondary3);
   background-color: var(--color-background3);
@@ -86,9 +87,7 @@
   color-scheme: dark;
 }
 
-select.forms-input {
-  
-}
+select.forms-input {}
 
 .forms-input:focus {
   outline: none;
@@ -97,7 +96,7 @@ select.forms-input {
 }
 
 
-.forms-date-picker{
+.forms-date-picker {
   color-scheme: dark;
 }
 
@@ -141,4 +140,31 @@ select.forms-input {
 .forms-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .forms-field {
+    width: 95%;
+  }
+
+.forms-double-field, .forms-triple-field {
+  width: 95%;
+  gap: 2.5rem;
+}
+}
+
+
+@media (max-width: 550px) {
+  .movie-form-container {
+    margin: 0px;
+  }
+    .forms-field {
+    width: 100%;
+    margin: 0rem;
+  }
+
+  .forms-double-field, .forms-triple-field {
+  width: 100%;
+  gap: 2rem;
+}
 }

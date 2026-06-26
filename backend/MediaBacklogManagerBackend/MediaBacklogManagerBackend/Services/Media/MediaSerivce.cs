@@ -36,16 +36,16 @@ namespace MediaBacklogManagerBackend.Services.Media
         }
 
 
-        protected async Task<bool> CheckExistsAsync(string title, DateTime? releaseDate)
+        protected async Task<T?> CheckExistsAsync(string title, DateTime? releaseDate)
         {
             if (!releaseDate.HasValue)
-                return false;
+                return null;
 
             var date = releaseDate.Value.Date;
             var nextDay = date.AddDays(1);
             var normalizedTitle = title.Trim().ToLowerInvariant();
 
-            return await dbSet.AnyAsync(m =>
+            return await dbSet.FirstOrDefaultAsync(m =>
                 m.Title.ToLower() == normalizedTitle &&
                 m.ReleaseDate.HasValue &&
                 m.ReleaseDate.Value >= date &&

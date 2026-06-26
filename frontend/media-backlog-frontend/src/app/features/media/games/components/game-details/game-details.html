@@ -13,9 +13,9 @@
     <div class="details-row">
         <span class="details-label">Platforms</span>
 
-        <div class="details-platforms">
+        <div class="details-tag-list">
             @for (platform of game.platforms; track platform.id) {
-            <span class="details-tag">
+            <span class="details-tag" (click)="searchPlatform(platform.name)">
                 {{ platform.name }}
             </span>
             }

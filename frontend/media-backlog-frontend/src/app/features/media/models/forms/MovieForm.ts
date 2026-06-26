@@ -1,6 +1,7 @@
-import { MediaForm } from "./MediaForm";
+import { BaseForm } from "./BaseForm";
 
-export interface MovieForm extends MediaForm {
+export interface MovieForm extends BaseForm {
+    mediaType: 'movie';
     director: string;
     runTime: number
     contentRating: string;

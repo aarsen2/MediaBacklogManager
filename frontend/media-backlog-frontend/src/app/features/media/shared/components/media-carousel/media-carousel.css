@@ -37,3 +37,17 @@
     background-color: #111;
 
 }
+
+
+@media (max-width: 550px) {
+    .container {
+        padding: .5rem;
+    }
+    .MediaCarousel {
+        display: flex;
+        gap: .5rem;
+        overflow-x: scroll;
+        padding: .25rem;
+        scroll-snap-type: x mandatory;
+    }
+}

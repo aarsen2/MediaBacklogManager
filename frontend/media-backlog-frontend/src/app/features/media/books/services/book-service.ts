@@ -23,21 +23,22 @@ export class BookService {
   getAllBooks(): Observable<ReadBookDto[]> {
     return this.BookApi.getBooks();
   }
-  
-    mapCreateDto(bookFrom: BookForm): CreateBookDto {
-       return {
-          // MediaBase / CreateMediaBase fields
-          title: bookFrom.title,
-          description: bookFrom.description,
-          releaseDate: bookFrom.releaseDate,
-          genres: bookFrom.genres ?? [],
-          generalRating: bookFrom.userRating,
-          assets: [],
-  
-          // Book-specific fields
-          author: bookFrom.author,
-          language: bookFrom.language,
-          pageCount: bookFrom.pageCount
-      };
-    }
+
+  mapCreateDto(bookFrom: BookForm): CreateBookDto {
+    return {
+      type: 'book',
+      // MediaBase / CreateMediaBase fields
+      title: bookFrom.title,
+      description: bookFrom.description,
+      releaseDate: bookFrom.releaseDate,
+      genres: bookFrom.genres ?? [],
+      generalRating: bookFrom.userRating,
+      assets: [],
+
+      // Book-specific fields
+      author: bookFrom.author,
+      language: bookFrom.language,
+      pageCount: bookFrom.pageCount
+    };
+  }
 }

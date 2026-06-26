@@ -1,0 +1,31 @@
+@if(report) {
+<div class="report">
+    <h1 class="report-title">{{report.title}}</h1>
+    <p class="report-date">Generated on {{report.generatedAt | date:"MMM dd, yyyy 'at' hh:mm a"}}</p>
+    <div class="separator"></div>
+    <div class="report-table scrollable">
+
+        <div class="report-headers">
+            <div class="report-header">Media Type</div>
+            <div class="report-header">Completed</div>
+            <div class="report-header">Avg. Age</div>
+            <div class="report-header">Average</div>
+            <div class="report-header">Minimum</div>
+            <div class="report-header">Maximum</div>
+        </div>
+        <div class="report-content">
+
+            @for(reportItem of report.timeToCompleteRows; track reportItem) {
+            <div class="report-row">
+                <div class="cell">{{reportItem.mediaType}}</div>
+                <div class="cell">{{reportItem.itemsCompleted}} Items</div>
+                <div class="cell">{{reportItem.averageAge | number: '1.2-2' }} days</div>
+                <div class="cell">{{reportItem.averageCompletionTime | number: '1.2-2' }} days</div>
+                <div class="cell">{{reportItem.minCompletionTime |number: '1.2-2' }} days</div>
+                <div class="cell">{{reportItem.maxCompletionTime | number: '1.2-2' }} days</div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+}

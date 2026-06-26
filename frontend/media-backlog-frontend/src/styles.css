@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import './styles/details.css';
 @import './styles/forms.css';
+@import './styles/UI.css';
+@import './styles/reports.css';
 
 :root {
     --color-background1: #0b1220;
@@ -12,7 +14,7 @@
     --color-text3: #94a3b8;
 
     --color-primary1: #38bdf8;
-    --color-primary2: #0ea5e9;
+    --color-primary2: #0e96d5;
     --color-primary3: #0369a1;
 
     --color-secondary1: #0f172a;
@@ -30,41 +32,43 @@
     background-color: var(--color-background1);
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-y: scroll;
 }
 
 body,
 html {
     margin: 0px;
     background-color: var();
-    height: 100%
+    height: 100%;
+
 }
 
 
 /* Dividers */
 /* With Text */
 .separator {
-  display: flex;
-  color: var(--color-text3);
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+    display: flex;
+    color: var(--color-text3);
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .separator::before,
 .separator::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid var(--color-secondary3);
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--color-secondary3);
 }
 
 .separator:not(:empty)::before {
-  margin-right: .25em;
+    margin-right: .25em;
 }
 
 .separator:not(:empty)::after {
-  margin-left: .25em;
+    margin-left: .25em;
 }
 
 
@@ -85,21 +89,17 @@ html {
 }
 
 .scrollable::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-        180deg,
-        var(--color-primary2),
-        var(--color-primary3)
-    );
+    background: linear-gradient(180deg,
+            var(--color-primary2),
+            var(--color-primary3));
     border-radius: 10px;
     border: 2px solid var(--color-background2);
 }
 
 .scrollable::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(
-        180deg,
-        var(--color-primary1),
-        var(--color-primary2)
-    );
+    background: linear-gradient(180deg,
+            var(--color-primary1),
+            var(--color-primary2));
 }
 
 .scrollable::-webkit-scrollbar-corner {

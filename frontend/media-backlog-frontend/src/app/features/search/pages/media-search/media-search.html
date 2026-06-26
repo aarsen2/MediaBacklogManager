@@ -1,0 +1,33 @@
+<div class="search-page">
+
+    <!-- 🔍 Top Search Bar -->
+    <div class="search-bar">
+        <input class="forms-input" #searchInput (keyup.enter)="search(searchInput.value)" placeholder="Search your media..." />
+        <button class="UI-button search-button" (click)="search(searchInput.value)">Search</button>
+    </div>
+
+    <!-- 📊 Results -->
+    <div class="results">
+        @if(results().results; as res) {
+
+        @if(res.length === 0 && hasSearched) {
+        @if(errorMessage() != null) {
+        <p class="search-error">{{errorMessage()}}</p>
+        }
+        @else {
+        <p class="no-results">No results found</p>
+        }
+        }
+
+        @if(res.length > 0) {
+        <div class="search-contents">
+            @for(item of res; track item.id) {
+            <app-media-card [item]="item"></app-media-card>
+            }
+        </div>
+        }
+
+        }
+    </div>
+
+</div>

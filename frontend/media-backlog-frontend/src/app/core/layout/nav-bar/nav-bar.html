@@ -5,13 +5,19 @@
     </a>
   </div>
 
+
   <div class="navButtons">
 
+    @if(authService.isLoggedInSignal()) {
 
     <div class="searchBar">
-      <input placeholder="search">
-      <span class="navButton squareButton material-symbols-outlined">search</span>
+      <input #searchInput placeholder="search" (keydown.enter)="search(searchInput.value)">
+      <span class="navButton squareButton material-symbols-outlined" (click)="search(searchInput.value)">search</span>
     </div>
+
+    <button routerLink="/search" class="reactive-search navButton squareButton" >
+      <span class="material-symbols-outlined">Search</span>
+    </button>
 
     <button routerLink="/home" (click)="closeProfile()" class="navButton squareButton">
       <span class="material-symbols-outlined">home</span>
@@ -21,7 +27,7 @@
       <span class="material-symbols-outlined">add</span>New
     </button>
 
-    <button routerLink="/media/create" class="navButton squareButton">
+    <button routerLink="/analytics" class="navButton squareButton">
       <span class="material-symbols-outlined">query_stats</span>
     </button>
 
@@ -33,9 +39,18 @@
       </button>
 
 
-      <app-profile-menu  (closeMenu)="closeProfile()" class="profileMenu" [hidden]="!profileMenuVisable"></app-profile-menu>
+      <app-profile-menu (closeMenu)="closeProfile()" class="profileMenu"
+        [hidden]="!profileMenuVisable"></app-profile-menu>
 
     </div>
+    }
+    @else {
+    <button routerLink="/login" class="navButton squareButton">
+      <span class="material-symbols-outlined">
+        login
+      </span>
+    </button>
+    }
 
   </div>
 </nav>

@@ -11,7 +11,7 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
         public GameContentRating ContentRating { get; set; }
         public ReadGameDto()
         {
-            Type = MediaType.game;
+            MediaType = MediaType.game;
         }
     }
 }

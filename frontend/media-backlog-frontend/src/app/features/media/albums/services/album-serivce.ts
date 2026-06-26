@@ -27,6 +27,7 @@ export class AlbumSerivce {
 
   mapCreateDto(albumForm: AlbumForm): CreateAlbumDto {
     return {
+      type: 'album',
       // MediaBase / CreateMediaBase fields
       title: albumForm.title,
       description: albumForm.description,
@@ -37,7 +38,7 @@ export class AlbumSerivce {
 
       // Album-specific fields
       runTime: albumForm.runTime,
-      trackCount: albumForm.TrackCount,
+      trackCount: albumForm.trackCount,
       artist: albumForm.artist
     };
   }

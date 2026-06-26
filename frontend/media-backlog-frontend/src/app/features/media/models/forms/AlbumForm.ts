@@ -1,8 +1,10 @@
-import { MediaForm } from "./MediaForm";
+import { BaseForm } from "./BaseForm";
 
-export interface AlbumForm extends MediaForm {
+export interface AlbumForm extends BaseForm {
+    mediaType: 'album';
+
     artist: string;
     runTime: number
-    TrackCount: number
+    trackCount: number
 
 }

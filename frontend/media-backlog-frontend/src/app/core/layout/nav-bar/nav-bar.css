@@ -20,9 +20,6 @@
 }
 
 .logo a:hover {
-  padding: 1rem;
-  text-decoration: none;
-  font-size: x-large;
   background-color: var(--color-background2);
   color: var(--color-text2);
 }
@@ -42,6 +39,7 @@
 .navButtons {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navButton {
@@ -157,4 +155,61 @@
   background-color: var(--color-primary3);
 }
 
+.reactive-search {
+  display: none;
+}
 
+
+
+@media (max-width: 900px) {
+  .logo a {
+    font-size: 1.1rem;
+    padding: .5rem;
+  }
+
+  .reactive-search {
+    display: block;
+  }
+
+  .searchBar {
+    display: none;
+  }
+
+  .textButton {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .textButton .material-symbols-outlined {
+    font-size: 24px;
+  }
+
+  .navButton {
+    margin: .25rem;
+  }
+}
+
+
+
+@media (max-width: 550px) {
+  .logo a {
+    font-size: 1rem;
+    padding: .5rem;
+  }
+
+  .reactive-search {
+    display: block;
+  }
+
+
+
+  .navButton {
+    margin: .1rem;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+
+
+}

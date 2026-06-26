@@ -1,7 +1,10 @@
-<h1>Home</h1>
+<h1 class="title">Home</h1>
 
 <!--Ensures that the dashboaard data is usable  -->
 @if (dashboard(); as data) {
+
+
+@if (hasAnyItems()) {
 
 
 <!-- Creates a media carousel for each section -->
@@ -10,10 +13,18 @@
 
 <!-- Only show sections with items -->
 @if (section.items.length > 0) {
-<h2>{{section.title}}</h2>
+<h2 class="section-title">{{section.title}}</h2>
 <app-media-carousel [items]="section.items"></app-media-carousel>
 }
 }
+} @else{
+    <div class="no-media-container">
+        <div class="no-media">
+            <h3>Add some media to get started</h3>
+            <button class="UI-button" routerLink="/media/create">Add Media</button> 
+        </div>
+    </div>
+} 
 } @else {
-<p>Loading...</p>
+<p>Loading</p>
 }

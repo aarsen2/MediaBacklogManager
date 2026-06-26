@@ -3,6 +3,8 @@ import { Login } from './core/auth/pages/login/login';
 import { authGuard } from './core/auth/auth-guard';
 import { Logout } from './core/auth/pages/logout/logout';
 import { CreateAccount } from './core/auth/pages/create-account/create-account';
+import { Analytics } from './features/analytics/pages/analytics/analytics';
+import { MediaSearch } from './features/search/pages/media-search/media-search';
 
 export const routes: Routes = [
     {
@@ -21,6 +23,14 @@ export const routes: Routes = [
     {
         path: 'register',
         component: CreateAccount
+    },
+    {
+        path: 'analytics',
+        component: Analytics
+    },
+    {
+        path: 'search',
+        component: MediaSearch
     },
     {
         path: 'home',

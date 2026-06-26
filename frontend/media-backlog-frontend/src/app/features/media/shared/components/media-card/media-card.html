@@ -1,0 +1,9 @@
+@if(item) {
+<div class="MediaCard" (click)="viewItem(item)">
+    <span class="icon material-symbols-outlined">
+        {{getMediaIcon()}}
+    </span>
+    <h1 class="title">{{ item.title }}</h1>
+    <p class="description">{{ item.description }}</p>
+</div>
+}

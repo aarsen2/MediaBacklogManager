@@ -23,13 +23,12 @@ namespace MediaBacklogManagerBackend.Services.Media
         {
             Console.WriteLine($"Creating Song: {songDto.Title}");
 
-            bool exists = await CheckExistsAsync(songDto.Title, songDto.ReleaseDate);
+            var song = await CheckExistsAsync(songDto.Title, songDto.ReleaseDate);
 
-            Console.WriteLine($"Song Exists: {exists}");
-            if (exists)
-                return null;
+            if (song != null)
+                return song;
 
-            var song = await MapSongCreation(songDto);
+            song = await MapSongCreation(songDto);
 
             return await CreateAsync(song, userId);
 

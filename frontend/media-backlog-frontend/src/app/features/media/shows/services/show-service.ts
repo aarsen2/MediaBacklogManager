@@ -26,20 +26,21 @@ export class ShowService {
   }
 
   mapCreateDto(showForm: ShowForm): CreateShowDto {
-       return {
-          // MediaBase / CreateMediaBase fields
-          title: showForm.title,
-          description: showForm.description,
-          releaseDate: showForm.releaseDate,
-          genres: showForm.genres ?? [],
-          generalRating: showForm.userRating,
-          assets: [],
-  
-          // Show-specific fields
-          EpisodeCount: showForm.episodeCount,
-          seasonCount: showForm.seasonCount,
-          contentRating: showForm.contentRating
-          
-      };
-    }
+    return {
+      type: 'show',
+      // MediaBase / CreateMediaBase fields
+      title: showForm.title,
+      description: showForm.description,
+      releaseDate: showForm.releaseDate,
+      genres: showForm.genres ?? [],
+      generalRating: showForm.userRating,
+      assets: [],
+
+      // Show-specific fields
+      episodeCount: showForm.episodeCount,
+      seasonCount: showForm.seasonCount,
+      contentRating: showForm.contentRating
+
+    };
+  }
 }
