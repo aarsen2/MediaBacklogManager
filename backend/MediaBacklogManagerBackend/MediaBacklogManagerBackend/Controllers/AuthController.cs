@@ -26,7 +26,7 @@ namespace MediaBacklogManagerBackend.Controllers
 
 
             Console.WriteLine("Logging in...");
-            var result = await _authService.login(credentials);
+            var result = await _authService.Login(credentials);
             Console.WriteLine(result);
             if (result == null)
                 return Unauthorized();

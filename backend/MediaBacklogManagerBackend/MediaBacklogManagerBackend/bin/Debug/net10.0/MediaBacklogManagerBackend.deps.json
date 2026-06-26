@@ -13,7 +13,8 @@
           "Microsoft.AspNetCore.OpenApi": "10.0.8",
           "Microsoft.EntityFrameworkCore": "10.0.8",
           "Microsoft.EntityFrameworkCore.Design": "10.0.8",
-          "Microsoft.EntityFrameworkCore.Sqlite": "10.0.8"
+          "Microsoft.EntityFrameworkCore.Sqlite": "10.0.8",
+          "SQLitePCLRaw.lib.e_sqlite3": "2.1.11"
         },
         "runtime": {
           "MediaBacklogManagerBackend.dll": {}

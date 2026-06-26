@@ -36,7 +36,7 @@ namespace MediaBacklogManagerBackend.Services
         }
 
 
-        internal async Task<AuthResponse?> login(CredentialDto credentials)
+        public async Task<AuthResponse?> Login(CredentialDto credentials)
         {
             var user = await _userManager.FindByNameAsync(credentials.Username);
 
@@ -104,12 +104,14 @@ namespace MediaBacklogManagerBackend.Services
         {
             //Checks for user with same username
             Debug.WriteLine("Checking if account with matching username already exists");
+            bool exists = false;
             var user = await _userManager.FindByNameAsync(newUserDto.Username);
             var errors = new AuthResponse();
 
             if (user != null)
             {
                 errors.Errors.Add("An account with this username already exists");
+                exists = true;
             }
 
             //checks for user with same email
@@ -118,27 +120,38 @@ namespace MediaBacklogManagerBackend.Services
             if (user != null)
             {
                 errors.Errors.Add("An account with this email already exists");
+                exists = true;
+            }
+
+            //returns account conflict errors if any have been found
+            if (errors.Errors.Count > 0)
+            {
+                return errors;
             }
 
 
-            //Creates new user
-            user = new User
+            if (exists == false)
             {
-                UserName = newUserDto.Username,
-                DisplayName = newUserDto.DisplayName,
-                Email = newUserDto.Email,
+                //Creates new user
+                user = new User
+                {
+                    UserName = newUserDto.Username,
+                    DisplayName = newUserDto.DisplayName,
+                    Email = newUserDto.Email,
 
-                //For Testing. Will be removed once an email confirmation system has been created
-                EmailConfirmed = true
-            };
-            var result = await _userManager.CreateAsync(user, newUserDto.Password);
+                    //For Testing. Will be removed once an email confirmation system has been created
+                    EmailConfirmed = true
+                };
+                //Checks for successful creation
+                var result = await _userManager.CreateAsync(user, newUserDto.Password);
 
-            Debug.WriteLine(user);
+                Debug.WriteLine(user);
 
-            //Checks for successful creation
-            if (!result.Succeeded)
-            {
-                errors.Errors.AddRange(result.Errors.Select(e => e.Description).ToList());
+                if (!result.Succeeded)
+                {
+                    errors.Errors.AddRange(result.Errors.Select(e => e.Description).ToList());
+                }
+
             }
 
             //returns errors if any have been found
@@ -148,7 +161,7 @@ namespace MediaBacklogManagerBackend.Services
             }
 
 
-
+                
             //Adds account to the User Role
             if (!await _userManager.IsInRoleAsync(user, "User"))
             {
