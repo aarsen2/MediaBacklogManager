@@ -265,6 +265,42 @@
         }
       }
     },
+    "/api/backlog/genres": {
+      "get": {
+        "tags": [
+          "Backlog"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/backlog/platforms": {
+      "get": {
+        "tags": [
+          "Backlog"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/backlog/export": {
+      "get": {
+        "tags": [
+          "Backlog"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/search": {
       "get": {
         "tags": [

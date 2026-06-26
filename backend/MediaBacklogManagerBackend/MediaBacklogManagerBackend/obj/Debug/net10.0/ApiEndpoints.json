@@ -189,6 +189,26 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "ExportBacklog",
+    "RelativePath": "api/backlog/export",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "GetAllGenres",
+    "RelativePath": "api/backlog/genres",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
     "Method": "GetBacklogItem",
     "RelativePath": "api/backlog/item/{id}",
     "HttpMethod": "GET",
@@ -238,6 +258,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "GetAllPlatforms",
+    "RelativePath": "api/backlog/platforms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

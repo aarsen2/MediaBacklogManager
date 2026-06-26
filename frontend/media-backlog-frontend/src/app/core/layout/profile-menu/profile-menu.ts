@@ -24,11 +24,17 @@ export class ProfileMenu {
     this.closeMenu.emit();
   }
   
-  // username = signal<string>("");
-  // constructor() {
-  //   this.username.set(this.userService.getUsername());
-  //   console.log(this.username())
-  // }
+getName() {
+  let username = this.userService.user()?.displayName
 
+  if (username == null) {
+    username = this.userService.user()?.username;
+  }
+  if (username == null) {
+    username = "User"
+  }
+  
+  return username;
+}
 
 }

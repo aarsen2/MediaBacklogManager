@@ -119,3 +119,38 @@
     cursor: pointer;
     color: var(--color-text3)
 }
+
+@media (max-width: 900px) {
+    .loginContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .feature-list {
+        display: none;
+    }
+    .content {
+        align-self: center;
+        margin: auto;
+    }
+    .content-cta {
+        display: none;
+    }
+}
+@media (max-width: 550px) {
+
+    .content-title {
+        font-size: x-large;
+        margin: auto;
+        padding: auto;
+    }
+    .content {
+        padding: 1rem;
+    }
+    .content-subtitle {
+        display: none;
+    }
+}

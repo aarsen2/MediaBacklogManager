@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { MediaBacklogService } from '../../../../backlog/services/media-backlog-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,7 @@ import { ReadSongDto } from '../../../models/read/ReadSongDto';
 import { ReadGameDto } from '../../../models/read/ReadGameDto';
 import { ReadBookDto } from '../../../models/read/ReadBookDto';
 import { ReadAlbumDto } from '../../../models/read/ReadAlbumDto';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-media-edit',
@@ -35,6 +36,14 @@ import { ReadAlbumDto } from '../../../models/read/ReadAlbumDto';
 })
 export class MediaEdit {
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.genre-wrapper')) {
+      this.filteredGenres = [];
+    }
+  }
+
 
   //injection
   private backlogService = inject(MediaBacklogService)
@@ -47,6 +56,12 @@ export class MediaEdit {
   errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
   backlogItem = signal<ReadBacklogItemDto | null>(null);
+  filteredGenres: string[] = [];
+  possibleGenres = toSignal(
+    this.backlogService.getGenres(),
+    { initialValue: [] as string[] }
+  )
+
 
   ngOnInit() {
     console.log("Initializing edit form")
@@ -97,9 +112,9 @@ export class MediaEdit {
     return rawDate ? new Date(rawDate).toISOString().split('T')[0] : null
   }
 
-  addGenre() {
-    console.log("adding Genre")
-    const value = this.form.value.genreInput?.trim();
+  addGenre(genre?: string | null) {
+
+    const value = !genre ? this.form.value.genreInput?.trim() : genre;
     console.log(value)
 
     if (!value) return;
@@ -137,6 +152,24 @@ export class MediaEdit {
 
   }
 
+  onGenreInput() {
+    const value = this.form.value.genreInput?.toLowerCase() ?? "";
+
+    if (!value) {
+      this.filteredGenres = [];
+      return;
+    }
+    const selected = this.form.value.genres as string[];
+
+    this.filteredGenres = this.possibleGenres().filter(g =>
+      g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
+    ).sort((a, b) => a.localeCompare(b));
+  }
+
+  selectFromList(genre: string) {
+    this.addGenre(genre);
+    this.filteredGenres = [];
+  }
 
   private mapBase(formValue: any): BaseForm {
     return {

@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValueChangeEvent } from '@angular/forms';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MovieCreationForm } from '../../../movies/components/movie-creation-form/movie-creation-form';
 import { ShowCreationForm } from '../../../shows/components/show-creation-form/show-creation-form';
 import { AlbumCreationForm } from '../../../albums/components/album-creation-form/album-creation-form';
@@ -10,15 +10,35 @@ import { BaseForm } from '../../../models/forms/BaseForm';
 import { MediaBacklogService } from '../../../../backlog/services/media-backlog-service';
 import { TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { HomePage } from '../../../../home/pages/home-page/home-page';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 @Component({
   selector: 'app-media-creation',
-  imports: [TitleCasePipe,ReactiveFormsModule, MovieCreationForm, ShowCreationForm, AlbumCreationForm, BookCreationForm, GameCreationForm, SongCreationForm],
+  standalone: true,
+  imports: [TitleCasePipe,
+    ReactiveFormsModule,
+    MovieCreationForm,
+    ShowCreationForm,
+    AlbumCreationForm,
+    BookCreationForm,
+    GameCreationForm,
+    SongCreationForm],
   templateUrl: './media-creation.html',
   styleUrl: './media-creation.css',
 })
 export class MediaCreation {
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.genre-wrapper')) {
+      this.filteredGenres = [];
+    }
+  }
 
   //injection
   private backlogService = inject(MediaBacklogService)
@@ -26,9 +46,14 @@ export class MediaCreation {
   private router = inject(Router)
 
   //inital variable setting
-  successMessage = signal<string|null>(null) 
-  errorMessage = signal<string|null>(null) 
+  successMessage = signal<string | null>(null)
+  errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
+  filteredGenres: string[] = [];
+  possibleGenres = toSignal(
+    this.backlogService.getGenres(),
+    { initialValue: [] as string[] }
+  )
 
 
   form = this.formBuilder.group({
@@ -44,9 +69,9 @@ export class MediaCreation {
     notes: [''],
   });
 
-  addGenre() {
-    console.log("adding Genre")
-    const value = this.form.value.genreInput?.trim();
+  addGenre(genre?: string | null) {
+
+    const value = !genre ? this.form.value.genreInput?.trim() : genre;
     console.log(value)
 
     if (!value) return;
@@ -75,15 +100,32 @@ export class MediaCreation {
     });
   }
 
-  // optional: allow comma to add
+
   handleKeydown(event: KeyboardEvent) {
     if (event.key === ',' || event.key === 'Enter') {
       event.preventDefault();
       this.addGenre();
     }
-
   }
 
+
+  onGenreInput() {
+    const value = this.form.value.genreInput?.toLowerCase() ?? "";
+
+    if (!value) {
+      this.filteredGenres = [];
+      return;
+    }
+    const selected = this.form.value.genres as string[];
+
+    this.filteredGenres = this.possibleGenres().filter(g =>
+      g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
+    ).sort((a, b) => a.localeCompare(b));
+  }
+
+  selectFromList(genre: string) {
+    this.addGenre(genre);
+  }
 
   private mapBase(formValue: any): BaseForm {
     return {

@@ -3,21 +3,13 @@
 <div class="profileMenu">
 
   <div class="profileHeader">
-    <h3 class="username">{{ userService.user()?.username }}</h3>
+    <h3 class="username">{{ getName() }}</h3>
   </div>
 
   <div class="profileButtons">
 
-    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
-      Profile
-    </a>
-
-    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
-      Preferences
-    </a>
-
-    <a class="profileButton" routerLink="/home" (click)="onNavigate()">
-      Export / Import Data
+    <a class="profileButton" routerLink="/export" (click)="onNavigate()">
+      Export Data
     </a>
 
     <div class="divider"></div>

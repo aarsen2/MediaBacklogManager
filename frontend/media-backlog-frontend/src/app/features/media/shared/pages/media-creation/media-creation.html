@@ -51,7 +51,7 @@
 
 
         <!-- Genres -->
-        <div class="forms-field">
+        <div class="forms-field genre-wrapper" >
             <label class="forms-label">Genres</label>
             <div class="chips">
                 @for (genre of form.value.genres; track genre) {
@@ -61,9 +61,21 @@
                 }
             </div>
 
-            <input class="forms-input" name="genreInput" formControlName="genreInput" type="text"
-                (keydown.enter)="addGenre()" (keydown)="handleKeydown($event)"
+            <input class="forms-input" name="genreInput" (input)="onGenreInput()" formControlName="genreInput"
+                type="text" list="genreList" (keydown.enter)="addGenre()" (keydown)="handleKeydown($event)"
                 placeholder="Type a genre and press Enter" />
+
+
+            @if (filteredGenres.length > 0) {
+            <div class="forms-dropdown scrollable">
+                @for (genre of filteredGenres; track genre) {
+                <div class="forms-dropdown-item" (click)="selectFromList(genre)">
+                    {{ genre }}
+                </div>
+                }
+            </div>
+            }
+
         </div>
 
 
@@ -131,7 +143,7 @@
 
         <!-- Submit -->
         <button class="UI-button" type="submit" [disabled]="isSubmitting">
-            {{ isSubmitting ? 'Creating...' : ('Create ' + ((form.value.mediaType || 'Item')) | titlecase) }} 
+            {{ isSubmitting ? 'Creating...' : ('Create ' + ((form.value.mediaType || 'Item')) | titlecase) }}
         </button>
 
     </form>

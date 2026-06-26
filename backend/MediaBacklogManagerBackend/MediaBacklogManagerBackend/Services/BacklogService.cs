@@ -279,12 +279,6 @@ namespace MediaBacklogManagerBackend.Services
                     Status = newUserMedia.Status
                 };
 
-                var success = await UserMediaService.UpdateMediaAsync(updateUserMediaDto, userId);
-
-                if (!success)
-                {
-                    throw new InvalidOperationException("Unable to update user media entry");
-                }
 
                 var media = newUserMedia.Media;
 
@@ -318,6 +312,13 @@ namespace MediaBacklogManagerBackend.Services
                         throw new InvalidDataException("Unknown media type");
                 }
 
+                var success = await UserMediaService.UpdateMediaAsync(updateUserMediaDto, userId);
+
+                if (!success)
+                {
+                    throw new InvalidOperationException("Unable to update user media entry");
+                }
+
                 await transaction.CommitAsync();
                 return;
             }
@@ -328,6 +329,62 @@ namespace MediaBacklogManagerBackend.Services
                 throw;
             }
 
+        }
+
+        internal async Task<ReadFullBacklogDto> ExportBacklogAsync(string userId)
+        {
+            var userMediaItems = await dbContext.UserMedia
+                .Include(um => um.Media)
+                .Where(um => um.UserId == userId)
+                .ToListAsync();
+
+
+            var results = new List<ReadUserMediaDto>();
+
+            foreach (var userMedia in userMediaItems)
+            {
+                // Get fully populated media (genres, platforms, assets, etc.)
+                var fullMedia = await GetMediaItem(userMedia.MediaId);
+
+                if (fullMedia == null)
+                {
+                    continue;
+                }
+
+                var dto = BacklogMapper.MapUserMediaRead(userMedia, fullMedia);
+
+                if (dto != null)
+                {
+                    results.Add(dto);
+                }
+            }
+
+            return new ReadFullBacklogDto()
+            {
+                BacklogItems = results
+            };
+        }
+
+        internal async Task<List<string>> GetGenresAsync(string userId)
+        {
+            return await dbContext.UserMedia
+                .Include(m => m.Media)
+                .Include(m => m.Media.Genres)
+                .Where(m => m.UserId == userId)
+                .SelectMany(m => m.Media.Genres.Select(g => g.Name))
+                .Distinct()
+                .ToListAsync();
+        }
+
+        internal async Task<List<string>> GetPlatformsAsync(string userId)
+        {
+            return await dbContext.UserMedia
+                .Include(m => m.Media)
+                .Include(m => m.Media.Genres)
+                .Where(m => m.UserId == userId && m.Media is Game)
+                .SelectMany(m => (m.Media as Game).Platforms.Select(g => g.Name))
+                .Distinct()
+                .ToListAsync();
         }
     }
 }

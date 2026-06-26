@@ -107,5 +107,59 @@ namespace MediaBacklogManagerBackend.Controllers
             }
 
         }
+
+
+        [HttpGet("genres")]
+        public async Task<ActionResult> GetAllGenres()
+        {
+            var userId = await UserService.GetCurrentUserId(User);
+            try
+            {
+                List<string> genres = await BacklogService.GetGenresAsync(userId);
+                return Ok(genres);
+            }
+            catch
+            {
+                return StatusCode(500, "an unexpected error occurred");
+            }
+
+        }
+        [HttpGet("platforms")]
+        public async Task<ActionResult> GetAllPlatforms()
+        {
+            var userId = await UserService.GetCurrentUserId(User);
+            try
+            {
+                List<string> genres = await BacklogService.GetPlatformsAsync(userId);
+                return Ok(genres);
+            }
+            catch
+            {
+                return StatusCode(500, "an unexpected error occurred");
+            }
+
+        }
+
+
+        [HttpGet("export")]
+        public async Task<ActionResult> ExportBacklog()
+        {
+            string userId = await UserService.GetCurrentUserId(User);
+
+            try
+            {
+                ReadFullBacklogDto backlog = await BacklogService.ExportBacklogAsync(userId);
+                return Ok(backlog);
+            }
+            catch
+            {
+                return StatusCode(500, "an unexpected error occurred");
+            }
+
+        }
+
+
+
+
     }
 }

@@ -42,14 +42,14 @@ export class MediaBacklogService {
     song: (p) => this.songService.createSong(p),
   };
 
-  getMediaHandlers: Record<string, (mediaId: any) => Observable<ReadMediaDto>> = {
-    movie: (p) => this.movieService.getMovie(p),
-    show: (p) => this.showService.getShow(p),
-    album: (p) => this.albumService.getAlbum(p),
-    book: (p) => this.bookService.getBook(p),
-    game: (p) => this.gameService.getGame(p),
-    song: (p) => this.songService.getSong(p),
-  };
+  // getMediaHandlers: Record<string, (mediaId: any) => Observable<ReadMediaDto>> = {
+  //   movie: (p) => this.movieService.getMovie(p),
+  //   show: (p) => this.showService.getShow(p),
+  //   album: (p) => this.albumService.getAlbum(p),
+  //   book: (p) => this.bookService.getBook(p),
+  //   game: (p) => this.gameService.getGame(p),
+  //   song: (p) => this.songService.getSong(p),
+  // };
 
 
 
@@ -88,6 +88,21 @@ export class MediaBacklogService {
   toggleFavorite(id: number): Observable<ReadBacklogItemDto> {
     return this.backlogApi.togglePriority(id);
   }
+
+  getGenres(): Observable<string[]> {
+    return this.backlogApi.getGenres();
+  }
+
+  getPlatforms(): Observable<string[]> {
+    return this.backlogApi.getPlatforms();
+  }
+
+
+  exportBacklog(): Observable<Blob> {
+    return this.backlogApi.exportBacklog();
+  }
+
+
 
 
   mapAddDto(mediaForm: BaseForm, mediaId: number): CreateUserMediaDto {

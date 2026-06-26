@@ -30,9 +30,11 @@ namespace MediaBacklogManagerBackend.Services
 
             dbContext.UserMedia.Add(userMedia);
             await dbContext.SaveChangesAsync();
+            await UpdateRatings(userMedia.MediaId);
 
             return userMedia;
         }
+
 
         internal async Task<bool> DeleteMediaAsync(int mediaID, string userId)
         {
@@ -123,6 +125,7 @@ namespace MediaBacklogManagerBackend.Services
             {
                 UserMediaMapper.MapMediaUpdate(userMedia, userMediaDto);
                 await dbContext.SaveChangesAsync();
+                await UpdateRatings(userMedia.MediaId);
                 return true;
             }
             catch
@@ -131,6 +134,27 @@ namespace MediaBacklogManagerBackend.Services
             }
         }
 
+        private async Task UpdateRatings(int mediaId)
+        {
+            var ratingsQuery = dbContext.UserMedia
+                .Where(m => m.MediaId == mediaId)
+                .Select(m => m.UserRating);
+
+            var media = await dbContext.Media
+                .FirstOrDefaultAsync(m => m.Id == mediaId);
+
+            if (media == null) return;
+
+            media.GeneralRating =
+                await ratingsQuery.AnyAsync()
+                    ? await ratingsQuery.AverageAsync()
+                    : 0;
+
+            await dbContext.SaveChangesAsync();
+
+            var media2 = await dbContext.Media
+             .FirstOrDefaultAsync(m => m.Id == mediaId);
+        }
 
         internal async Task<bool> CheckExists(int mediaId, string userId)
         {

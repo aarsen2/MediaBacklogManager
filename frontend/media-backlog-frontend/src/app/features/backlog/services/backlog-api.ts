@@ -29,6 +29,22 @@ export class BacklogApi {
   public updateBacklogItem(userMedia: UpdateBacklogItemDto, mediaId: string): Observable<string> {
     console.log("Updating Media Item: " + userMedia.media.title)
     console.log(userMedia)
-    return this.http.post(`${this.baseUrl}/item/${mediaId}/update`, userMedia, {responseType: 'text'})
+    return this.http.post(`${this.baseUrl}/item/${mediaId}/update`, userMedia, { responseType: 'text' })
+  }
+
+
+  public getGenres(): Observable<string[]> {
+    console.log("Getting all genres")
+    return this.http.get<string[]>(`${this.baseUrl}/genres`)
+  }
+
+  public getPlatforms(): Observable<string[]> {
+    console.log("Getting all genres")
+    return this.http.get<string[]>(`${this.baseUrl}/platforms`)
+
+  }
+
+  public exportBacklog(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/export`, { responseType: 'blob' })
   }
 }

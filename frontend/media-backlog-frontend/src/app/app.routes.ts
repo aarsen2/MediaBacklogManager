@@ -5,6 +5,8 @@ import { Logout } from './core/auth/pages/logout/logout';
 import { CreateAccount } from './core/auth/pages/create-account/create-account';
 import { Analytics } from './features/analytics/pages/analytics/analytics';
 import { MediaSearch } from './features/search/pages/media-search/media-search';
+import { ProfileView } from './core/user/pages/profile-view/profile-view';
+import { ExportData } from './core/user/pages/export-data/export-data';
 
 export const routes: Routes = [
     {
@@ -31,6 +33,14 @@ export const routes: Routes = [
     {
         path: 'search',
         component: MediaSearch
+    },
+    {
+        path: 'profile',
+        component: ProfileView
+    },
+    {
+        path: 'export',
+        component: ExportData
     },
     {
         path: 'home',

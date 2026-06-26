@@ -25,7 +25,7 @@
     </div>
 
     <!-- Platforms -->
-    <div class="forms-field">
+    <div class="forms-field platforms-wrapper">
         <label class="forms-label">Platforms</label>
         <div class="chips">
             @for (platform of gameForm.value.platforms; track platform) {
@@ -36,9 +36,19 @@
             }
         </div>
 
-        <input class="forms-input" formControlName="platformInput" type="text"
-            (keydown.enter)="addPlatform()" (keydown)="handleKeydown($event)"
-            placeholder="Type a platform and press Enter" />
+        <input class="forms-input" formControlName="platformInput" (input)="onPlatformInput()" type="text" (keydown.enter)="addPlatform()"
+            (keydown)="handleKeydown($event)" placeholder="Type a platform and press Enter" />
+
+
+        @if (filteredPlatforms.length > 0) {
+        <div class="forms-dropdown scrollable">
+            @for (platform of filteredPlatforms; track platform) {
+            <div class="forms-dropdown-item" (click)="selectFromList(platform)">
+                {{ platform }}
+            </div>
+            }
+        </div>
+        }
     </div>
 
 

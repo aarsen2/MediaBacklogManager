@@ -1,0 +1,35 @@
+.page-header {
+  color: var(--color-text1);
+  text-align: center;
+}
+
+.data-page {
+  color: var(--color-text1);
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: auto 5rem ;
+}
+
+
+.card {
+  background: var(--color-background2);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  margin-bottom: 1rem;
+  color: var(--color-text3)
+}
+
+input[type="file"] {
+  display: block;
+  margin-bottom: 1rem;
+}
