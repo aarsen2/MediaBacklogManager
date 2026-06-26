@@ -7,9 +7,7 @@
 
 .search-bar {
   display: flex;
-  gap: 10px;
-  padding: 16px;
-
+  padding: 1rem;
   background: var(--color-background2);
   border-bottom: 1px solid var(--color-tertiary1);
 }
@@ -53,4 +51,30 @@
   color: var(--color-error1);
 
   font-weight: 500;
+}
+
+
+@media (max-width: 900px ) {
+  .search-bar {
+    padding: 0rem;
+    padding-left: 1rem;
+  }
+
+  .UI-button {
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 550px ) {
+  .search-bar {
+    padding: 0rem;
+    padding-left: 1rem;
+  }
+  .forms-input {
+    width: 100%;
+  }
+
+  .UI-button {
+    margin: 1rem;
+  }
 }
