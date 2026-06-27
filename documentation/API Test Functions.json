@@ -273,7 +273,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "https://localhost:7170/api/show/28",
+                  "raw": "https://localhost:7170/api/show/42",
                   "protocol": "https",
                   "host": [
                     "localhost"
@@ -282,7 +282,7 @@
                   "path": [
                     "api",
                     "show",
-                    "28"
+                    "42"
                   ]
                 }
               },
@@ -675,7 +675,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "https://localhost:7170/api/game/38",
+                  "raw": "https://localhost:7170/api/game/21",
                   "protocol": "https",
                   "host": [
                     "localhost"
@@ -684,7 +684,7 @@
                   "path": [
                     "api",
                     "game",
-                    "38"
+                    "21"
                   ]
                 }
               },
@@ -809,7 +809,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "https://localhost:7170/api/movie/5",
+                  "raw": "https://localhost:7170/api/song/11",
                   "protocol": "https",
                   "host": [
                     "localhost"
@@ -817,8 +817,8 @@
                   "port": "7170",
                   "path": [
                     "api",
-                    "movie",
-                    "5"
+                    "song",
+                    "11"
                   ]
                 }
               },
@@ -1093,6 +1093,347 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "UserMedia",
+      "item": [
+        {
+          "name": "Read All User Media",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/user-media/",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "user-media",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Item to backlog",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  { \r\n    \"mediaId\": 60, \r\n    \"status\": \"Completed\", \r\n    \"prioritized\": true, \r\n    \"userRating\": 4.6, \r\n    \"notes\": \"Very strong finish\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/user-media/add",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "user-media",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Adds items 1-60 to the users backlog",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  { \"mediaId\": 1, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Haven't started yet\" },\r\n  { \"mediaId\": 2, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3, \"notes\": \"About halfway through\" },\r\n  { \"mediaId\": 3, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.5, \"notes\": \"Really solid overall\" },\r\n  { \"mediaId\": 4, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"Been meaning to start this one\" },\r\n  { \"mediaId\": 5, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 5, \"notes\": \"One of my favorites\" },\r\n  { \"mediaId\": 6, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2.5, \"notes\": \"Slow but interesting\" },\r\n  { \"mediaId\": 7, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"On the list\" },\r\n  { \"mediaId\": 8, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4, \"notes\": \"Good ending\" },\r\n  { \"mediaId\": 9, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3.5, \"notes\": \"Getting better each episode\" },\r\n  { \"mediaId\": 10, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Recommended by a friend\" },\r\n  { \"mediaId\": 11, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.2, \"notes\": \"Enjoyed the story\" },\r\n  { \"mediaId\": 12, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 3, \"notes\": \"Taking my time with it\" },\r\n  { \"mediaId\": 13, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"Looks really good\" },\r\n  { \"mediaId\": 14, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 5, \"notes\": \"Absolutely perfect\" },\r\n  { \"mediaId\": 15, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Not started yet\" },\r\n  { \"mediaId\": 16, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 4, \"notes\": \"Very engaging so far\" },\r\n  { \"mediaId\": 17, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 3.8, \"notes\": \"Good but not amazing\" },\r\n  { \"mediaId\": 18, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Waiting for free time\" },\r\n  { \"mediaId\": 19, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2, \"notes\": \"Hard to get into\" },\r\n  { \"mediaId\": 20, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4.7, \"notes\": \"Great experience overall\" },\r\n  { \"mediaId\": 21, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Queued up next\" },\r\n  { \"mediaId\": 22, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3.2, \"notes\": \"Slow start but improving\" },\r\n  { \"mediaId\": 23, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.1, \"notes\": \"Solid watch/read\" },\r\n  { \"mediaId\": 24, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"High interest item\" },\r\n  { \"mediaId\": 25, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 5, \"notes\": \"Amazing experience\" },\r\n  { \"mediaId\": 26, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2.8, \"notes\": \"A bit slow but okay\" },\r\n  { \"mediaId\": 27, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Haven’t started yet\" },\r\n  { \"mediaId\": 28, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4.6, \"notes\": \"Really enjoyable\" },\r\n  { \"mediaId\": 29, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3.9, \"notes\": \"Getting good\" },\r\n  { \"mediaId\": 30, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"On the backlog list\" },\r\n  { \"mediaId\": 31, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.3, \"notes\": \"Very satisfying ending\" },\r\n  { \"mediaId\": 32, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 3.1, \"notes\": \"Still in progress\" },\r\n  { \"mediaId\": 33, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"Recommended highly\" },\r\n  { \"mediaId\": 34, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.9, \"notes\": \"Nearly perfect\" },\r\n  { \"mediaId\": 35, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Waiting for motivation\" },\r\n  { \"mediaId\": 36, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 4.0, \"notes\": \"Really hooked now\" },\r\n  { \"mediaId\": 37, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 3.7, \"notes\": \"Pretty good overall\" },\r\n  { \"mediaId\": 38, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Not started yet\" },\r\n  { \"mediaId\": 39, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2.4, \"notes\": \"Struggling to continue\" },\r\n  { \"mediaId\": 40, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4.8, \"notes\": \"Excellent quality\" },\r\n  { \"mediaId\": 41, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"On the list\" },\r\n  { \"mediaId\": 42, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3.5, \"notes\": \"Getting interesting\" },\r\n  { \"mediaId\": 43, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.2, \"notes\": \"Really enjoyed it\" },\r\n  { \"mediaId\": 44, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"Looks promising\" },\r\n  { \"mediaId\": 45, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 5, \"notes\": \"Masterpiece\" },\r\n  { \"mediaId\": 46, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2.9, \"notes\": \"Slow pacing\" },\r\n  { \"mediaId\": 47, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Haven’t started yet\" },\r\n  { \"mediaId\": 48, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4.4, \"notes\": \"Very good overall\" },\r\n  { \"mediaId\": 49, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 3.6, \"notes\": \"Getting into it\" },\r\n  { \"mediaId\": 50, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Pending start\" },\r\n  { \"mediaId\": 51, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.0, \"notes\": \"Nice experience\" },\r\n  { \"mediaId\": 52, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 3.3, \"notes\": \"Still working through it\" },\r\n  { \"mediaId\": 53, \"status\": \"Backlog\", \"prioritized\": true, \"userRating\": 0, \"notes\": \"Highly recommended\" },\r\n  { \"mediaId\": 54, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 4.7, \"notes\": \"Great conclusion\" },\r\n  { \"mediaId\": 55, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"On hold\" },\r\n  { \"mediaId\": 56, \"status\": \"InProgress\", \"prioritized\": true, \"userRating\": 4.1, \"notes\": \"Really engaging\" },\r\n  { \"mediaId\": 57, \"status\": \"Completed\", \"prioritized\": false, \"userRating\": 3.9, \"notes\": \"Good overall\" },\r\n  { \"mediaId\": 58, \"status\": \"Backlog\", \"prioritized\": false, \"userRating\": 0, \"notes\": \"Not started yet\" },\r\n  { \"mediaId\": 59, \"status\": \"InProgress\", \"prioritized\": false, \"userRating\": 2.7, \"notes\": \"A bit slow\" },\r\n  { \"mediaId\": 60, \"status\": \"Completed\", \"prioritized\": true, \"userRating\": 4.6, \"notes\": \"Very strong finish\" }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/user-media/add-many",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "user-media",
+                "add-many"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Backlog Functions",
+      "item": [
+        {
+          "name": "GetDashboard",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/dashboard",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetBacklogItem",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/item/20",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "item",
+                "20"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateBacklogItem",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 16,\r\n    \"userId\": \"6a41defd-53ee-46a6-86b7-f756db105123\",\r\n    \"mediaId\": 13,\r\n    \"media\": {\r\n        \"type\": \"book\",\r\n        \"author\": \"Harper Lee\",\r\n        \"pageCount\": 281,\r\n        \"language\": \"English\",\r\n        \"id\": 13,\r\n        \"title\": \"To Kill a Mockingbird\",\r\n        \"description\": \"A story of racial injustice and moral growth in the American South.\",\r\n        \"assets\": [],\r\n        \"releaseDate\": \"1960-07-11T00:00:00\",\r\n        \"genres\": [\r\n            \"Southern Gothic\",\r\n            \"Coming-of-Age\",\r\n            \"Legal Drama\",\r\n            \"Social Commentary\"\r\n        ],\r\n        \"generalRating\": null,\r\n        \"mediaType\": \"book\"\r\n    },\r\n    \"status\": \"Backlog\",\r\n    \"prioritized\": false,\r\n    \"userRating\": 0,\r\n    \"notes\": \"Looks really good\",\r\n    \"dateAdded\": \"2026-06-19T17:34:23.2371788\",\r\n    \"dateCompleted\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/item/12/update",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "item",
+                "12",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllGenres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/genres",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "genres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllPlatforms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/platforms",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "platforms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllRecommenders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7170/api/backlog/recommenders",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "backlog",
+                "recommenders"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Completed Items Report",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/analytics/completed",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "analytics",
+                "completed"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Completed Items Last 7 Days",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7170/api/analytics/completed/7",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7170",
+              "path": [
+                "api",
+                "analytics",
+                "completed",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Priority Report",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Media Type Report",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Completion Time Report",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "auth": {
@@ -1100,7 +1441,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImFjM2JkNGE0LWI1MTQtNDllNy1hMWYxLTY5YzZmYmEzMmE4YyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImV4cCI6MTc4MTU2Mjc4MywiaXNzIjoiTWVkaWFCYWNrbG9nQXBpIiwiYXVkIjoiTWVkaWFCYWNrbG9nQ2xpZW50In0.3nJO5VbnfOUvAtD0wrzDVxGlIYm_2EZ2BM-uRP0NDlI",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjZhNDFkZWZkLTUzZWUtNDZhNi04NmI3LWY3NTZkYjEwNTEyMyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImV4cCI6MTc4MjU3OTYyNSwiaXNzIjoiTWVkaWFCYWNrbG9nQXBpIiwiYXVkIjoiTWVkaWFCYWNrbG9nQ2xpZW50In0.khZwvX-cVUqM6_LzxMJCxWMkZwntL3kY8SgloLt_kU8",
         "type": "string"
       }
     ]
