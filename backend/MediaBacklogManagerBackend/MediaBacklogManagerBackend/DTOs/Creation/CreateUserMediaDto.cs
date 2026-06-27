@@ -11,6 +11,8 @@ namespace MediaBacklogManagerBackend.DTOs.Creation
         public bool Prioritized { get; set; }
         public double UserRating { get; set; }
         public string Notes { get; set; }
+        public List<string> Recommenders { get; set; }
+
 
         public CreateUserMediaDto()
         {

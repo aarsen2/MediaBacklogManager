@@ -63,6 +63,21 @@
         }
 
 
+        @if (b.recommenders.length > 0) {
+
+        <div class="details-row">
+            <span class="details-label">Recommenders</span>
+            <div class="details-tag-list">
+                @for (recommender of b.recommenders; track recommender) {
+                <span class="details-tag" (click)="searchRecommender(recommender)">
+                    {{ recommender.name || recommender }}
+                </span>
+                }
+            </div>
+        </div>
+        }
+
+
 
 
         <p class="description">

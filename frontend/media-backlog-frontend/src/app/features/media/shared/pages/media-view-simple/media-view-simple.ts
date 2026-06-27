@@ -109,6 +109,14 @@ export class MediaViewSimple {
     })
   }
 
+  searchRecommender(recommenderName: string) {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        rec: recommenderName || null,
+      }
+    })
+  }
+
   searchGenre(genreName: string) {
     this.router.navigate(['/search'], {
       queryParams: {

@@ -10,6 +10,7 @@ namespace MediaBacklogManagerBackend.DTOs.Reading
         public string UserId { get; set; }
         public int MediaId { get; set; }
         public ReadMediaDto Media { get; set; }
+        public List<string> Recommenders { get; set; }
         public UserMediaStatus Status { get; set; }
         public bool Prioritized { get; set; }
         public double UserRating { get; set; }

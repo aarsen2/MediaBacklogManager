@@ -56,12 +56,12 @@ namespace MediaBacklogManagerBackend.Services
             }
             if (!string.IsNullOrWhiteSpace(parameters.RecommenderSearch))
             {
-                //var normalizedSearch = parameters.RecommenderSearch.ToLower();
+                var normalizedSearch = parameters.RecommenderSearch.ToLower();
 
-                //query = query.Where(m =>
-                //m.Media.Rec.Any(g =>
-                //    g.Name.ToLower()
-                //    .Contains(normalizedSearch)));
+                query = query.Where(m =>
+                m.Recommenders.Any(r =>
+                    r.Name.ToLower()
+                    .Contains(normalizedSearch)));
             }
 
             return new SearchResults

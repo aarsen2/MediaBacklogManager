@@ -38,6 +38,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     flex-direction: row-reverse;
+    margin: .5rem;
 }
 
 .details-tag {

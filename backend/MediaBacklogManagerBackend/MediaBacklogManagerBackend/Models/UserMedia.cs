@@ -24,6 +24,7 @@ namespace MediaBacklogManagerBackend.Models
         public string? Notes { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime? DateCompleted { get; set; }
+        public List<Recommender> Recommenders { get; set; } = new();
 
         public User? User { get; set; }
         public Models.Media.Media? Media { get; set; }

@@ -42,6 +42,7 @@ namespace MediaBacklogManagerBackend.Services
                 Prioritized = userMediaDto.Prioritized,
                 Status = userMediaDto.Status,
                 UserRating = userMediaDto.UserRating,
+                Recommenders = await GetRecommendersAsync(userMediaDto.Recommenders)
             };
         }
 
@@ -62,7 +63,7 @@ namespace MediaBacklogManagerBackend.Services
             };
         }
 
-        public void MapMediaUpdate(UserMedia userMedia, UpdateUserMediaDto userMediaDto)
+        public async Task MapMediaUpdateAsync(UserMedia userMedia, UpdateUserMediaDto userMediaDto)
         {
             userMedia.Status = userMediaDto.Status;
             userMedia.UserRating = userMediaDto.UserRating;
@@ -74,6 +75,47 @@ namespace MediaBacklogManagerBackend.Services
             }
             userMedia.Notes = userMediaDto.Notes;
             userMedia.Prioritized = userMediaDto.Prioritized;
+
+            userMedia.Recommenders = await GetRecommendersAsync(userMediaDto.Recommenders);
+        }
+
+
+        protected async Task<List<Recommender>> GetRecommendersAsync(List<string> recommenderStrings)
+        {
+            // Normalize for comparison only
+            var cleanedInputs = recommenderStrings
+                .Where(p => !string.IsNullOrWhiteSpace(p))
+                .Select(p => p.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            List<Recommender> recommenders = new List<Recommender>();
+            foreach (var recommenderString in cleanedInputs)
+            {
+                var normalizedRecommender = recommenderString.ToLower();
+                var recommender = await dbContext.Recommenders
+                    .FirstOrDefaultAsync(g => g.Name.ToLower() == normalizedRecommender);
+
+                if (recommender == null)
+                {
+                    recommender = new Recommender() { Name = recommenderString };
+
+                    await dbContext.Recommenders.AddAsync(recommender);
+                }
+                recommenders.Add(recommender);
+
+            }
+
+            return recommenders;
+        }
+
+        protected List<ReadRecommenderDto> ReadRecommenders(UserMedia userMedia)
+        {
+            return userMedia.Recommenders.Select(g => new ReadRecommenderDto
+            {
+                Id = g.Id,
+                Name = g.Name
+            }).ToList();
         }
     }
 }

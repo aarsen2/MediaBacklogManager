@@ -11,9 +11,6 @@ import { MediaBacklogService } from '../../../../backlog/services/media-backlog-
 import { TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @Component({
@@ -54,6 +51,11 @@ export class MediaCreation {
     this.backlogService.getGenres(),
     { initialValue: [] as string[] }
   )
+  filteredRecommenders: string[] = [];
+  possibleRecommenders = toSignal(
+    this.backlogService.getGenres(),
+    { initialValue: [] as string[] }
+  )
 
 
   form = this.formBuilder.group({
@@ -63,6 +65,8 @@ export class MediaCreation {
     description: ['', [Validators.maxLength(1000)]],
     genreInput: [''],
     genres: [[] as string[]],
+    recommenderInput: [''],
+    recommenders: [[] as string[]],
     status: ["Backlog"],
     prioritized: ["no"],
     userRating: [0],
@@ -92,40 +96,99 @@ export class MediaCreation {
 
     this.form.patchValue({ genreInput: '' });
   }
-
+  
   removeGenre(genre: string) {
     const genres = this.form.value.genres as string[];
     this.form.patchValue({
       genres: genres.filter(g => g !== genre)
     });
   }
-
-
-  handleKeydown(event: KeyboardEvent) {
+  
+  
+  handleGenreKeydown(event: KeyboardEvent) {
     if (event.key === ',' || event.key === 'Enter') {
       event.preventDefault();
       this.addGenre();
     }
   }
-
-
+  
+  
   onGenreInput() {
     const value = this.form.value.genreInput?.toLowerCase() ?? "";
-
+    
     if (!value) {
       this.filteredGenres = [];
       return;
     }
     const selected = this.form.value.genres as string[];
-
+    
     this.filteredGenres = this.possibleGenres().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
     ).sort((a, b) => a.localeCompare(b));
   }
-
-  selectFromList(genre: string) {
+  
+  selectGenreFromList(genre: string) {
     this.addGenre(genre);
   }
+  
+
+    addRecommender(recommender?: string | null) {
+  
+      const value = !recommender ? this.form.value.recommenderInput?.trim() : recommender;
+      console.log(value)
+  
+      if (!value) return;
+  
+      const recommenders = this.form.value.recommenders as string[];
+  
+      // prevent duplicates (case-insensitive)
+      const exists = recommenders.some(g => g.toLowerCase() === value.toLowerCase());
+      if (exists) {
+        this.form.patchValue({
+          recommenderInput: ''
+        });
+        return;
+      }
+  
+      recommenders.push(value);
+      this.form.patchValue({ recommenders: recommenders });
+  
+      this.form.patchValue({ recommenderInput: '' });
+    }
+  removeRecommender(recommender: string) {
+    const recommenders = this.form.value.recommenders as string[];
+    this.form.patchValue({
+      recommenders: recommenders.filter(g => g !== recommender)
+    });
+  }
+  handleRecommenderKeydown(event: KeyboardEvent) {
+    if (event.key === ',' || event.key === 'Enter') {
+      event.preventDefault();
+      this.addRecommender();
+    }
+  }
+
+  onRecommenderInput() {
+    const value = this.form.value.recommenderInput?.toLowerCase() ?? "";
+
+    if (!value) {
+      this.filteredRecommenders = [];
+      return;
+    }
+    const selected = this.form.value.recommenders as string[];
+
+    this.filteredRecommenders = this.possibleRecommenders().filter(g =>
+      g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
+    ).sort((a, b) => a.localeCompare(b));
+  }
+
+  selectRecommenderFromList(recommender: string) {
+    this.addRecommender(recommender);
+  }
+
+
+
+
 
   private mapBase(formValue: any): BaseForm {
     return {
@@ -134,6 +197,7 @@ export class MediaCreation {
       releaseDate: formValue.releaseDate,
       description: formValue.description,
       genres: formValue.genres ?? [],
+      recommenders: formValue.recommenders ?? [],
       status: formValue.status,
       prioritized: formValue.prioritized,
       userRating: formValue.userRating ?? 0,

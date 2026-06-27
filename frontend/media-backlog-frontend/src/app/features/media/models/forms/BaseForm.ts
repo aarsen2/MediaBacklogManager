@@ -4,6 +4,7 @@ export interface BaseForm {
     releaseDate: string
     description: string
     genres: string[]
+    recommenders: string[]
     status: string
     prioritized: string
     userRating: number

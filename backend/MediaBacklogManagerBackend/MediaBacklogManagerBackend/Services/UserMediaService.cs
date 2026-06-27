@@ -57,9 +57,10 @@ namespace MediaBacklogManagerBackend.Services
 
         private async Task<UserMedia?> GetUserMediaByMediaIdAsync(int mediaId, string userId)
         {
-            var userMedia = dbContext.UserMedia
+            var userMedia = await dbContext.UserMedia
+                .Include(m => m.Recommenders)
                 .Where(m => m.UserId == userId && m.MediaId == mediaId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (userMedia == null)
             {
@@ -71,7 +72,9 @@ namespace MediaBacklogManagerBackend.Services
 
         internal async Task<UserMedia?> GetUserMediaByIdAsync(int id, string userId)
         {
-            var userMedia = await dbContext.UserMedia.FindAsync(id);
+            var userMedia = await dbContext.UserMedia
+                .Include(um => um.Recommenders)
+                .FirstOrDefaultAsync(um => um.Id == id);
 
             if (userMedia == null)
             {
@@ -91,6 +94,7 @@ namespace MediaBacklogManagerBackend.Services
             var Media = await dbContext.UserMedia
                             .Include(m => m.User)
                             .Include(m => m.Media)
+                            .Include(m => m.Recommenders)
                             .Where(m => m.UserId == userId)
                             .ToListAsync();
             return Media.Select(UserMediaMapper.MapMediaRead).ToList();
@@ -99,7 +103,10 @@ namespace MediaBacklogManagerBackend.Services
         internal async Task<ReadUserMediaDto?> ReadByIdAsync(int id, string userId)
         {
 
-            var media = await dbContext.UserMedia.FindAsync(id);
+            var media = await dbContext.UserMedia
+                .Include(um => um.Recommenders)
+                .FirstOrDefaultAsync(um => um.Id == id);
+
             if (media == null)
             {
                 return null;
@@ -113,8 +120,12 @@ namespace MediaBacklogManagerBackend.Services
 
         internal async Task<bool> UpdateMediaAsync(UpdateUserMediaDto userMediaDto, string userId)
         {
+
+  
+
             var mediaId = userMediaDto.MediaId;
             var userMedia = await GetUserMediaByMediaIdAsync(mediaId, userId);
+
 
             if (userMedia == null)
             {
@@ -123,8 +134,19 @@ namespace MediaBacklogManagerBackend.Services
 
             try
             {
-                UserMediaMapper.MapMediaUpdate(userMedia, userMediaDto);
+                var media1 = await GetUserMediaByMediaIdAsync(16, userId);
+                var media2 = await GetUserMediaByMediaIdAsync(20, userId);
+
+
+                await UserMediaMapper.MapMediaUpdateAsync(userMedia, userMediaDto);
+
+                media1 = await GetUserMediaByMediaIdAsync(16, userId);
+                media2 = await GetUserMediaByMediaIdAsync(20, userId);
+
                 await dbContext.SaveChangesAsync();
+
+                media1 = await GetUserMediaByMediaIdAsync(16, userId);
+                media2 = await GetUserMediaByMediaIdAsync(20, userId);
                 await UpdateRatings(userMedia.MediaId);
                 return true;
             }

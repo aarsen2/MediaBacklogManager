@@ -96,6 +96,9 @@ export class MediaBacklogService {
   getPlatforms(): Observable<string[]> {
     return this.backlogApi.getPlatforms();
   }
+  getRecommenders(): Observable<string[]> {
+    return this.backlogApi.getRecommenders();
+  }
 
 
   exportBacklog(): Observable<Blob> {
@@ -127,6 +130,7 @@ export class MediaBacklogService {
       status: form.status,
       prioritized: priority,
       userRating: form.userRating,
+      recommenders: form.recommenders,
       notes: form.notes,
       media: this.buildMedia(form, mediaId)
     };

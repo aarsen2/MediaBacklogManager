@@ -9,7 +9,7 @@ export interface ReadBacklogItemDto {
   prioritized: boolean;
   userRating: number;
   notes?: string;
-
+  recommenders: any[];
   dateAdded: string;      
   dateCompleted?: string;
 

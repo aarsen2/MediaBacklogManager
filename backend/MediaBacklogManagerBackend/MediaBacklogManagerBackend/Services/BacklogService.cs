@@ -188,6 +188,7 @@ namespace MediaBacklogManagerBackend.Services
 
 
             var userMedia = await dbContext.UserMedia
+                .Include(m => m.Recommenders)
                 .FirstOrDefaultAsync(m => m.UserId == userId && m.MediaId == id);
 
 
@@ -268,6 +269,7 @@ namespace MediaBacklogManagerBackend.Services
 
             using var transaction = await dbContext.Database.BeginTransactionAsync();
 
+
             try
             {
                 UpdateUserMediaDto updateUserMediaDto = new UpdateUserMediaDto
@@ -276,11 +278,15 @@ namespace MediaBacklogManagerBackend.Services
                     MediaId = newUserMedia.MediaId,
                     Notes = newUserMedia.Notes,
                     Prioritized = newUserMedia.Prioritized,
-                    Status = newUserMedia.Status
+                    Status = newUserMedia.Status,
+                    Recommenders = newUserMedia.Recommenders,
                 };
 
 
+
+
                 var media = newUserMedia.Media;
+
 
                 switch (media)
                 {
@@ -312,14 +318,18 @@ namespace MediaBacklogManagerBackend.Services
                         throw new InvalidDataException("Unknown media type");
                 }
 
+              
+
                 var success = await UserMediaService.UpdateMediaAsync(updateUserMediaDto, userId);
 
+             
                 if (!success)
                 {
                     throw new InvalidOperationException("Unable to update user media entry");
                 }
 
                 await transaction.CommitAsync();
+
                 return;
             }
 
@@ -380,11 +390,22 @@ namespace MediaBacklogManagerBackend.Services
         {
             return await dbContext.UserMedia
                 .Include(m => m.Media)
-                .Include(m => m.Media.Genres)
                 .Where(m => m.UserId == userId && m.Media is Game)
-                .SelectMany(m => (m.Media as Game).Platforms.Select(g => g.Name))
+                .SelectMany(m => (m.Media as Game).Platforms.Select(p => p.Name))
                 .Distinct()
                 .ToListAsync();
+        }
+        internal async Task<List<string>> GetRecommendersAsync(string userId)
+        {
+            var recommenders = await dbContext.UserMedia
+                .Include(m => m.Media)
+                .Include(m => m.Recommenders)
+                .Where(m => m.UserId == userId && m.Media is Game)
+                .SelectMany(m => m.Recommenders.Select(r => r.Name))
+                .Distinct()
+                .ToListAsync();
+
+            return recommenders;
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using MediaBacklogManagerBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaBacklogManagerBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260627025519_AddedRecommenders")]
+    partial class AddedRecommenders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
@@ -162,7 +165,12 @@ namespace MediaBacklogManagerBackend.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("UserMediaId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserMediaId");
 
                     b.ToTable("Recommenders");
                 });
@@ -403,21 +411,6 @@ namespace MediaBacklogManagerBackend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RecommenderUserMedia", b =>
-                {
-                    b.Property<int>("RecommendersId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserMediaId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("RecommendersId", "UserMediaId");
-
-                    b.HasIndex("UserMediaId");
-
-                    b.ToTable("RecommenderUserMedia");
-                });
-
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Album", b =>
                 {
                     b.HasBaseType("MediaBacklogManagerBackend.Models.Media.Media");
@@ -593,6 +586,13 @@ namespace MediaBacklogManagerBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.Recommender", b =>
+                {
+                    b.HasOne("MediaBacklogManagerBackend.Models.UserMedia", null)
+                        .WithMany("Recommenders")
+                        .HasForeignKey("UserMediaId");
+                });
+
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.UserMedia", b =>
                 {
                     b.HasOne("MediaBacklogManagerBackend.Models.Media.Media", "Media")
@@ -663,21 +663,6 @@ namespace MediaBacklogManagerBackend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RecommenderUserMedia", b =>
-                {
-                    b.HasOne("MediaBacklogManagerBackend.Models.Recommender", null)
-                        .WithMany()
-                        .HasForeignKey("RecommendersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaBacklogManagerBackend.Models.UserMedia", null)
-                        .WithMany()
-                        .HasForeignKey("UserMediaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Song", b =>
                 {
                     b.HasOne("MediaBacklogManagerBackend.Models.Media.Album", null)
@@ -693,6 +678,11 @@ namespace MediaBacklogManagerBackend.Migrations
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.User", b =>
                 {
                     b.Navigation("UserMedia");
+                });
+
+            modelBuilder.Entity("MediaBacklogManagerBackend.Models.UserMedia", b =>
+                {
+                    b.Navigation("Recommenders");
                 });
 
             modelBuilder.Entity("MediaBacklogManagerBackend.Models.Media.Album", b =>

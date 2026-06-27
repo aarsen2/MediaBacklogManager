@@ -72,7 +72,10 @@ namespace MediaBacklogManagerBackend.Controllers
         [HttpPost("item/{mediaId}/update")]
         public async Task<ActionResult> UpdateItem(int mediaId, [FromBody] UpdateBacklogItemDto newUserMedia)
         {
+
             var userId = await UserService.GetCurrentUserId(User);
+
+      
 
 
             try
@@ -84,6 +87,7 @@ namespace MediaBacklogManagerBackend.Controllers
                 await BacklogService.UpdateItem(newUserMedia, userId);
 
                 var item = await BacklogService.GetBacklogItem(mediaId, userId);
+          
 
                 if (item == null)
                 {
@@ -130,8 +134,24 @@ namespace MediaBacklogManagerBackend.Controllers
             var userId = await UserService.GetCurrentUserId(User);
             try
             {
-                List<string> genres = await BacklogService.GetPlatformsAsync(userId);
-                return Ok(genres);
+                List<string> platforms = await BacklogService.GetPlatformsAsync(userId);
+                return Ok(platforms);
+            }
+            catch
+            {
+                return StatusCode(500, "an unexpected error occurred");
+            }
+
+        }
+
+        [HttpGet("recommenders")]
+        public async Task<ActionResult> GetAllRecommenders()
+        {
+            var userId = await UserService.GetCurrentUserId(User);
+            try
+            {
+                List<string> recommenders = await BacklogService.GetRecommendersAsync(userId);
+                return Ok(recommenders);
             }
             catch
             {

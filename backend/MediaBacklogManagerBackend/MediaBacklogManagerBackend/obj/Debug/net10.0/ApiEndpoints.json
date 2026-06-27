@@ -271,6 +271,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.BacklogController",
+    "Method": "GetAllRecommenders",
+    "RelativePath": "api/backlog/recommenders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.BookController",
     "Method": "ReadAllBooks",
     "RelativePath": "api/book",

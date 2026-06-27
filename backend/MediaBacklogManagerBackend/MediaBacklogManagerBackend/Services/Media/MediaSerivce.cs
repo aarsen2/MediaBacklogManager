@@ -91,15 +91,15 @@ namespace MediaBacklogManagerBackend.Services.Media
             foreach (var genreString in cleanedInputs)
             {
                 var normalizedGenre = genreString.ToLower();
-                var platform = await dbContext.Genres.FirstOrDefaultAsync(g => g.Name.ToLower() == normalizedGenre);
+                var genre = await dbContext.Genres.FirstOrDefaultAsync(g => g.Name.ToLower() == normalizedGenre);
 
-                if (platform == null)
+                if (genre == null)
                 {
-                    platform = new Genre() { Name = genreString };
+                    genre = new Genre() { Name = genreString };
 
-                    await dbContext.Genres.AddAsync(platform);
+                    await dbContext.Genres.AddAsync(genre);
                 }
-                genres.Add(platform);
+                genres.Add(genre);
 
             }
 

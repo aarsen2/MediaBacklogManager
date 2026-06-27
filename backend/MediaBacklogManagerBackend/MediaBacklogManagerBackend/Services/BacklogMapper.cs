@@ -36,6 +36,7 @@ namespace MediaBacklogManagerBackend.Services
                 Notes = userMedia.Notes,
                 DateAdded = userMedia.DateAdded,
                 DateCompleted = userMedia.DateCompleted,
+                Recommenders = userMedia.Recommenders.Select(r => r.Name).ToList(),
 
                 Media = MapMediaRead(media)
             };
@@ -227,6 +228,7 @@ namespace MediaBacklogManagerBackend.Services
             {
                 Id = b.Id,
                 Title = b.Title,
+                GeneralRating = b.GeneralRating,
                 ReleaseDate = b.ReleaseDate,
                 Description = b.Description,
                 Author = b.Author,

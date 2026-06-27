@@ -37,13 +37,16 @@ export class BacklogApi {
     console.log("Getting all genres")
     return this.http.get<string[]>(`${this.baseUrl}/genres`)
   }
-
   public getPlatforms(): Observable<string[]> {
-    console.log("Getting all genres")
+    console.log("Getting all Platforms")
     return this.http.get<string[]>(`${this.baseUrl}/platforms`)
 
   }
+  public getRecommenders(): Observable<string[]> {
+    console.log("Getting all Recommenders")
+    return this.http.get<string[]>(`${this.baseUrl}/recommenders`)
 
+  }
   public exportBacklog(): Observable<Blob> {
     return this.http.get(`${this.baseUrl}/export`, { responseType: 'blob' })
   }

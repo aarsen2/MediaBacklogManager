@@ -289,6 +289,18 @@
         }
       }
     },
+    "/api/backlog/recommenders": {
+      "get": {
+        "tags": [
+          "Backlog"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/backlog/export": {
       "get": {
         "tags": [
@@ -2060,6 +2072,12 @@
           },
           "notes": {
             "type": "string"
+          },
+          "recommenders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -2289,6 +2307,12 @@
               "null",
               "string"
             ]
+          },
+          "recommenders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "media": {
             "$ref": "#/components/schemas/UpdateMediaDto"
@@ -3235,6 +3259,12 @@
               "string"
             ],
             "format": "double"
+          },
+          "recommenders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "notes": {
             "type": [

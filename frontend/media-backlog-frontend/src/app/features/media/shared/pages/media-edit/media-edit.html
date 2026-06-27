@@ -63,6 +63,37 @@
         </div>
 
 
+        <!-- Recommenders  -->
+        <div class="forms-field genre-wrapper" >
+            <label class="forms-label">Recommenders</label>
+            <div class="chips">
+                @for (recommender of form.value.recommenders; track recommender) {
+                <div class="details-tag chip">
+                    {{ recommender }}<span class="material-symbols-outlined icon" (click)="removeRecommender(recommender)">close</span>
+                </div>
+                }
+            </div>
+
+            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()" formControlName="recommenderInput"
+                type="text" (keydown.enter)="addRecommender()" (keydown)="handleRecommenderKeydown($event)"
+                placeholder="Type a recommender and press Enter" />
+
+
+            @if (filteredRecommenders.length > 0) {
+            <div class="forms-dropdown scrollable">
+                @for (recommender of filteredRecommenders; track recommender) {
+                <div class="forms-dropdown-item" (click)="selectRecommenderFromList(recommender)">
+                    {{ recommender }}
+                </div>
+                }
+            </div>
+            }
+
+        </div>
+
+
+
+
         <!-- User Specific Items -->
         <div class="separator"></div>
 

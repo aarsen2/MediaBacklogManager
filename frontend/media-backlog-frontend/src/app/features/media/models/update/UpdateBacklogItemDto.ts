@@ -5,7 +5,8 @@ export interface UpdateBacklogItemDto {
     mediaId: string;
     status: string;
     prioritized: boolean;
-    userRating: number,
+    userRating: number;
+    recommenders: any[];
     notes: string;
     media: UpdateMediaDto;
 }

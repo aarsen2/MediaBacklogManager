@@ -62,14 +62,14 @@
             </div>
 
             <input class="forms-input" name="genreInput" (input)="onGenreInput()" formControlName="genreInput"
-                type="text" list="genreList" (keydown.enter)="addGenre()" (keydown)="handleKeydown($event)"
+                type="text" (keydown.enter)="addGenre()" (keydown)="handleGenreKeydown($event)"
                 placeholder="Type a genre and press Enter" />
 
 
             @if (filteredGenres.length > 0) {
             <div class="forms-dropdown scrollable">
                 @for (genre of filteredGenres; track genre) {
-                <div class="forms-dropdown-item" (click)="selectFromList(genre)">
+                <div class="forms-dropdown-item" (click)="selectGenreFromList(genre)">
                     {{ genre }}
                 </div>
                 }
@@ -77,6 +77,37 @@
             }
 
         </div>
+
+        
+        <!-- Recommenders  -->
+        <div class="forms-field genre-wrapper" >
+            <label class="forms-label">Recommenders</label>
+            <div class="chips">
+                @for (recommender of form.value.recommenders; track recommender) {
+                <div class="details-tag chip">
+                    {{ recommender }}<span class="material-symbols-outlined icon" (click)="removeRecommender(recommender)">close</span>
+                </div>
+                }
+            </div>
+
+            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()" formControlName="recommenderInput"
+                type="text" (keydown.enter)="addRecommender()" (keydown)="handleRecommenderKeydown($event)"
+                placeholder="Type a recommender and press Enter" />
+
+
+            @if (filteredRecommenders.length > 0) {
+            <div class="forms-dropdown scrollable">
+                @for (recommender of filteredRecommenders; track recommender) {
+                <div class="forms-dropdown-item" (click)="selectRecommenderFromList(recommender)">
+                    {{ recommender }}
+                </div>
+                }
+            </div>
+            }
+
+        </div>
+
+
 
 
         <!-- User Specific Items -->

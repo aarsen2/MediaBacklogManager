@@ -61,6 +61,11 @@ export class MediaEdit {
     this.backlogService.getGenres(),
     { initialValue: [] as string[] }
   )
+  filteredRecommenders: string[] = [];
+  possibleRecommenders = toSignal(
+    this.backlogService.getRecommenders(),
+    { initialValue: [] as string[] }
+  )
 
 
   ngOnInit() {
@@ -83,6 +88,8 @@ export class MediaEdit {
     description: ['', [Validators.maxLength(1000)]],
     genreInput: [''],
     genres: [[] as string[]],
+    recommenderInput: [''],
+    recommenders: [[] as string[]],
     status: ["Backlog"],
     prioritized: ["no"],
     userRating: [0],
@@ -98,6 +105,8 @@ export class MediaEdit {
     this.form.patchValue({ releaseDate: this.formatDate() })
     this.form.patchValue({ description: this.backlogItem()?.media.description })
     this.form.patchValue({ genres: this.getGenres() })
+    this.form.patchValue({ recommenders: this.getRecommenders() })
+    console.log(this.getRecommenders())
     this.form.patchValue({ prioritized: this.backlogItem()?.prioritized ? "yes" : "no" })
     this.form.patchValue({ userRating: this.backlogItem()?.userRating })
     this.form.patchValue({ notes: this.backlogItem()?.notes })
@@ -106,6 +115,11 @@ export class MediaEdit {
   getGenres(): string[] {
     return this.backlogItem()?.media.genres?.map(g => g.name) ?? [];
   }
+  
+  getRecommenders(): string[] {
+    return this.backlogItem()?.recommenders ?? [];
+  }
+
 
   formatDate() {
     const rawDate = this.backlogItem()?.media.releaseDate;
@@ -171,6 +185,61 @@ export class MediaEdit {
     this.filteredGenres = [];
   }
 
+
+  addRecommender(recommender?: string | null) {
+
+    const value = !recommender ? this.form.value.recommenderInput?.trim() : recommender;
+    console.log(value)
+
+    if (!value) return;
+
+    const recommenders = this.form.value.recommenders as string[];
+
+    // prevent duplicates (case-insensitive)
+    const exists = recommenders.some(g => g.toLowerCase() === value.toLowerCase());
+    if (exists) {
+      this.form.patchValue({
+        recommenderInput: ''
+      });
+      return;
+    }
+
+    recommenders.push(value);
+    this.form.patchValue({ recommenders: recommenders });
+
+    this.form.patchValue({ recommenderInput: '' });
+  }
+  removeRecommender(recommender: string) {
+    const recommenders = this.form.value.recommenders as string[];
+    this.form.patchValue({
+      recommenders: recommenders.filter(g => g !== recommender)
+    });
+  }
+  handleRecommenderKeydown(event: KeyboardEvent) {
+    if (event.key === ',' || event.key === 'Enter') {
+      event.preventDefault();
+      this.addRecommender();
+    }
+  }
+
+  onRecommenderInput() {
+    const value = this.form.value.recommenderInput?.toLowerCase() ?? "";
+
+    if (!value) {
+      this.filteredRecommenders = [];
+      return;
+    }
+    const selected = this.form.value.recommenders as string[];
+
+    this.filteredRecommenders = this.possibleRecommenders().filter(g =>
+      g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
+    ).sort((a, b) => a.localeCompare(b));
+  }
+
+  selectRecommenderFromList(recommender: string) {
+    this.addRecommender(recommender);
+  }
+
   private mapBase(formValue: any): BaseForm {
     return {
       title: formValue.title,
@@ -178,6 +247,7 @@ export class MediaEdit {
       releaseDate: formValue.releaseDate,
       description: formValue.description,
       genres: formValue.genres ?? [],
+      recommenders: formValue.recommenders ?? [],
       status: formValue.status,
       prioritized: formValue.prioritized,
       userRating: formValue.userRating ?? 0,
