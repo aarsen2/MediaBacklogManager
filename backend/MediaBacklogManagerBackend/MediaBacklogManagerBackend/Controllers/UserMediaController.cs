@@ -32,12 +32,12 @@ namespace MediaBacklogManagerBackend.Controllers.MediaControllers
         public async Task<IActionResult> AddMedia([FromBody] CreateUserMediaDto userMediaDto)
         {
             var userId = await UserService.GetCurrentUserId(User);
-            var book = await UserMediaService.AddMediaAsync(userMediaDto, userId);
+            var media = await UserMediaService.AddMediaAsync(userMediaDto, userId);
 
             Console.WriteLine("Adding Item to User's List");
-            if (book != null)
+            if (media != null)
             {
-                return CreatedAtAction(nameof(GetUserMedia), new { id = book.Id }, await UserMediaService.ReadByIdAsync(book.Id, userId));
+                return CreatedAtAction(nameof(GetUserMedia), new { id = media.Id }, await UserMediaService.ReadByIdAsync(media.Id, userId));
             }
             else return Conflict("Item Already Exists.");
         }

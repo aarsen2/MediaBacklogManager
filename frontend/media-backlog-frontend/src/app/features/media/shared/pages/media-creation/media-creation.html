@@ -51,7 +51,7 @@
 
 
         <!-- Genres -->
-        <div class="forms-field genre-wrapper" >
+        <div class="forms-field autocomplete-wrapper" >
             <label class="forms-label">Genres</label>
             <div class="chips">
                 @for (genre of form.value.genres; track genre) {
@@ -66,9 +66,9 @@
                 placeholder="Type a genre and press Enter" />
 
 
-            @if (filteredGenres.length > 0) {
+            @if (filteredGenres().length > 0) {
             <div class="forms-dropdown scrollable">
-                @for (genre of filteredGenres; track genre) {
+                @for (genre of filteredGenres(); track genre) {
                 <div class="forms-dropdown-item" (click)="selectGenreFromList(genre)">
                     {{ genre }}
                 </div>
@@ -80,7 +80,7 @@
 
         
         <!-- Recommenders  -->
-        <div class="forms-field genre-wrapper" >
+        <div class="forms-field autocomplete-wrapper" >
             <label class="forms-label">Recommenders</label>
             <div class="chips">
                 @for (recommender of form.value.recommenders; track recommender) {
@@ -95,9 +95,9 @@
                 placeholder="Type a recommender and press Enter" />
 
 
-            @if (filteredRecommenders.length > 0) {
+            @if (filteredRecommenders().length > 0) {
             <div class="forms-dropdown scrollable">
-                @for (recommender of filteredRecommenders; track recommender) {
+                @for (recommender of filteredRecommenders(); track recommender) {
                 <div class="forms-dropdown-item" (click)="selectRecommenderFromList(recommender)">
                     {{ recommender }}
                 </div>

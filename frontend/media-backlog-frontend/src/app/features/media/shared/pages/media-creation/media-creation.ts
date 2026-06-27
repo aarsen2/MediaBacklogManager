@@ -32,8 +32,9 @@ export class MediaCreation {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.genre-wrapper')) {
-      this.filteredGenres = [];
+    if (!target.closest('.autocomplete-wrapper')) {
+      this.filteredGenres.set([]);
+      this.filteredRecommenders.set([]);
     }
   }
 
@@ -46,14 +47,14 @@ export class MediaCreation {
   successMessage = signal<string | null>(null)
   errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
-  filteredGenres: string[] = [];
+  filteredGenres = signal<string[]>([]);
   possibleGenres = toSignal(
     this.backlogService.getGenres(),
     { initialValue: [] as string[] }
   )
-  filteredRecommenders: string[] = [];
+  filteredRecommenders = signal<string[]>([]);
   possibleRecommenders = toSignal(
-    this.backlogService.getGenres(),
+    this.backlogService.getRecommenders(),
     { initialValue: [] as string[] }
   )
 
@@ -95,66 +96,69 @@ export class MediaCreation {
     this.form.patchValue({ genres });
 
     this.form.patchValue({ genreInput: '' });
+    this.filteredGenres.set([]);
   }
-  
+
   removeGenre(genre: string) {
     const genres = this.form.value.genres as string[];
     this.form.patchValue({
       genres: genres.filter(g => g !== genre)
     });
   }
-  
-  
+
+
   handleGenreKeydown(event: KeyboardEvent) {
     if (event.key === ',' || event.key === 'Enter') {
       event.preventDefault();
       this.addGenre();
     }
   }
-  
-  
+
+
   onGenreInput() {
     const value = this.form.value.genreInput?.toLowerCase() ?? "";
-    
+
     if (!value) {
-      this.filteredGenres = [];
+      this.filteredGenres.set([]);
       return;
     }
     const selected = this.form.value.genres as string[];
-    
-    this.filteredGenres = this.possibleGenres().filter(g =>
+
+    this.filteredGenres.set(this.possibleGenres().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
-    ).sort((a, b) => a.localeCompare(b));
+    ).sort((a, b) => a.localeCompare(b)));
   }
-  
+
   selectGenreFromList(genre: string) {
     this.addGenre(genre);
   }
-  
 
-    addRecommender(recommender?: string | null) {
-  
-      const value = !recommender ? this.form.value.recommenderInput?.trim() : recommender;
-      console.log(value)
-  
-      if (!value) return;
-  
-      const recommenders = this.form.value.recommenders as string[];
-  
-      // prevent duplicates (case-insensitive)
-      const exists = recommenders.some(g => g.toLowerCase() === value.toLowerCase());
-      if (exists) {
-        this.form.patchValue({
-          recommenderInput: ''
-        });
-        return;
-      }
-  
-      recommenders.push(value);
-      this.form.patchValue({ recommenders: recommenders });
-  
-      this.form.patchValue({ recommenderInput: '' });
+
+  addRecommender(recommender?: string | null) {
+
+    const value = !recommender ? this.form.value.recommenderInput?.trim() : recommender;
+    console.log(value)
+
+    if (!value) return;
+
+    const recommenders = this.form.value.recommenders as string[];
+
+    // prevent duplicates (case-insensitive)
+    const exists = recommenders.some(g => g.toLowerCase() === value.toLowerCase());
+    if (exists) {
+      this.form.patchValue({
+        recommenderInput: ''
+      });
+      return;
     }
+
+    recommenders.push(value);
+    this.form.patchValue({ recommenders: recommenders });
+
+    this.form.patchValue({ recommenderInput: '' });
+    this.filteredRecommenders.set([]);
+
+  }
   removeRecommender(recommender: string) {
     const recommenders = this.form.value.recommenders as string[];
     this.form.patchValue({
@@ -172,14 +176,14 @@ export class MediaCreation {
     const value = this.form.value.recommenderInput?.toLowerCase() ?? "";
 
     if (!value) {
-      this.filteredRecommenders = [];
+      this.filteredRecommenders.set([]);
       return;
     }
     const selected = this.form.value.recommenders as string[];
 
-    this.filteredRecommenders = this.possibleRecommenders().filter(g =>
+    this.filteredRecommenders.set(this.possibleRecommenders().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
-    ).sort((a, b) => a.localeCompare(b));
+    ).sort((a, b) => a.localeCompare(b)));
   }
 
   selectRecommenderFromList(recommender: string) {

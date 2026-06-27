@@ -398,9 +398,8 @@ namespace MediaBacklogManagerBackend.Services
         internal async Task<List<string>> GetRecommendersAsync(string userId)
         {
             var recommenders = await dbContext.UserMedia
-                .Include(m => m.Media)
                 .Include(m => m.Recommenders)
-                .Where(m => m.UserId == userId && m.Media is Game)
+                .Where(m => m.UserId == userId)
                 .SelectMany(m => m.Recommenders.Select(r => r.Name))
                 .Distinct()
                 .ToListAsync();

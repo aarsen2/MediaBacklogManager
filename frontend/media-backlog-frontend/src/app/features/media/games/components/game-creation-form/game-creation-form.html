@@ -40,9 +40,9 @@
             (keydown)="handleKeydown($event)" placeholder="Type a platform and press Enter" />
 
 
-        @if (filteredPlatforms.length > 0) {
+        @if (filteredPlatforms().length > 0) {
         <div class="forms-dropdown scrollable">
-            @for (platform of filteredPlatforms; track platform) {
+            @for (platform of filteredPlatforms(); track platform) {
             <div class="forms-dropdown-item" (click)="selectFromList(platform)">
                 {{ platform }}
             </div>

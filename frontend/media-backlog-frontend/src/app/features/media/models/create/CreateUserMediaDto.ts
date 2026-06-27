@@ -4,4 +4,5 @@ export interface CreateUserMediaDto {
     prioritized: boolean;
     userRating: number,
     notes: string;
+    recommenders: string[]; 
 }

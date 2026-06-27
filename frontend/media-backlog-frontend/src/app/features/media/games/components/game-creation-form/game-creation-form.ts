@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, Input } from '@angular/core';
+import { Component, HostListener, inject, Input, signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReadGameDto } from '../../../models/read/ReadGameDto';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -17,7 +17,7 @@ export class GameCreationForm {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.platforms-wrapper')) {
-      this.filteredPlatforms = [];
+      this.filteredPlatforms.set([]);
     }
   }
 
@@ -25,7 +25,7 @@ export class GameCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
   @Input() game!: ReadGameDto | null;
-  filteredPlatforms: string[] = [];
+  filteredPlatforms = signal<string[]>([]);
   possiblePlatforms = toSignal(
     this.backlogService.getPlatforms(),
     { initialValue: [] as string[] }
@@ -87,6 +87,8 @@ export class GameCreationForm {
     this.gameForm.patchValue({ platforms: platforms });
 
     this.gameForm.patchValue({ platformInput: '' });
+    this.filteredPlatforms.set([]);
+
   }
 
   removePlatform(platform: string) {
@@ -105,25 +107,25 @@ export class GameCreationForm {
 
   }
 
-  
+
   onPlatformInput() {
     console.log(this.possiblePlatforms())
     const value = this.gameForm.value.platformInput?.toLowerCase() ?? "";
 
     if (!value) {
-      this.filteredPlatforms = [];
+      this.filteredPlatforms.set([]);
       return;
     }
     const selected = this.gameForm.value.platforms as string[];
 
-    this.filteredPlatforms = this.possiblePlatforms().filter(g =>
+    this.filteredPlatforms.set(this.possiblePlatforms().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
-    ).sort((a, b) => a.localeCompare(b));
+    ).sort((a, b) => a.localeCompare(b)));
   }
 
   selectFromList(genre: string) {
     this.addPlatform(genre);
-    this.filteredPlatforms = [];
+    this.filteredPlatforms.set([]);
   }
 
 }

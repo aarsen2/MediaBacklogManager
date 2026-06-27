@@ -39,8 +39,9 @@ export class MediaEdit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.genre-wrapper')) {
-      this.filteredGenres = [];
+    if (!target.closest('.autocomplete-wrapper')) {
+      this.filteredGenres.set([]);
+      this.filteredRecommenders.set([]);
     }
   }
 
@@ -56,12 +57,12 @@ export class MediaEdit {
   errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
   backlogItem = signal<ReadBacklogItemDto | null>(null);
-  filteredGenres: string[] = [];
+  filteredGenres = signal<string[]>([]);
   possibleGenres = toSignal(
     this.backlogService.getGenres(),
     { initialValue: [] as string[] }
   )
-  filteredRecommenders: string[] = [];
+  filteredRecommenders = signal<string[]>([]);
   possibleRecommenders = toSignal(
     this.backlogService.getRecommenders(),
     { initialValue: [] as string[] }
@@ -106,7 +107,6 @@ export class MediaEdit {
     this.form.patchValue({ description: this.backlogItem()?.media.description })
     this.form.patchValue({ genres: this.getGenres() })
     this.form.patchValue({ recommenders: this.getRecommenders() })
-    console.log(this.getRecommenders())
     this.form.patchValue({ prioritized: this.backlogItem()?.prioritized ? "yes" : "no" })
     this.form.patchValue({ userRating: this.backlogItem()?.userRating })
     this.form.patchValue({ notes: this.backlogItem()?.notes })
@@ -115,7 +115,7 @@ export class MediaEdit {
   getGenres(): string[] {
     return this.backlogItem()?.media.genres?.map(g => g.name) ?? [];
   }
-  
+
   getRecommenders(): string[] {
     return this.backlogItem()?.recommenders ?? [];
   }
@@ -148,6 +148,7 @@ export class MediaEdit {
     this.form.patchValue({ genres });
 
     this.form.patchValue({ genreInput: '' });
+    this.filteredGenres.set([]);
   }
 
   removeGenre(genre: string) {
@@ -170,19 +171,19 @@ export class MediaEdit {
     const value = this.form.value.genreInput?.toLowerCase() ?? "";
 
     if (!value) {
-      this.filteredGenres = [];
+      this.filteredGenres.set([]);
       return;
     }
     const selected = this.form.value.genres as string[];
 
-    this.filteredGenres = this.possibleGenres().filter(g =>
+    this.filteredGenres.set(this.possibleGenres().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
-    ).sort((a, b) => a.localeCompare(b));
+    ).sort((a, b) => a.localeCompare(b)));
   }
 
   selectFromList(genre: string) {
     this.addGenre(genre);
-    this.filteredGenres = [];
+    this.filteredGenres.set([]);
   }
 
 
@@ -208,6 +209,9 @@ export class MediaEdit {
     this.form.patchValue({ recommenders: recommenders });
 
     this.form.patchValue({ recommenderInput: '' });
+
+    this.filteredRecommenders.set([]);
+
   }
   removeRecommender(recommender: string) {
     const recommenders = this.form.value.recommenders as string[];
@@ -226,18 +230,20 @@ export class MediaEdit {
     const value = this.form.value.recommenderInput?.toLowerCase() ?? "";
 
     if (!value) {
-      this.filteredRecommenders = [];
+      this.filteredRecommenders.set([]);
       return;
     }
     const selected = this.form.value.recommenders as string[];
 
-    this.filteredRecommenders = this.possibleRecommenders().filter(g =>
+    this.filteredRecommenders.set(this.possibleRecommenders().filter(g =>
       g.toLowerCase().includes(value) && !selected.some(s => s.toLowerCase() === g.toLowerCase())
-    ).sort((a, b) => a.localeCompare(b));
+    ).sort((a, b) => a.localeCompare(b)));
+    console.log(this.filteredRecommenders())
   }
 
   selectRecommenderFromList(recommender: string) {
     this.addRecommender(recommender);
+    this.filteredGenres.set([]);
   }
 
   private mapBase(formValue: any): BaseForm {

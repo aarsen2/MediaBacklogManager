@@ -115,7 +115,8 @@ export class MediaBacklogService {
       status: mediaForm.status,
       prioritized: priority,
       userRating: mediaForm.userRating,
-      notes: mediaForm.notes
+      notes: mediaForm.notes,
+      recommenders: mediaForm.recommenders
     }
   }
 
