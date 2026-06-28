@@ -25,9 +25,7 @@ build_backend:
   script:
     - dotnet restore backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj
 
-    - dotnet publish backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj \
-        -c Release \
-        -o publish
+    - dotnet publish backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj -c Release -o publish
   artifacts:
     paths:
       - publish/
