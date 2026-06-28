@@ -1,8 +1,8 @@
 stages:
-  - build_frontend
   - build_backend
-  - deploy_frontend
   - deploy_backend
+  - build_frontend
+  - deploy_frontend
 
 
 # ---------------- FRONTEND BUILD ----------------
