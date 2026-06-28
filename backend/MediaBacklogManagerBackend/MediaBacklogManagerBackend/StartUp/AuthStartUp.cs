@@ -37,19 +37,12 @@ namespace MediaBacklogManagerBackend.StartUp
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 
-                        ValidIssuer = "BacklogBackend",
-                        ValidAudience = "BacklogFrontend",
+
+                        ValidIssuer = config["Jwt:Issuer"],
+                        ValidAudience = config["Jwt:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes("supersecurelongkey" ?? throw new Exception("JWT Key is Missing"))
+                            Encoding.UTF8.GetBytes(config["Jwt:Key"] ?? throw new Exception("JWT Key is Missing"))
                             )
-
-
-
-                        //ValidIssuer = config["Jwt:Issuer"],
-                        //ValidAudience = config["Jwt:Audience"],
-                        //IssuerSigningKey = new SymmetricSecurityKey(
-                        //    Encoding.UTF8.GetBytes(config["Jwt:Key"] ?? throw new Exception("JWT Key is Missing"))
-                        //    )
                     };
                 });
 
