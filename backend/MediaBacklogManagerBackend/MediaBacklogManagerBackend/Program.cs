@@ -17,9 +17,18 @@ namespace MediaBacklogManagerBackend
     {
         public static void Main(string[] args)
         {
+
             Console.WriteLine("Starting the App");
             var builder = WebApplication.CreateBuilder(args);
 
+            var isAzure = Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") != null;
+
+            if (isAzure)
+            {
+                // Azure requires HTTP internally
+                var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+                builder.WebHost.UseUrls($"http://+:{port}");
+            }
 
             //just the file path
             var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
