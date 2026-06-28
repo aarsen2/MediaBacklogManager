@@ -17,18 +17,21 @@ namespace MediaBacklogManagerBackend
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Starting the App");
             var builder = WebApplication.CreateBuilder(args);
-
 
 
             //just the file path
             var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
+            Console.WriteLine("Database path");
+            Console.WriteLine(dbPath);
 
             // ensure folder exists
             var directory = Path.GetDirectoryName(dbPath);
 
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
             {
+                Console.WriteLine("Creating Database Directory");
                 Directory.CreateDirectory(directory);
             }
 
@@ -57,7 +60,7 @@ namespace MediaBacklogManagerBackend
                 options.AddPolicy("AllowAngular", policy =>
                 {
                     policy.WithOrigins(
-                        "http://localhost:4200", 
+                        "http://localhost:4200",
                         "https://thankful-hill-0021e0d10.7.azurestaticapps.net")
                           .AllowAnyHeader()
                           .AllowAnyMethod();

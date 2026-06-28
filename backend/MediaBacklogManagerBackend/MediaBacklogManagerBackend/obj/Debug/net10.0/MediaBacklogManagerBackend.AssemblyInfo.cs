@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediaBacklogManagerBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa8f32b8488ceaa1fe257407833058ca090ed842")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28b9766bdfbb87d0e6610232b7e960054281736a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediaBacklogManagerBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediaBacklogManagerBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
