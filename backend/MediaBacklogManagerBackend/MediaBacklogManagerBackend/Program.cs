@@ -4,6 +4,7 @@ using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Services;
 using MediaBacklogManagerBackend.StartUp;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
@@ -18,9 +19,27 @@ namespace MediaBacklogManagerBackend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+
+
+            //just the file path
+            var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // ensure folder exists
+            var directory = Path.GetDirectoryName(dbPath);
+
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            // build proper SQLite connection string
+            var connectionString = $"Data Source={dbPath}";
+
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(connectionString));
+
+
+
 
             builder.Services.AddApplicationServices();
 
@@ -37,7 +56,9 @@ namespace MediaBacklogManagerBackend
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")
+                    policy.WithOrigins(
+                        "http://localhost:4200", 
+                        "https://thankful-hill-0021e0d10.7.azurestaticapps.net")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
@@ -57,7 +78,6 @@ namespace MediaBacklogManagerBackend
             }
 
             //Instatiate the Database
-
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
