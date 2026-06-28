@@ -81,7 +81,6 @@ namespace MediaBacklogManager.Tests
             };
 
             var results = await AuthService.Login(credentials);
-
             //Should Return null
             Assert.Null(results);
         }
@@ -107,6 +106,13 @@ namespace MediaBacklogManager.Tests
 
             //auth response should have errors.
             Assert.NotEmpty(result.Errors);
+
+
+            //Token should be null
+            Assert.Null(result.Token);
+
+            //Should contain the username error
+            Assert.Contains(result.Errors, e => e.Contains("An account with this username already exists"));
         }
         [Fact]
         public async Task DuplicateEmail()
@@ -128,6 +134,12 @@ namespace MediaBacklogManager.Tests
 
             //auth response should have errors.
             Assert.NotEmpty(result.Errors);
+
+            //Token should be null
+            Assert.Null(result.Token);
+
+            //Should contain the email error
+            Assert.Contains(result.Errors, e => e.Contains("An account with this email already exists"));
         }
         [Fact]
         public async Task BlankPassword()
@@ -147,8 +159,13 @@ namespace MediaBacklogManager.Tests
             //auth response should not be null
             Assert.NotNull(result);
 
+            //Token should be null
+            Assert.Null(result.Token);
+
             //auth response should have errors.
             Assert.NotEmpty(result.Errors);
+
+            
         }
         [Fact]
         public async Task BadPassword()
@@ -167,6 +184,9 @@ namespace MediaBacklogManager.Tests
 
             //auth response should not be null
             Assert.NotNull(result);
+
+            //Token should be null
+            Assert.Null(result.Token);
 
             //auth response should have errors.
             Assert.NotEmpty(result.Errors);
