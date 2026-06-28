@@ -20,7 +20,7 @@ build_frontend:
 
 # ---------------- BACKEND BUILD ----------------
 build_backend:
-  image: mcr.microsoft.com/dotnet/sdk:8.0
+  image: mcr.microsoft.com/dotnet/sdk:10.0
   stage: build_backend
   script:
     - dotnet restore backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj
