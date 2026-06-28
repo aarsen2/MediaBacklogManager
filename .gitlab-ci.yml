@@ -62,11 +62,13 @@ deploy_backend:
     - zip -r ../app.zip .
     - cd ..
 
+    - apk add --no-cache libxml2-utils
     
-    - URL=$(grep -A5 'publishMethod="ZipDeploy"' publishprofile.xml | grep publishUrl | sed -n 's/.*publishUrl="\([^"]*\)".*/\1/p')
-    - USER=$(grep -A5 'publishMethod="ZipDeploy"' publishprofile.xml | grep userName | sed -n 's/.*userName="\([^"]*\)".*/\1/p')
-    - PASS=$(grep -A5 'publishMethod="ZipDeploy"' publishprofile.xml | grep userPWD | sed -n 's/.*userPWD="\([^"]*\)".*/\1/p')
+    - URL=$(xmllint --xpath "string(//publishProfile[@publishMethod='ZipDeploy']/@publishUrl)" publishprofile.xml)
+    - USER=$(xmllint --xpath "string(//publishProfile[@publishMethod='ZipDeploy']/@userName)" publishprofile.xml)
+    - PASS=$(xmllint --xpath "string(//publishProfile[@publishMethod='ZipDeploy']/@userPWD)" publishprofile.xml)
 
+  
        
     - echo $URL
     - curl -X POST -u "$USER:$PASS" --data-binary @app.zip "https://$URL/api/zipdeploy"
