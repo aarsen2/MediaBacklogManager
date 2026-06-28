@@ -71,6 +71,29 @@ namespace MediaBacklogManager.Tests
         }
 
         [Fact]
+        public async Task SuccessfulLogin()
+        {
+
+            await InitialSetup();
+            var credentials = new CredentialDto
+            {
+                Username = "test",
+                Password = "Password123!"
+            };
+
+            var result = await AuthService.Login(credentials);
+
+            //auth response should not be null
+            Assert.NotNull(result);
+            //token should not be null
+            Assert.NotNull(result.Token);
+            //should have no errors
+            Assert.Empty(result.Errors);
+        }
+
+
+
+        [Fact]
         public async Task BlankLogin()
         {
             await InitialSetup();
@@ -165,7 +188,7 @@ namespace MediaBacklogManager.Tests
             //auth response should have errors.
             Assert.NotEmpty(result.Errors);
 
-            
+
         }
         [Fact]
         public async Task BadPassword()
