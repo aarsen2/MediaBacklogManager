@@ -1,11 +1,14 @@
-image: node:20
-
 stages:
-  - build
-  - deploy
+  - build_frontend
+  - build_backend
+  - deploy_frontend
+  - deploy_backend
 
-build:
-  stage: build
+
+# ---------------- FRONTEND BUILD ----------------
+build_frontend:
+  image: node:20
+  stage: build_frontend
   script:
     - cd frontend/media-backlog-frontend
     - npm install
@@ -14,12 +17,64 @@ build:
     paths:
       - frontend/media-backlog-frontend/dist/
 
-deploy:
-  stage: deploy
+
+# ---------------- BACKEND BUILD ----------------
+build_backend:
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  stage: build_backend
+  script:
+    - dotnet restore backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj
+
+    - dotnet publish backend/MediaBacklogManagerBackend/MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj \
+        -c Release \
+        -o publish
+  artifacts:
+    paths:
+      - publish/
+
+
+# ---------------- FRONTEND DEPLOY (Azure SWA) ----------------
+deploy_frontend:
+  image: node:20
+  stage: deploy_frontend
+  dependencies:
+    - build_frontend
   script:
     - npm install -g @azure/static-web-apps-cli
-    - swa deploy ./frontend/media-backlog-frontend/dist/media-backlog-frontend/browser --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN --env production
+
+    - swa deploy ./frontend/media-backlog-frontend/dist/media-backlog-frontend/browser \
+        --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN \
+        --env production
   only:
     - main
 
-    
+
+# ---------------- BACKEND DEPLOY (Azure App Service) ----------------
+deploy_backend:
+  image: alpine:latest
+  stage: deploy_backend
+  dependencies:
+    - build_backend
+  before_script:
+    - apk add --no-cache curl zip
+  script:
+    # Load publish profile (File variable from GitLab)
+    - cp "$AZURE_PUBLISH_PROFILE" publishprofile.xml
+
+    # Zip published backend
+    - cd publish
+    - zip -r ../app.zip .
+    - cd ..
+
+    # Extract deployment credentials
+    - USER=$(grep -oP 'userName="\K[^"]+' publishprofile.xml | head -1)
+    - PASS=$(grep -oP 'userPWD="\K[^"]+' publishprofile.xml | head -1)
+    - URL=$(grep -oP 'publishUrl="\K[^"]+' publishprofile.xml | head -1)
+
+    # Deploy to Azure App Service
+    - curl -X POST \
+        -u "$USER:$PASS" \
+        --data-binary @app.zip \
+        "https://$URL/api/zipdeploy"
+  only:
+    - main
