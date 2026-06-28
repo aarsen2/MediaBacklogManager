@@ -134,7 +134,10 @@ namespace MediaBacklogManagerBackend
                 });
             });
 
-            app.UseHttpsRedirection();
+            if (!isAzure)
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseCors("AllowAngular");
 
