@@ -4,27 +4,21 @@ stages:
   - build
   - deploy
 
-cache:
-  paths:
-    - node_modules/
-
-before_script:
-  - cd frontend/media-backlog-frontend
-  - npm install
-
 build:
   stage: build
   script:
+    - cd frontend/media-backlog-frontend
+    - npm install
     - npm run build -- --configuration production
   artifacts:
     paths:
-      - dist/
+      - frontend/media-backlog-frontend/dist/
 
 deploy:
   stage: deploy
   script:
     - npm install -g @azure/static-web-apps-cli
-    - swa deploy ./dist/media-backlog-frontend \
+    - swa deploy ./frontend/media-backlog-frontend/dist/media-backlog-frontend \
         --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN \
         --env production
   only:
