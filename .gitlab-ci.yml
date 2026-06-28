@@ -62,10 +62,10 @@ deploy_backend:
     - zip -r ../app.zip .
     - cd ..
 
-    # Extract deployment credentials
-    - USER=$(grep -oP 'userName="\K[^"]+' publishprofile.xml | head -1)
-    - PASS=$(grep -oP 'userPWD="\K[^"]+' publishprofile.xml | head -1)
-    - URL=$(grep -oP 'publishUrl="\K[^"]+' publishprofile.xml | head -1)
+    
+    - USER=$(sed -n 's/.*userName="\([^"]*\)".*/\1/p' publishprofile.xml | head -1)
+    - PASS=$(sed -n 's/.*userPWD="\([^"]*\)".*/\1/p' publishprofile.xml | head -1)
+    - URL=$(sed -n 's/.*publishUrl="\([^"]*\)".*/\1/p' publishprofile.xml | head -1)
 
     # Deploy to Azure App Service
     - curl -X POST -u "$USER:$PASS" --data-binary @app.zip "https://$URL/api/zipdeploy"
