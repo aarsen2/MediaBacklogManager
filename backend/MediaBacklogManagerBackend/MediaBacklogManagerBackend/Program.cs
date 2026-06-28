@@ -21,6 +21,14 @@ namespace MediaBacklogManagerBackend
             Console.WriteLine("Starting the App");
             var builder = WebApplication.CreateBuilder(args);
 
+            Console.WriteLine("Jwt Key: " + builder.Configuration["Jwt:key"]);
+            Console.WriteLine("Jwt Issuer: " + builder.Configuration["Jwt:Issuer"]);
+            Console.WriteLine("Jwt Audience: " + builder.Configuration["Jwt:Audience"]);
+            Console.WriteLine("Jwt Issuer: " + builder.Configuration["Jwt:Issuer"]);
+            Console.WriteLine("Jwt Audience: " + builder.Configuration["Jwt:Audience"]);
+            Console.WriteLine("DefaultConnection: " + builder.Configuration["DefaultConnection"]);
+
+
             //just the file path
             var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
             Console.WriteLine("Database path");
