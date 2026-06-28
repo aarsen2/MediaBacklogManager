@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReadSongDto } from '../../models/read/ReadSongDto';
 import { CreateSongDto } from '../../models/create/CreateSongDto';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SongApi {
-   private baseUrl = 'https://localhost:7170/api/song';
+    private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/song";
 
   constructor(private http: HttpClient) {}
 

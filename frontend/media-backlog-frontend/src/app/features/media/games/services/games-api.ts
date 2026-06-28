@@ -3,12 +3,14 @@ import { Observable } from 'rxjs';
 import { ReadGameDto } from '../../models/read/ReadGameDto';
 import { HttpClient } from '@angular/common/http';
 import { CreateGameDto } from '../../models/create/CreateGameDto';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GamesApi {
-  private baseUrl = 'https://localhost:7170/api/game';
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/game";
 
   constructor(private http: HttpClient) { }
 

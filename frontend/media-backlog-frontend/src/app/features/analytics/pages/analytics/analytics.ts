@@ -14,7 +14,7 @@ import { TimeToCompleteReport } from "../../components/time-to-complete-report/t
 
 @Component({
   selector: 'app-analytics',
-  imports: [DatePipe, MediaTypeReport, PriorityItemsReport, CompletedItemsReport, TimeToCompleteReport],
+  imports: [MediaTypeReport, PriorityItemsReport, CompletedItemsReport, TimeToCompleteReport],
   templateUrl: './analytics.html',
   styleUrl: './analytics.css',
 })

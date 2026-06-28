@@ -5,6 +5,7 @@ import { ReadBacklogItemDto } from '../../media/models/read/ReadBacklogItemDto';
 import { Form } from '@angular/forms';
 import { BaseForm } from '../../media/models/forms/BaseForm';
 import { UpdateBacklogItemDto } from '../../media/models/update/UpdateBacklogItemDto';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class BacklogApi {
 
   private http = inject(HttpClient)
 
-  private baseUrl = 'https://localhost:7170/api/backlog';
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/backlog";
 
 
   public getBacklogItem(id: string): Observable<ReadBacklogItemDto> {

@@ -4,14 +4,15 @@ import { CreateUserMediaDto } from '../../models/create/CreateUserMediaDto';
 import { HttpClient } from '@angular/common/http';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { ReadBacklogItemDto } from '../../models/read/ReadBacklogItemDto';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserMediaApi {
   private readonly http = inject(HttpClient)
-
-  private baseUrl = 'https://localhost:7170/api/user-media';
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/user-media";
 
   addItem(dto: CreateUserMediaDto): Observable<object> {
     console.log("Adding Item to backlog...");

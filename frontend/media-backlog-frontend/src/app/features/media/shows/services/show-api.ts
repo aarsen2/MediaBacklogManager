@@ -3,14 +3,15 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReadShowDto } from '../../models/read/ReadShowDto';
 import { CreateShowDto } from '../../models/create/CreateShowDto';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShowApi {
   private readonly http = inject(HttpClient)
-
-  private baseUrl = 'https://localhost:7170/api/show';
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/show";
 
 
   getShows(): Observable<ReadShowDto[]> {

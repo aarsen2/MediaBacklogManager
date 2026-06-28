@@ -4,15 +4,17 @@ import { Observable } from 'rxjs';
 import { CredentialDto } from './models/CredentialDto';
 import { AuthResponse } from './models/AuthResponse';
 import { RegisterDto } from './models/RegisterDto';
+import { environment } from '../../../environments/environment.development';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthApi {
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/auth";
 
   private http = inject(HttpClient)
-  private baseUrl =  "https://localhost:7170/api/auth";
 
 
   login(username: string, password: string): Observable<AuthResponse> {

@@ -5,15 +5,16 @@ import { CompletedItemsReportDto } from '../models/CompletedItemsReportDto';
 import { MediaTypeReportDto } from '../models/MediaTypeReportDto';
 import { PriorityItemsReportDto } from '../models/PriorityItemsReportDto';
 import { TimeToCompleteReportDto } from '../models/TimeToCompleteReportDto';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalyticsApi {
-  
-  private http = inject(HttpClient)
 
-  private baseUrl = 'https://localhost:7170/api/analytics';
+  private http = inject(HttpClient)
+  private apiUrl = environment.apiUrl;
+  private baseUrl = this.apiUrl + "/analytics";
 
 
   public getCompletedItemsReport(): Observable<CompletedItemsReportDto> {
