@@ -21,17 +21,19 @@ namespace MediaBacklogManagerBackend
             Console.WriteLine("Starting the App");
             var builder = WebApplication.CreateBuilder(args);
 
-            var isAzure = Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") != null;
+            var isAzure = true; //Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") != null;
 
             if (isAzure)
             {
                 // Azure requires HTTP internally
-                var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-                builder.WebHost.UseUrls($"http://+:{port}");
+                //var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+                //builder.WebHost.UseUrls($"http://+:{port}");
+                builder.WebHost.UseUrls($"http://+:8080");
             }
 
             //just the file path
-            var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
+            //var dbPath = builder.Configuration.GetConnectionString("DefaultConnection");
+            var dbPath = "/home/data/BacklogManager.db";
             Console.WriteLine("Database path");
             Console.WriteLine(dbPath);
 
@@ -106,8 +108,10 @@ namespace MediaBacklogManagerBackend
                     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    var adminUsername = builder.Configuration["User:Admin_Username"];
-                    var adminPassword = builder.Configuration["User:Admin_Password"];
+                    //var adminUsername = builder.Configuration["User:Admin_Username"];
+                    //var adminPassword = builder.Configuration["User:Admin_Password"];
+                    var adminUsername = "admin";
+                    var adminPassword = "Admin123!";
 
                     //creates needed Roles
                     if (!await roleManager.RoleExistsAsync("Admin"))
