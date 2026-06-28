@@ -65,7 +65,7 @@ deploy_backend:
     
     - USER=$(sed -n 's/.*userName="\([^"]*\)".*/\1/p' publishprofile.xml | head -1)
     - PASS=$(sed -n 's/.*userPWD="\([^"]*\)".*/\1/p' publishprofile.xml | head -1)
-    - URL=$(sed -n '/publishMethod="ZipDeploy"/ s/.*publishUrl="\([^"]*\)".*/\1/p' publishprofile.xml)   
+    - URL=$(grep -A 2 'publishMethod="ZipDeploy"' publishprofile.xml | grep publishUrl | sed -n 's/.*publishUrl="\([^"]*\)".*/\1/p')   
     - echo $URL
     - curl -X POST -u "$USER:$PASS" --data-binary @app.zip "https://$URL/api/zipdeploy"
   only:
