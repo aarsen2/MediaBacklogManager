@@ -345,6 +345,7 @@ namespace MediaBacklogManagerBackend.Services
         {
             var userMediaItems = await dbContext.UserMedia
                 .Include(um => um.Media)
+                .Include(um => um.Recommenders)
                 .Where(um => um.UserId == userId)
                 .ToListAsync();
 
