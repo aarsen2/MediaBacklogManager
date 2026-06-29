@@ -8,7 +8,7 @@
 
         public ReportBaseDto(string title)
         {
-            GeneratedAt = DateTime.Now;
+            GeneratedAt = DateTime.UtcNow;
             Title = title;
         }
     }

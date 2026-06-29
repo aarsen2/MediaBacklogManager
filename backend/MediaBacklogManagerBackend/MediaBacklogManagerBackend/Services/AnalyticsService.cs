@@ -86,7 +86,7 @@ namespace MediaBacklogManagerBackend.Services
                     MediaType = m.Media!.MediaType,
                     Id = m.Media!.Id,
                     Title = m.Media.Title,
-                    ElapsedDays = (DateTime.Now - m.DateAdded).Days
+                    ElapsedDays = (DateTime.UtcNow - m.DateAdded).Days
                 }
                     )
                 .ToListAsync();
@@ -117,47 +117,25 @@ namespace MediaBacklogManagerBackend.Services
                         ItemsCompleted = completed.Count(),
 
                         AverageAge = g.Average(m =>
-                            (DateTime.Now - m.DateAdded).TotalDays),
+                            (DateTime.UtcNow - m.DateAdded).TotalDays),
 
                         AverageCompletionTime = completed.Any()
                             ? completed.Average(m =>
-                                (DateTime.Now - m.DateCompleted!.Value).TotalDays)
+                                (DateTime.UtcNow - m.DateCompleted!.Value).TotalDays)
                             : 0,
 
                         MinCompletionTime = completed.Any()
                             ? completed.Min(m =>
-                                (DateTime.Now - m.DateCompleted!.Value).TotalDays)
+                                (DateTime.UtcNow - m.DateCompleted!.Value).TotalDays)
                             : 0,
 
                         MaxCompletionTime = completed.Any()
                             ? completed.Max(m =>
-                                (DateTime.Now - m.DateCompleted!.Value).TotalDays)
+                                (DateTime.UtcNow - m.DateCompleted!.Value).TotalDays)
                             : 0,
                     };
                 })
                 .ToList();
-
-
-
-
-
-            //report.TimeToCompleteRows = mediaItems.GroupBy(x => x.Media!.MediaType)
-            //    .Select(g => new TimeToCompleteRow
-            //    {
-            //        MediaType = g.Key,
-            //        ItemsCompleted = g.Count(),
-            //        AverageAge = g.Average(m => (DateTime.Now - m.DateAdded ).TotalDays),
-            //        AverageCompletionTime = g
-            //            .Where(m => m.Status == UserMediaStatus.Completed && m.DateCompleted != null)
-            //            .Average(m => (DateTime.Now - m.DateCompleted.Value).TotalDays),
-            //        MinCompletionTime = g
-            //            .Where(m => m.Status == UserMediaStatus.Completed && m.DateCompleted != null)
-            //            .Min(m => (DateTime.Now - m.DateCompleted.Value).TotalDays),
-            //        MaxCompletionTime = g
-            //            .Where(m => m.Status == UserMediaStatus.Completed && m.DateCompleted != null)
-            //            .Max(m => (DateTime.Now - m.DateCompleted.Value).TotalDays),
-
-            //    }).ToList();
 
             return report;
         }
