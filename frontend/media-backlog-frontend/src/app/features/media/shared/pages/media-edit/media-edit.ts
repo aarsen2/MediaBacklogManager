@@ -108,6 +108,7 @@ export class MediaEdit {
     this.form.patchValue({ genres: this.getGenres() })
     this.form.patchValue({ recommenders: this.getRecommenders() })
     this.form.patchValue({ prioritized: this.backlogItem()?.prioritized ? "yes" : "no" })
+    this.form.patchValue({ status: this.backlogItem()?.status })
     this.form.patchValue({ userRating: this.backlogItem()?.userRating })
     this.form.patchValue({ notes: this.backlogItem()?.notes })
   }
