@@ -76,6 +76,20 @@
     ;
 }
 
+.report-empty {
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+}
+.report-empty-message {
+    margin: 1rem;
+    text-align: center;
+    color: var(--color-text3);
+    font-style: italic;
+}
+
 @media (max-width: 550px) {
 
 .report{

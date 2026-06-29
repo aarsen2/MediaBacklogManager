@@ -12,7 +12,11 @@
             <div class="report-header">Days Elapsed</div>
         </div>
         <div class="report-content">
-
+            @if (report.mediaItems.length == 0) {
+            <div class="report-empty">
+                <h4 class="report-empty-message">You do not have any items prioritized. Prioritize an item to generate the report.</h4>
+            </div>
+            }
             @for(reportItem of report.mediaItems; track reportItem) {
             <div class="report-row">
 

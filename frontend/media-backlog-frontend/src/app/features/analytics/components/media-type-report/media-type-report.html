@@ -13,7 +13,11 @@
             <div class="report-header">Completed</div>
         </div>
         <div class="report-content">
-
+            @if (report.mediaTypeRows.length == 0) {
+            <div class="report-empty">
+                <h4 class="report-empty-message">You have not added any items to your backlog. Add an item to generate the report.</h4>
+            </div>
+            }
             @for(reportItem of report.mediaTypeRows; track reportItem) {
             <div class="report-row">
 

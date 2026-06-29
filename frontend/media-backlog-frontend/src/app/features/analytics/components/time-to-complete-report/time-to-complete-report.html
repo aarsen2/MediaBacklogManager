@@ -14,7 +14,11 @@
             <div class="report-header">Maximum</div>
         </div>
         <div class="report-content">
-
+            @if (report.timeToCompleteRows.length == 0) {
+            <div class="report-empty">
+                <h4 class="report-empty-message">You have not completed any items. Complete an item to generate the report.</h4>
+            </div>
+            }
             @for(reportItem of report.timeToCompleteRows; track reportItem) {
             <div class="report-row">
                 <div class="cell">{{reportItem.mediaType}}</div>
