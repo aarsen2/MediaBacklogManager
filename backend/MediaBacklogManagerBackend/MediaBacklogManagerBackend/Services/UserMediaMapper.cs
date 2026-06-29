@@ -65,20 +65,29 @@ namespace MediaBacklogManagerBackend.Services
 
         public async Task MapMediaUpdateAsync(UserMedia userMedia, UpdateUserMediaDto userMediaDto)
         {
-            userMedia.Status = userMediaDto.Status;
+            var previousStatus = userMedia.Status;
+            var newStatus = userMediaDto.Status;
+
             userMedia.UserRating = userMediaDto.UserRating;
 
-            if (userMedia.Status != UserMediaStatus.Completed &&
-                userMediaDto.Status == UserMediaStatus.Completed)
+            if (newStatus == UserMediaStatus.Completed)
             {
-                userMedia.DateCompleted = DateTime.Now;
+                if (userMedia.DateCompleted == null)
+                {
+                    userMedia.DateCompleted = DateTime.UtcNow;
+                }
             }
+            else if (previousStatus == UserMediaStatus.Completed)
+            {
+                userMedia.DateCompleted = null;
+            }
+
+            userMedia.Status = newStatus;
             userMedia.Notes = userMediaDto.Notes;
             userMedia.Prioritized = userMediaDto.Prioritized;
 
             userMedia.Recommenders = await GetRecommendersAsync(userMediaDto.Recommenders);
         }
-
 
         protected async Task<List<Recommender>> GetRecommendersAsync(List<string> recommenderStrings)
         {
