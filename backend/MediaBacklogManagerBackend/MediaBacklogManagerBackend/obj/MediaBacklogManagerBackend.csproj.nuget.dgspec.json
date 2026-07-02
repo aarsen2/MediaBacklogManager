@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj": {}
+    "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj": {
+    "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+        "projectUniqueName": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
         "projectName": "MediaBacklogManagerBackend",
-        "projectPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+        "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
         "packagesPath": "C:\\Users\\Aaron\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\obj\\",
+        "outputPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

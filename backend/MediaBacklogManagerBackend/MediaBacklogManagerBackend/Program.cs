@@ -69,7 +69,7 @@ namespace MediaBacklogManagerBackend
                 {
                     policy.WithOrigins(
                         "http://localhost:4200",
-                        "https://thankful-hill-0021e0d10.7.azurestaticapps.net")
+                        "https://proud-beach-0dbb19810.7.azurestaticapps.net)
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });

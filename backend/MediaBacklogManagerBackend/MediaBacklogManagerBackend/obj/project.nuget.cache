@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "50Bb+KLNqYw=",
+  "dgSpecHash": "Lqg5C7FObPo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+  "projectFilePath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aaron\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Aaron\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.8\\microsoft.aspnetcore.authentication.jwtbearer.10.0.8.nupkg.sha512",
@@ -52,10 +52,22 @@
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+      "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\Aaron\\Projects\\Capstone\\Task 3\\d424-capstone\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+      "filePath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
+      "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend\\MediaBacklogManagerBackend.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         "net10.0"
