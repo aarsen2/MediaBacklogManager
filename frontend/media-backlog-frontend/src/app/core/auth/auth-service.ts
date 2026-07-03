@@ -17,11 +17,25 @@ export class AuthService {
   private router = inject(Router)
   constructor() {
     this.isLoggedInSignal.set(this.isLoggedIn())
-   }
+  }
 
   isLoggedIn(): boolean {
     const token = this.getToken();
-    return !!token;
+
+    if (token != null) {
+      const now = new Date().getTime();
+      const expirationString = this.getExpiration();
+      if (expirationString == null) {
+        return false;
+      }
+      const expirationTimestamp = new Date(expirationString).getTime()
+      if (now < expirationTimestamp) {
+        console.log(now)
+        console.log(expirationTimestamp)
+        return true
+      }
+    }
+    return false;
   }
 
   isLoggedInSignal = signal<boolean>(false)
@@ -42,8 +56,14 @@ export class AuthService {
 
   private setToken(token: AuthResponse): void {
     localStorage.setItem(this.tokenkey, token.token);
-    localStorage.setItem(this.expirationKey, token.expiresIn?.toString() ?? "");
+    this.setExpiration(token.expiresIn);
     localStorage.setItem(this.refreshTokenKey, token.refreshToken ?? "");
+  }
+
+  private setExpiration(expiresIn: number) {
+    let expirationTime = new Date();
+    expirationTime.setSeconds(expirationTime.getSeconds() + expiresIn);
+    localStorage.setItem(this.expirationKey, expirationTime.toISOString());
   }
 
   private clearToken(): void {
@@ -60,8 +80,8 @@ export class AuthService {
       })
     );
   }
-  
-  
+
+
   register(registerDto: RegisterDto) {
     return this.authAPI.register(registerDto).pipe(
       tap(response => {
@@ -70,7 +90,7 @@ export class AuthService {
       })
     )
   }
-  
+
   logout(): void {
     this.clearToken()
     this.router.navigate(['/logout']);
