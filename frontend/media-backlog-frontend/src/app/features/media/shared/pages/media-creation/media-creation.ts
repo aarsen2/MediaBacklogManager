@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, signal } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MovieCreationForm } from '../../../movies/components/movie-creation-form/movie-creation-form';
 import { ShowCreationForm } from '../../../shows/components/show-creation-form/show-creation-form';
@@ -11,6 +11,12 @@ import { MediaBacklogService } from '../../../../backlog/services/media-backlog-
 import { TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MediaSearchService } from '../../../../search/Services/media-search-service';
+import { MediaSearchApi } from '../../../../search/Services/media-search-api';
+import { CreationSearchQuery } from '../../../../search/models/CreationSearchQuery';
+import { ReadMediaDto } from '../../../models/read/ReadMediaDto';
+import { ReadMovieDto } from '../../../models/read/ReadMovieDto';
+import { ReadShowDto } from '../../../models/read/ReadShowDto';
 
 
 @Component({
@@ -42,11 +48,20 @@ export class MediaCreation {
   private backlogService = inject(MediaBacklogService)
   private formBuilder = inject(FormBuilder);
   private router = inject(Router)
+  private mediaSearchService = inject(MediaSearchService);
+  private cdr = inject(ChangeDetectorRef);
+
+
+  movie = signal<ReadMovieDto | null>(null);
+  show = signal<ReadShowDto | null>(null);
+
+
 
   //inital variable setting
   successMessage = signal<string | null>(null)
   errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
+  isSearching: boolean = false;
   filteredGenres = signal<string[]>([]);
   possibleGenres = toSignal(
     this.backlogService.getGenres(),
@@ -57,7 +72,6 @@ export class MediaCreation {
     this.backlogService.getRecommenders(),
     { initialValue: [] as string[] }
   )
-
 
   form = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
@@ -75,27 +89,22 @@ export class MediaCreation {
   });
 
   addGenre(genre?: string | null) {
-
     const value = !genre ? this.form.value.genreInput?.trim() : genre;
-    console.log(value)
-
     if (!value) return;
 
-    const genres = this.form.value.genres as string[];
+    const current = this.form.value.genres as string[];
 
-    // prevent duplicates (case-insensitive)
-    const exists = genres.some(g => g.toLowerCase() === value.toLowerCase());
+    const exists = current.some(g => g.toLowerCase() === value.toLowerCase());
     if (exists) {
-      this.form.patchValue({
-        genreInput: ''
-      });
+      this.form.patchValue({ genreInput: '' });
       return;
     }
 
-    genres.push(value);
-    this.form.patchValue({ genres });
+    this.form.patchValue({
+      genres: [...current, value], // ✅ NEW ARRAY
+      genreInput: ''
+    });
 
-    this.form.patchValue({ genreInput: '' });
     this.filteredGenres.set([]);
   }
 
@@ -135,30 +144,25 @@ export class MediaCreation {
 
 
   addRecommender(recommender?: string | null) {
-
     const value = !recommender ? this.form.value.recommenderInput?.trim() : recommender;
-    console.log(value)
-
     if (!value) return;
 
-    const recommenders = this.form.value.recommenders as string[];
+    const current = this.form.value.recommenders as string[];
 
-    // prevent duplicates (case-insensitive)
-    const exists = recommenders.some(g => g.toLowerCase() === value.toLowerCase());
+    const exists = current.some(g => g.toLowerCase() === value.toLowerCase());
     if (exists) {
-      this.form.patchValue({
-        recommenderInput: ''
-      });
+      this.form.patchValue({ recommenderInput: '' });
       return;
     }
 
-    recommenders.push(value);
-    this.form.patchValue({ recommenders: recommenders });
+    this.form.patchValue({
+      recommenders: [...current, value], // ✅ FIXED
+      recommenderInput: ''
+    });
 
-    this.form.patchValue({ recommenderInput: '' });
     this.filteredRecommenders.set([]);
-
   }
+
   removeRecommender(recommender: string) {
     const recommenders = this.form.value.recommenders as string[];
     this.form.patchValue({
@@ -257,11 +261,72 @@ export class MediaCreation {
         this.isSubmitting = false;
       }
     })
+  }
 
 
 
+  search() {
+    if (this.form.invalid) {
+      this.form.get('title')?.markAsTouched();
+      this.form.get('mediaType')?.markAsTouched();
+      console.error(this.form.errors);
+      console.error(this.form.status);
+      console.error("form is invalid")
+      return;
+    }
+    this.isSearching = true;
+    const title = this.form.get('title')?.value!
+    const mediaType = this.form.get('mediaType')?.value! as MediaType
+
+    const creationQuery: CreationSearchQuery = {
+      title: title,
+      mediaType: mediaType
+    }
+
+    console.log(title)
+    console.log(mediaType)
 
 
+    this.mediaSearchService.creationSearch(creationQuery).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.fillInfo(res);
+        this.isSearching = false
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+        this.isSearching = false
+      }
+    });
+    console.log("Done");
 
+  }
+
+  fillInfo(media: ReadMediaDto) {
+    let genres = media.genres.map(g => g.name)
+
+    this.form.patchValue({ title: media.title });
+    this.form.patchValue({ releaseDate: this.formatDate(media.releaseDate) });
+    this.form.patchValue({ description: media.description });
+    this.form.patchValue({ genres: genres })
+
+
+    console.log("Setting Movie")
+    console.log(media)
+    switch (media.mediaType) {
+      case 'movie': {
+        this.movie.set(media as ReadMovieDto);
+        break;
+      }
+      case 'show': {
+        this.show.set(media as ReadShowDto);
+      }
+    }
+  }
+
+
+  formatDate(rawDate: string) {
+    return rawDate ? new Date(rawDate).toISOString().split('T')[0] : null
   }
 }

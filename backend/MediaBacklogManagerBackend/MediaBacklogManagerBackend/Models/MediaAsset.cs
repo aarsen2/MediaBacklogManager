@@ -1,4 +1,4 @@
-﻿using MediaBacklogManagerBackend.Emuns;
+﻿using MediaBacklogManagerBackend.Enums;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace MediaBacklogManagerBackend.Models

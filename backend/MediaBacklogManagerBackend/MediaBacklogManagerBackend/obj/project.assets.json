@@ -985,6 +985,16 @@
             "related": ".xml"
           }
         }
+      },
+      "Tmdb/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Tmdb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tmdb.dll": {}
+        }
       }
     }
   },
@@ -2838,6 +2848,11 @@
         "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
+    },
+    "Tmdb/1.0.0": {
+      "type": "project",
+      "path": "../Tmdb/Tmdb.csproj",
+      "msbuildProject": "../Tmdb/Tmdb.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2849,7 +2864,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 10.0.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.8",
-      "SQLitePCLRaw.lib.e_sqlite3 >= 2.1.11"
+      "SQLitePCLRaw.lib.e_sqlite3 >= 2.1.11",
+      "Tmdb >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2885,7 +2901,11 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\Tmdb\\Tmdb.csproj": {
+              "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\Tmdb\\Tmdb.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

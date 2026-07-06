@@ -1,7 +1,7 @@
 ﻿using MediaBacklogManagerBackend.Models.Media;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaBacklogManagerBackend.Emuns
+namespace MediaBacklogManagerBackend.Enums
 {
     public enum MediaType
     {

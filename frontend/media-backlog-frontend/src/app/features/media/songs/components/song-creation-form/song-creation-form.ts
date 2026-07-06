@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, effect, inject, Injector, Input, runInInjectionContext, Signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReadSongDto } from '../../../models/read/ReadSongDto';
 
@@ -11,7 +11,8 @@ import { ReadSongDto } from '../../../models/read/ReadSongDto';
 export class SongCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-  @Input() song!: ReadSongDto | null;
+  private injector = inject(Injector)
+  @Input() song!: Signal<ReadSongDto | null>;
 
   songForm = this.formBuilder.group({
     artist: ['', [Validators.maxLength(100)]],
@@ -23,20 +24,30 @@ export class SongCreationForm {
   ngOnInit() {
     const parentForm: any = this.controlContainer.control as FormGroup;
     parentForm.addControl('song', this.songForm)
+    if (this.song != null) {
+      this.prefillFrom();
+    }
+
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const song = this.song();
+
+        if (song) {
+          this.prefillFrom();
+        }
+      })
+    })
   }
 
   ngOnDestroy() {
     const parent = this.controlContainer.control as FormGroup;
     parent.removeControl('song');
 
-    if (this.song != null) {
-      this.prefillFrom();
-    }
   }
 
   prefillFrom() {
-    this.songForm.patchValue({ artist: this.song?.artist })
-    this.songForm.patchValue({ runTime: this.song?.runTime })
+    this.songForm.patchValue({ artist: this.song()?.artist })
+    this.songForm.patchValue({ runTime: this.song()?.runTime })
   }
 
 }

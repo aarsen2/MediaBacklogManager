@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="MediaBacklogManager.Tests/MediaBacklogManager.Tests.csproj" Id="c73aae25-d829-4000-bc7e-617350d9ee48" />
   <Project Path="MediaBacklogManagerBackend/MediaBacklogManagerBackend.csproj" />
+  <Project Path="Tmdb/Tmdb.csproj" Id="010692df-ab99-4383-9e51-fd4f231fed13" />
 </Solution>

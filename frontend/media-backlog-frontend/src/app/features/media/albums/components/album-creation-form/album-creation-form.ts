@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, effect, inject, Injector, Input, runInInjectionContext, Signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ReadAlbumDto } from '../../../models/read/ReadAlbumDto';
 
@@ -11,7 +11,8 @@ import { ReadAlbumDto } from '../../../models/read/ReadAlbumDto';
 export class AlbumCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-  @Input() album!: ReadAlbumDto | null;
+  private injector = inject(Injector);
+  @Input() album!: Signal<ReadAlbumDto | null>;
 
   albumForm = this.formBuilder.group({
     artist: [''],
@@ -24,9 +25,20 @@ export class AlbumCreationForm {
   ngOnInit() {
     const parentForm: any = this.controlContainer.control as FormGroup;
     parentForm.addControl('album', this.albumForm)
-  if (this.album != null) {
+    if (this.album != null) {
       this.prefillFrom();
     }
+
+
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const album = this.album();
+
+        if (album) {
+          this.prefillFrom();
+        }
+      })
+    })
   }
 
   ngOnDestroy() {
@@ -34,8 +46,8 @@ export class AlbumCreationForm {
     parent.removeControl('album');
   }
   prefillFrom() {
-    this.albumForm.patchValue({ artist: this.album?.artist })
-    this.albumForm.patchValue({ runTime: this.album?.runTime })
-    this.albumForm.patchValue({ trackCount: this.album?.trackCount })
+    this.albumForm.patchValue({ artist: this.album()?.artist })
+    this.albumForm.patchValue({ runTime: this.album()?.runTime })
+    this.albumForm.patchValue({ trackCount: this.album()?.trackCount })
   }
 }

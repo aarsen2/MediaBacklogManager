@@ -14,7 +14,8 @@
           "Microsoft.EntityFrameworkCore": "10.0.8",
           "Microsoft.EntityFrameworkCore.Design": "10.0.8",
           "Microsoft.EntityFrameworkCore.Sqlite": "10.0.8",
-          "SQLitePCLRaw.lib.e_sqlite3": "2.1.11"
+          "SQLitePCLRaw.lib.e_sqlite3": "2.1.11",
+          "Tmdb": "1.0.0"
         },
         "runtime": {
           "MediaBacklogManagerBackend.dll": {}
@@ -759,6 +760,14 @@
             "fileVersion": "8.0.1.50722"
           }
         }
+      },
+      "Tmdb/1.0.0": {
+        "runtime": {
+          "Tmdb.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1047,6 +1056,11 @@
       "sha512": "sha512-GJw3bYkWpOgvN3tJo5X4lYUeIFA2HD293FPUhKmp7qxS+g5ywAb34Dnd3cDAFLkcMohy5XTpoaZ4uAHuw0uSPQ==",
       "path": "system.identitymodel.tokens.jwt/8.0.1",
       "hashPath": "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
+    },
+    "Tmdb/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

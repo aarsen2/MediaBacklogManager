@@ -1,4 +1,4 @@
-import { Component, inject, Injector, Input, input } from '@angular/core';
+import { Component, effect, inject, Injector, Input, input, runInInjectionContext, Signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReadShowDto } from '../../../models/read/ReadShowDto';
 
@@ -10,9 +10,10 @@ import { ReadShowDto } from '../../../models/read/ReadShowDto';
 })
 export class ShowCreationForm {
   private formBuilder = inject(FormBuilder);
-  private controlContainer = inject(ControlContainer)
-  @Input() show!: ReadShowDto | null;
+  private controlContainer = inject(ControlContainer);
+  private injector = inject(Injector);
 
+  @Input() show!: Signal<ReadShowDto | null>;
 
   showForm = this.formBuilder.group({
     seasonCount: [0],
@@ -20,14 +21,19 @@ export class ShowCreationForm {
     contentRating: ['TV_PG', Validators.required],
   });
 
-
-
   ngOnInit() {
-    const parentForm: any = this.controlContainer.control as FormGroup;
-    parentForm.addControl('show', this.showForm)
-  if (this.show != null) {
-      this.prefillFrom();
-    }
+    const parentForm = this.controlContainer.control as FormGroup;
+    parentForm.addControl('show', this.showForm);
+
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const show = this.show();
+
+        if (show) {
+          this.prefillFrom(show);
+        }
+      });
+    });
   }
 
   ngOnDestroy() {
@@ -35,11 +41,11 @@ export class ShowCreationForm {
     parent.removeControl('show');
   }
 
-
-
-  prefillFrom() {
-    this.showForm.patchValue({seasonCount: this.show?.seasonCount})
-    this.showForm.patchValue({episodeCount: this.show?.episodeCount})
-    this.showForm.patchValue({contentRating: this.show?.contentRating})
+  prefillFrom(show: ReadShowDto) {
+    this.showForm.patchValue({
+      seasonCount: show.seasonCount ?? 0,
+      episodeCount: show.episodeCount ?? 0,
+      contentRating: show.contentRating ?? 'TV_PG'
+    });
   }
 }

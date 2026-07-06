@@ -3,6 +3,8 @@ import { SearchParameters } from '../models/SearchParameters';
 import { SearchResultsDto } from '../models/SearchResultsDto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
+import { CreationSearchQuery } from '../models/CreationSearchQuery';
+import { ReadMediaDto } from '../../media/models/read/ReadMediaDto';
 
 @Injectable({
   providedIn: 'root',
@@ -33,4 +35,17 @@ export class MediaSearchApi {
 
     return this.http.get<SearchResultsDto>(`${this.baseUrl}`, { params: httpParams });
   }
+
+
+  creationSearch(query: CreationSearchQuery) {
+    let httpParams = new HttpParams()
+
+    let url = `${this.baseUrl}/create/${query.mediaType}`
+    console.log(url);
+    httpParams = httpParams.set('title', query.title);
+
+    return this.http.get<ReadMediaDto>(url, { params: httpParams });
+  }
+
+
 }

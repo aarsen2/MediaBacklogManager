@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, Signal, signal } from '@angular/core';
 import { MediaBacklogService } from '../../../../backlog/services/media-backlog-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,6 @@ import { GameCreationForm } from '../../../games/components/game-creation-form/g
 import { SongCreationForm } from '../../../songs/components/song-creation-form/song-creation-form';
 import { ReadBacklogItemDto } from '../../../models/read/ReadBacklogItemDto';
 import { switchMap } from 'rxjs';
-import { ShowForm } from '../../../models/forms/ShowForm';
 import { ReadShowDto } from '../../../models/read/ReadShowDto';
 import { ReadMovieDto } from '../../../models/read/ReadMovieDto';
 import { ReadSongDto } from '../../../models/read/ReadSongDto';
@@ -321,34 +320,34 @@ export class MediaEdit {
   }
 
 
-  get movie(): ReadMovieDto | null {
+  get movie(): Signal<ReadMovieDto | null>{
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'movie') return null;
-    return item.media as ReadMovieDto
+    if (!item || item.media.type !== 'movie') return signal<null>(null);
+    return signal<ReadMovieDto | null>(item.media);
   }
-  get show(): ReadShowDto | null {
+  get show(): Signal<ReadShowDto | null> {
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'show') return null;
-    return item.media as ReadShowDto
+    if (!item || item.media.type !== 'show') return signal<null>(null);
+    return signal<ReadShowDto | null>(item.media);
   }
-  get album(): ReadAlbumDto | null {
+  get album(): Signal<ReadAlbumDto | null> {
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'album') return null;
-    return item.media as ReadAlbumDto
+    if (!item || item.media.type !== 'album') return signal<null>(null);
+    return signal<ReadAlbumDto | null>(item.media);
   }
-  get book(): ReadBookDto | null {
+  get book(): Signal<ReadBookDto | null> {
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'book') return null;
-    return item.media as ReadBookDto
+    if (!item || item.media.type !== 'book') return signal<null>(null);
+    return signal<ReadBookDto | null>(item.media);
   }
-  get game(): ReadGameDto | null {
+  get game(): Signal<ReadGameDto | null> {
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'game') return null;
-    return item.media as ReadGameDto
+    if (!item || item.media.type !== 'game') return signal<null>(null);
+    return signal<ReadGameDto | null>(item.media);
   }
-  get song(): ReadSongDto | null {
+  get song(): Signal<ReadSongDto | null> {
     const item = this.backlogItem();
-    if (!item || item.media.type !== 'song') return null;
-    return item.media as ReadSongDto
+    if (!item || item.media.type !== 'song') return signal<null>(null);
+    return signal<ReadSongDto | null>(item.media);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, effect, inject, Injector, Input, runInInjectionContext, Signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReadBookDto } from '../../../models/read/ReadBookDto';
 
@@ -11,7 +11,8 @@ import { ReadBookDto } from '../../../models/read/ReadBookDto';
 export class BookCreationForm {
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-  @Input() book!: ReadBookDto | null;
+  private injector = inject(Injector);
+  @Input() book!: Signal<ReadBookDto | null>;
 
   bookForm = this.formBuilder.group({
     author: ['0'],
@@ -27,6 +28,16 @@ export class BookCreationForm {
     if (this.book != null) {
       this.prefillFrom();
     }
+
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const album = this.book();
+
+        if (album) {
+          this.prefillFrom();
+        }
+      })
+    })
   }
 
   ngOnDestroy() {
@@ -34,8 +45,25 @@ export class BookCreationForm {
     parent.removeControl('book');
   }
   prefillFrom() {
-    this.bookForm.patchValue({ pageCount: this.book?.pageCount })
-    this.bookForm.patchValue({ author: this.book?.author })
-    this.bookForm.patchValue({ language: this.book?.language })
+    this.bookForm.patchValue({ pageCount: this.book()?.pageCount })
+    this.bookForm.patchValue({ author: this.book()?.author })
+    this.bookForm.patchValue({ language: this.book()?.language })
+
+    const code = this.book()?.language;
+
+    let language = code ?? '';
+
+    try {
+      if (code) {
+        const displayNames = new Intl.DisplayNames(['en'], { type: 'language' });
+        language = displayNames.of(code) ?? code;
+      }
+    } catch {
+      language = code ?? '';
+    }
+
+    this.bookForm.patchValue({
+      language: language
+    });
   }
 }

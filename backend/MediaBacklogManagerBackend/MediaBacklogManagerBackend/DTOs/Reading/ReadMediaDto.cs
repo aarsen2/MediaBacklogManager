@@ -1,4 +1,4 @@
-﻿using MediaBacklogManagerBackend.Emuns;
+﻿using MediaBacklogManagerBackend.Enums;
 using MediaBacklogManagerBackend.Models;
 
 namespace MediaBacklogManagerBackend.DTOs.Reading

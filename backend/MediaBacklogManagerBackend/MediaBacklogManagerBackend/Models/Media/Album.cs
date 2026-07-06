@@ -1,4 +1,4 @@
-﻿using MediaBacklogManagerBackend.Emuns;
+﻿using MediaBacklogManagerBackend.Enums;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace MediaBacklogManagerBackend.Models.Media

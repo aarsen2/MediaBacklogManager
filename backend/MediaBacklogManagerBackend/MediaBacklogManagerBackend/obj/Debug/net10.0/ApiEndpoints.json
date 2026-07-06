@@ -592,6 +592,38 @@
     ]
   },
   {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.SearchController",
+    "Method": "MovieCreationSearch",
+    "RelativePath": "api/search/create/movie",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.SearchController",
+    "Method": "ShowCreationSearch",
+    "RelativePath": "api/search/create/show",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.MediaControllers.ShowController",
     "Method": "ReadAllShows",
     "RelativePath": "api/show",

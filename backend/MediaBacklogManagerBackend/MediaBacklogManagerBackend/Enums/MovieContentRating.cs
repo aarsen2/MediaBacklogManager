@@ -1,4 +1,4 @@
-﻿namespace MediaBacklogManagerBackend.Emuns
+﻿namespace MediaBacklogManagerBackend.Enums
 {
     public enum MovieContentRating
     {

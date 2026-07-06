@@ -4,10 +4,18 @@
     <form class="forms-form" [formGroup]="form" (ngSubmit)="submit()">
 
         <!-- Global Items -->
+
         <!-- Title -->
         <div class="forms-field">
             <label class="forms-label">Title</label>
-            <input class="forms-input" type="text" formControlName="title" />
+            <div class="forms-double-input">
+                <input class="forms-input" type="text" formControlName="title" />
+                <button class="UI-square-button" type="button" (click)="search()" [disabled]="isSearching">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
             @if (form.get('title')?.invalid && form.get('title')?.touched) {
             <small class="forms-error">Title is required</small>
             }
@@ -18,7 +26,7 @@
             <!-- Media Type -->
             <div class="forms-field">
                 <label class="forms-label">Media Type</label>
-                <select class="forms-input" formControlName="mediaType">
+                <select class="forms-input forms-select" formControlName="mediaType">
                     <option value="album">Album</option>
                     <option value="book">Book</option>
                     <option value="game">Game</option>
@@ -51,10 +59,10 @@
 
 
         <!-- Genres -->
-        <div class="forms-field autocomplete-wrapper" >
+        <div class="forms-field autocomplete-wrapper">
             <label class="forms-label">Genres</label>
             <div class="chips">
-                @for (genre of form.value.genres; track genre) {
+                @for (genre of form.controls.genres.value; track $index) {
                 <div class="details-tag chip">
                     {{ genre }}<span class="material-symbols-outlined icon" (click)="removeGenre(genre)">close</span>
                 </div>
@@ -78,21 +86,22 @@
 
         </div>
 
-        
+
         <!-- Recommenders  -->
-        <div class="forms-field autocomplete-wrapper" >
+        <div class="forms-field autocomplete-wrapper">
             <label class="forms-label">Recommenders</label>
             <div class="chips">
                 @for (recommender of form.value.recommenders; track recommender) {
                 <div class="details-tag chip">
-                    {{ recommender }}<span class="material-symbols-outlined icon" (click)="removeRecommender(recommender)">close</span>
+                    {{ recommender }}<span class="material-symbols-outlined icon"
+                        (click)="removeRecommender(recommender)">close</span>
                 </div>
                 }
             </div>
 
-            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()" formControlName="recommenderInput"
-                type="text" (keydown.enter)="addRecommender()" (keydown)="handleRecommenderKeydown($event)"
-                placeholder="Type a recommender and press Enter" />
+            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()"
+                formControlName="recommenderInput" type="text" (keydown.enter)="addRecommender()"
+                (keydown)="handleRecommenderKeydown($event)" placeholder="Type a recommender and press Enter" />
 
 
             @if (filteredRecommenders().length > 0) {
@@ -151,10 +160,10 @@
 
         @switch (form.value.mediaType) {
         @case ('movie') {
-        <app-movie-creation-form></app-movie-creation-form>
+        <app-movie-creation-form [movie]="movie"></app-movie-creation-form>
         }
         @case ('show') {
-        <app-show-creation-form></app-show-creation-form>
+        <app-show-creation-form [show]="show"></app-show-creation-form>
         }
         @case ('album') {
         <app-album-creation-form></app-album-creation-form>

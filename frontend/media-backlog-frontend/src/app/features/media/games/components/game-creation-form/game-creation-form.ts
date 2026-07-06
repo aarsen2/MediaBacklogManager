@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, Input, signal } from '@angular/core';
+import { Component, effect, HostListener, inject, Injector, Input, runInInjectionContext, Signal, signal } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReadGameDto } from '../../../models/read/ReadGameDto';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -24,7 +24,8 @@ export class GameCreationForm {
   private backlogService = inject(MediaBacklogService)
   private formBuilder = inject(FormBuilder);
   private controlContainer = inject(ControlContainer)
-  @Input() game!: ReadGameDto | null;
+  private injector = inject(Injector);
+  @Input() game!: Signal<ReadGameDto | null>;
   filteredPlatforms = signal<string[]>([]);
   possiblePlatforms = toSignal(
     this.backlogService.getPlatforms(),
@@ -46,6 +47,15 @@ export class GameCreationForm {
     if (this.game != null) {
       this.prefillFrom();
     }
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const game = this.game();
+
+        if (game) {
+          this.prefillFrom();
+        }
+      })
+    })
   }
 
   ngOnDestroy() {
@@ -53,12 +63,12 @@ export class GameCreationForm {
     parent.removeControl('game');
   }
   prefillFrom() {
-    this.gameForm.patchValue({ studio: this.game?.studio })
+    this.gameForm.patchValue({ studio: this.game()?.studio })
     this.gameForm.patchValue({ platforms: this.getPlatforms() })
-    this.gameForm.patchValue({ contentRating: this.game?.contentRating })
+    this.gameForm.patchValue({ contentRating: this.game()?.contentRating })
   }
   getPlatforms(): string[] {
-    return this.game?.platforms?.map(g => g.name) ?? [];
+    return this.game()?.platforms?.map(g => g.name) ?? [];
   }
 
 

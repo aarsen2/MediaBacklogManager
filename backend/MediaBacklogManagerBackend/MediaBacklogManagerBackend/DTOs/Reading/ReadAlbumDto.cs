@@ -1,5 +1,5 @@
 ﻿using MediaBacklogManagerBackend.DTOs.Reading;
-using MediaBacklogManagerBackend.Emuns;
+using MediaBacklogManagerBackend.Enums;
 
 namespace MediaBacklogManagerBackend.DTOs.Creation
 {

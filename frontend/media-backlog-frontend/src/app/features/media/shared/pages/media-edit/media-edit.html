@@ -33,9 +33,9 @@
         </div>
 
 
-  
+
         <!-- Genres -->
-        <div class="forms-field autocomplete-wrapper" >
+        <div class="forms-field autocomplete-wrapper">
             <label class="forms-label">Genres</label>
             <div class="chips">
                 @for (genre of form.value.genres; track genre) {
@@ -64,19 +64,20 @@
 
 
         <!-- Recommenders  -->
-        <div class="forms-field autocomplete-wrapper" >
+        <div class="forms-field autocomplete-wrapper">
             <label class="forms-label">Recommenders</label>
             <div class="chips">
                 @for (recommender of form.value.recommenders; track recommender) {
                 <div class="details-tag chip">
-                    {{ recommender }}<span class="material-symbols-outlined icon" (click)="removeRecommender(recommender)">close</span>
+                    {{ recommender }}<span class="material-symbols-outlined icon"
+                        (click)="removeRecommender(recommender)">close</span>
                 </div>
                 }
             </div>
 
-            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()" formControlName="recommenderInput"
-                type="text" (keydown.enter)="addRecommender()" (keydown)="handleRecommenderKeydown($event)"
-                placeholder="Type a recommender and press Enter" />
+            <input class="forms-input" name="recommenderInput" (input)="onRecommenderInput()"
+                formControlName="recommenderInput" type="text" (keydown.enter)="addRecommender()"
+                (keydown)="handleRecommenderKeydown($event)" placeholder="Type a recommender and press Enter" />
 
 
             @if (filteredRecommenders().length > 0) {

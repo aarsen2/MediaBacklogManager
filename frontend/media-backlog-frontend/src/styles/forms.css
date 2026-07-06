@@ -51,6 +51,18 @@
   grid-template-columns: 1fr 1fr;
 }
 
+/*Puts 2 form ocntrols next to eachother, but does not space them evenly*/
+.forms-double-input {
+  width: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 /* Puts 3 form controls next to each other */
 .forms-triple-field {
   align-self: center;
@@ -86,9 +98,8 @@
   transition: 0.15s;
   box-sizing: content-box;
   color-scheme: dark;
+  box-sizing: border-box;
 }
-
-select.forms-input {}
 
 .forms-input:focus {
   outline: none;
@@ -96,6 +107,10 @@ select.forms-input {}
   box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
 }
 
+
+.forms-select, .forms-select option{
+  cursor: pointer;
+}
 
 .forms-date-picker {
   color-scheme: dark;
@@ -114,35 +129,6 @@ select.forms-input {}
   gap: .5rem;
 }
 
-
-.forms-button {
-  width: 90%;
-  height: 2.5rem;
-  align-self: center;
-  border: none;
-  border-radius: var(--button-radius);
-  background-color: var(--color-primary2);
-  color: var(--color-text1);
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s;
-  margin: 1rem;
-}
-
-.forms-button:hover {
-  background-color: var(--color-primary1);
-}
-
-.forms-button:active {
-  background-color: var(--color-primary3);
-}
-
-.forms-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .forms-dropdown {
   position: absolute;
   top: 100%;
@@ -153,6 +139,7 @@ select.forms-input {}
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
+  cursor: pointer;
 }
 
 .forms-dropdown-item {
@@ -170,10 +157,11 @@ select.forms-input {}
     width: 95%;
   }
 
-.forms-double-field, .forms-triple-field {
-  width: 95%;
-  gap: 2.5rem;
-}
+  .forms-double-field,
+  .forms-triple-field {
+    width: 95%;
+    gap: 2.5rem;
+  }
 }
 
 
@@ -181,13 +169,15 @@ select.forms-input {}
   .movie-form-container {
     margin: 0px;
   }
-    .forms-field {
+
+  .forms-field {
     width: 100%;
     margin: 0rem;
   }
 
-  .forms-double-field, .forms-triple-field {
-  width: 100%;
-  gap: 2rem;
-}
+  .forms-double-field,
+  .forms-triple-field {
+    width: 100%;
+    gap: 2rem;
+  }
 }

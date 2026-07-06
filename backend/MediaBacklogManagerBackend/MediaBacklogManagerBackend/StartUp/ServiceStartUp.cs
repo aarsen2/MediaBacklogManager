@@ -1,5 +1,6 @@
 ﻿using MediaBacklogManagerBackend.Models.Media;
 using MediaBacklogManagerBackend.Services;
+using MediaBacklogManagerBackend.Services.ApiServices;
 using MediaBacklogManagerBackend.Services.Media;
 
 namespace MediaBacklogManagerBackend.StartUp
@@ -11,13 +12,13 @@ namespace MediaBacklogManagerBackend.StartUp
         {
             services.AddScoped<AuthService>();
             services.AddScoped<UserService>();
+            services.AddScoped<MediaMapper>();
             services.AddScoped<BacklogMapper>();
             services.AddScoped<UserMediaMapper>();
             services.AddScoped<UserMediaService>();
             services.AddScoped<BacklogService>();
             services.AddScoped<AnalyticsService>();
             services.AddScoped<SearchService>();
-
             services.AddScoped<MovieService>();
             services.AddScoped<ShowService>();
             services.AddScoped<AlbumService>();

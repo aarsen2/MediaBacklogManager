@@ -6,4 +6,5 @@ export interface MediaBase {
     type: MediaType;
     assets: any[]; // replace with propper asset storage later
     genres: any[];       // List of genre types. I'll figure this out later.
+    mediaType?: MediaType;
 }

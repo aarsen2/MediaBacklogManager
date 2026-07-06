@@ -2,7 +2,7 @@
 using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.DTOs.Updating;
-using MediaBacklogManagerBackend.Emuns;
+using MediaBacklogManagerBackend.Enums;
 using MediaBacklogManagerBackend.Enums;
 using MediaBacklogManagerBackend.Models;
 using MediaBacklogManagerBackend.Models.Media;

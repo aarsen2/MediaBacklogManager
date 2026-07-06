@@ -56,6 +56,8 @@ namespace MediaBacklogManagerBackend
 
             builder.Services.AddIdentityServices(builder.Configuration);
 
+            builder.Services.AddHttpClients(builder.Configuration);
+
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(
