@@ -1,4 +1,5 @@
 ﻿using MediaBacklogManagerBackend.Data;
+using MediaBacklogManagerBackend.DTOs.Creation;
 using MediaBacklogManagerBackend.DTOs.Reading;
 using MediaBacklogManagerBackend.Enums;
 using MediaBacklogManagerBackend.Models;
@@ -15,16 +16,19 @@ namespace MediaBacklogManagerBackend.Services
         private readonly MediaMapper MediaMapper;
         private readonly TmdbMovieService TmdbMovieService;
         private readonly TmdbShowService TmdbShowService;
+        private readonly IgdbGameService IgdbGameService;
         public SearchService(
             AppDbContext context, 
             MediaMapper mediaMapper, 
             TmdbMovieService tmdbMovieService,
-            TmdbShowService tmdbShowService)
+            TmdbShowService tmdbShowService,
+            IgdbGameService igdbGameService)
         {
             dbContext = context;
             MediaMapper = mediaMapper;
             TmdbMovieService = tmdbMovieService;
             TmdbShowService = tmdbShowService;
+            IgdbGameService = igdbGameService;
         }
 
 
@@ -129,6 +133,11 @@ namespace MediaBacklogManagerBackend.Services
 
             var dto = await TmdbShowService.BuildShowDtoAsync(tmdbId.Value);
             return dto;
+        }
+
+        public async Task<ReadGameDto?> GameCreationSearchAsync(string title)
+        {
+            return await IgdbGameService.GetGameByTitleAsync(title);
         }
     }
 }

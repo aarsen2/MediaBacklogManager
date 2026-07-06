@@ -70,5 +70,25 @@ namespace MediaBacklogManagerBackend.Controllers
                 return StatusCode(500, "An Unknown Error Occurred when generating the requested report");
             }
         }
+
+        [HttpGet("create/game")]
+        public async Task<IActionResult> GameCreationSearch([FromQuery] string title)
+        {
+            try
+            {
+                var item = await SearchService.GameCreationSearchAsync(title);
+
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(item);
+            }
+            catch
+            {
+                return StatusCode(500, "An Unknown Error Occurred when generating the requested report");
+            }
+        }
     }
 }

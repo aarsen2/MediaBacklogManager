@@ -25,6 +25,11 @@ namespace MediaBacklogManagerBackend.StartUp
                 client.DefaultRequestHeaders.Add("Authorization", $"Bearer {config["TMDB:ApiKey"]}");
             });
 
+            services.AddHttpClient(); // generic factory
+
+            services.AddSingleton<IgdbAuthService>();
+            services.AddScoped<IgdbGameService>();
+
             return services;
 
 

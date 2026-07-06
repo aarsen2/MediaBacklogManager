@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "MediaBacklogManagerBackend/1.0.0": {
         "dependencies": {
+          "IGDB": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.8",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "10.0.8",
           "Microsoft.AspNetCore.OpenApi": "10.0.8",
@@ -761,6 +762,14 @@
           }
         }
       },
+      "IGDB/1.0.0": {
+        "runtime": {
+          "IGDB.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Tmdb/1.0.0": {
         "runtime": {
           "Tmdb.dll": {
@@ -1056,6 +1065,11 @@
       "sha512": "sha512-GJw3bYkWpOgvN3tJo5X4lYUeIFA2HD293FPUhKmp7qxS+g5ywAb34Dnd3cDAFLkcMohy5XTpoaZ4uAHuw0uSPQ==",
       "path": "system.identitymodel.tokens.jwt/8.0.1",
       "hashPath": "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
+    },
+    "IGDB/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Tmdb/1.0.0": {
       "type": "project",

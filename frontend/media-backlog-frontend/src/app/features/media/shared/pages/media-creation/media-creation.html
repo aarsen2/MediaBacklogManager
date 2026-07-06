@@ -172,7 +172,7 @@
         <app-book-creation-form></app-book-creation-form>
         }
         @case ('game') {
-        <app-game-creation-form></app-game-creation-form>
+        <app-game-creation-form [game]="game"></app-game-creation-form>
         }
         @case ('song') {
         <app-song-creation-form></app-song-creation-form>

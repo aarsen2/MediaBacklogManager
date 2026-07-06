@@ -17,6 +17,7 @@ import { CreationSearchQuery } from '../../../../search/models/CreationSearchQue
 import { ReadMediaDto } from '../../../models/read/ReadMediaDto';
 import { ReadMovieDto } from '../../../models/read/ReadMovieDto';
 import { ReadShowDto } from '../../../models/read/ReadShowDto';
+import { ReadGameDto } from '../../../models/read/ReadGameDto';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class MediaCreation {
 
   movie = signal<ReadMovieDto | null>(null);
   show = signal<ReadShowDto | null>(null);
+  game = signal<ReadGameDto | null>(null);
 
 
 
@@ -321,6 +323,11 @@ export class MediaCreation {
       }
       case 'show': {
         this.show.set(media as ReadShowDto);
+        break;
+      }
+      case 'game': {
+        this.game.set(media as ReadGameDto);
+        break;
       }
     }
   }

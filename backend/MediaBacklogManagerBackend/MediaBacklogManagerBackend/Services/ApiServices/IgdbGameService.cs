@@ -1,0 +1,168 @@
+﻿using IGDB;
+using MediaBacklogManagerBackend.DTOs.Creation;
+using MediaBacklogManagerBackend.DTOs.Reading;
+using MediaBacklogManagerBackend.Enums;
+using MediaBacklogManagerBackend.Models;
+using Microsoft.JSInterop.Infrastructure;
+
+namespace MediaBacklogManagerBackend.Services.ApiServices
+{
+    public class IgdbGameService
+    {
+        private readonly HttpClient _http;
+        private readonly IConfiguration _config;
+        private readonly IgdbAuthService _auth;
+
+        public IgdbGameService(HttpClient http, IConfiguration config, IgdbAuthService auth)
+        {
+            _http = http;
+            _config = config;
+            _auth = auth;
+        }
+
+        private async Task<HttpRequestMessage> CreateRequest(string query)
+        {
+            var token = await _auth.GetAccessTokenAsync();
+            var clientId = _config["IGDB:ClientId"];
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://api.igdb.com/v4/games");
+
+            request.Headers.Add("Client-ID", clientId);
+            request.Headers.Add("Authorization", $"Bearer {token}");
+
+            request.Content = new StringContent(query);
+            return request;
+        }
+        public async Task<int?> SearchGameIdAsync(string title)
+        {
+            var query = $"search \"{title}\"; fields id, name, game_type; limit 5; where version_parent = null & game_type = (0,8,9, 10);";
+
+            var request = await CreateRequest(query);
+            var response = await _http.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var results = await response.Content.ReadFromJsonAsync<List<IgdbGameResponse>>();
+
+            var filtered = results?
+                .Where(g =>
+                    (g.Game_Type == 0 || g.Game_Type == 8 || g.Game_Type == 9 || g.Game_Type == 10)) // keeps main/remake/remaster
+                .ToList();
+
+            return filtered?
+                .FirstOrDefault(g => g.Name.Equals(title, StringComparison.OrdinalIgnoreCase))
+                ?.Id
+                ?? filtered?.FirstOrDefault()?.Id;
+        }
+        public async Task<IgdbGameResponse?> GetGameAsync(int id)
+        {
+            var query = $@"
+        fields 
+            name,
+            summary,
+            first_release_date,
+            rating,
+            genres.name,
+            platforms.name,
+            age_ratings.rating_category.rating,
+            age_ratings.organization.name,
+            involved_companies.company.name,
+            involved_companies.developer,
+            cover.image_id;
+        where id = {id};
+    ";
+
+            var request = await CreateRequest(query);
+            var response = await _http.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var results = await response.Content.ReadFromJsonAsync<List<IgdbGameResponse>>();
+
+            return results?.FirstOrDefault();
+        }
+
+        public ReadGameDto MapToDto(IgdbGameResponse game)
+        {
+            var dto = new ReadGameDto
+            {
+                Id = game.Id,
+                Title = game.Name,
+                Description = game.Summary,
+                GeneralRating = game.Rating,
+
+                ReleaseDate = game.First_Release_Date != null
+                    ? DateTimeOffset.FromUnixTimeSeconds(game.First_Release_Date.Value).DateTime
+                    : null
+            };
+
+            // Genres
+            if (game.Genres != null)
+            {
+                dto.Genres = game.Genres
+                    .Select(g => new ReadGenreDto { Name = g.Name })
+                    .ToList();
+            }
+
+            // Platforms
+            if (game.Platforms != null)
+            {
+                dto.Platforms = game.Platforms
+                    .Select(p => new ReadPlatformDto { Name = p.Name })
+                    .ToList();
+            }
+
+            // Studio (first developer)
+            dto.Studio = game.Involved_Companies?
+                .FirstOrDefault(c => c.Developer)?.Company?.Name;
+
+
+            dto.ContentRating = GetUsContentRating(game);
+
+            // Cover image
+            if (game.Cover != null)
+            {
+                //dto.Assets.Add(new MediaAsset
+                //{
+                //    Url = $"https://images.igdb.com/igdb/image/upload/t_cover_big/{game.Cover.Image_Id}.jpg"
+                //});
+            }
+
+            return dto;
+        }
+        public async Task<ReadGameDto?> GetGameByTitleAsync(string title)
+        {
+            var id = await SearchGameIdAsync(title);
+            if (id == null) return null;
+
+            var game = await GetGameAsync(id.Value);
+            if (game == null) return null;
+
+            return MapToDto(game);
+        }
+
+        private GameContentRating GetUsContentRating(IgdbGameResponse game)
+        {
+            var esrbRating = game.Age_Ratings?
+                .FirstOrDefault(r =>
+                    r.Organization?.Name == "ESRB");
+
+            if (esrbRating?.Rating_Category?.Rating == null)
+                return GameContentRating.E;
+;
+
+            return esrbRating.Rating_Category.Rating switch
+            {
+                "EC" => GameContentRating.EC,
+                "E" => GameContentRating.E,
+                "E10" => GameContentRating.E10,
+                "T" => GameContentRating.T,
+                "M" => GameContentRating.M,
+                "AO" => GameContentRating.AO,
+                "RP" => GameContentRating.RP,
+                _ => GameContentRating.E
+            };
+        }
+
+    }
+}

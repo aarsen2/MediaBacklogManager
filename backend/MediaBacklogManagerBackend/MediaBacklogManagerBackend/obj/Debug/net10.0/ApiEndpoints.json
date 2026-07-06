@@ -593,6 +593,22 @@
   },
   {
     "ContainingType": "MediaBacklogManagerBackend.Controllers.SearchController",
+    "Method": "GameCreationSearch",
+    "RelativePath": "api/search/create/game",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaBacklogManagerBackend.Controllers.SearchController",
     "Method": "MovieCreationSearch",
     "RelativePath": "api/search/create/movie",
     "HttpMethod": "GET",

@@ -986,6 +986,16 @@
           }
         }
       },
+      "IGDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/IGDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IGDB.dll": {}
+        }
+      },
       "Tmdb/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -2849,6 +2859,11 @@
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
+    "IGDB/1.0.0": {
+      "type": "project",
+      "path": "../IGDB/IGDB.csproj",
+      "msbuildProject": "../IGDB/IGDB.csproj"
+    },
     "Tmdb/1.0.0": {
       "type": "project",
       "path": "../Tmdb/Tmdb.csproj",
@@ -2857,6 +2872,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "IGDB >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 10.0.8",
       "Microsoft.AspNetCore.OpenApi >= 10.0.8",
@@ -2902,6 +2918,9 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
+            "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\IGDB\\IGDB.csproj": {
+              "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\IGDB\\IGDB.csproj"
+            },
             "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\Tmdb\\Tmdb.csproj": {
               "projectPath": "C:\\Users\\Aaron\\Projects\\MediaBacklogManager\\backend\\MediaBacklogManagerBackend\\Tmdb\\Tmdb.csproj"
             }

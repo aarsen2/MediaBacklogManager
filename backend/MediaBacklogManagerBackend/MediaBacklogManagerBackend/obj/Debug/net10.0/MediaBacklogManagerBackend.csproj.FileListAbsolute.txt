@@ -318,3 +318,5 @@ C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\M
 C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\obj\Debug\net10.0\ref\MediaBacklogManagerBackend.dll
 C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Tmdb.dll
 C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\Tmdb.pdb
+C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\IGDB.dll
+C:\Users\Aaron\Projects\MediaBacklogManager\backend\MediaBacklogManagerBackend\MediaBacklogManagerBackend\bin\Debug\net10.0\IGDB.pdb
