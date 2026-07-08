@@ -33,9 +33,14 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
             request.Content = new StringContent(query);
             return request;
         }
-        public async Task<int?> SearchGameIdAsync(string title)
+        private async Task<List<int>> SearchGameIdsAsync(string title)
         {
-            var query = $"search \"{title}\"; fields id, name, game_type; limit 5; where version_parent = null & game_type = (0,8,9, 10);";
+            var query = $@"
+                search ""{title}"";
+                fields id, name, game_type;
+                limit 12;
+                where version_parent = null & game_type = (0,8,9,10);
+            ";
 
             var request = await CreateRequest(query);
             var response = await _http.SendAsync(request);
@@ -44,15 +49,7 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
 
             var results = await response.Content.ReadFromJsonAsync<List<IgdbGameResponse>>();
 
-            var filtered = results?
-                .Where(g =>
-                    (g.Game_Type == 0 || g.Game_Type == 8 || g.Game_Type == 9 || g.Game_Type == 10)) // keeps main/remake/remaster
-                .ToList();
-
-            return filtered?
-                .FirstOrDefault(g => g.Name.Equals(title, StringComparison.OrdinalIgnoreCase))
-                ?.Id
-                ?? filtered?.FirstOrDefault()?.Id;
+            return results?.Select(g => g.Id).ToList() ?? new List<int>();
         }
         public async Task<IgdbGameResponse?> GetGameAsync(int id)
         {
@@ -130,15 +127,26 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
 
             return dto;
         }
-        public async Task<ReadGameDto?> GetGameByTitleAsync(string title)
+        public async Task<List<ReadGameDto>> GetGamesByTitleAsync(string title)
         {
-            var id = await SearchGameIdAsync(title);
-            if (id == null) return null;
+            var ids = await SearchGameIdsAsync(title);
 
-            var game = await GetGameAsync(id.Value);
-            if (game == null) return null;
+            if (ids.Count == 0)
+                return new List<ReadGameDto>();
 
-            return MapToDto(game);
+            var tasks = ids.Select(async id =>
+            {
+                var game = await GetGameAsync(id);
+                return game != null ? MapToDto(game) : null;
+            });
+
+            var results = await Task.WhenAll(tasks);
+
+            return results
+                .Where(r => r != null)
+                .Select(r => r!)
+                .OrderBy(r => r.Title)
+                .ToList();
         }
 
         private GameContentRating GetUsContentRating(IgdbGameResponse game)

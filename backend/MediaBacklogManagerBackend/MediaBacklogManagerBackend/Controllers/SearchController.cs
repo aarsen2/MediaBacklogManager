@@ -76,14 +76,14 @@ namespace MediaBacklogManagerBackend.Controllers
         {
             try
             {
-                var item = await SearchService.GameCreationSearchAsync(title);
+                var items = await SearchService.GameCreationSearchAsync(title);
 
-                if (item == null)
+                if (items.Count == 0)
                 {
                     return NotFound();
                 }
 
-                return Ok(item);
+                return Ok(items);
             }
             catch
             {

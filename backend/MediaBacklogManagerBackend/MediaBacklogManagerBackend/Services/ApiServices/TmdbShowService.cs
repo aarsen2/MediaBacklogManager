@@ -17,7 +17,7 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
         // ------------------------------------
         // SEARCH
         // ------------------------------------
-        public async Task<int?> SearchIdByStringAsync(string title)
+        public async Task<List<int>?> SearchIdByStringAsync(string title)
         {
             var url = QueryHelpers.AddQueryString("/3/search/tv", new Dictionary<string, string?>
             {
@@ -31,7 +31,7 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
             response.EnsureSuccessStatusCode();
 
             var data = await response.Content.ReadFromJsonAsync<TmdbSearchResponse>();
-            return data?.results?.FirstOrDefault()?.id;
+            return data?.results?.Select(r => r.id).Take(12).ToList();
         }
 
         // ------------------------------------
@@ -120,6 +120,14 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
             }
 
             return dto;
+        }
+
+        internal async Task<List<ReadShowDto>?> BuildShowDtosAsync(List<int> tmdbId)
+        {
+            var tasks = tmdbId.Select(id => BuildShowDtoAsync(id));
+            var results = await Task.WhenAll(tasks);
+
+            return results.ToList();    
         }
     }
 }

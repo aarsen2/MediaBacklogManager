@@ -10,7 +10,7 @@
             <label class="forms-label">Title</label>
             <div class="forms-double-input">
                 <input class="forms-input" type="text" formControlName="title" />
-                <button class="UI-square-button" type="button" (click)="search()" [disabled]="isSearching">
+                <button class="UI-square-button" type="button" (click)="search()" [disabled]="isSearchOpen()">
                     <span class="material-symbols-outlined">
                         search
                     </span>
@@ -198,3 +198,20 @@
     }
 
 </div>
+
+
+
+@if (isSearchOpen()) {
+<div class="overlay" (click)="closeSearch()">
+
+    <div class="modal" (click)="$event.stopPropagation()">
+        <app-metadata-search [mediaType]="searchQuery().mediaType" [initialTitle]="searchQuery().title"
+            (itemSelected)="onMetadataSelected($event)">
+        </app-metadata-search>
+
+        <button class="UI-button" (click)="closeSearch()">Close</button>
+
+    </div>
+
+</div>
+}

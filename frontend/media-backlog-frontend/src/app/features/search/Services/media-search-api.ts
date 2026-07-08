@@ -44,7 +44,7 @@ export class MediaSearchApi {
     console.log(url);
     httpParams = httpParams.set('title', query.title);
 
-    return this.http.get<ReadMediaDto>(url, { params: httpParams });
+    return this.http.get<ReadMediaDto[]>(url, { params: httpParams });
   }
 
 

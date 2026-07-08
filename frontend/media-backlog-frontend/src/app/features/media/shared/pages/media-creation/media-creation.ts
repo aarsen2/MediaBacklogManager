@@ -18,6 +18,7 @@ import { ReadMediaDto } from '../../../models/read/ReadMediaDto';
 import { ReadMovieDto } from '../../../models/read/ReadMovieDto';
 import { ReadShowDto } from '../../../models/read/ReadShowDto';
 import { ReadGameDto } from '../../../models/read/ReadGameDto';
+import { MetadataSearch } from "../../components/metadata-search/metadata-search";
 
 
 @Component({
@@ -30,7 +31,7 @@ import { ReadGameDto } from '../../../models/read/ReadGameDto';
     AlbumCreationForm,
     BookCreationForm,
     GameCreationForm,
-    SongCreationForm],
+    SongCreationForm, MetadataSearch],
   templateUrl: './media-creation.html',
   styleUrl: './media-creation.css',
 })
@@ -63,7 +64,6 @@ export class MediaCreation {
   successMessage = signal<string | null>(null)
   errorMessage = signal<string | null>(null)
   isSubmitting: boolean = false;
-  isSearching: boolean = false;
   filteredGenres = signal<string[]>([]);
   possibleGenres = toSignal(
     this.backlogService.getGenres(),
@@ -89,6 +89,12 @@ export class MediaCreation {
     userRating: [0],
     notes: [''],
   });
+
+
+  isSearchOpen = signal(false);
+  searchQuery = signal<CreationSearchQuery>({ title: '', mediaType: 'movie' });
+
+
 
   addGenre(genre?: string | null) {
     const value = !genre ? this.form.value.genreInput?.trim() : genre;
@@ -268,45 +274,36 @@ export class MediaCreation {
 
 
   search() {
-    if (this.form.invalid) {
+    const title = this.form.get('title')?.value;
+    const mediaType = this.form.get('mediaType')?.value as MediaType;
+
+    if (!title || !mediaType) {
       this.form.get('title')?.markAsTouched();
       this.form.get('mediaType')?.markAsTouched();
-      console.error(this.form.errors);
-      console.error(this.form.status);
-      console.error("form is invalid")
       return;
     }
-    this.isSearching = true;
-    const title = this.form.get('title')?.value!
-    const mediaType = this.form.get('mediaType')?.value! as MediaType
 
-    const creationQuery: CreationSearchQuery = {
-      title: title,
-      mediaType: mediaType
-    }
-
-    console.log(title)
-    console.log(mediaType)
-
-
-    this.mediaSearchService.creationSearch(creationQuery).subscribe({
-      next: (res) => {
-        console.log(res)
-        this.fillInfo(res);
-        this.isSearching = false
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.log(err);
-        this.isSearching = false
-      }
+    this.searchQuery.set({
+      title,
+      mediaType
     });
-    console.log("Done");
 
+    this.isSearchOpen.set(true);
   }
 
+  onMetadataSelected(item: ReadMediaDto) {
+    this.fillInfo(item);
+    this.isSearchOpen.set(false);
+  }
+
+  closeSearch() {
+    this.isSearchOpen.set(false);
+  }
+
+
+
   fillInfo(media: ReadMediaDto) {
-    let genres = media.genres.map(g => g.name)
+    const genres = (media.genres ?? []).map(g => g.name);
 
     this.form.patchValue({ title: media.title });
     this.form.patchValue({ releaseDate: this.formatDate(media.releaseDate) });

@@ -115,29 +115,28 @@ namespace MediaBacklogManagerBackend.Services
         //    //return MediaMapper.MapMediaRead(mediaItem);
         //}
 
-        internal async Task<ReadMovieDto> MovieCreationSearchAsync(string title)
+        internal async Task<List<ReadMovieDto>?> MovieCreationSearchAsync(string title)
         {
-            var tmdbId = await TmdbMovieService.SearchIdByStringAsync(title); // your search method
-            if (tmdbId is null)
+            var items = await TmdbMovieService.SearchIdByStringAsync(title); // your search method
+            if (items is null || items.Count == 0)
                 return null; // or NotFound
-
-            var dto = await TmdbMovieService.BuildMovieDtoAsync(tmdbId.Value);
+            var dto = await TmdbMovieService.BuildMovieDtosAsync(items);
             return dto;
         }
 
-        internal async Task<ReadShowDto> ShowCreationSearchAsync(string title)
+        internal async Task<List<ReadShowDto>?> ShowCreationSearchAsync(string title)
         {
             var tmdbId = await TmdbShowService.SearchIdByStringAsync(title); // your search method
             if (tmdbId is null)
                 return null; // or NotFound
 
-            var dto = await TmdbShowService.BuildShowDtoAsync(tmdbId.Value);
+            var dto = await TmdbShowService.BuildShowDtosAsync(tmdbId);
             return dto;
         }
 
-        public async Task<ReadGameDto?> GameCreationSearchAsync(string title)
+        public async Task<List<ReadGameDto>> GameCreationSearchAsync(string title)
         {
-            return await IgdbGameService.GetGameByTitleAsync(title);
+            return await IgdbGameService.GetGamesByTitleAsync(title);
         }
     }
 }

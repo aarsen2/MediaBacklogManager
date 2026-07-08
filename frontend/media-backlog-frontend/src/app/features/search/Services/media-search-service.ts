@@ -16,7 +16,7 @@ export class MediaSearchService {
     return this.searchApi.search(parameters);
   }
 
-  creationSearch(query: CreationSearchQuery): Observable<ReadMediaDto> {
+  creationSearch(query: CreationSearchQuery): Observable<ReadMediaDto[]> {
     return this.searchApi.creationSearch(query);
   }
 }

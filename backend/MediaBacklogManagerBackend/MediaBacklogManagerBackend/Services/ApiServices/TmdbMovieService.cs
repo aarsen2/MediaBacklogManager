@@ -17,7 +17,7 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
 
    
 
-        public async Task<int?> SearchIdByStringAsync(string title)
+        public async Task<List<int>?> SearchIdByStringAsync(string title)
         {
             var url = QueryHelpers.AddQueryString("/3/search/movie", new Dictionary<string, string?>
             {
@@ -30,7 +30,7 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
             var response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadFromJsonAsync<TmdbSearchResponse>();
-            return data?.results?.FirstOrDefault()?.id;
+            return data?.results?.Select(r => r.id).Take(12).ToList();
         }
 
 
@@ -57,6 +57,14 @@ namespace MediaBacklogManagerBackend.Services.ApiServices
             return await response.Content.ReadFromJsonAsync<TmdbReleaseDatesResponse>();
         }
 
+
+        public async Task<List<ReadMovieDto>> BuildMovieDtosAsync(List<int> ids)
+        {
+            var tasks = ids.Select(id => BuildMovieDtoAsync(id));
+            var results = await Task.WhenAll(tasks);
+
+            return results.ToList();
+        }
 
         public async Task<ReadMovieDto> BuildMovieDtoAsync(int tmdbId)
         {

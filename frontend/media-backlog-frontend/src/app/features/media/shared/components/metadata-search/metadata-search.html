@@ -1,0 +1,28 @@
+<div class="search-box">
+  <input class="forms-input" [formControl]="searchControl" placeholder="Search for a title..." />
+  <button class="UI-square-button" (click)="search()">
+    <span class="material-symbols-outlined">
+      search
+    </span></button>
+</div>
+
+@if (isLoading()) {
+<div class="loading">Loading...</div>
+}
+
+@if (!isLoading() && results().length > 0) {
+<div class="results-grid">
+  @for (item of results(); track item.title) {
+  <div (click)="selectItem(item)" class="result-card">
+    <div class="result-content">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.releaseDate | date }}</p>
+    </div>
+  </div>
+  }
+</div>
+}
+
+@if (!isLoading() && hasSearched() && results().length === 0) {
+<div class="empty">No results found</div>
+}
